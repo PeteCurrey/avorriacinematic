@@ -1,0 +1,45 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1920" height="1080" fill="#07080A"/>
+  <defs>
+    <radialGradient id="productVignette" cx="50%" cy="55%" r="65%">
+      <stop offset="0%" stop-color="#141822"/>
+      <stop offset="100%" stop-color="#07080A"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#productVignette)"/>
+
+  <!-- Contact Shadow -->
+  <ellipse cx="960" cy="890" rx="680" ry="24" fill="#000000" opacity="0.8"/>
+
+  <!-- Front Wheel (29" Carbon Rim) -->
+  <circle cx="1440" cy="720" r="170" stroke="#334155" stroke-width="8" fill="none"/>
+  <circle cx="1440" cy="720" r="140" stroke="#1E293B" stroke-width="2" fill="none"/>
+  <circle cx="1440" cy="720" r="12" fill="#E2E8F0"/>
+  
+  <!-- Rear Wheel (29" Carbon Rim) -->
+  <circle cx="480" cy="720" r="170" stroke="#334155" stroke-width="8" fill="none"/>
+  <circle cx="480" cy="720" r="140" stroke="#1E293B" stroke-width="2" fill="none"/>
+  <circle cx="480" cy="720" r="18" fill="#64748B"/>
+
+  <!-- Titanium Main Frame Tubes -->
+  <!-- Down Tube -->
+  <line x1="1260" y1="480" x2="1060" y2="760" stroke="#CBD5E1" stroke-width="14" stroke-linecap="round"/>
+  <!-- Top Tube -->
+  <line x1="1260" y1="480" x2="860" y2="460" stroke="#CBD5E1" stroke-width="12" stroke-linecap="round"/>
+  <!-- Seat Tube -->
+  <line x1="860" y1="460" x2="1060" y2="760" stroke="#CBD5E1" stroke-width="12" stroke-linecap="round"/>
+  <!-- Seat Stays -->
+  <line x1="860" y1="460" x2="480" y2="720" stroke="#94A3B8" stroke-width="8" stroke-linecap="round"/>
+  <!-- Chain Stays -->
+  <line x1="1060" y1="760" x2="480" y2="720" stroke="#94A3B8" stroke-width="10" stroke-linecap="round"/>
+  <!-- Front Suspension Fork -->
+  <line x1="1260" y1="480" x2="1440" y2="720" stroke="#E2E8F0" stroke-width="12" stroke-linecap="round"/>
+  <!-- Handlebar / Cockpit -->
+  <line x1="1260" y1="480" x2="1240" y2="420" stroke="#64748B" stroke-width="10"/>
+  <line x1="1200" y1="420" x2="1280" y2="420" stroke="#0F172A" stroke-width="12" stroke-linecap="round"/>
+  <!-- Saddle -->
+  <path d="M 800 400 L 890 395 L 870 415 Z" fill="#0F172A"/>
+
+  <!-- Alkota Wordmark on Down Tube -->
+  <text x="1100" y="620" font-family="sans-serif" font-size="14" font-weight="900" fill="#08090C" letter-spacing="3" transform="rotate(-54 1100 620)">ALKOTA</text>
+</svg>

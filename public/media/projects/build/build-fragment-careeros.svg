@@ -1,0 +1,26 @@
+<svg width="800" height="500" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="500" fill="#0C0E14" rx="2"/>
+  <rect x="0" y="0" width="800" height="40" fill="#131722" stroke="#1E2433" stroke-width="1"/>
+  <text x="24" y="25" font-family="monospace" font-size="11" fill="#38BDF8" font-weight="bold" letter-spacing="1">005 // CAREEROS // DYNAMIC CONTEXT</text>
+  <circle cx="770" cy="20" r="4" fill="#38BDF8"/>
+  
+  <rect x="24" y="60" width="752" height="120" fill="#151A27" stroke="#222B3D" stroke-width="1"/>
+  <text x="44" y="95" font-family="sans-serif" font-size="16" font-weight="700" fill="#F8FAFC">AI Career Mentor Context Graph</text>
+  <text x="44" y="125" font-family="monospace" font-size="11" fill="#94A3B8">Model Status: Active Twin // High-Leverage Trajectories Identified</text>
+  <rect x="44" y="145" width="120" height="20" fill="#38BDF8" fill-opacity="0.2"/>
+  <text x="52" y="159" font-family="monospace" font-size="9" fill="#38BDF8">SYNCHRONISED</text>
+
+  <!-- Mini nodes -->
+  <rect x="24" y="200" width="364" height="270" fill="#11141E" stroke="#1E2433" stroke-width="1"/>
+  <text x="44" y="235" font-family="sans-serif" font-size="13" font-weight="600" fill="#F8FAFC">Domain Competencies</text>
+  <line x1="44" y1="260" x2="368" y2="260" stroke="#1E2433"/>
+  <text x="44" y="290" font-family="monospace" font-size="11" fill="#64748B">01 / Systems Architecture</text>
+  <text x="44" y="325" font-family="monospace" font-size="11" fill="#64748B">02 / Creative Technology</text>
+  <text x="44" y="360" font-family="monospace" font-size="11" fill="#64748B">03 / Human-AI Interaction</text>
+
+  <rect x="412" y="200" width="364" height="270" fill="#11141E" stroke="#1E2433" stroke-width="1"/>
+  <text x="432" y="235" font-family="sans-serif" font-size="13" font-weight="600" fill="#F8FAFC">Active Recommendations</text>
+  <line x1="432" y1="260" x2="756" y2="260" stroke="#1E2433"/>
+  <text x="432" y="290" font-family="monospace" font-size="11" fill="#38BDF8">→ Staff Design Engineer</text>
+  <text x="432" y="325" font-family="monospace" font-size="11" fill="#38BDF8">→ Digital Product Architect</text>
+</svg>

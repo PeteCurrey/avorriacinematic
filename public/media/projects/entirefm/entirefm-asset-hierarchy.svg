@@ -1,0 +1,27 @@
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="400" fill="#0A0C10" rx="2"/>
+
+  <text x="30" y="40" font-family="monospace" font-size="11" fill="#94A3B8">FACILITIES ASSET HIERARCHY</text>
+
+  <line x1="60" y1="80" x2="60" y2="340" stroke="#1E232F" stroke-width="2"/>
+
+  <!-- Node 1 -->
+  <circle cx="60" cy="90" r="4" fill="#38BDF8"/>
+  <line x1="60" y1="90" x2="100" y2="90" stroke="#1E232F"/>
+  <text x="110" y="94" font-family="sans-serif" font-size="12" fill="#F8FAFC">Estate: Commercial Centre Alpha</text>
+
+  <!-- Node 2 -->
+  <circle cx="60" cy="160" r="4" fill="#38BDF8"/>
+  <line x1="60" y1="160" x2="100" y2="160" stroke="#1E232F"/>
+  <text x="110" y="164" font-family="sans-serif" font-size="12" fill="#F8FAFC">Building: Tower 01 (Commercial)</text>
+
+  <!-- Node 3 -->
+  <circle cx="60" cy="230" r="4" fill="#38BDF8"/>
+  <line x1="60" y1="230" x2="100" y2="230" stroke="#1E232F"/>
+  <text x="110" y="234" font-family="sans-serif" font-size="12" fill="#F8FAFC">Space: Plant Room 02 // Level 03</text>
+
+  <!-- Node 4 (Target) -->
+  <circle cx="60" cy="300" r="5" fill="#C8F135"/>
+  <line x1="60" y1="300" x2="100" y2="300" stroke="#C8F135"/>
+  <text x="110" y="304" font-family="sans-serif" font-size="13" font-weight="700" fill="#C8F135">Target Asset: AHU-03 (Air Handling Unit)</text>
+</svg>

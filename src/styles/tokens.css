@@ -1,0 +1,88 @@
+:root {
+  /* AVORRIA V2 CORE DESIGN TOKENS */
+  --avorria-black: #080808;
+  --avorria-obsidian: #0D0D0D;
+  --avorria-graphite: #121212;
+  --avorria-surface: #111111;
+  --avorria-surface-subtle: #161616;
+  --avorria-line-deep: #1A1A1A;
+  --avorria-line: rgba(255, 255, 255, 0.07);
+  --avorria-line-subtle: rgba(255, 255, 255, 0.04);
+  --avorria-line-strong: rgba(255, 255, 255, 0.16);
+
+  /* Typography Colors */
+  --avorria-white: #F3F3F0;
+  --avorria-white-soft: #D7D7D2;
+  --avorria-muted: #777773;
+  --avorria-quiet: #555552;
+
+  /* Signal Color (Restrained 5-10% usage strictly for active states) */
+  --avorria-signal: #C8F135;
+  --avorria-signal-muted: rgba(200, 241, 53, 0.12);
+  --avorria-signal-glow: rgba(200, 241, 53, 0.25);
+
+  /* Spacing Scale */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4.5rem;
+  --space-4xl: 6rem;
+  --space-5xl: 9rem;
+  --space-cinematic: clamp(5rem, 12vh, 14rem);
+
+  /* Layout */
+  --grid-margin: clamp(1.25rem, 5vw, 5.5rem);
+  --grid-gutter: clamp(1rem, 2.5vw, 2.5rem);
+  --grid-max-width: 1760px;
+  --measure-editorial: 68ch;
+
+  /* Corner Radius (Architectural: 0px - 4px) */
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+
+  /* Motion Timing Tokens */
+  --duration-micro: 160ms;
+  --duration-fast: 280ms;
+  --duration-standard: 450ms;
+  --duration-slow: 800ms;
+  --duration-cinematic: 1400ms;
+
+  /* Motion Easing Curves */
+  --ease-avorria-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-avorria-in-out: cubic-bezier(0.87, 0, 0.13, 1);
+  --ease-avorria-cinematic: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-avorria-signal: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-avorria-linear: linear;
+
+  /* Z-Index Scale */
+  --z-base: 0;
+  --z-content: 10;
+  --z-media: 20;
+  --z-scene-overlay: 30;
+  --z-header: 50;
+  --z-transition: 80;
+  --z-cursor: 90;
+  --z-modal: 95;
+  --z-debug: 100;
+}
+
+[data-theme="light"] {
+  --avorria-black: #F5F5F2;
+  --avorria-obsidian: #EBEBE6;
+  --avorria-graphite: #E0E0DB;
+  --avorria-surface: #EBEBE6;
+  --avorria-surface-subtle: #E3E3DE;
+  --avorria-line-deep: #D4D4CE;
+  --avorria-line: rgba(0, 0, 0, 0.08);
+  --avorria-line-subtle: rgba(0, 0, 0, 0.04);
+  --avorria-line-strong: rgba(0, 0, 0, 0.2);
+  --avorria-white: #0A0A0A;
+  --avorria-white-soft: #222220;
+  --avorria-muted: #666662;
+  --avorria-quiet: #888884;
+}

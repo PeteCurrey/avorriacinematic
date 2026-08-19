@@ -1,0 +1,77 @@
+@import "./tokens.css";
+@import "./typography.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--avorria-black);
+  color: var(--avorria-white);
+  font-family: var(--font-body), sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--avorria-black);
+  color: var(--avorria-white);
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color var(--duration-standard) var(--ease-avorria-out),
+              color var(--duration-standard) var(--ease-avorria-out);
+}
+
+::selection {
+  background-color: var(--avorria-signal);
+  color: #080808;
+}
+
+:focus-visible {
+  outline: 2px solid var(--avorria-signal);
+  outline-offset: 3px;
+}
+
+body.scroll-locked {
+  overflow: hidden !important;
+  touch-action: none;
+}
+
+/* Custom Minimal Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--avorria-black);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--avorria-signal);
+}

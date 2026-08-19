@@ -1,0 +1,50 @@
+<svg width="1200" height="1400" viewBox="0 0 1200 1400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="portraitGlow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#1E232E"/>
+      <stop offset="100%" stop-color="#080808"/>
+    </radialGradient>
+    <linearGradient id="skinTone" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E2D4C5"/>
+      <stop offset="50%" stop-color="#CBB6A1"/>
+      <stop offset="100%" stop-color="#8F7865"/>
+    </linearGradient>
+    <linearGradient id="coatTone" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="1400" fill="url(#portraitGlow)"/>
+
+  <!-- Human Silhouette & Natural Editorial Stance -->
+  <!-- Shoulders & Coat -->
+  <path d="M 150 1400 L 320 980 L 520 860 L 680 860 L 880 980 L 1050 1400 Z" fill="url(#coatTone)"/>
+
+  <!-- Neck & Collar -->
+  <path d="M 520 860 L 540 680 L 660 680 L 680 860 Z" fill="url(#skinTone)"/>
+  <path d="M 500 780 L 600 920 L 700 780 Z" fill="#090D14"/>
+
+  <!-- Head & Facial Contour (Refined Editorial Lighting) -->
+  <ellipse cx="600" cy="520" rx="190" ry="240" fill="url(#skinTone)"/>
+
+  <!-- Hair / Silhouette Framing -->
+  <path d="M 400 480 Q 420 260 600 250 Q 780 260 800 480 Q 790 320 600 310 Q 410 320 400 480 Z" fill="#1C1917"/>
+
+  <!-- Thoughtful Eyes & Expression (Quiet & Intelligent) -->
+  <ellipse cx="530" cy="500" rx="20" ry="9" fill="#1E293B"/>
+  <circle cx="532" cy="499" r="4" fill="#FFFFFF"/>
+  <ellipse cx="670" cy="500" rx="20" ry="9" fill="#1E293B"/>
+  <circle cx="672" cy="499" r="4" fill="#FFFFFF"/>
+
+  <!-- Eyebrows -->
+  <path d="M 495 470 Q 530 455 565 470" stroke="#1C1917" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 635 470 Q 670 455 705 470" stroke="#1C1917" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Nose & Mouth (Minimal Editorial Geometry) -->
+  <path d="M 600 500 L 590 570 L 615 575" stroke="#785F49" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M 560 630 Q 600 645 640 630" stroke="#785F49" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+  <!-- Vignette Gradient Mask to fade base into pure obsidian -->
+  <rect y="1000" width="1200" height="400" fill="url(#portraitGlow)" opacity="0.95"/>
+</svg>

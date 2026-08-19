@@ -1,0 +1,25 @@
+<svg width="800" height="480" viewBox="0 0 800 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="480" fill="#0C0E14" stroke="#1E2433" stroke-width="1" rx="2"/>
+
+  <!-- Top Action Bar -->
+  <rect width="800" height="42" fill="#131722" stroke="#1E2433" stroke-width="1"/>
+  <text x="24" y="26" font-family="monospace" font-size="11" fill="#38BDF8" font-weight="bold">ACTION 01 // HUMAN APPROVAL GATE</text>
+
+  <!-- Email Header Fields -->
+  <rect x="24" y="60" width="752" height="110" fill="#141925" stroke="#222A3B" stroke-width="1"/>
+  <text x="44" y="90" font-family="monospace" font-size="10" fill="#94A3B8">TO: Lead 014 (Partner Operations)</text>
+  <text x="44" y="115" font-family="monospace" font-size="10" fill="#94A3B8">FROM: Avorria Systems Engineering</text>
+  <text x="44" y="145" font-family="sans-serif" font-size="13" font-weight="700" fill="#F8FAFC">SUBJECT: Digital Operations &amp; Scalable Workflow Architecture</text>
+
+  <!-- Email Body Content -->
+  <rect x="24" y="185" width="752" height="190" fill="#10141D" stroke="#1C2331" stroke-width="1"/>
+  <text x="44" y="225" font-family="sans-serif" font-size="12" fill="#CBD5E1">Hi team,</text>
+  <text x="44" y="255" font-family="sans-serif" font-size="12" fill="#CBD5E1">Following our discussion on operational bottlenecks, we reviewed how your CRM and internal</text>
+  <text x="44" y="280" font-family="sans-serif" font-size="12" fill="#CBD5E1">processes currently handle lead triage. We have prepared an architectural framework to</text>
+  <text x="44" y="305" font-family="sans-serif" font-size="12" fill="#CBD5E1">automate deterministic routing while keeping full human oversight on sensitive decisions.</text>
+  <text x="44" y="340" font-family="sans-serif" font-size="12" fill="#38BDF8">Attached: Avorria Systems Architecture Blueprint (PDF)</text>
+
+  <!-- Simulated Control Bar -->
+  <rect x="24" y="390" width="752" height="65" fill="#131722" stroke="#1E2433" stroke-width="1"/>
+  <text x="44" y="428" font-family="monospace" font-size="10" fill="#C8F135">STATUS: READY FOR HUMAN REVIEW</text>
+</svg>

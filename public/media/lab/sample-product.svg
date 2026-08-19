@@ -1,0 +1,7 @@
+<svg width="800" height="500" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="500" fill="#0C0E14" rx="2"/>
+  <circle cx="400" cy="250" r="140" fill="#151924" stroke="#252D40" stroke-width="2"/>
+  <rect x="340" y="190" width="120" height="120" rx="12" fill="#C8F135" fill-opacity="0.1" stroke="#C8F135" stroke-width="2"/>
+  <text x="400" y="255" font-family="monospace" font-size="12" font-weight="700" fill="#C8F135" text-anchor="middle">PHYSICAL OBJECT</text>
+  <line x1="260" y1="250" x2="540" y2="250" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="4 4"/>
+</svg>

@@ -1,0 +1,6 @@
+<svg width="800" height="500" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="500" fill="#0E1016" rx="2"/>
+  <polygon points="100,450 700,450 600,150 200,150" fill="#161B26" stroke="#283248" stroke-width="1.5"/>
+  <line x1="400" y1="150" x2="400" y2="450" stroke="#C8F135" stroke-width="1.5" stroke-dasharray="6 6"/>
+  <text x="400" y="300" font-family="monospace" font-size="12" fill="#C8F135" text-anchor="middle">SPATIAL FIELD // DEPTH</text>
+</svg>

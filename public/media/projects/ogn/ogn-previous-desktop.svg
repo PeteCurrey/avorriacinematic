@@ -1,0 +1,30 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="900" fill="#F1F3F5"/>
+  <!-- Header / Nav -->
+  <rect width="1440" height="80" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <rect x="60" y="24" width="140" height="32" fill="#1E293B" rx="2"/>
+  <text x="75" y="45" font-family="sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">ONE GREAT NORTHERN</text>
+  <text x="880" y="46" font-family="sans-serif" font-size="13" fill="#64748B">Home   Offices   Location   Availability   Contact</text>
+  <rect x="1260" y="20" width="120" height="40" fill="#3B82F6" rx="4"/>
+  <text x="1285" y="45" font-family="sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">Enquire Now</text>
+
+  <!-- Hero Section -->
+  <rect x="60" y="120" width="1320" height="420" fill="#E2E8F0" rx="4"/>
+  <rect x="100" y="180" width="600" height="40" fill="#1E293B" rx="2"/>
+  <text x="120" y="207" font-family="sans-serif" font-size="20" font-weight="800" fill="#FFFFFF">PREMIUM COMMERCIAL WORKSPACE &amp; OFFICES</text>
+  <rect x="100" y="240" width="480" height="80" fill="#CBD5E1" rx="2"/>
+  <text x="120" y="285" font-family="sans-serif" font-size="14" fill="#475569">Grade A office space in an iconic central location.</text>
+
+  <!-- Feature Grid -->
+  <rect x="60" y="580" width="410" height="240" fill="#FFFFFF" stroke="#CBD5E1" rx="4"/>
+  <text x="90" y="630" font-family="sans-serif" font-size="16" font-weight="700" fill="#1E293B">Prime Location</text>
+  <text x="90" y="665" font-family="sans-serif" font-size="13" fill="#64748B">Direct transport connections.</text>
+
+  <rect x="515" y="580" width="410" height="240" fill="#FFFFFF" stroke="#CBD5E1" rx="4"/>
+  <text x="545" y="630" font-family="sans-serif" font-size="16" font-weight="700" fill="#1E293B">Flexible Floorplates</text>
+  <text x="545" y="665" font-family="sans-serif" font-size="13" fill="#64748B">Spaces from 2,500 to 45,000 sq ft.</text>
+
+  <rect x="970" y="580" width="410" height="240" fill="#FFFFFF" stroke="#CBD5E1" rx="4"/>
+  <text x="1000" y="630" font-family="sans-serif" font-size="16" font-weight="700" fill="#1E293B">Modern Amenities</text>
+  <text x="1000" y="665" font-family="sans-serif" font-size="13" fill="#64748B">BREEAM Excellent &amp; Wellness facilities.</text>
+</svg>

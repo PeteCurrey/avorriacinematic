@@ -1,0 +1,71 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="700" fill="#0A0C10" rx="2"/>
+
+  <!-- Zone Headers -->
+  <rect x="50" y="40" width="320" height="36" fill="#12151E" stroke="#1D2230" stroke-width="1"/>
+  <text x="70" y="63" font-family="monospace" font-size="11" fill="#94A3B8">01 / BUSINESS INPUTS</text>
+
+  <rect x="440" y="40" width="320" height="36" fill="#12151E" stroke="#1D2230" stroke-width="1"/>
+  <text x="460" y="63" font-family="monospace" font-size="11" fill="#C8F135">02 / INTELLIGENCE & RULES</text>
+
+  <rect x="830" y="40" width="320" height="36" fill="#12151E" stroke="#1D2230" stroke-width="1"/>
+  <text x="850" y="63" font-family="monospace" font-size="11" fill="#38BDF8">03 / ACTIONS & APPROVAL</text>
+
+  <!-- Zone 1: Business Inputs (CRM, History, Activity) -->
+  <rect x="50" y="100" width="320" height="540" fill="#0F121A" stroke="#1D2230" stroke-width="1"/>
+  <rect x="70" y="130" width="280" height="90" fill="#141924" stroke="#222B3D" stroke-width="1"/>
+  <text x="90" y="160" font-family="monospace" font-size="10" fill="#94A3B8">CRM // LEAD 014</text>
+  <text x="90" y="185" font-family="sans-serif" font-size="12" fill="#F8FAFC">Status: Open // Inactive 18 Days</text>
+  <text x="90" y="205" font-family="monospace" font-size="9" fill="#C8F135">RULE MATCH: FOLLOW-UP DUE</text>
+
+  <rect x="70" y="240" width="280" height="90" fill="#141924" stroke="#222B3D" stroke-width="1"/>
+  <text x="90" y="270" font-family="monospace" font-size="10" fill="#94A3B8">CRM // LEAD 027</text>
+  <text x="90" y="295" font-family="sans-serif" font-size="12" fill="#F8FAFC">Status: Proposal Sent // Inactive 12 Days</text>
+  <text x="90" y="315" font-family="monospace" font-size="9" fill="#94A3B8">STATUS: ACTIVE NURTURE</text>
+
+  <rect x="70" y="350" width="280" height="90" fill="#141924" stroke="#222B3D" stroke-width="1"/>
+  <text x="90" y="380" font-family="monospace" font-size="10" fill="#94A3B8">CRM // LEAD 041</text>
+  <text x="90" y="405" font-family="sans-serif" font-size="12" fill="#F8FAFC">Status: High-Intent Return to Work Page</text>
+  <text x="90" y="425" font-family="monospace" font-size="9" fill="#C8F135">RULE MATCH: PRIORITY INTENT</text>
+
+  <!-- Flow Lines to Centre -->
+  <line x1="370" y1="175" x2="440" y2="200" stroke="#C8F135" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <line x1="370" y1="395" x2="440" y2="400" stroke="#C8F135" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+  <!-- Zone 2: Intelligence & Rules -->
+  <rect x="440" y="100" width="320" height="540" fill="#0F121A" stroke="#1D2230" stroke-width="1"/>
+  
+  <!-- Rules Sub-node -->
+  <rect x="460" y="130" width="280" height="110" fill="#141924" stroke="#C8F135" stroke-width="1"/>
+  <text x="480" y="160" font-family="monospace" font-size="10" fill="#C8F135">DETERMINISTIC RULES ENGINE</text>
+  <text x="480" y="185" font-family="sans-serif" font-size="11" fill="#F8FAFC">Condition: Last Contact &gt; 14 Days</text>
+  <text x="480" y="210" font-family="sans-serif" font-size="11" fill="#F8FAFC">Action: Trigger Value Re-engagement</text>
+
+  <!-- AI Context Sub-node -->
+  <rect x="460" y="270" width="280" height="150" fill="#141924" stroke="#222B3D" stroke-width="1"/>
+  <text x="480" y="300" font-family="monospace" font-size="10" fill="#94A3B8">AI CONTEXT SERVICE</text>
+  <text x="480" y="325" font-family="sans-serif" font-size="11" fill="#F8FAFC">Analyzes past client conversation context,</text>
+  <text x="480" y="345" font-family="sans-serif" font-size="11" fill="#F8FAFC">extracts key requirements &amp; formulates</text>
+  <text x="480" y="365" font-family="sans-serif" font-size="11" fill="#F8FAFC">tailored, value-led action plan.</text>
+  <rect x="480" y="385" width="140" height="20" fill="#C8F135" fill-opacity="0.1"/>
+  <text x="490" y="399" font-family="monospace" font-size="9" fill="#C8F135">CONTEXT READY</text>
+
+  <!-- Flow Lines to Action -->
+  <line x1="760" y1="345" x2="830" y2="240" stroke="#38BDF8" stroke-width="1.5"/>
+
+  <!-- Zone 3: Actions & Approval -->
+  <rect x="830" y="100" width="320" height="540" fill="#0F121A" stroke="#1D2230" stroke-width="1"/>
+  
+  <rect x="850" y="130" width="280" height="190" fill="#141924" stroke="#38BDF8" stroke-width="1"/>
+  <text x="870" y="160" font-family="monospace" font-size="10" fill="#38BDF8">PREPARED ACTION // EMAIL DRAFT</text>
+  <text x="870" y="190" font-family="sans-serif" font-size="11" font-weight="700" fill="#F8FAFC">Subject: Follow-up on System Architecture</text>
+  <text x="870" y="215" font-family="sans-serif" font-size="10" fill="#94A3B8">Attached relevant Case Study (NestIQ) &amp;</text>
+  <text x="870" y="235" font-family="sans-serif" font-size="10" fill="#94A3B8">proposed next steps consultation.</text>
+  
+  <rect x="870" y="260" width="120" height="32" fill="#1E293B" stroke="#38BDF8" stroke-width="1"/>
+  <text x="886" y="280" font-family="monospace" font-size="10" fill="#38BDF8">HUMAN REVIEW</text>
+
+  <!-- Closed Loop Signal -->
+  <path d="M 990 400 L 990 600 L 210 600 L 210 460" stroke="#C8F135" stroke-width="1.5" stroke-dasharray="4 4" fill="none"/>
+  <text x="500" y="590" font-family="monospace" font-size="9" fill="#C8F135">CLOSED LOOP // CRM STATUS UPDATE &amp; FUTURE TRIGGER</text>
+</svg>

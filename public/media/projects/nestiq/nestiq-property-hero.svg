@@ -1,0 +1,46 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#0C0E14"/>
+  <defs>
+    <linearGradient id="facadeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E2433"/>
+      <stop offset="100%" stop-color="#0E121A"/>
+    </linearGradient>
+    <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Architectural Building Facade Structure -->
+  <!-- Main Building Outline -->
+  <rect x="250" y="100" width="700" height="650" fill="url(#facadeGrad)" stroke="#222B3D" stroke-width="2"/>
+  
+  <!-- Floor Level Divisions -->
+  <line x1="250" y1="260" x2="950" y2="260" stroke="#18202E" stroke-width="2"/>
+  <line x1="250" y1="420" x2="950" y2="420" stroke="#18202E" stroke-width="2"/>
+  <line x1="250" y1="580" x2="950" y2="580" stroke="#18202E" stroke-width="2"/>
+
+  <!-- Floor 3 Glazing & Balcony -->
+  <rect x="300" y="140" width="160" height="90" fill="url(#glassGrad)" stroke="#38BDF8" stroke-opacity="0.4"/>
+  <rect x="520" y="140" width="160" height="90" fill="url(#glassGrad)" stroke="#38BDF8" stroke-opacity="0.4"/>
+  <rect x="740" y="140" width="160" height="90" fill="url(#glassGrad)" stroke="#38BDF8" stroke-opacity="0.4"/>
+
+  <!-- Floor 2 Glazing -->
+  <rect x="300" y="300" width="160" height="90" fill="url(#glassGrad)" stroke="#38BDF8" stroke-opacity="0.4"/>
+  <rect x="520" y="300" width="160" height="90" fill="url(#glassGrad)" stroke="#38BDF8" stroke-opacity="0.4"/>
+  <rect x="740" y="300" width="160" height="90" fill="url(#glassGrad)" stroke="#38BDF8" stroke-opacity="0.4"/>
+
+  <!-- Floor 1 Glazing -->
+  <rect x="300" y="460" width="160" height="90" fill="url(#glassGrad)" stroke="#38BDF8" stroke-opacity="0.4"/>
+  <rect x="520" y="460" width="160" height="90" fill="url(#glassGrad)" stroke="#38BDF8" stroke-opacity="0.4"/>
+  <rect x="740" y="460" width="160" height="90" fill="url(#glassGrad)" stroke="#38BDF8" stroke-opacity="0.4"/>
+
+  <!-- Ground Floor Entrance Portal -->
+  <rect x="500" y="620" width="200" height="130" fill="#0A0D14" stroke="#60A5FA" stroke-width="1.5"/>
+  <line x1="600" y1="620" x2="600" y2="750" stroke="#1E293B"/>
+
+  <!-- Architectural Location & Spec Callout -->
+  <rect x="280" y="40" width="640" height="36" fill="#131824" stroke="#1E2638" stroke-width="1"/>
+  <text x="300" y="63" font-family="monospace" font-size="11" fill="#60A5FA" letter-spacing="1">CHELSEA EMBANKMENT RESIDENCE // 4,250 SQ FT</text>
+  <text x="830" y="63" font-family="monospace" font-size="10" fill="#94A3B8">003 / NESTIQ</text>
+</svg>

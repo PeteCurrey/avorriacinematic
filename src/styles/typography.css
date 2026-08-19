@@ -1,0 +1,114 @@
+.display-xxl {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(3.5rem, 11vw, 11.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.display-xl {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2.75rem, 8vw, 8.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.display-lg {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2.25rem, 5.5vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.display-md {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.75rem, 3.5vw, 3.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+.heading-lg {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.5rem, 2.2vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.heading-md {
+  font-family: var(--font-body), sans-serif;
+  font-size: clamp(1.2rem, 1.5vw, 1.75rem);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  font-weight: 500;
+}
+
+.body-lg {
+  font-family: var(--font-body), sans-serif;
+  font-size: clamp(1.05rem, 1.2vw, 1.25rem);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--avorria-white);
+  max-width: var(--measure-editorial);
+}
+
+.body {
+  font-family: var(--font-body), sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: -0.005em;
+  font-weight: 400;
+  color: var(--avorria-white-soft);
+  max-width: var(--measure-editorial);
+}
+
+.body-sm {
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--avorria-muted);
+}
+
+.mono-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--avorria-quiet);
+}
+
+.mono-micro {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.5625rem;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--avorria-quiet);
+}
+
+.mono-meta {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  color: var(--avorria-white);
+}
+
+.mono-navigation {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}

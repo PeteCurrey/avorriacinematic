@@ -1,0 +1,19 @@
+<svg width="1000" height="700" viewBox="0 0 1000 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1000" height="700" fill="none" stroke="#38BDF8" stroke-width="1" stroke-dasharray="4 4" opacity="0.4"/>
+  
+  <!-- Semantic Wireframe Markers -->
+  <rect x="20" y="10" width="960" height="40" stroke="#38BDF8" stroke-width="1" fill="#0284C7" fill-opacity="0.05"/>
+  <text x="35" y="34" font-family="monospace" font-size="9" fill="#38BDF8">HEADER / NAV [ROLE=NAVIGATION]</text>
+
+  <rect x="50" y="80" width="900" height="130" stroke="#C8F135" stroke-width="1" fill="#C8F135" fill-opacity="0.05"/>
+  <text x="65" y="105" font-family="monospace" font-size="9" fill="#C8F135">H1: HERO STATEMENT [PRIMARY_ENTITY]</text>
+
+  <rect x="50" y="240" width="550" height="120" stroke="#60A5FA" stroke-width="1" fill="#60A5FA" fill-opacity="0.05"/>
+  <text x="65" y="260" font-family="monospace" font-size="9" fill="#60A5FA">MAIN CONTENT [SCHEMA=ARTICLE]</text>
+
+  <rect x="630" y="240" width="320" height="380" stroke="#A855F7" stroke-width="1" fill="#A855F7" fill-opacity="0.05"/>
+  <text x="645" y="260" font-family="monospace" font-size="9" fill="#A855F7">ENTITIES [SCHEMA=ABOUT/MENTIONS]</text>
+
+  <rect x="50" y="390" width="550" height="230" stroke="#38BDF8" stroke-width="1" fill="#38BDF8" fill-opacity="0.05"/>
+  <text x="65" y="410" font-family="monospace" font-size="9" fill="#38BDF8">INTERNAL_LINKS [CRAWL_GRAPH]</text>
+</svg>

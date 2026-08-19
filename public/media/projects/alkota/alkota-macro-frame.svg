@@ -1,0 +1,30 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1920" height="1080" fill="#08090C"/>
+  <defs>
+    <radialGradient id="macroGlow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#1E232E"/>
+      <stop offset="100%" stop-color="#08090C"/>
+    </radialGradient>
+    <linearGradient id="titaniumGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#94A3B8"/>
+      <stop offset="50%" stop-color="#CBD5E1"/>
+      <stop offset="100%" stop-color="#64748B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#macroGlow)"/>
+
+  <!-- Precision Machined Headtube Junction & Weld Beads -->
+  <path d="M 600 100 L 1100 120 L 1320 880 L 780 840 Z" fill="url(#titaniumGrad)" opacity="0.92"/>
+  <path d="M 1100 120 L 1680 340 L 1540 520 L 1140 300 Z" fill="#475569" opacity="0.85"/>
+  <path d="M 1320 880 L 1800 980 L 1740 1080 L 1260 960 Z" fill="#334155" opacity="0.85"/>
+
+  <!-- Surgical Weld Pattern Details -->
+  <line x1="1100" y1="120" x2="1140" y2="300" stroke="#E2E8F0" stroke-width="4" stroke-dasharray="6 4"/>
+  <line x1="1320" y1="880" x2="1260" y2="960" stroke="#E2E8F0" stroke-width="4" stroke-dasharray="6 4"/>
+
+  <!-- Internal Cable Port Detail -->
+  <ellipse cx="940" cy="420" rx="36" ry="18" fill="#0F172A" stroke="#C8F135" stroke-width="2"/>
+
+  <!-- Laser Etched Serial Number -->
+  <text x="860" y="490" font-family="monospace" font-size="12" fill="#C8F135" letter-spacing="3">ALK-TI-001 // 3AL-2.5V</text>
+</svg>
