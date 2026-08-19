@@ -8,6 +8,9 @@ export type AnalyticsEventName =
   | "lab_interaction"
   | "start_project_click"
   | "start_project_submit"
+  | "start_project_step_complete"
+  | "start_project_error"
+  | "start_project_submit_success"
   | "intelligence_open"
   | "video_play"
   | "interactive_demo_started";

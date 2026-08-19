@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="100%" height="100%">
+  <rect width="1200" height="750" fill="#0A0A0A"/>
+  <defs>
+    <pattern id="gridH" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1F1F1F" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="750" fill="url(#gridH)"/>
+  <rect x="80" y="80" width="1040" height="590" fill="#121212" stroke="#262626" stroke-width="1.5"/>
+  <text x="120" y="140" fill="#C8F135" font-family="monospace" font-size="14" letter-spacing="3">ARCHIVE // AVORRIA HOSPITALITY</text>
+  <text x="120" y="180" fill="#FFFFFF" font-family="sans-serif" font-weight="900" font-size="28" letter-spacing="1">BESPOKE RESERVATION &amp; COMMERCE ENGINE</text>
+  <line x1="120" y1="210" x2="1080" y2="210" stroke="#262626" stroke-width="1"/>
+  <rect x="120" y="240" width="540" height="380" fill="#080808" stroke="#262626"/>
+  <rect x="690" y="240" width="390" height="380" fill="#080808" stroke="#262626"/>
+</svg>
