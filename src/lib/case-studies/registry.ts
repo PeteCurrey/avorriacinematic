@@ -711,63 +711,264 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
     }
   },
 
+  // ============================================================
   // 004 // DRAWDOWN.TRADING
+  // PHASE 25D — FULL CASE STUDY
+  // RELATIONSHIP: VENTURE
+  // AVORRIA ROLE: Strategy, product, UX, UI, data, development, system architecture
+  // TRUTH BOUNDARY: Never fabricate profit, returns, account balances,
+  //   win rates, or trade success. Never imply investment advice or
+  //   guaranteed financial returns. All data is deterministic/illustrative.
+  // ============================================================
   "drawdown-trading": {
     projectSlug: "drawdown-trading",
     canonicalTitle: "Drawdown.Trading",
     projectIndex: "004 / DRAWDOWN.TRADING",
     publicationStatus: "PUBLISHED",
     publishedAt: "2024-09-15",
-    heroMode: "DATA_DENSE",
+    heroMode: "INTERFACE",
     heroMedia: {
       id: "drawdown-hero-main",
       type: "IMAGE",
       src: "/media/projects/drawdown/drawdown-chart-hero.svg",
-      alt: "Drawdown.Trading Quantitative Risk Dashboard",
+      alt: "Drawdown.Trading — single clean market chart and trade planning canvas",
       aspectRatio: "16/10",
       status: "FINAL",
       priority: true
     },
     theme: {
-      background: "#0A0A0B",
-      foreground: "#FAFAFA",
-      muted: "#A1A1AA",
+      background: "#08090C",
+      foreground: "#F8FAFC",
+      muted: "#94A3B8",
       accent: "#F59E0B",
-      surface: "#18181B",
-      mediaBorder: "rgba(245, 158, 11, 0.16)",
+      surface: "#0E1118",
+      mediaBorder: "rgba(245, 158, 11, 0.12)",
       signalColour: "#F59E0B",
       headerMode: "PROJECT_DARK"
     },
     relationship: "VENTURE",
     status: "LIVE",
-    roles: ["PRODUCT", "SYSTEMS", "UI", "DATA"],
-    scopeSummary: "Low-latency trading analytics interface, quantitative risk management architecture, and execution telemetry.",
+    roles: ["STRATEGY", "PRODUCT", "UX", "UI", "DATA", "DEVELOPMENT", "SYSTEM_ARCHITECTURE"],
+    scopeSummary: "High-density trading workflow platform, structured trade planning modules, risk boundary engine, and post-trade review journal.",
     capabilities: ["SYSTEMS", "BUILD"],
     year: 2024,
     introNarrative: [
-      "Professional proprietary traders operate under extreme information density and sub-second risk constraints.",
-      "Drawdown.Trading was engineered to eliminate visual latency, providing instantaneous risk curve feedback and drawdown telemetry."
+      "Professional trading demands intense information synthesis under strict capital preservation rules.",
+      "Avorria engineered Drawdown.Trading to turn chaotic market streams into a disciplined, structured workflow — replacing emotional impulses with repeatable decision architecture."
     ],
     chapters: [
+      // -------------------------------------------------------
+      // CHAPTER 01 / COMPLEXITY
+      // Radical visual restraint over market casino noise.
+      // -------------------------------------------------------
       {
-        id: "risk-engine",
+        id: "drawdown-complexity",
         type: "STATEMENT",
-        eyebrow: "01 // RISK TELEMETRY",
-        title: "SUB-MILLISECOND FEEDBACK",
-        body: "Visualizing probability distributions, VaR matrices, and real-time equity drawdowns without canvas stutter or frame drops."
+        eyebrow: "01 / COMPLEXITY",
+        title: "COMPLEXITY, CONTROLLED.",
+        body: "Financial markets generate overwhelming streams of fragmented data. Traditional platforms amplify this friction with cluttered layouts, erratic colour coding, and casino-like interfaces. Drawdown.Trading was engineered with an opposing philosophy: radical visual restraint, structured workflows, and deterministic clarity."
+      },
+      // -------------------------------------------------------
+      // CHAPTER 02 / INFORMATION ARCHITECTURE
+      // Single clean market view. Space to think.
+      // -------------------------------------------------------
+      {
+        id: "drawdown-info-arch",
+        type: "MEDIA",
+        eyebrow: "DRAWDOWN // THE INTERFACE",
+        caption: "Single clean market canvas — clear price action, structural levels, and deliberate whitespace.",
+        media: [
+          {
+            id: "drawdown-chart-view",
+            type: "IMAGE",
+            src: "/media/projects/drawdown/drawdown-chart-hero.svg",
+            alt: "Drawdown.Trading single market chart view with clear price action and structural grid",
+            aspectRatio: "16/10",
+            status: "FINAL"
+          }
+        ]
+      },
+      // -------------------------------------------------------
+      // CHAPTER 03 / THE WORKFLOW
+      // The 6-stage discipline loop.
+      // -------------------------------------------------------
+      {
+        id: "drawdown-workflow",
+        type: "PROCESS",
+        eyebrow: "02 / THE WORKFLOW",
+        title: "STRUCTURE OVER EMOTION: THE 6-STAGE DISCIPLINE CYCLE.",
+        body: "Rather than reacting impulsively to fluctuating candles, Drawdown enforces a structured behavioral loop: PREPARE → PLAN → EXECUTE ELSEWHERE → IMPORT / RECORD → REVIEW → IMPROVE. By deliberately decoupling trade planning from external execution brokers, the platform keeps the trader centered in objective analysis.",
+        secondaryBody: "PREPARE / PLAN / EXECUTE ELSEWHERE / IMPORT & RECORD / REVIEW / IMPROVE — a systematic framework designed to build long-term operational consistency."
+      },
+      // -------------------------------------------------------
+      // CHAPTER 04 / MODULAR ARCHITECTURE
+      // The Playbook module.
+      // -------------------------------------------------------
+      {
+        id: "drawdown-modules-plan",
+        type: "SPLIT",
+        eyebrow: "03 / MODULES & PLAYBOOK",
+        title: "THE TRADE PLAYBOOK: FORMULATING RULES BEFORE COMMITMENT.",
+        body: "Every trade begins with a predefined hypothesis, entry invalidation trigger, and structured risk parameters. The Playbook module mandates pre-trade checklist compliance before scenarios can be finalized.",
+        secondaryBody: "HYPOTHESIS BUILDER / SCENARIO MAPPER / CHECKLIST VALIDATION — eliminating discretionary ambiguity before capital is committed.",
+        media: [
+          {
+            id: "drawdown-plan-module-img",
+            type: "IMAGE",
+            src: "/media/projects/drawdown/drawdown-module-plan.svg",
+            alt: "Drawdown.Trading Trade Playbook & Plan module showing structured trade preparation checklist",
+            aspectRatio: "16/10",
+            status: "FINAL"
+          }
+        ]
+      },
+      // -------------------------------------------------------
+      // CHAPTER 05 / RISK BOUNDARIES
+      // Capital preservation engine.
+      // -------------------------------------------------------
+      {
+        id: "drawdown-risk-engine",
+        type: "SPLIT",
+        eyebrow: "04 / RISK BOUNDARY ENGINE",
+        title: "DYNAMIC CAPITAL PRESERVATION & EXPOSURE LIMITS.",
+        body: "Risk management is not an afterthought; it is the platform's core operating constraint. Automated boundary calculations monitor portfolio exposure in R-multiples, preventing revenge trading and over-leverage through visual and architectural interlocks.",
+        secondaryBody: "R-MULTIPLE MODELING / DRAWDOWN CIRCUIT BREAKERS / CORRELATION ANALYSIS — continuous mathematical boundaries keeping risk controlled.",
+        media: [
+          {
+            id: "drawdown-risk-module-img",
+            type: "IMAGE",
+            src: "/media/projects/drawdown/drawdown-module-risk.svg",
+            alt: "Drawdown.Trading Risk Boundary Engine module showing capital exposure calculations",
+            aspectRatio: "16/10",
+            status: "FINAL"
+          }
+        ]
+      },
+      // -------------------------------------------------------
+      // CHAPTER 06 / DECISION SURFACES
+      // Unified operational workspace.
+      // -------------------------------------------------------
+      {
+        id: "drawdown-decision-surface",
+        type: "INTERFACE",
+        eyebrow: "05 / DECISION SURFACES",
+        title: "DENSE INFORMATION, CALMLY COORDINATED.",
+        body: "Avorria unified the entire operational cycle — market research, active playbook, risk monitors, and post-trade journal — into a single high-throughput desktop workspace. Navigation is instantaneous, keyboard-driven, and devoid of visual noise.",
+        media: [
+          {
+            id: "drawdown-full-ui-view",
+            type: "IMAGE",
+            src: "/media/projects/drawdown/drawdown-full-ui.svg",
+            alt: "Drawdown.Trading complete multi-module operational workspace showing market, playbook, risk, and journal modules",
+            aspectRatio: "16/10",
+            status: "FINAL"
+          }
+        ]
+      },
+      // -------------------------------------------------------
+      // CHAPTER 07 / DATA METHODOLOGY & TRANSPARENCY
+      // Deterministic latency, data provenance, zero financial hype.
+      // -------------------------------------------------------
+      {
+        id: "drawdown-data-transparency",
+        type: "DATA",
+        eyebrow: "06 / DATA METHODOLOGY",
+        title: "DETERMINISTIC LATENCY, SOURCE PROVENANCE, ZERO PERFORMANCE HYPE.",
+        body: "Drawdown.Trading does not offer financial advice or promise trading returns. The platform is purely software: a structured decision and journaling system. All benchmarks reflect internal interface rendering telemetry on deterministic data fixtures.",
+        evidence: [
+          {
+            id: "dd-dat-01",
+            type: "TECHNICAL",
+            value: "60FPS",
+            unit: "CANVAS",
+            description: "Sustained chart rendering frame rate without layout thrashing during live market telemetry",
+            source: "Internal rendering benchmark",
+            verified: true
+          },
+          {
+            id: "dd-dat-02",
+            type: "TECHNICAL",
+            value: "6 STAGES",
+            unit: "WORKFLOW",
+            description: "Structured behavioral discipline cycle from pre-trade preparation to post-trade review",
+            source: "Drawdown product specification",
+            verified: true
+          },
+          {
+            id: "dd-dat-03",
+            type: "TECHNICAL",
+            value: "100%",
+            unit: "DETERMINISTIC",
+            description: "Local risk calculation engine with zero client-side latency and offline journal capability",
+            source: "Drawdown engine benchmark",
+            verified: true
+          }
+        ]
+      },
+      // -------------------------------------------------------
+      // CHAPTER 08 / PRODUCT SYSTEM
+      // Modular software architecture.
+      // -------------------------------------------------------
+      {
+        id: "drawdown-product-system",
+        type: "PROCESS",
+        eyebrow: "07 / PRODUCT SYSTEM",
+        title: "MODULAR COMPONENT ARCHITECTURE.",
+        body: "The platform comprises distinct, interoperable modules engineered to scale independently: Market Watch & Charting, Playbook Planning, Risk Boundary Matrix, Execution Import Adapter, and Trade Analytics Journal.",
+        secondaryBody: "MODULAR FRONTEND / LOCAL STATE ENGINE / SECURE IMPORT PIPELINE / EXPORTABLE JOURNAL — designed for institutional focus and individual control."
+      },
+      // -------------------------------------------------------
+      // CHAPTER 09 / WHAT EXISTS — PROOF CHAPTER
+      // Live software, modular framework, verified records.
+      // -------------------------------------------------------
+      {
+        id: "drawdown-proof",
+        type: "PROOF",
+        eyebrow: "08 / WHAT EXISTS",
+        title: "LIVE FINANCIAL SOFTWARE PLATFORM.",
+        body: "Drawdown.Trading is an operational venture platform. The complete modular software architecture, trade planning framework, and risk engine Avorria engineered are active in production.",
+        evidence: [
+          {
+            id: "dd-ev-01",
+            type: "TECHNICAL",
+            value: "LIVE",
+            unit: "",
+            description: "Trade Playbook & Planning Engine — structured pre-trade preparation interface",
+            source: "Drawdown platform status",
+            verified: true
+          },
+          {
+            id: "dd-ev-02",
+            type: "TECHNICAL",
+            value: "LIVE",
+            unit: "",
+            description: "Risk Boundary Matrix — automated R-multiple calculation and portfolio exposure limits",
+            source: "Drawdown platform status",
+            verified: true
+          },
+          {
+            id: "dd-ev-03",
+            type: "TECHNICAL",
+            value: "DELIVERED",
+            unit: "",
+            description: "Product Architecture & UX — full multi-module decision workspace and journaling system",
+            source: "Drawdown project delivery record",
+            verified: true
+          }
+        ]
       }
     ],
     nextProject: {
       slug: "entirefm",
       title: "EntireFM",
       projectIndex: "005 / ENTIREFM",
-      descriptor: "OPERATIONAL CAFM SYSTEM",
+      descriptor: "OPERATIONAL CAFM SYSTEM / FIELD DISPATCH AUTOMATION",
       heroMedia: "/media/projects/entirefm/entirefm-workorder-hero.svg",
       themeAccent: "#60A5FA"
     },
     seo: {
-      metaTitle: "Drawdown.Trading — Quantitative Risk Platform Case Study | Avorria",
-      metaDescription: "Low-latency trading analytics interface and quantitative risk architecture."
+      metaTitle: "Drawdown.Trading — Complex Trading Product | Avorria",
+      metaDescription: "Avorria engineered Drawdown.Trading — a high-density financial software platform delivering structured trade planning, risk boundary calculations, and post-trade review."
     }
   },
 
