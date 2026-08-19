@@ -16,9 +16,11 @@ export function useGsapContext(
 ) {
   useIsomorphicLayoutEffect(() => {
     initGsap();
-    const ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {}, scope?.current || undefined);
+
+    ctx.add(() => {
       callback(ctx);
-    }, scope?.current || undefined);
+    });
 
     return () => {
       ctx.revert();

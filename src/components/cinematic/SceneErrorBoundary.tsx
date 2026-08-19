@@ -24,7 +24,13 @@ export class SceneErrorBoundary extends Component<SceneErrorBoundaryProps, Scene
 
   componentDidCatch(error: Error, info: ErrorInfo) {
     if (process.env.NODE_ENV === "development") {
-      console.error(`[SceneErrorBoundary] Scene "${this.props.sceneLabel}" failed to render.`, error, info);
+      console.error(
+        `%c[SceneErrorBoundary] CRITICAL FAILURE IN SCENE: ${this.props.sceneId} ("${this.props.sceneLabel}")`,
+        "color: #ff3366; font-weight: bold; font-size: 14px;",
+        "\nError Message:", error.message,
+        "\nError Stack:", error.stack,
+        "\nComponent Stack:", info.componentStack
+      );
     }
   }
 
