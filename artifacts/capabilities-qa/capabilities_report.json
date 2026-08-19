@@ -1,0 +1,382 @@
+{
+  "desktop_1440": [
+    {
+      "chName": "01_build",
+      "found": true,
+      "safeFrameWidth": 1440,
+      "articleWidth": 1440,
+      "usableWidthPct": 100,
+      "title": "BUILD.",
+      "titleRect": {
+        "x": 0,
+        "y": 291,
+        "width": 820,
+        "height": 158
+      },
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1440
+      },
+      "footerRect": {
+        "x": 0,
+        "y": 214,
+        "width": 1440
+      },
+      "ctaRect": {
+        "x": 1284,
+        "y": 880,
+        "width": 156
+      },
+      "visualVisible": true,
+      "pointerEvents": "auto"
+    },
+    {
+      "chName": "02_search",
+      "found": true,
+      "safeFrameWidth": 1440,
+      "articleWidth": 1440,
+      "usableWidthPct": 100,
+      "title": "SEARCH.",
+      "titleRect": {
+        "x": 0,
+        "y": 291,
+        "width": 820,
+        "height": 158
+      },
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1440
+      },
+      "footerRect": {
+        "x": 0,
+        "y": 214,
+        "width": 1440
+      },
+      "ctaRect": {
+        "x": 1275,
+        "y": 880,
+        "width": 165
+      },
+      "visualVisible": true,
+      "pointerEvents": "auto"
+    },
+    {
+      "chName": "03_systems",
+      "found": true,
+      "safeFrameWidth": 1440,
+      "articleWidth": 1440,
+      "usableWidthPct": 100,
+      "title": "SYSTEMS.",
+      "titleRect": {
+        "x": 0,
+        "y": 291,
+        "width": 820,
+        "height": 158
+      },
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1440
+      },
+      "footerRect": {
+        "x": 0,
+        "y": 214,
+        "width": 1440
+      },
+      "ctaRect": {
+        "x": 1265,
+        "y": 880,
+        "width": 175
+      },
+      "visualVisible": true,
+      "pointerEvents": "auto"
+    }
+  ],
+  "desktop_1920": [
+    {
+      "chName": "01_build",
+      "found": true,
+      "safeFrameWidth": 1760,
+      "articleWidth": 1760,
+      "usableWidthPct": 100,
+      "title": "BUILD.",
+      "titleRect": {
+        "x": 80,
+        "y": 364,
+        "width": 1007,
+        "height": 192
+      },
+      "headerRect": {
+        "x": 80,
+        "y": 0,
+        "width": 1760
+      },
+      "footerRect": {
+        "x": 80,
+        "y": 304,
+        "width": 1760
+      },
+      "ctaRect": {
+        "x": 1684,
+        "y": 1060,
+        "width": 156
+      },
+      "visualVisible": true,
+      "pointerEvents": "auto"
+    },
+    {
+      "chName": "02_search",
+      "found": true,
+      "safeFrameWidth": 1760,
+      "articleWidth": 1760,
+      "usableWidthPct": 100,
+      "title": "SEARCH.",
+      "titleRect": {
+        "x": 80,
+        "y": 364,
+        "width": 1007,
+        "height": 192
+      },
+      "headerRect": {
+        "x": 80,
+        "y": 0,
+        "width": 1760
+      },
+      "footerRect": {
+        "x": 80,
+        "y": 304,
+        "width": 1760
+      },
+      "ctaRect": {
+        "x": 1675,
+        "y": 1060,
+        "width": 165
+      },
+      "visualVisible": true,
+      "pointerEvents": "auto"
+    },
+    {
+      "chName": "03_systems",
+      "found": true,
+      "safeFrameWidth": 1760,
+      "articleWidth": 1760,
+      "usableWidthPct": 100,
+      "title": "SYSTEMS.",
+      "titleRect": {
+        "x": 80,
+        "y": 364,
+        "width": 1007,
+        "height": 192
+      },
+      "headerRect": {
+        "x": 80,
+        "y": 0,
+        "width": 1760
+      },
+      "footerRect": {
+        "x": 80,
+        "y": 304,
+        "width": 1760
+      },
+      "ctaRect": {
+        "x": 1665,
+        "y": 1060,
+        "width": 175
+      },
+      "visualVisible": true,
+      "pointerEvents": "auto"
+    }
+  ],
+  "desktop_1366": [
+    {
+      "chName": "01_build",
+      "found": true,
+      "safeFrameWidth": 1366,
+      "articleWidth": 1366,
+      "usableWidthPct": 100,
+      "title": "BUILD.",
+      "titleRect": {
+        "x": 0,
+        "y": 229,
+        "width": 777,
+        "height": 150
+      },
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1366
+      },
+      "footerRect": {
+        "x": 0,
+        "y": 148,
+        "width": 1366
+      },
+      "ctaRect": {
+        "x": 1210,
+        "y": 748,
+        "width": 156
+      },
+      "visualVisible": true,
+      "pointerEvents": "auto"
+    },
+    {
+      "chName": "02_search",
+      "found": true,
+      "safeFrameWidth": 1366,
+      "articleWidth": 1366,
+      "usableWidthPct": 100,
+      "title": "SEARCH.",
+      "titleRect": {
+        "x": 0,
+        "y": 229,
+        "width": 777,
+        "height": 150
+      },
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1366
+      },
+      "footerRect": {
+        "x": 0,
+        "y": 148,
+        "width": 1366
+      },
+      "ctaRect": {
+        "x": 1201,
+        "y": 748,
+        "width": 165
+      },
+      "visualVisible": true,
+      "pointerEvents": "auto"
+    },
+    {
+      "chName": "03_systems",
+      "found": true,
+      "safeFrameWidth": 1366,
+      "articleWidth": 1366,
+      "usableWidthPct": 100,
+      "title": "SYSTEMS.",
+      "titleRect": {
+        "x": 0,
+        "y": 229,
+        "width": 777,
+        "height": 150
+      },
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1366
+      },
+      "footerRect": {
+        "x": 0,
+        "y": 148,
+        "width": 1366
+      },
+      "ctaRect": {
+        "x": 1191,
+        "y": 748,
+        "width": 175
+      },
+      "visualVisible": true,
+      "pointerEvents": "auto"
+    }
+  ],
+  "mobile_390": [
+    {
+      "chName": "01_build",
+      "found": true,
+      "safeFrameWidth": 390,
+      "articleWidth": 390,
+      "usableWidthPct": 100,
+      "title": "BUILD.",
+      "titleRect": {
+        "x": 0,
+        "y": 297,
+        "width": 390,
+        "height": 80
+      },
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 390
+      },
+      "footerRect": {
+        "x": 0,
+        "y": 273,
+        "width": 390
+      },
+      "ctaRect": {
+        "x": 255,
+        "y": 828,
+        "width": 135
+      },
+      "visualVisible": false,
+      "pointerEvents": "auto"
+    },
+    {
+      "chName": "02_search",
+      "found": true,
+      "safeFrameWidth": 390,
+      "articleWidth": 390,
+      "usableWidthPct": 100,
+      "title": "SEARCH.",
+      "titleRect": {
+        "x": 0,
+        "y": 297,
+        "width": 390,
+        "height": 80
+      },
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 390
+      },
+      "footerRect": {
+        "x": 0,
+        "y": 273,
+        "width": 390
+      },
+      "ctaRect": {
+        "x": 247,
+        "y": 828,
+        "width": 143
+      },
+      "visualVisible": false,
+      "pointerEvents": "auto"
+    },
+    {
+      "chName": "03_systems",
+      "found": true,
+      "safeFrameWidth": 390,
+      "articleWidth": 390,
+      "usableWidthPct": 100,
+      "title": "SYSTEMS.",
+      "titleRect": {
+        "x": 0,
+        "y": 297,
+        "width": 390,
+        "height": 80
+      },
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 390
+      },
+      "footerRect": {
+        "x": 0,
+        "y": 273,
+        "width": 390
+      },
+      "ctaRect": {
+        "x": 239,
+        "y": 828,
+        "width": 151
+      },
+      "visualVisible": false,
+      "pointerEvents": "auto"
+    }
+  ]
+}

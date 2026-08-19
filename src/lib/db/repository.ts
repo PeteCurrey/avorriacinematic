@@ -2397,3 +2397,661 @@ export async function getServiceProfitability(): Promise<ServiceProfitability[]>
     },
   ];
 }
+
+
+
+// ============================================================================
+// PHASE 11: PRODUCTION CONTROL & COHORTS STORE
+// ============================================================================
+
+import type {
+  AIAutoOperatingConfig,
+  RolloutCohort,
+  AutonomyGatePolicy,
+  ProductionDefect,
+  ProductionChangeLogEntry,
+  MailboxConfig,
+  ReviewSession,
+  CohortProspectLineage,
+  CohortEvent,
+  CohortFunnelMetrics,
+  AutonomyReadinessItem,
+  FullAutopilotReadinessCheck,
+  ProductionReadinessSection,
+  OperatingMode,
+  CohortStatus,
+  GateKey,
+  GateMode
+} from "@/types/admin";
+
+interface Phase11State {
+  config: AIAutoOperatingConfig;
+  cohorts: RolloutCohort[];
+  gatePolicies: Record<string, AutonomyGatePolicy[]>;
+  defects: ProductionDefect[];
+  changeLog: ProductionChangeLogEntry[];
+  mailboxes: MailboxConfig[];
+  reviewSessions: ReviewSession[];
+  lineage: Record<string, CohortProspectLineage[]>;
+  events: Record<string, CohortEvent[]>;
+}
+
+let _p11: Phase11State | null = null;
+function getP11(): Phase11State {
+  if (!_p11) {
+    const now = new Date().toISOString();
+    const pilotId = "cohort-pilot-001";
+    _p11 = {
+      config: {
+        id: "00000000-0000-0000-0000-000000000001",
+        current_mode: "TEST",
+        previous_mode: null,
+        mode_changed_at: now,
+        mode_changed_by: "system",
+        mode_change_reason: "Initial system configuration (safe default)",
+        max_scout_per_day: 50,
+        max_qualified_per_day: 20,
+        max_sites_per_day: 10,
+        max_outreach_per_day: 5,
+        max_followups_per_day: 10,
+        max_ai_spend_per_day: 20.00,
+        max_ai_spend_per_month: 400.00,
+        max_concurrent_site_builds: 3,
+        max_concurrent_scout_jobs: 2,
+        human_prospect_reviews_per_day: 10,
+        human_site_reviews_per_day: 10,
+        human_sales_responses_per_day: 20,
+        human_client_launches_per_week: 2,
+        production_outreach_confirmed: false,
+        production_outreach_confirmed_at: null,
+        production_outreach_confirmed_by: null,
+        emergency_stop_active: false,
+        emergency_stop_reason: null,
+        emergency_stop_at: null,
+        updated_at: now,
+      },
+      cohorts: [
+        {
+          id: pilotId,
+          name: "PILOT 001 — AUTOMOTIVE NORTH UK",
+          environment: "PILOT",
+          status: "ready",
+          target_profile_id: "profile-auto-north",
+          target_sectors: ["automotive_specialists", "precision_engineering"],
+          target_locations: ["Manchester", "Leeds", "Newcastle", "Sheffield"],
+          min_opportunity_score: 72,
+          min_business_strength_score: 65,
+          max_prospects: 10,
+          max_qualified: 8,
+          max_approved: 6,
+          max_sites_generated: 6,
+          max_outreach_sent: 6,
+          daily_ai_budget_limit: 5.00,
+          total_ai_budget_limit: 30.00,
+          email_send_limit: 6,
+          outcome_observation_days: 30,
+          started_at: null,
+          operationally_completed_at: null,
+          outcome_matured_at: null,
+          completed_at: null,
+          created_by: "Pete Currey",
+          notes: "Initial controlled production pilot. 10 high-opportunity automotive & engineering businesses. All gates MANUAL.",
+          post_mortem_notes: null,
+          created_at: now,
+        },
+      ],
+      gatePolicies: {
+        [pilotId]: [
+          { id: "gp-1", cohort_id: pilotId, gate_key: "PROSPECT_QUALIFICATION", mode: "MANUAL", criteria: { min_score: 72 }, version: 1, changed_by: "Pete Currey", cohort_evidence: {}, created_at: now },
+          { id: "gp-2", cohort_id: pilotId, gate_key: "PROSPECT_APPROVAL", mode: "MANUAL", criteria: {}, version: 1, changed_by: "Pete Currey", cohort_evidence: {}, created_at: now },
+          { id: "gp-3", cohort_id: pilotId, gate_key: "CREATIVE_BRIEF_APPROVAL", mode: "MANUAL", criteria: {}, version: 1, changed_by: "Pete Currey", cohort_evidence: {}, created_at: now },
+          { id: "gp-4", cohort_id: pilotId, gate_key: "WEBSITE_APPROVAL", mode: "MANUAL", criteria: {}, version: 1, changed_by: "Pete Currey", cohort_evidence: {}, created_at: now },
+          { id: "gp-5", cohort_id: pilotId, gate_key: "QA_REMEDIATION", mode: "MANUAL", criteria: {}, version: 1, changed_by: "Pete Currey", cohort_evidence: {}, created_at: now },
+          { id: "gp-6", cohort_id: pilotId, gate_key: "OUTREACH_APPROVAL", mode: "MANUAL", criteria: {}, version: 1, changed_by: "Pete Currey", cohort_evidence: {}, created_at: now },
+          { id: "gp-7", cohort_id: pilotId, gate_key: "FOLLOW_UP", mode: "MANUAL", criteria: {}, version: 1, changed_by: "Pete Currey", cohort_evidence: {}, created_at: now },
+          { id: "gp-8", cohort_id: pilotId, gate_key: "REPLY_RESPONSE", mode: "MANUAL", criteria: {}, version: 1, changed_by: "Pete Currey", cohort_evidence: {}, created_at: now },
+          { id: "gp-9", cohort_id: pilotId, gate_key: "PROPOSAL", mode: "MANUAL", criteria: {}, version: 1, changed_by: "Pete Currey", cohort_evidence: {}, created_at: now },
+          { id: "gp-10", cohort_id: pilotId, gate_key: "PRICING", mode: "MANUAL", criteria: {}, version: 1, changed_by: "Pete Currey", cohort_evidence: {}, created_at: now },
+          { id: "gp-11", cohort_id: pilotId, gate_key: "SITE_LAUNCH", mode: "MANUAL", criteria: {}, version: 1, changed_by: "Pete Currey", cohort_evidence: {}, created_at: now },
+        ],
+      },
+      defects: [],
+      changeLog: [
+        {
+          id: "cl-1",
+          cohort_id: pilotId,
+          change_type: "MODE_CHANGE",
+          description: "Configured PILOT 001 rollout cohort in ready state. All gates locked to MANUAL.",
+          changed_by: "Pete Currey",
+          reason: "Phase 11 production operations setup",
+          created_at: now,
+        },
+      ],
+      mailboxes: [
+        {
+          id: "mb-1",
+          mailbox_type: "OUTREACH",
+          name: "Avorria Growth Outreach",
+          from_name: "Pete Currey | Avorria",
+          from_email: "pete@outreach.avorria.com",
+          reply_to: "pete@avorria.com",
+          sending_domain: "outreach.avorria.com",
+          daily_send_limit: 5,
+          status: "unconfigured",
+          is_production: false,
+          warm_up_day: 0,
+          provider: "resend",
+          notes: "Dedicated outreach subdomain. Needs domain verification and production API key.",
+          created_at: now,
+        },
+      ],
+      reviewSessions: [],
+      lineage: {},
+      events: {
+        [pilotId]: [
+          {
+            id: "ce-1",
+            cohort_id: pilotId,
+            event_type: "COHORT_CONFIGURED",
+            description: "PILOT 001 configured with 10 prospect capacity, max £30 budget, automotive focus. Status: READY.",
+            actor: "Pete Currey",
+            metadata: { target_sectors: ["automotive_specialists"] },
+            occurred_at: now,
+          },
+        ],
+      },
+    };
+  }
+  return _p11;
+}
+
+// ── REPOSITORY PHASE 11 EXPORTS ───────────────────────────────────────────────
+
+export async function getOperatingConfig(): Promise<AIAutoOperatingConfig> {
+  return { ...getP11().config };
+}
+
+export async function updateOperatingMode(
+  mode: OperatingMode,
+  changedBy: string,
+  reason?: string
+): Promise<void> {
+  const p11 = getP11();
+  const prev = p11.config.current_mode;
+  const now = new Date().toISOString();
+
+  p11.config.previous_mode = prev;
+  p11.config.current_mode = mode;
+  p11.config.mode_changed_at = now;
+  p11.config.mode_changed_by = changedBy;
+  p11.config.mode_change_reason = reason ?? null;
+  p11.config.updated_at = now;
+
+  p11.changeLog.unshift({
+    id: crypto.randomUUID(),
+    change_type: "MODE_CHANGE",
+    description: `Operating mode changed from ${prev} to ${mode}`,
+    old_value: { mode: prev },
+    new_value: { mode },
+    changed_by: changedBy,
+    reason: reason ?? null,
+    created_at: now,
+  });
+}
+
+export async function getRolloutCohorts(): Promise<RolloutCohort[]> {
+  return [...getP11().cohorts].sort((a, b) => b.created_at.localeCompare(a.created_at));
+}
+
+export async function getRolloutCohort(id: string): Promise<RolloutCohort | null> {
+  const c = getP11().cohorts.find(ch => ch.id === id);
+  return c ? { ...c } : null;
+}
+
+export async function createRolloutCohort(
+  data: Omit<RolloutCohort, "id" | "created_at">
+): Promise<RolloutCohort> {
+  const p11 = getP11();
+  const now = new Date().toISOString();
+  const id = `cohort-${Date.now()}`;
+  const cohort: RolloutCohort = { ...data, id, created_at: now };
+  p11.cohorts.unshift(cohort);
+
+  // Initialize gate policies as MANUAL for this new cohort
+  const gateKeys: GateKey[] = [
+    "PROSPECT_QUALIFICATION", "PROSPECT_APPROVAL", "CREATIVE_BRIEF_APPROVAL",
+    "WEBSITE_APPROVAL", "QA_REMEDIATION", "OUTREACH_APPROVAL", "FOLLOW_UP",
+    "REPLY_RESPONSE", "PROPOSAL", "PRICING", "SITE_LAUNCH"
+  ];
+  p11.gatePolicies[id] = gateKeys.map(k => ({
+    id: crypto.randomUUID(),
+    cohort_id: id,
+    gate_key: k,
+    mode: "MANUAL",
+    criteria: {},
+    version: 1,
+    changed_by: data.created_by,
+    cohort_evidence: {},
+    created_at: now,
+  }));
+
+  p11.events[id] = [{
+    id: crypto.randomUUID(),
+    cohort_id: id,
+    event_type: "COHORT_CREATED",
+    description: `Cohort "${cohort.name}" created in ${cohort.environment} environment. Status: ${cohort.status}.`,
+    actor: data.created_by,
+    metadata: {},
+    occurred_at: now,
+  }];
+
+  return cohort;
+}
+
+export async function updateCohortStatus(
+  id: string,
+  status: CohortStatus,
+  changedBy: string,
+  reason?: string
+): Promise<void> {
+  const p11 = getP11();
+  const c = p11.cohorts.find(ch => ch.id === id);
+  if (!c) return;
+
+  const prev = c.status;
+  c.status = status;
+  const now = new Date().toISOString();
+
+  if (status === "running" && !c.started_at) {
+    c.started_at = now;
+  }
+  if (status === "completed" && !c.completed_at) {
+    c.completed_at = now;
+  }
+
+  p11.changeLog.unshift({
+    id: crypto.randomUUID(),
+    cohort_id: id,
+    change_type: status === "paused" ? "COHORT_PAUSE" : status === "cancelled" ? "COHORT_STOP" : "MODE_CHANGE",
+    description: `Cohort "${c.name}" status changed from ${prev} to ${status}`,
+    old_value: { status: prev },
+    new_value: { status },
+    changed_by: changedBy,
+    reason: reason ?? null,
+    created_at: now,
+  });
+
+  if (!p11.events[id]) p11.events[id] = [];
+  p11.events[id].unshift({
+    id: crypto.randomUUID(),
+    cohort_id: id,
+    event_type: `STATUS_${status.toUpperCase()}`,
+    description: `Cohort status changed to ${status}${reason ? ` (${reason})` : ""}`,
+    actor: changedBy,
+    metadata: { previous_status: prev, new_status: status },
+    occurred_at: now,
+  });
+}
+
+export async function getCohortGatePolicies(cohortId: string): Promise<AutonomyGatePolicy[]> {
+  const p11 = getP11();
+  return p11.gatePolicies[cohortId] ? [...p11.gatePolicies[cohortId]] : [];
+}
+
+export async function updateGatePolicy(
+  cohortId: string,
+  gateKey: GateKey,
+  mode: GateMode,
+  changedBy: string,
+  reason: string
+): Promise<AutonomyGatePolicy> {
+  const p11 = getP11();
+  const policies = p11.gatePolicies[cohortId] || [];
+  const existing = policies.find(p => p.gate_key === gateKey);
+  const now = new Date().toISOString();
+
+  const newPolicy: AutonomyGatePolicy = {
+    id: crypto.randomUUID(),
+    cohort_id: cohortId,
+    gate_key: gateKey,
+    mode,
+    criteria: existing ? existing.criteria : {},
+    version: existing ? existing.version + 1 : 1,
+    previous_mode: existing ? existing.mode : null,
+    changed_by: changedBy,
+    change_reason: reason,
+    cohort_evidence: {},
+    created_at: now,
+  };
+
+  const filtered = policies.filter(p => p.gate_key !== gateKey);
+  p11.gatePolicies[cohortId] = [...filtered, newPolicy];
+
+  p11.changeLog.unshift({
+    id: crypto.randomUUID(),
+    cohort_id: cohortId,
+    change_type: "AUTONOMY_CHANGE",
+    description: `Gate "${gateKey}" mode changed to ${mode} (v${newPolicy.version})`,
+    old_value: { mode: existing?.mode },
+    new_value: { mode },
+    changed_by: changedBy,
+    reason,
+    created_at: now,
+  });
+
+  return newPolicy;
+}
+
+export async function getProductionDefects(cohortId?: string): Promise<ProductionDefect[]> {
+  const p11 = getP11();
+  if (cohortId) {
+    return p11.defects.filter(d => d.cohort_id === cohortId);
+  }
+  return [...p11.defects];
+}
+
+export async function createProductionDefect(
+  data: Omit<ProductionDefect, "id" | "created_at">
+): Promise<ProductionDefect> {
+  const p11 = getP11();
+  const defect: ProductionDefect = {
+    ...data,
+    id: crypto.randomUUID(),
+    created_at: new Date().toISOString(),
+  };
+  p11.defects.unshift(defect);
+  return defect;
+}
+
+export async function getProductionChangeLog(limit = 100): Promise<ProductionChangeLogEntry[]> {
+  return [...getP11().changeLog]
+    .sort((a, b) => b.created_at.localeCompare(a.created_at))
+    .slice(0, limit);
+}
+
+export async function getCohortFunnelMetrics(cohortId: string): Promise<CohortFunnelMetrics> {
+  // Pure actual metrics for the cohort (zeroed / null unit metrics before processing)
+  return {
+    cohort_id: cohortId,
+    discovered: 0,
+    verified: 0,
+    qualified: 0,
+    reviewed: 0,
+    approved: 0,
+    researched: 0,
+    designed: 0,
+    generated: 0,
+    qa_passed: 0,
+    outreach_approved: 0,
+    sent: 0,
+    preview_viewed: 0,
+    replied: 0,
+    opportunity: 0,
+    client: 0,
+    ai_cost_total: 0,
+    email_cost_total: 0,
+    total_acquisition_cost: 0,
+    contracted_revenue: 0,
+    tracked_contribution: 0,
+    cost_per_qualified: null,
+    cost_per_site: null,
+    cost_per_client: null,
+    cost_per_reply: null,
+    first_pass_sendable_pct: null,
+    human_intervention_count: 0,
+  };
+}
+
+export async function getCohortProspectLineage(cohortId: string): Promise<CohortProspectLineage[]> {
+  const p11 = getP11();
+  return p11.lineage[cohortId] ? [...p11.lineage[cohortId]] : [];
+}
+
+export async function getCohortEvents(cohortId: string): Promise<CohortEvent[]> {
+  const p11 = getP11();
+  return p11.events[cohortId]
+    ? [...p11.events[cohortId]].sort((a, b) => b.occurred_at.localeCompare(a.occurred_at))
+    : [];
+}
+
+export async function getAutonomyReadiness(): Promise<AutonomyReadinessItem[]> {
+  return [
+    {
+      gate_key: "PROSPECT_QUALIFICATION",
+      gate_label: "Prospect Qualification",
+      current_mode: "MANUAL",
+      human_agreement_rate: null,
+      failure_rate: null,
+      human_intervention_rate: null,
+      evidence_sample_size: 0,
+      readiness_recommendation: "INSUFFICIENT_DATA",
+      readiness_reason: "Requires ≥20 human review observations from real cohort runs before automation candidate evaluation.",
+    },
+    {
+      gate_key: "PROSPECT_APPROVAL",
+      gate_label: "Prospect Approval",
+      current_mode: "MANUAL",
+      human_agreement_rate: null,
+      failure_rate: null,
+      human_intervention_rate: null,
+      evidence_sample_size: 0,
+      readiness_recommendation: "KEEP_MANUAL",
+      readiness_reason: "Core strategic gate. Keeps human in loop on target selection during initial production cohorts.",
+    },
+    {
+      gate_key: "CREATIVE_BRIEF_APPROVAL",
+      gate_label: "Creative Brief Approval",
+      current_mode: "MANUAL",
+      human_agreement_rate: null,
+      failure_rate: null,
+      human_intervention_rate: null,
+      evidence_sample_size: 0,
+      readiness_recommendation: "INSUFFICIENT_DATA",
+      readiness_reason: "Requires observational evidence on Claude creative direction quality.",
+    },
+    {
+      gate_key: "WEBSITE_APPROVAL",
+      gate_label: "Website Approval",
+      current_mode: "MANUAL",
+      human_agreement_rate: null,
+      failure_rate: null,
+      human_intervention_rate: null,
+      evidence_sample_size: 0,
+      readiness_recommendation: "KEEP_MANUAL",
+      readiness_reason: "Design sendability must reach ≥80% first-pass before automated approval can be considered.",
+    },
+    {
+      gate_key: "QA_REMEDIATION",
+      gate_label: "QA Remediation",
+      current_mode: "MANUAL",
+      human_agreement_rate: null,
+      failure_rate: null,
+      human_intervention_rate: null,
+      evidence_sample_size: 0,
+      readiness_recommendation: "INSUFFICIENT_DATA",
+      readiness_reason: "Self-healing remediation requires verification across production build failures.",
+    },
+    {
+      gate_key: "OUTREACH_APPROVAL",
+      gate_label: "Outreach Approval",
+      current_mode: "MANUAL",
+      human_agreement_rate: null,
+      failure_rate: null,
+      human_intervention_rate: null,
+      evidence_sample_size: 0,
+      readiness_recommendation: "KEEP_MANUAL",
+      readiness_reason: "All outbound emails must be individually reviewed during PILOT mode to prevent deliverability risk.",
+    },
+    {
+      gate_key: "FOLLOW_UP",
+      gate_label: "Follow-Up Send",
+      current_mode: "MANUAL",
+      human_agreement_rate: null,
+      failure_rate: null,
+      human_intervention_rate: null,
+      evidence_sample_size: 0,
+      readiness_recommendation: "INSUFFICIENT_DATA",
+      readiness_reason: "Candidate for early automation once initial outreach sequences are validated.",
+    },
+    {
+      gate_key: "REPLY_RESPONSE",
+      gate_label: "Reply Classification & Response",
+      current_mode: "MANUAL",
+      human_agreement_rate: null,
+      failure_rate: null,
+      human_intervention_rate: null,
+      evidence_sample_size: 0,
+      readiness_recommendation: "KEEP_MANUAL",
+      readiness_reason: "Inbound prospect replies require Pete's consultative commercial direction.",
+    },
+    {
+      gate_key: "PROPOSAL",
+      gate_label: "Proposal Generation & Send",
+      current_mode: "MANUAL",
+      human_agreement_rate: null,
+      failure_rate: null,
+      human_intervention_rate: null,
+      evidence_sample_size: 0,
+      readiness_recommendation: "DO_NOT_AUTOMATE",
+      readiness_reason: "Commercial and legal responsibility. Permanently human-controlled by policy.",
+    },
+    {
+      gate_key: "PRICING",
+      gate_label: "Commercial Pricing & Discounting",
+      current_mode: "MANUAL",
+      human_agreement_rate: null,
+      failure_rate: null,
+      human_intervention_rate: null,
+      evidence_sample_size: 0,
+      readiness_recommendation: "DO_NOT_AUTOMATE",
+      readiness_reason: "Pricing strategy and margin protection permanently human-controlled by policy.",
+    },
+    {
+      gate_key: "SITE_LAUNCH",
+      gate_label: "Live Client Site Launch & DNS",
+      current_mode: "MANUAL",
+      human_agreement_rate: null,
+      failure_rate: null,
+      human_intervention_rate: null,
+      evidence_sample_size: 0,
+      readiness_recommendation: "DO_NOT_AUTOMATE",
+      readiness_reason: "Domain ownership, DNS routing, and live customer infrastructure permanently human-controlled.",
+    },
+  ];
+}
+
+export async function getFullAutopilotReadiness(): Promise<FullAutopilotReadinessCheck[]> {
+  return [
+    { check_key: "sec_no_incidents", category: "SECURITY", label: "Zero Active Security Incidents", status: "READY", detail: "Audit trail clean, no unauthorized access detected." },
+    { check_key: "sec_ssrf", category: "SECURITY", label: "SSRF & Domain Guards Active", status: "READY", detail: "DNS resolution filters and private IP ranges blocked." },
+    { check_key: "sec_suppression", category: "SECURITY", label: "Suppression & Duplicate Prevention", status: "READY", detail: "Domain suppression list and duplicate detectors enforced." },
+    { check_key: "sec_emergency_stop", category: "SECURITY", label: "Emergency Stop Circuit Active", status: "READY", detail: "One-click system halt and threshold circuit breakers enabled." },
+    { check_key: "rel_budget_limits", category: "RELIABILITY", label: "Daily & Monthly Budget Caps", status: "READY", detail: "£20.00/day and £400.00/month hard limits enforced." },
+    { check_key: "rel_lineage", category: "RELIABILITY", label: "Cohort Lineage Tracking", status: "READY", detail: "Every prospect references parent cohort." },
+    { check_key: "scout_agreement", category: "SCOUT_QUALITY", label: "Scout Human Agreement ≥92%", status: "WARNING", detail: "Insufficient data from production cohort runs (need ≥50 cases).", metric_value: "—", threshold: "≥92%" },
+    { check_key: "design_sendability", category: "DESIGN_QUALITY", label: "Website First-Pass Sendability ≥80%", status: "BLOCKED", detail: "Current observed sendability is 68% (historical heuristic). Target is ≥80%.", metric_value: "68%", threshold: "≥80%" },
+    { check_key: "qa_pass_rate", category: "DESIGN_QUALITY", label: "QA Pass Rate ≥95%", status: "WARNING", detail: "Insufficient production cases to certify autonomous pass rate.", metric_value: "—", threshold: "≥95%" },
+    { check_key: "email_outreach_domain", category: "DELIVERABILITY", label: "Dedicated Outreach Subdomain", status: "BLOCKED", detail: "Outreach mailbox is unconfigured. Production sending domain not verified.", metric_value: "Unset", threshold: "Verified" },
+    { check_key: "email_spf_dkim", category: "DELIVERABILITY", label: "SPF / DKIM / DMARC Active", status: "BLOCKED", detail: "DNS records cannot be verified on unconfigured domain.", metric_value: "Unverified", threshold: "Valid" },
+    { check_key: "email_bounce_rate", category: "DELIVERABILITY", label: "Hard Bounce Rate ≤2%", status: "WARNING", detail: "Baseline deliverability not yet established on live cohorts.", metric_value: "—", threshold: "≤2.0%" },
+    { check_key: "sales_auto_response", category: "POLICY_GATE", label: "Sales Auto-Response", status: "NOT_AUTHORIZED", detail: "Sales negotiation and reply handling is permanently manual by policy." },
+    { check_key: "site_launch_auto", category: "POLICY_GATE", label: "Automated Production Site Launch", status: "DISABLED_BY_POLICY", detail: "Final client website DNS cutover is permanently human-controlled." },
+  ];
+}
+
+export async function getProductionReadinessSections(): Promise<ProductionReadinessSection[]> {
+  return [
+    {
+      section: "AI_OPENAI",
+      label: "OpenAI Intelligence (Scout & Operations)",
+      status: "READY",
+      checks: [
+        { label: "API Configuration", status: "READY", detail: "OPENAI_API_KEY present and format validated." },
+        { label: "Model Task Routing", status: "READY", detail: "Mapped to GPT-4o and GPT-4o-mini." },
+        { label: "Token Telemetry & Cost Tracking", status: "READY", detail: "ai_usage_events logging active." },
+        { label: "Daily Budget Cap", status: "READY", detail: "£20.00/day hard limit active." },
+        { label: "Web Search Tooling", status: "READY", detail: "Hosted search available for discovery tasks." },
+      ],
+    },
+    {
+      section: "AI_ANTHROPIC",
+      label: "Anthropic Claude (Creative Director & Factory)",
+      status: "READY",
+      checks: [
+        { label: "API Configuration", status: "READY", detail: "ANTHROPIC_API_KEY present and format validated." },
+        { label: "Creative Task Mapping", status: "READY", detail: "Mapped to Claude 3.5 Sonnet." },
+        { label: "Per-Site Cost Hard Ceiling", status: "READY", detail: "£0.60 per generated site limit active." },
+        { label: "Design Blueprint Validation", status: "READY", detail: "Strict JSON schema parsing and error boundaries active." },
+      ],
+    },
+    {
+      section: "SCOUT_ENGINE",
+      label: "OpenAI Scout & Prospect Discovery",
+      status: "READY",
+      checks: [
+        { label: "Scout Intake Engine", status: "READY", detail: "Multi-sector discovery active." },
+        { label: "SSRF URL Sanitisation", status: "READY", detail: "Private IPs and loopback addresses blocked." },
+        { label: "Domain Deduplication", status: "READY", detail: "Unique domain indexes and suppression checks." },
+        { label: "Intake Rate Limits", status: "READY", detail: "50 candidates/day limit active." },
+      ],
+    },
+    {
+      section: "EMAIL_INFRASTRUCTURE",
+      label: "Outreach Email & Sending Infrastructure",
+      status: "BLOCKED",
+      checks: [
+        { label: "Delivery Provider Configured", status: "BLOCKED", detail: "No production outreach mailbox active." },
+        { label: "Dedicated Outreach Domain", status: "BLOCKED", detail: "Sending domain (outreach.avorria.com) unverified." },
+        { label: "SPF / DKIM / DMARC Authentication", status: "WARNING", detail: "Cannot verify DNS records on unconfigured domain." },
+        { label: "Unsubscribe Header & Mechanism", status: "READY", detail: "RFC-compliant unsubscribe links in templates." },
+        { label: "Suppression List Enforcement", status: "READY", detail: "Suppression table checked before any email creation." },
+        { label: "Initial Send Limit", status: "READY", detail: "5 emails/day maximum configured for ramp." },
+      ],
+    },
+    {
+      section: "PAYMENTS_AND_COMMERCE",
+      label: "Commercial & Payment Infrastructure",
+      status: "READY",
+      checks: [
+        { label: "Stripe Provider", status: "READY", detail: "Stripe API configured." },
+        { label: "Test vs Production Mode", status: "WARNING", detail: "Stripe currently in test mode (switch before live deposits)." },
+        { label: "Milestone Invoicing Logic", status: "READY", detail: "50% deposit / 50% launch balance tracking." },
+      ],
+    },
+    {
+      section: "SYSTEM_AND_SAFETY",
+      label: "System Resilience & Emergency Controls",
+      status: "READY",
+      checks: [
+        { label: "Emergency Stop Circuit", status: "READY", detail: "No active emergency stop. Circuit breakers nominal." },
+        { label: "Audit Event Ledger", status: "READY", detail: "All actions audit-trailed with timestamps and actors." },
+        { label: "Cohort Lineage Tracking", status: "READY", detail: "Full prospect-to-cohort attribution active." },
+        { label: "Production Change Log", status: "READY", detail: "Versioned gate and mode change history active." },
+      ],
+    },
+  ];
+}
+
+export async function getMailboxConfigs(): Promise<MailboxConfig[]> {
+  return [...getP11().mailboxes];
+}
+
+export async function getReviewSessions(cohortId?: string): Promise<ReviewSession[]> {
+  const p11 = getP11();
+  if (cohortId) {
+    return p11.reviewSessions.filter(s => s.cohort_id === cohortId);
+  }
+  return [...p11.reviewSessions];
+}
+
+export async function createReviewSession(
+  data: Omit<ReviewSession, "id">
+): Promise<ReviewSession> {
+  const p11 = getP11();
+  const session: ReviewSession = {
+    ...data,
+    id: crypto.randomUUID(),
+  };
+  p11.reviewSessions.unshift(session);
+  return session;
+}

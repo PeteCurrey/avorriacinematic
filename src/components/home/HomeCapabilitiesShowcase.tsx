@@ -1,10 +1,17 @@
 "use client";
 
 import React, { useRef } from "react";
-import Link from "next/link";
 import { CinematicSceneViewport } from "@/components/scenes/CinematicSceneViewport";
 import { SceneSafeFrame } from "@/components/scenes/SceneSafeFrame";
+import { useReducedMotion } from "@/providers/ReducedMotionProvider";
 import { SceneConfig } from "@/types/scene";
+import { CAPABILITY_ITEMS } from "@/lib/home/home-capabilities";
+import {
+  HomeCapabilityChapter,
+  BuildBlueprintVisual,
+  SearchTopologyVisual,
+  SystemsPipelineVisual,
+} from "./HomeCapabilityChapter";
 
 const CAPABILITIES_CONFIG: SceneConfig = {
   id: "scene-capabilities-showcase" as any,
@@ -26,18 +33,27 @@ const CAPABILITIES_CONFIG: SceneConfig = {
 /**
  * HOME CAPABILITIES SHOWCASE
  *
- * Spatial, un-boxed architecture for Avorria capabilities.
- * Explains: BUILD, SEARCH, and SYSTEMS across 360vh (~120vh per discipline).
+ * Full-screen spatial composition for Avorria capabilities.
+ * Spans the entire SceneSafeFrame width (12-column editorial grid).
  *
- * Sequence:
- * 0.00 – 0.33: 01 / BUILD (Digital Products, Web Design, Commerce) -> Holds 0.03 – 0.30 (~97vh)
- * 0.33 – 0.66: 02 / SEARCH (Technical SEO, Content Architecture, Visibility) -> Holds 0.36 – 0.63 (~97vh)
- * 0.66 – 0.99: 03 / SYSTEMS (AI Systems, Automations, Internal Operations) -> Holds 0.69 – 0.96 (~97vh)
+ * Sequence (360vh total across 3 disciplines):
+ * 0.00 – 0.33: 01 / BUILD   -> Holds 0.03 – 0.30 (~97vh rock-solid hold)
+ * 0.33 – 0.66: 02 / SEARCH  -> Holds 0.36 – 0.63 (~97vh rock-solid hold)
+ * 0.66 – 1.00: 03 / SYSTEMS -> Holds 0.69 – 0.97 (~100vh rock-solid hold)
  */
 export function HomeCapabilitiesShowcase() {
+  const { effectiveReducedMotion } = useReducedMotion();
+
   const c1Ref = useRef<HTMLDivElement>(null);
   const c2Ref = useRef<HTMLDivElement>(null);
   const c3Ref = useRef<HTMLDivElement>(null);
+
+  const refs = [c1Ref, c2Ref, c3Ref];
+  const visuals = [
+    <BuildBlueprintVisual key="build-vis" />,
+    <SearchTopologyVisual key="search-vis" />,
+    <SystemsPipelineVisual key="systems-vis" />,
+  ];
 
   const buildTimeline = (timeline: gsap.core.Timeline) => {
     timeline.addLabel("entry", 0);
@@ -46,54 +62,121 @@ export function HomeCapabilitiesShowcase() {
     timeline.addLabel("systems", 0.69);
     timeline.addLabel("handoff", 0.98);
 
-    // 01 / BUILD (0.00 – 0.33)
-    if (c1Ref.current) {
-      timeline.fromTo(
-        c1Ref.current,
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.03, ease: "power2.out" },
-        0.00
-      );
-      // Zero drift during hold (0.03 - 0.30)
-      timeline.to(
-        c1Ref.current,
-        { opacity: 0, y: -10, duration: 0.03, ease: "power2.in" },
-        0.30
-      );
-    }
+    const count = CAPABILITY_ITEMS.length;
+    const windowSize = 1 / count; // 0.3333
 
-    // 02 / SEARCH (0.33 – 0.66)
-    if (c2Ref.current) {
-      timeline.fromTo(
-        c2Ref.current,
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.03, ease: "power2.out" },
-        0.33
-      );
-      // Zero drift during hold (0.36 - 0.63)
-      timeline.to(
-        c2Ref.current,
-        { opacity: 0, y: -10, duration: 0.03, ease: "power2.in" },
-        0.63
-      );
-    }
+    CAPABILITY_ITEMS.forEach((_, i) => {
+      const container = refs[i]?.current;
+      if (!container) return;
 
-    // 03 / SYSTEMS (0.66 – 0.99)
-    if (c3Ref.current) {
+      const enterStart = i === 0 ? 0 : i * windowSize;
+      const enterEnd = i === 0 ? 0.03 : i * windowSize + 0.03;
+      const exitStart = i === count - 1 ? 0.97 : (i + 1) * windowSize - 0.03;
+      const exitEnd = (i + 1) * windowSize;
+
+      // Entrance: autoAlpha 0 -> 1 and pointer-events activation
       timeline.fromTo(
-        c3Ref.current,
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.03, ease: "power2.out" },
-        0.66
+        container,
+        { autoAlpha: 0, y: 15, pointerEvents: "none" },
+        {
+          autoAlpha: 1,
+          y: 0,
+          pointerEvents: "auto",
+          duration: enterEnd - enterStart,
+          ease: "power2.out"
+        },
+        enterStart
       );
-      // Zero drift during hold (0.69 - 0.96)
+
+      // Exit: autoAlpha 1 -> 0 and pointer-events deactivation
       timeline.to(
-        c3Ref.current,
-        { opacity: 0, y: -10, duration: 0.03, ease: "power2.in" },
-        0.96
+        container,
+        {
+          autoAlpha: 0,
+          y: -10,
+          pointerEvents: "none",
+          duration: exitEnd - exitStart,
+          ease: "power2.in"
+        },
+        exitStart
       );
-    }
+    });
   };
+
+  // Reduced Motion Fallback: Stacked static chapters
+  if (effectiveReducedMotion) {
+    return (
+      <section
+        id="scene-capabilities-showcase"
+        className="w-full bg-avorria-black select-none border-t border-avorria-line py-20"
+      >
+        <div className="max-w-[1760px] mx-auto px-[clamp(24px,4vw,72px)] flex flex-col gap-24">
+          <h2 className="sr-only">
+            Avorria Capabilities — Build, Search, Systems Engineering
+          </h2>
+          {CAPABILITY_ITEMS.map((capability, idx) => (
+            <div
+              key={capability.id}
+              className="relative min-h-[70svh] border-b border-avorria-line/30 pb-16 flex flex-col justify-between"
+            >
+              {/* Header */}
+              <div className="w-full flex items-center justify-between font-mono text-xs uppercase tracking-widest text-avorria-quiet border-b border-avorria-line/40 pb-4">
+                <span className="text-avorria-signal font-medium">
+                  {capability.chapterNumber}
+                </span>
+                <span className="text-avorria-white font-medium">
+                  {capability.category}
+                </span>
+              </div>
+
+              {/* Body */}
+              <div className="w-full my-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center py-8">
+                <div className="lg:col-span-7 flex flex-col justify-center">
+                  <h3
+                    className="tracking-tight leading-none text-avorria-white font-bold"
+                    style={{ fontSize: "clamp(3.5rem, 8vw, 8rem)" }}
+                  >
+                    {capability.title}
+                    <span className="text-avorria-signal">.</span>
+                  </h3>
+                  <p className="text-xl sm:text-2xl font-light text-avorria-white/90 leading-snug max-w-[760px] mt-6">
+                    {capability.description}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs sm:text-sm text-avorria-signal uppercase tracking-widest mt-6">
+                    {capability.services.map((service, sIdx) => (
+                      <React.Fragment key={service}>
+                        <span>{service}</span>
+                        {sIdx < capability.services.length - 1 && (
+                          <span className="text-white/30">•</span>
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                </div>
+                <div className="lg:col-span-5 hidden lg:flex items-center justify-center">
+                  {visuals[idx]}
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="w-full flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-xs">
+                <span className="text-avorria-quiet uppercase tracking-wider hidden sm:inline-block">
+                  {capability.footerStatement}
+                </span>
+                <a
+                  href={capability.href}
+                  className="inline-flex items-center gap-2 text-xs sm:text-sm text-avorria-signal uppercase tracking-widest hover:underline ml-auto sm:ml-0"
+                >
+                  <span>{capability.ctaLabel}</span>
+                  <span>→</span>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <CinematicSceneViewport
@@ -107,143 +190,14 @@ export function HomeCapabilitiesShowcase() {
           Avorria Capabilities — Build, Search, Systems Engineering
         </h2>
 
-        {/* 01 / BUILD */}
-        <div
-          ref={c1Ref}
-          className="absolute inset-x-6 sm:inset-x-12 lg:inset-x-16 max-w-6xl mx-auto flex flex-col justify-between h-full py-6 opacity-0 pointer-events-auto select-none"
-        >
-          {/* Header */}
-          <div className="flex items-center justify-between font-mono text-xs uppercase tracking-widest text-avorria-quiet border-b border-avorria-line/40 pb-4">
-            <span className="text-avorria-signal font-medium">01 / CAPABILITY</span>
-            <span className="text-avorria-white font-medium">DIGITAL PRODUCTS &amp; ENGINEERING</span>
-          </div>
-
-          {/* Central Architecture */}
-          <div className="my-auto flex flex-col gap-6 max-w-3xl">
-            <div
-              className="tracking-tight leading-none text-avorria-white font-bold"
-              style={{ fontSize: "clamp(3.5rem, 9vw, 9.5rem)" }}
-            >
-              BUILD<span className="text-avorria-signal">.</span>
-            </div>
-            <div className="display-md text-avorria-white font-light">
-              Digital flagships, custom web applications, and high-conversion commerce infrastructure.
-            </div>
-            <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs sm:text-sm text-avorria-signal uppercase tracking-widest pt-2">
-              <span>WEB DESIGN</span>
-              <span>•</span>
-              <span>DEVELOPMENT</span>
-              <span>•</span>
-              <span>PRODUCT DESIGN</span>
-              <span>•</span>
-              <span>COMMERCE</span>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4">
-            <span className="font-mono text-xs text-avorria-quiet uppercase">WE DON&apos;T DECORATE. WE ENGINEER ADVANTAGE.</span>
-            <Link
-              href="/capabilities/build"
-              className="font-mono text-xs sm:text-sm text-avorria-signal uppercase tracking-widest hover:underline flex items-center gap-2"
-            >
-              <span>EXPLORE BUILD</span>
-              <span>→</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* 02 / SEARCH */}
-        <div
-          ref={c2Ref}
-          className="absolute inset-x-6 sm:inset-x-12 lg:inset-x-16 max-w-6xl mx-auto flex flex-col justify-between h-full py-6 opacity-0 pointer-events-auto select-none"
-        >
-          {/* Header */}
-          <div className="flex items-center justify-between font-mono text-xs uppercase tracking-widest text-avorria-quiet border-b border-avorria-line/40 pb-4">
-            <span className="text-avorria-signal font-medium">02 / CAPABILITY</span>
-            <span className="text-avorria-white font-medium">TECHNICAL SEARCH &amp; VISIBILITY</span>
-          </div>
-
-          {/* Central Architecture */}
-          <div className="my-auto flex flex-col gap-6 max-w-3xl">
-            <div
-              className="tracking-tight leading-none text-avorria-white font-bold"
-              style={{ fontSize: "clamp(3.5rem, 9vw, 9.5rem)" }}
-            >
-              SEARCH<span className="text-avorria-signal">.</span>
-            </div>
-            <div className="display-md text-avorria-white font-light">
-              Visibility is engineered. Technical SEO architecture, entity graphs, and algorithmic discovery systems.
-            </div>
-            <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs sm:text-sm text-avorria-signal uppercase tracking-widest pt-2">
-              <span>TECHNICAL SEO</span>
-              <span>•</span>
-              <span>CONTENT ARCHITECTURE</span>
-              <span>•</span>
-              <span>MIGRATIONS</span>
-              <span>•</span>
-              <span>DISCOVERY</span>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4">
-            <span className="font-mono text-xs text-avorria-quiet uppercase">SEARCH ADVANTAGE THROUGH ARCHITECTURE</span>
-            <Link
-              href="/capabilities/search"
-              className="font-mono text-xs sm:text-sm text-avorria-signal uppercase tracking-widest hover:underline flex items-center gap-2"
-            >
-              <span>EXPLORE SEARCH</span>
-              <span>→</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* 03 / SYSTEMS */}
-        <div
-          ref={c3Ref}
-          className="absolute inset-x-6 sm:inset-x-12 lg:inset-x-16 max-w-6xl mx-auto flex flex-col justify-between h-full py-6 opacity-0 pointer-events-auto select-none"
-        >
-          {/* Header */}
-          <div className="flex items-center justify-between font-mono text-xs uppercase tracking-widest text-avorria-quiet border-b border-avorria-line/40 pb-4">
-            <span className="text-avorria-signal font-medium">03 / CAPABILITY</span>
-            <span className="text-avorria-white font-medium">AI SYSTEMS &amp; AUTOMATION</span>
-          </div>
-
-          {/* Central Architecture */}
-          <div className="my-auto flex flex-col gap-6 max-w-3xl">
-            <div
-              className="tracking-tight leading-none text-avorria-white font-bold"
-              style={{ fontSize: "clamp(3.5rem, 9vw, 9.5rem)" }}
-            >
-              SYSTEMS<span className="text-avorria-signal">.</span>
-            </div>
-            <div className="display-md text-avorria-white font-light">
-              Make it think. Autonomous workflows, custom AI integrations, internal tools, and closed-loop pipelines.
-            </div>
-            <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs sm:text-sm text-avorria-signal uppercase tracking-widest pt-2">
-              <span>AI SYSTEMS</span>
-              <span>•</span>
-              <span>AUTOMATION</span>
-              <span>•</span>
-              <span>INTERNAL TOOLS</span>
-              <span>•</span>
-              <span>WORKFLOW ENGINES</span>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4">
-            <span className="font-mono text-xs text-avorria-quiet uppercase">CLOSED-LOOP AUTONOMOUS PIPELINES</span>
-            <Link
-              href="/capabilities/systems"
-              className="font-mono text-xs sm:text-sm text-avorria-signal uppercase tracking-widest hover:underline flex items-center gap-2"
-            >
-              <span>EXPLORE SYSTEMS</span>
-              <span>→</span>
-            </Link>
-          </div>
-        </div>
+        {CAPABILITY_ITEMS.map((capability, idx) => (
+          <HomeCapabilityChapter
+            key={capability.id}
+            capability={capability}
+            containerRef={refs[idx]}
+            visual={visuals[idx]}
+          />
+        ))}
       </SceneSafeFrame>
     </CinematicSceneViewport>
   );

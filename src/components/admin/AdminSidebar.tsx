@@ -22,6 +22,7 @@ import {
   LogOut,
   ChevronRight,
   Shield,
+  ShieldCheck,
   Radio
 } from "lucide-react";
 import { signOutAdminAction } from "@/app/admin/actions";
@@ -29,6 +30,7 @@ import { AdminUser } from "@/types/admin";
 
 interface AdminSidebarProps {
   user: AdminUser;
+  collapsed?: boolean;
 }
 
 interface NavItem {
@@ -51,6 +53,7 @@ const PRIMARY_NAVIGATION: { section: string; items: NavItem[] }[] = [
   {
     section: "GROWTH",
     items: [
+      { label: "Production Control", href: "/admin/ai-auto/production", icon: ShieldCheck, badge: "PILOT" },
       { label: "AI Auto", href: "/admin/ai-auto", icon: Sparkles, highlight: true },
       { label: "Review Queue", href: "/admin/ai-auto/review", icon: CheckSquare, badge: "DAILY" },
       { label: "Prospects", href: "/admin/prospects", icon: Users },

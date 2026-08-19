@@ -1151,3 +1151,270 @@ export interface ExecutiveKPIs {
   monthly_revenue_target: number;
   revenue_pace_status: TargetPaceStatus;
 }
+
+
+// ============================================================================
+// PHASE 11: PRODUCTION CONTROL & COHORTS TYPES
+// ============================================================================
+
+export type OperatingMode = 'TEST' | 'PILOT' | 'CONTROLLED_PRODUCTION' | 'SCALED_PRODUCTION' | 'FULL_AUTOPILOT';
+
+export type CohortStatus = 'draft' | 'ready' | 'running' | 'paused' | 'completed' | 'failed' | 'cancelled';
+
+export type GateMode = 'MANUAL' | 'ASSISTED' | 'CONTROLLED_AUTO' | 'AUTO';
+
+export type GateKey =
+  | 'PROSPECT_QUALIFICATION'
+  | 'PROSPECT_APPROVAL'
+  | 'CREATIVE_BRIEF_APPROVAL'
+  | 'WEBSITE_APPROVAL'
+  | 'QA_REMEDIATION'
+  | 'OUTREACH_APPROVAL'
+  | 'FOLLOW_UP'
+  | 'REPLY_RESPONSE'
+  | 'PROPOSAL'
+  | 'PRICING'
+  | 'SITE_LAUNCH';
+
+export interface AIAutoOperatingConfig {
+  id: string;
+  current_mode: OperatingMode;
+  previous_mode?: string | null;
+  mode_changed_at: string;
+  mode_changed_by: string;
+  mode_change_reason?: string | null;
+  max_scout_per_day: number;
+  max_qualified_per_day: number;
+  max_sites_per_day: number;
+  max_outreach_per_day: number;
+  max_followups_per_day: number;
+  max_ai_spend_per_day: number;
+  max_ai_spend_per_month: number;
+  max_concurrent_site_builds: number;
+  max_concurrent_scout_jobs: number;
+  human_prospect_reviews_per_day: number;
+  human_site_reviews_per_day: number;
+  human_sales_responses_per_day: number;
+  human_client_launches_per_week: number;
+  production_outreach_confirmed: boolean;
+  production_outreach_confirmed_at?: string | null;
+  production_outreach_confirmed_by?: string | null;
+  emergency_stop_active: boolean;
+  emergency_stop_reason?: string | null;
+  emergency_stop_at?: string | null;
+  updated_at: string;
+}
+
+export interface RolloutCohort {
+  id: string;
+  name: string;
+  environment: 'TEST' | 'PILOT' | 'CONTROLLED_PRODUCTION' | 'SCALED_PRODUCTION';
+  status: CohortStatus;
+  target_profile_id?: string | null;
+  target_sectors?: string[] | null;
+  target_locations?: string[] | null;
+  min_opportunity_score: number;
+  min_business_strength_score: number;
+  max_prospects: number;
+  max_qualified: number;
+  max_approved: number;
+  max_sites_generated: number;
+  max_outreach_sent: number;
+  daily_ai_budget_limit: number;
+  total_ai_budget_limit: number;
+  email_send_limit: number;
+  outcome_observation_days: number;
+  started_at?: string | null;
+  operationally_completed_at?: string | null;
+  outcome_matured_at?: string | null;
+  completed_at?: string | null;
+  created_by: string;
+  notes?: string | null;
+  post_mortem_notes?: string | null;
+  created_at: string;
+}
+
+export interface AutonomyGatePolicy {
+  id: string;
+  cohort_id?: string | null;
+  gate_key: GateKey;
+  mode: GateMode;
+  criteria: Record<string, unknown>;
+  version: number;
+  previous_mode?: string | null;
+  changed_by: string;
+  change_reason?: string | null;
+  cohort_evidence: Record<string, unknown>;
+  created_at: string;
+}
+
+export interface ProductionDefect {
+  id: string;
+  cohort_id?: string | null;
+  prospect_id?: string | null;
+  system: string;
+  severity: 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
+  category: 'DATA' | 'PROMPT' | 'MODEL' | 'CODE' | 'PROVIDER' | 'CONFIGURATION' | 'HUMAN_ERROR' | 'UNKNOWN';
+  defect_type: string;
+  description: string;
+  detected_by: string;
+  status: 'open' | 'investigating' | 'resolved' | 'wont_fix';
+  resolution?: string | null;
+  auto_pause_triggered: boolean;
+  created_at: string;
+  resolved_at?: string | null;
+}
+
+export interface ProductionChangeLogEntry {
+  id: string;
+  cohort_id?: string | null;
+  change_type: string;
+  description: string;
+  old_value?: Record<string, unknown> | null;
+  new_value?: Record<string, unknown> | null;
+  changed_by: string;
+  reason?: string | null;
+  created_at: string;
+}
+
+export interface MailboxConfig {
+  id: string;
+  mailbox_type: 'OUTREACH' | 'TRANSACTIONAL' | 'REPLY_INBOX';
+  name: string;
+  from_name: string;
+  from_email: string;
+  reply_to?: string | null;
+  sending_domain: string;
+  daily_send_limit: number;
+  status: 'unconfigured' | 'warming' | 'active' | 'paused' | 'suspended';
+  is_production: boolean;
+  warm_up_day?: number | null;
+  provider: string;
+  notes?: string | null;
+  created_at: string;
+}
+
+export interface ReviewSession {
+  id: string;
+  cohort_id?: string | null;
+  session_type: 'PROSPECT_REVIEW' | 'SITE_REVIEW' | 'OUTREACH_REVIEW';
+  started_by: string;
+  started_at: string;
+  completed_at?: string | null;
+  total_items: number;
+  approved: number;
+  rejected: number;
+  revised: number;
+  skipped: number;
+  scout_quality_rating?: number | null;
+  design_quality_rating?: number | null;
+  email_quality_rating?: number | null;
+  system_confidence_rating?: number | null;
+  session_notes?: string | null;
+}
+
+export interface CohortProspectLineage {
+  id: string;
+  cohort_id: string;
+  prospect_id: string;
+  discovered_at?: string | null;
+  verified_at?: string | null;
+  qualified_at?: string | null;
+  reviewed_at?: string | null;
+  approved_at?: string | null;
+  researched_at?: string | null;
+  designed_at?: string | null;
+  generated_at?: string | null;
+  qa_passed_at?: string | null;
+  outreach_approved_at?: string | null;
+  sent_at?: string | null;
+  preview_viewed_at?: string | null;
+  replied_at?: string | null;
+  opportunity_at?: string | null;
+  client_at?: string | null;
+  design_sendability?: 'SENDABLE' | 'NEEDS_WORK' | 'UNSENDABLE' | null;
+  design_rejection_reason?: string | null;
+  outreach_edit_distance?: 'UNCHANGED' | 'MINOR_EDIT' | 'MAJOR_EDIT' | 'REWRITTEN' | null;
+  scout_human_rejected?: boolean | null;
+  scout_rejection_reason?: string | null;
+  ai_cost_discovery: number;
+  ai_cost_research: number;
+  ai_cost_generation: number;
+  ai_cost_qa: number;
+  ai_cost_total: number;
+  created_at: string;
+}
+
+export interface CohortEvent {
+  id: string;
+  cohort_id: string;
+  prospect_id?: string | null;
+  event_type: string;
+  description: string;
+  actor: string;
+  metadata: Record<string, unknown>;
+  occurred_at: string;
+}
+
+export interface CohortFunnelMetrics {
+  cohort_id: string;
+  discovered: number;
+  verified: number;
+  qualified: number;
+  reviewed: number;
+  approved: number;
+  researched: number;
+  designed: number;
+  generated: number;
+  qa_passed: number;
+  outreach_approved: number;
+  sent: number;
+  preview_viewed: number;
+  replied: number;
+  opportunity: number;
+  client: number;
+  ai_cost_total: number;
+  email_cost_total: number;
+  total_acquisition_cost: number;
+  contracted_revenue: number;
+  tracked_contribution: number;
+  cost_per_qualified: number | null;
+  cost_per_site: number | null;
+  cost_per_client: number | null;
+  cost_per_reply: number | null;
+  first_pass_sendable_pct: number | null;
+  human_intervention_count: number;
+}
+
+export interface AutonomyReadinessItem {
+  gate_key: GateKey;
+  gate_label: string;
+  current_mode: GateMode;
+  human_agreement_rate?: number | null;
+  failure_rate?: number | null;
+  human_intervention_rate?: number | null;
+  evidence_sample_size: number;
+  readiness_recommendation: 'KEEP_MANUAL' | 'READY_FOR_ASSISTED' | 'READY_FOR_CONTROLLED_AUTO' | 'INSUFFICIENT_DATA' | 'DO_NOT_AUTOMATE';
+  readiness_reason: string;
+}
+
+export interface FullAutopilotReadinessCheck {
+  check_key: string;
+  category: string;
+  label: string;
+  status: 'READY' | 'WARNING' | 'BLOCKED' | 'NOT_AUTHORIZED' | 'DISABLED_BY_POLICY';
+  detail: string;
+  metric_value?: string | null;
+  threshold?: string | null;
+}
+
+export interface ProductionReadinessSection {
+  section: string;
+  label: string;
+  status: 'READY' | 'WARNING' | 'BLOCKED';
+  checks: Array<{
+    label: string;
+    status: 'READY' | 'WARNING' | 'BLOCKED';
+    detail: string;
+  }>;
+}
