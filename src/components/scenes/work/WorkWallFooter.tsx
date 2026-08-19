@@ -1,12 +1,15 @@
 import React from "react";
 import Link from "next/link";
 import { CursorTrigger } from "@/providers/CursorContext";
+import { CLIENT_WORK_PROJECTS, VENTURE_PROJECTS } from "@/lib/scenes/work-wall-config";
 
 export function WorkWallFooter() {
+  const totalCount = CLIENT_WORK_PROJECTS.length + VENTURE_PROJECTS.length;
+
   return (
-    <div className="w-full max-w-[1760px] mx-auto px-6 sm:px-12 pt-20 pb-32 flex flex-col sm:flex-row items-center justify-between gap-8 border-t border-avorria-line">
+    <div className="w-full max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16 pt-16 sm:pt-20 pb-24 sm:pb-32 flex flex-col sm:flex-row items-center justify-between gap-8 border-t border-avorria-line">
       <div className="font-mono text-xs text-avorria-quiet uppercase tracking-widest">
-        10 SELECTED PROJECTS <span>{"//"}</span> ARCHIVE &amp; COMPLETE FOLIO
+        {totalCount} SELECTED PROJECTS <span>{"//"}</span> ARCHIVE &amp; COMPLETE FOLIO
       </div>
 
       <CursorTrigger state="view" label="ALL WORK">

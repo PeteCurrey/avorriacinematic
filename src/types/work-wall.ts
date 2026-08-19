@@ -6,9 +6,6 @@ export interface WorkWallProject {
   sector: string;
   capability: string;
   imagePath: string;
-  aspectRatio: "16/10" | "4/3" | "3/4" | "1/1" | "16/9" | "2/1";
-  colStart: number;
-  colSpan: number;
   caseStudyAvailable: boolean;
   objectFit?: "cover" | "contain";
   objectPosition?: string;

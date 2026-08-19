@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { WorkWallProject } from "@/types/work-wall";
@@ -9,91 +10,81 @@ interface WorkWallItemProps {
   project: WorkWallProject;
 }
 
-export function WorkWallItem({ project }: WorkWallItemProps) {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const aspectClasses: Record<string, string> = {
-    "16/10": "aspect-[16/10]",
-    "4/3": "aspect-[4/3]",
-    "3/4": "aspect-[3/4]",
-    "1/1": "aspect-square",
-    "16/9": "aspect-video",
-    "2/1": "aspect-[2/1]"
-  };
-
-  const colClasses: Record<number, string> = {
-    1: "lg:col-start-1",
-    2: "lg:col-start-2",
-    3: "lg:col-start-3",
-    4: "lg:col-start-4",
-    5: "lg:col-start-5",
-    6: "lg:col-start-6",
-    7: "lg:col-start-7",
-    8: "lg:col-start-8",
-    9: "lg:col-start-9"
-  };
-
-  const spanClasses: Record<number, string> = {
-    3: "lg:col-span-3",
-    4: "lg:col-span-4",
-    5: "lg:col-span-5",
-    6: "lg:col-span-6",
-    7: "lg:col-span-7",
-    8: "lg:col-span-8",
-    9: "lg:col-span-9",
-    12: "lg:col-span-12"
-  };
-
+function WorkWallItemContent({ project }: { project: WorkWallProject }) {
   const isContain = project.objectFit === "contain";
 
-  const content = (
-    <article
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className={`group flex flex-col gap-4 col-span-12 ${colClasses[project.colStart] || ""} ${spanClasses[project.colSpan] || ""}`}
-    >
-      {/* Media Frame */}
+  return (
+    <article className="w-full flex flex-col">
+      {/* 1. Canonical Media Frame (Always 16:10, crisp border, zero frame scale) */}
       <div
-        className={`relative w-full ${aspectClasses[project.aspectRatio] || "aspect-video"} border border-avorria-line overflow-hidden transition-all duration-300 ${isHovered ? "border-avorria-signal/60 scale-[1.015]" : ""}`}
-        style={{ backgroundColor: project.mediaBackground || "#0c0e14" }}
+        className="relative w-full aspect-[16/10] overflow-hidden border border-avorria-line group-hover:border-avorria-signal/40 transition-colors duration-300"
+        style={{ backgroundColor: project.mediaBackground || "#080808" }}
       >
         <Image
           src={project.imagePath}
-          alt={`${project.title} - ${project.sector}`}
+          alt={`${project.title} — ${project.sector}`}
           fill
           loading="lazy"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className={`${isContain ? "object-contain p-4" : "object-cover"} transition-transform duration-500 group-hover:scale-105`}
+          sizes="(max-width: 850px) 100vw, (max-width: 1600px) 50vw, 800px"
+          className={`${
+            isContain
+              ? "object-contain p-[clamp(12px,1.25vw,22px)]"
+              : "object-cover"
+          } transition-transform duration-500 ease-out group-hover:scale-[1.015]`}
           style={{ objectPosition: project.objectPosition || "center center" }}
         />
       </div>
 
-      {/* Caption */}
-      <div className="flex items-start justify-between gap-4 font-mono text-xs">
-        <div className="flex flex-col gap-1">
-          <h3 className="font-sans font-bold text-base sm:text-lg text-avorria-white group-hover:text-avorria-signal transition-colors">
+      {/* 2. Canonical Editorial Caption */}
+      <div className="mt-[clamp(18px,1.8vw,22px)] flex flex-col gap-1.5 select-none">
+        {/* Row 1: Title (left) & Number (right) */}
+        <div className="flex items-baseline justify-between gap-4">
+          <h3 className="font-sans font-bold text-lg sm:text-xl lg:text-2xl text-avorria-white group-hover:text-avorria-signal transition-colors leading-tight">
             {project.title}
           </h3>
-          <span className="text-avorria-quiet text-[11px] uppercase tracking-wider">
-            {project.sector} <span>{"//"}</span> {project.capability}
+          <span className="font-mono text-xs text-avorria-muted uppercase tracking-widest shrink-0">
+            {project.number}
           </span>
         </div>
-        <span className="text-avorria-muted group-hover:text-avorria-signal transition-colors">
-          {project.number}
-        </span>
+
+        {/* Row 2: Sector */}
+        <div className="font-mono text-xs text-white/70 uppercase tracking-wider">
+          {project.sector}
+        </div>
+
+        {/* Row 3: Capability */}
+        <div className="font-mono text-[11px] text-avorria-quiet uppercase tracking-wider">
+          {project.capability}
+        </div>
       </div>
     </article>
   );
+}
 
-  if (project.caseStudyAvailable) {
-    return (
-      <CursorTrigger state="view" label="VIEW">
-        <Link href={`/work/${project.slug}`} className="block outline-none focus-visible:ring-1 focus-visible:ring-avorria-signal">
-          {content}
-        </Link>
-      </CursorTrigger>
-    );
-  }
-
-  return content;
+/**
+ * WORK WALL ITEM
+ *
+ * Direct Grid Child:
+ * The outer <div className="work-grid-item"> is ALWAYS the direct grid child
+ * ensuring identical 1-column layout geometry whether caseStudyAvailable is true or false.
+ */
+export function WorkWallItem({ project }: WorkWallItemProps) {
+  return (
+    <div className="work-grid-item w-full">
+      {project.caseStudyAvailable ? (
+        <CursorTrigger state="view" label="VIEW" className="block w-full h-full">
+          <Link
+            href={`/work/${project.slug}`}
+            className="group block w-full h-full outline-none focus-visible:ring-1 focus-visible:ring-avorria-signal"
+          >
+            <WorkWallItemContent project={project} />
+          </Link>
+        </CursorTrigger>
+      ) : (
+        <div className="group block w-full h-full">
+          <WorkWallItemContent project={project} />
+        </div>
+      )}
+    </div>
+  );
 }
