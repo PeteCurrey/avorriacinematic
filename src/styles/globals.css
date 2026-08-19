@@ -75,3 +75,10 @@ body.scroll-locked {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--avorria-signal);
 }
+
+/* Scene height responsive switching — SSR safe, no window.innerWidth needed */
+@media (max-width: 767px) {
+  [data-layout-role="scene"] {
+    height: var(--scene-h-mobile) !important;
+  }
+}

@@ -7,8 +7,16 @@ import { NestIQDecisionStage } from "./nestiq/NestIQDecisionStage";
 import { NestIQContributionStage } from "./nestiq/NestIQContributionStage";
 import { NestIQFallback } from "./nestiq/NestIQFallback";
 import { CinematicSceneViewport } from "./CinematicSceneViewport";
+import { SceneSafeFrame } from "./SceneSafeFrame";
 import { getSceneConfig } from "./registry";
 
+/**
+ * SCENE 07 — NESTIQ (PROJECT 003)
+ *
+ * Fixed motion contract:
+ * - Property image scale completes within 0.00 - 0.07, holds stationary 0.07 - 0.22, exits 0.22 - 0.28
+ * - Spatial 3D rotation completes within 0.48 - 0.56, holds stationary 0.56 - 0.66, exits 0.66 - 0.72
+ */
 export function Scene07NestIQ() {
   const config = getSceneConfig("scene-07-nestiq")!;
 
@@ -32,15 +40,15 @@ export function Scene07NestIQ() {
     timeline.addLabel("contribution", 0.88);
     timeline.addLabel("handoff", 0.96);
 
-    // 0.00 - 0.26: Property Hero (Move -> Land -> Hold -> Exit)
+    // 0.00 - 0.28: Property Hero (Move -> Land -> Hold -> Exit)
     if (propertyContainerRef.current) {
       timeline.fromTo(
         propertyContainerRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.08 },
+        { opacity: 1, duration: 0.07 },
         0
       );
-      // Hold 0.08 - 0.20
+      // Hold stationary 0.07 - 0.22
       timeline.to(
         propertyContainerRef.current,
         { opacity: 0, duration: 0.06 },
@@ -51,20 +59,20 @@ export function Scene07NestIQ() {
       timeline.fromTo(
         propertyImageRef.current,
         { scale: 0.98 },
-        { scale: 1.04, duration: 0.24 },
+        { scale: 1.0, duration: 0.07 },
         0
       );
     }
 
-    // 0.26 - 0.48: Context Engine
+    // 0.28 - 0.48: Context Engine
     if (contextContainerRef.current) {
       timeline.fromTo(
         contextContainerRef.current,
         { opacity: 0, y: 25 },
         { opacity: 1, y: 0, duration: 0.08 },
-        0.26
+        0.28
       );
-      // Hold 0.34 - 0.42
+      // Hold 0.36 - 0.42
       timeline.to(
         contextContainerRef.current,
         { opacity: 0, y: -15, duration: 0.06 },
@@ -75,12 +83,12 @@ export function Scene07NestIQ() {
       timeline.fromTo(
         contextLineRef.current,
         { width: "0%" },
-        { width: "100%", duration: 0.12 },
-        0.28
+        { width: "100%", duration: 0.10 },
+        0.30
       );
     }
 
-    // 0.48 - 0.70: Spatial 3D Map
+    // 0.48 - 0.72: Spatial 3D Map
     if (spatialContainerRef.current) {
       timeline.fromTo(
         spatialContainerRef.current,
@@ -88,7 +96,7 @@ export function Scene07NestIQ() {
         { opacity: 1, duration: 0.08 },
         0.48
       );
-      // Hold 0.56 - 0.64
+      // Hold stationary 0.56 - 0.66
       timeline.to(
         spatialContainerRef.current,
         { opacity: 0, duration: 0.06 },
@@ -96,10 +104,11 @@ export function Scene07NestIQ() {
       );
     }
     if (spatialInnerRef.current) {
+      // Rotation completes early at 0.56, then holds static
       timeline.fromTo(
         spatialInnerRef.current,
         { rotateX: 0, scale: 1.0 },
-        { rotateX: 24, scale: 1.10, duration: 0.20 },
+        { rotateX: 20, scale: 1.05, duration: 0.08 },
         0.48
       );
     }
@@ -108,7 +117,7 @@ export function Scene07NestIQ() {
         spatialAnnotationRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 0.06 },
-        0.52
+        0.50
       );
       timeline.to(
         spatialAnnotationRef.current,
@@ -117,15 +126,15 @@ export function Scene07NestIQ() {
       );
     }
 
-    // 0.70 - 0.86: Decision Platform
+    // 0.72 - 0.86: Decision Platform
     if (decisionContainerRef.current) {
       timeline.fromTo(
         decisionContainerRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 0.06 },
-        0.70
+        0.72
       );
-      // Hold 0.76 - 0.82
+      // Hold 0.78 - 0.82
       timeline.to(
         decisionContainerRef.current,
         { opacity: 0, duration: 0.04 },
@@ -166,12 +175,12 @@ export function Scene07NestIQ() {
       fallback={<NestIQFallback />}
       buildTimeline={buildTimeline}
     >
-      <div className="w-full h-full relative overflow-hidden flex flex-col justify-between p-6 sm:p-12 lg:p-16">
+      <SceneSafeFrame>
         {/* Semantic Accessibility Heading */}
         <h2 className="sr-only">NestIQ — Property Intelligence and Spatial Data engineered by Avorria</h2>
 
         {/* Top Minimal Scene Marker */}
-        <div className="absolute top-0 inset-x-0 z-30 flex items-center justify-between font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet p-6 sm:p-12 lg:p-16">
+        <div className="flex items-center justify-between font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet z-30">
           <span className="text-avorria-signal">003 / NESTIQ</span>
           <span className="text-avorria-white">PROPERTY INTELLIGENCE // 07</span>
         </div>
@@ -208,7 +217,7 @@ export function Scene07NestIQ() {
         {/* Bottom Handoff Anchor for Scene 08 */}
         <div
           ref={footerMarkerRef}
-          className="absolute bottom-0 inset-x-0 z-30 flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-[10px] sm:text-xs text-avorria-quiet uppercase tracking-widest p-6 sm:p-12 lg:p-16"
+          className="flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-[10px] sm:text-xs text-avorria-quiet uppercase tracking-widest z-30"
         >
           <div className="text-avorria-white">
             TECHNICAL ARCHITECTURE // SEARCH
@@ -217,7 +226,7 @@ export function Scene07NestIQ() {
             07 / 18
           </div>
         </div>
-      </div>
+      </SceneSafeFrame>
     </CinematicSceneViewport>
   );
 }

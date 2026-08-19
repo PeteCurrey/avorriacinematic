@@ -7,13 +7,28 @@ import { AlkotaDigitalStage } from "./alkota/AlkotaDigitalStage";
 import { AlkotaContributionStage } from "./alkota/AlkotaContributionStage";
 import { AlkotaFallback } from "./alkota/AlkotaFallback";
 import { CinematicSceneViewport } from "./CinematicSceneViewport";
+import { CinematicMediaFrame } from "@/components/cinematic/CinematicMediaFrame";
 import { getSceneConfig } from "./registry";
 
+/**
+ * SCENE 03 — ALKOTA BIKES (PROJECT 001)
+ *
+ * THE FIRST PROJECT A VISITOR SEES.
+ *
+ * Storytelling order:
+ * 1. COMPLETE NAKED CARBON BIKE FIRST (0.00 - 0.24) — LANDS, HOLDS STATIONARY
+ * 2. Carbon / Material Macro (0.24 - 0.44)
+ * 3. Engineering Kinematics (0.44 - 0.60)
+ * 4. Digital Flagship Website Experience & Scan (0.60 - 0.82)
+ * 5. Avorria Contribution (0.82 - 0.94)
+ * 6. Philosophy / Breath Handoff (0.94 - 1.00)
+ */
 export function Scene03Alkota() {
   const config = getSceneConfig("scene-03-alkota")!;
 
   // Refs for declarative GSAP timeline orchestration
-  const handoffRef = useRef<HTMLDivElement>(null);
+  const bikeHeroContainerRef = useRef<HTMLDivElement>(null);
+  const bikeHeroImageRef = useRef<HTMLDivElement>(null);
   const macroRef = useRef<HTMLDivElement>(null);
   const kinematicsRef = useRef<HTMLDivElement>(null);
   const materialAnnotationRef = useRef<HTMLDivElement>(null);
@@ -26,108 +41,96 @@ export function Scene03Alkota() {
   const nextHandoffRef = useRef<HTMLDivElement>(null);
 
   const buildTimeline = (timeline: gsap.core.Timeline) => {
-    // Stage Timeline Labels & Non-Overlapping Orchestration
     timeline.addLabel("entry", 0);
-    timeline.addLabel("carbon_material", 0.08);
-    timeline.addLabel("engineering", 0.30);
-    timeline.addLabel("product_hero", 0.52);
-    timeline.addLabel("digital_flagship", 0.73);
-    timeline.addLabel("contribution", 0.90);
-    timeline.addLabel("handoff", 0.96);
+    timeline.addLabel("complete_bike", 0.04);
+    timeline.addLabel("carbon_material", 0.24);
+    timeline.addLabel("engineering", 0.44);
+    timeline.addLabel("digital_flagship", 0.62);
+    timeline.addLabel("contribution", 0.84);
+    timeline.addLabel("handoff", 0.95);
 
-    // 0.00 - 0.08: Handoff from Signal fades out cleanly
-    if (handoffRef.current) {
+    // 0.00 - 0.24: COMPLETE MACHINE FIRST (Move -> Land -> Hold -> Exit)
+    if (bikeHeroContainerRef.current) {
       timeline.fromTo(
-        handoffRef.current,
-        { opacity: 1 },
-        { opacity: 0, duration: 0.08 },
+        bikeHeroContainerRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.08 },
+        0
+      );
+      // Hold stationary 0.08 - 0.20
+      timeline.to(
+        bikeHeroContainerRef.current,
+        { opacity: 0, duration: 0.05 },
+        0.20
+      );
+    }
+    if (bikeHeroImageRef.current) {
+      timeline.fromTo(
+        bikeHeroImageRef.current,
+        { scale: 0.98 },
+        { scale: 1.0, duration: 0.08 },
         0
       );
     }
 
-    // 0.08 - 0.30: Carbon Material Macro (Move -> Land -> Hold -> Exit)
+    // 0.24 - 0.44: Carbon Material Macro
     if (macroRef.current) {
       timeline.fromTo(
         macroRef.current,
         { opacity: 0, scale: 1.0 },
-        { opacity: 1, scale: 1.08, duration: 0.12 },
-        0.08
+        { opacity: 1, scale: 1.04, duration: 0.08 },
+        0.24
       );
-      // Hold 0.20 - 0.28
+      // Hold stationary 0.32 - 0.40
       timeline.to(
         macroRef.current,
-        { opacity: 0, scale: 1.15, duration: 0.06 },
-        0.28
+        { opacity: 0, duration: 0.04 },
+        0.40
       );
     }
-
     if (materialAnnotationRef.current) {
       timeline.fromTo(
         materialAnnotationRef.current,
         { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.08 },
-        0.12
+        { opacity: 1, y: 0, duration: 0.06 },
+        0.26
       );
       timeline.to(
         materialAnnotationRef.current,
-        { opacity: 0, y: -10, duration: 0.06 },
-        0.46
+        { opacity: 0, y: -10, duration: 0.04 },
+        0.40
       );
     }
 
-    // 0.30 - 0.50: Kinematics Engineering (Move -> Land -> Hold -> Exit)
+    // 0.44 - 0.62: Kinematics Engineering
     if (kinematicsRef.current) {
       timeline.fromTo(
         kinematicsRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.10 },
-        0.30
+        { opacity: 1, duration: 0.06 },
+        0.44
       );
-      // Hold 0.40 - 0.46
+      // Hold 0.50 - 0.58
       timeline.to(
         kinematicsRef.current,
-        { opacity: 0, duration: 0.06 },
-        0.48
+        { opacity: 0, duration: 0.04 },
+        0.58
       );
     }
 
-    // 0.52 - 0.72: Complete Product Hero (Move -> Land -> Hold -> Exit)
-    if (productContainerRef.current) {
-      timeline.fromTo(
-        productContainerRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.07 },
-        0.52
-      );
-      // Hold 0.59 - 0.68 (stationary)
-      timeline.to(
-        productContainerRef.current,
-        { opacity: 0, duration: 0.05 },
-        0.68
-      );
-    }
-    if (productImageRef.current) {
-      timeline.fromTo(
-        productImageRef.current,
-        { scale: 0.96 },
-        { scale: 1.02, duration: 0.07 },
-        0.52
-      );
-    }
-
-    // 0.73 - 0.89: Digital Flagship Interface & Scan
+    // 0.62 - 0.84: Digital Flagship Interface & Scan
     if (digitalContainerRef.current) {
       timeline.fromTo(
         digitalContainerRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.07 },
-        0.73
+        { opacity: 1, duration: 0.06 },
+        0.62
       );
-      // Hold 0.80 - 0.86
+      // Hold 0.68 - 0.80
       timeline.to(
         digitalContainerRef.current,
-        { opacity: 0, duration: 0.05 },
-        0.87
+        { opacity: 0, duration: 0.04 },
+        0.80
       );
     }
     if (scanLineRef.current) {
@@ -135,42 +138,42 @@ export function Scene03Alkota() {
         scanLineRef.current,
         { left: "0%", opacity: 0 },
         { opacity: 1, duration: 0.02 },
-        0.75
+        0.64
       );
       timeline.to(
         scanLineRef.current,
-        { left: "100%", duration: 0.10 },
-        0.75
+        { left: "100%", duration: 0.12 },
+        0.64
       );
       timeline.to(
         scanLineRef.current,
         { opacity: 0, duration: 0.02 },
-        0.85
+        0.78
       );
     }
 
-    // 0.90 - 0.96: Avorria Delivered Contribution
+    // 0.84 - 0.95: Avorria Delivered Contribution
     if (contributionContainerRef.current) {
       timeline.fromTo(
         contributionContainerRef.current,
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.05 },
-        0.90
+        0.84
       );
       timeline.to(
         contributionContainerRef.current,
         { opacity: 0, y: -15, duration: 0.03 },
-        0.96
+        0.95
       );
     }
 
-    // 0.96 - 1.00: Philosophy / Breath Handoff Marker
+    // 0.95 - 1.00: Philosophy / Breath Handoff Marker
     if (nextHandoffRef.current) {
       timeline.fromTo(
         nextHandoffRef.current,
         { opacity: 0, y: 10 },
         { opacity: 1, y: 0, duration: 0.03 },
-        0.96
+        0.95
       );
     }
   };
@@ -186,42 +189,43 @@ export function Scene03Alkota() {
         {/* Semantic Accessibility Heading */}
         <h2 className="sr-only">Alkota Bikes — Product, Brand and Digital Engineering by Avorria</h2>
 
-        {/* Chapter 0: Continuous Handoff from Scene 02 */}
-        <div
-          ref={handoffRef}
-          className="absolute inset-0 w-full h-full z-0 pointer-events-none"
-          aria-hidden="true"
+        {/* Chapter 1: COMPLETE NAKED CARBON MACHINE (THE FIRST PROJECT IMAGE) */}
+        <CinematicMediaFrame
+          src="/media/projects/alkota/product/naked-carbon-hero.jpg"
+          alt="Alkota Project 01 Naked Carbon Mountain Bike"
+          mode="LANDSCAPE"
+          fit="cover"
+          desktopFocal={{ x: 50, y: 48 }}
+          mobileFocal={{ x: 45, y: 50 }}
+          priority
+          containerRef={bikeHeroContainerRef}
+          innerRef={bikeHeroImageRef}
         >
-          <Image
-            src="/media/projects/alkota/product/naked-carbon-hero.jpg"
-            alt="Alkota Naked Carbon Master Entry"
-            fill
-            priority
-            className="object-cover"
-          />
-        </div>
+          {/* Restrained Project Context Instrumentation */}
+          <div className="absolute top-4 left-4 right-4 flex items-center justify-between font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet z-20">
+            <span className="text-avorria-signal">001 / ALKOTA</span>
+            <span className="text-avorria-white">SELECTED WORK // DIGITAL FLAGSHIP</span>
+          </div>
+          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet z-20 border-t border-avorria-line/30 pt-2">
+            <span>PRE-PRODUCTION CARBON DEVELOPMENT</span>
+            <span className="text-avorria-white">001 // THE MACHINE</span>
+          </div>
+        </CinematicMediaFrame>
 
-        {/* Chapter A & B: Material Macro & Engineering Kinematics */}
+        {/* Chapter 2: Material Macro */}
         <AlkotaMaterialStage
           macroRef={macroRef}
           kinematicsRef={kinematicsRef}
           annotationRef={materialAnnotationRef}
         />
 
-        {/* Chapter C: The Object / Product Hero */}
-        <AlkotaProductStage
-          containerRef={productContainerRef}
-          imageRef={productImageRef}
-          copyRef={productCopyRef}
-        />
-
-        {/* Chapter D: Physical to Digital Transformation */}
+        {/* Chapter 3: Physical to Digital Transformation */}
         <AlkotaDigitalStage
           containerRef={digitalContainerRef}
           scanLineRef={scanLineRef}
         />
 
-        {/* Chapter E: Avorria Contribution & Case Study Link */}
+        {/* Chapter 4: Avorria Contribution & Case Study Link */}
         <AlkotaContributionStage
           containerRef={contributionContainerRef}
         />

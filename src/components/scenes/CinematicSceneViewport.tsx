@@ -9,7 +9,8 @@ import { SceneConfig } from "@/types/scene";
 interface CinematicSceneViewportProps {
   config: SceneConfig;
   sceneIndex: number;
-  children: React.ReactNode | ((progress: number) => React.ReactNode);
+  /** Pure ReactNode children only. No function children / progress props. */
+  children: React.ReactNode;
   fallback?: React.ReactNode;
   /** Declarative GSAP timeline builder */
   buildTimeline?: (timeline: gsap.core.Timeline, refs: { outer: HTMLElement; sticky: HTMLDivElement }) => void;
@@ -21,12 +22,15 @@ interface CinematicSceneViewportProps {
  *
  * The canonical architecture for all sticky cinematic scenes.
  *
- * OUTER SECTION  — owns scroll distance via `style={{ height: heightValue }}` (desktop/mobile aware)
- * INNER DIV      — sticky to viewport, `h-[100dvh] overflow-hidden`
- * ScrollTrigger  — observes outer section geometry with `scrub: true` attached to a single GSAP Timeline
+ * OUTER SECTION  — owns scroll distance via CSS custom properties (SSR safe)
+ * INNER DIV      — sticky to viewport, h-[100dvh] overflow-hidden
+ * ScrollTrigger  — observes outer section with scrub: true attached to a GSAP Timeline
  *
  * GSAP owns the animation directly via declarative timelines.
  * React does NOT store scroll progress or act as a frame-by-frame scroll render engine.
+ *
+ * Mobile height is controlled purely via CSS media query using custom properties,
+ * never via window.innerWidth during render. Server and client produce identical markup.
  */
 export function CinematicSceneViewport({
   config,
@@ -40,7 +44,7 @@ export function CinematicSceneViewport({
   const stickyRef = useRef<HTMLDivElement>(null);
   const { effectiveReducedMotion } = useReducedMotion();
 
-  // Stabilise buildTimeline in a ref so external re-renders do NOT trigger timeline recreation
+  // Stabilise buildTimeline in a ref so external re-renders do NOT recreate the ScrollTrigger
   const builderRef = useRef(buildTimeline);
   useEffect(() => {
     builderRef.current = buildTimeline;
@@ -65,7 +69,7 @@ export function CinematicSceneViewport({
           builderRef.current(timeline, { outer: outerRef.current, sticky: stickyRef.current });
         }
 
-        // Add non-visual sentinel at 1.000 to guarantee exact normalised duration
+        // Non-visual sentinel at 1.000 guarantees exact normalised timeline total duration
         const clock = { value: 0 };
         timeline.to(
           clock,
@@ -114,14 +118,17 @@ export function CinematicSceneViewport({
       data-registry-height={config.minHeight}
       className={`relative w-full bg-avorria-black select-none ${className}`}
       style={{
-        height: typeof window !== "undefined" && window.innerWidth < 768 && config.mobileHeight
-          ? config.mobileHeight
-          : config.minHeight,
-      }}
+        // CSS-only height switching — no window.innerWidth during render
+        // --scene-h-desktop / --scene-h-mobile are injected as inline vars
+        // and the media query in globals.css switches between them.
+        ["--scene-h-desktop" as string]: config.minHeight,
+        ["--scene-h-mobile" as string]: config.mobileHeight || config.minHeight,
+        height: "var(--scene-h-desktop)",
+      } as React.CSSProperties}
     >
       {/* Sticky viewport — 100dvh, clips all sub-stage content */}
       <div ref={stickyRef} className="sticky top-0 h-[100dvh] overflow-hidden">
-        {typeof children === "function" ? (children as (progress: number) => React.ReactNode)(0) : children}
+        {children}
       </div>
     </section>
   );

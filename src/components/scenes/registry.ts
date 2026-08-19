@@ -1,29 +1,15 @@
 import { SceneConfig, SceneId } from "@/types/scene";
 
 export const HOMEPAGE_SCENES: SceneConfig[] = [
-  {
-    id: "scene-00-void",
-    index: 0,
-    label: "VOID",
-    chapter: "PROLOGUE",
-    minHeight: "100vh",
-    mobileHeight: "90svh",
-    mobileSceneClass: "A",
-    bgMode: "black",
-    pinningEligibility: false,
-    webglRequirement: false,
-    mediaPriority: "high",
-    reducedMotionStrategy: "static",
-    mobileStrategy: "mobileCinematic",
-    analyticsName: "scene_00_void"
-  },
+  // Scene00Void removed — signal dot integrated into Scene01Precision hero
+  // Scene02Signal removed — multi-project gallery before Alkota eliminated
   {
     id: "scene-01-precision",
     index: 1,
     label: "PRECISION AS POWER",
     chapter: "STATEMENT",
-    minHeight: "190vh",
-    mobileHeight: "150svh",
+    minHeight: "170vh",
+    mobileHeight: "140svh",
     mobileSceneClass: "A",
     bgMode: "black",
     pinningEligibility: true,
@@ -32,22 +18,6 @@ export const HOMEPAGE_SCENES: SceneConfig[] = [
     reducedMotionStrategy: "static",
     mobileStrategy: "mobileCinematic",
     analyticsName: "scene_01_precision"
-  },
-  {
-    id: "scene-02-signal",
-    index: 2,
-    label: "PROJECT SIGNAL",
-    chapter: "GALLERY",
-    minHeight: "380vh",
-    mobileHeight: "240svh",
-    mobileSceneClass: "C",
-    bgMode: "black",
-    pinningEligibility: true,
-    webglRequirement: true,
-    mediaPriority: "high",
-    reducedMotionStrategy: "simplified-motion",
-    mobileStrategy: "mobileSimplified",
-    analyticsName: "scene_02_signal"
   },
   {
     id: "scene-03-alkota",
@@ -59,7 +29,7 @@ export const HOMEPAGE_SCENES: SceneConfig[] = [
     mobileSceneClass: "C",
     bgMode: "black",
     pinningEligibility: true,
-    webglRequirement: true,
+    webglRequirement: false,
     mediaPriority: "high",
     reducedMotionStrategy: "simplified-motion",
     mobileStrategy: "mobileCinematic",

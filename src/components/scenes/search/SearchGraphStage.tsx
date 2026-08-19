@@ -6,23 +6,17 @@ import { CursorTrigger } from "@/providers/CursorContext";
 import { Z } from "@/lib/scene-z";
 
 interface SearchGraphStageProps {
-  progress: number; // 0.0 to 1.0
+  containerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function SearchGraphStage({ progress }: SearchGraphStageProps) {
+export function SearchGraphStage({ containerRef }: SearchGraphStageProps) {
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
-
-  // Active between 0.24 and 0.88
-  if (progress < 0.23 || progress > 0.89) return null;
-
-  const opacity = progress < 0.30 ? (progress - 0.23) / 0.07 : progress < 0.82 ? 1.0 : Math.max(0, 1.0 - (progress - 0.82) / 0.06);
-  const isOptimized = progress >= 0.65;
 
   return (
     <div
-      className="absolute inset-0 w-full h-full pointer-events-auto overflow-hidden p-6 sm:p-12 lg:p-16 flex flex-col justify-between"
-      style={{ opacity, zIndex: Z.media }}
-      aria-hidden={progress > 0.86 ? "true" : "false"}
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full pointer-events-auto overflow-hidden p-6 sm:p-12 lg:p-16 flex flex-col justify-between opacity-0"
+      style={{ zIndex: Z.media }}
     >
       {/* Top Marker */}
       <div
@@ -34,7 +28,7 @@ export function SearchGraphStage({ progress }: SearchGraphStageProps) {
           <span className="text-avorria-signal">AVORRIA V2 // SITE TOPOLOGY</span>
         </div>
         <div className="text-avorria-white">
-          {isOptimized ? "OPTIMISED DISCOVERY GRAPH" : "TOPOLOGICAL EXPANSION"}
+          OPTIMISED DISCOVERY GRAPH
         </div>
       </div>
 
@@ -54,10 +48,9 @@ export function SearchGraphStage({ progress }: SearchGraphStageProps) {
               y1={`${fromNode.y}%`}
               x2={`${toNode.x}%`}
               y2={`${toNode.y}%`}
-              stroke={isHighlighted ? "#C8F135" : isOptimized ? "#38BDF8" : "#334155"}
+              stroke={isHighlighted ? "#C8F135" : "#38BDF8"}
               strokeWidth={isHighlighted ? "2" : "1"}
-              strokeDasharray={isOptimized ? "none" : "4 4"}
-              opacity={isHighlighted ? 1.0 : isOptimized ? 0.8 : 0.4}
+              opacity={isHighlighted ? 1.0 : 0.8}
               className="transition-all duration-150"
             />
           );
@@ -100,19 +93,17 @@ export function SearchGraphStage({ progress }: SearchGraphStageProps) {
         })}
 
         {/* Search Intent Queries Arriving from Edges */}
-        {progress >= 0.50 && (
-          <div className="pointer-events-none">
-            {SEARCH_QUERIES.map((q) => (
-              <div
-                key={q.id}
-                className="absolute font-mono text-[10px] text-avorria-signal uppercase tracking-widest bg-avorria-black/80 px-2 py-1 border border-avorria-signal/40 -translate-x-1/2 -translate-y-1/2 animate-pulse"
-                style={{ left: `${q.fromX}%`, top: `${q.fromY}%`, zIndex: Z.instrumentation }}
-              >
-                QUERY: &quot;{q.query}&quot; →
-              </div>
-            ))}
-          </div>
-        )}
+        <div className="pointer-events-none">
+          {SEARCH_QUERIES.map((q) => (
+            <div
+              key={q.id}
+              className="absolute font-mono text-[10px] text-avorria-signal uppercase tracking-widest bg-avorria-black/80 px-2 py-1 border border-avorria-signal/40 -translate-x-1/2 -translate-y-1/2 animate-pulse"
+              style={{ left: `${q.fromX}%`, top: `${q.fromY}%`, zIndex: Z.instrumentation }}
+            >
+              QUERY: &quot;{q.query}&quot; →
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

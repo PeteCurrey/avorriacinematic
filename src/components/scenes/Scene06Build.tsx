@@ -4,48 +4,50 @@ import { BuildCapabilityReveal } from "./build/BuildCapabilityReveal";
 import { BuildAssemblyStage } from "./build/BuildAssemblyStage";
 import { BuildFallback } from "./build/BuildFallback";
 import { CinematicSceneViewport } from "./CinematicSceneViewport";
+import { SceneSafeFrame } from "./SceneSafeFrame";
+import { CinematicCueController } from "@/lib/motion/cinematic-cues";
 import { BUILD_FRAGMENTS } from "@/lib/scenes/build-scene-config";
+import { gsap } from "@/lib/motion/gsap-config";
 import { getSceneConfig } from "./registry";
 
+/**
+ * SCENE 06 — BUILD CAPABILITY (01 / CAPABILITY)
+ *
+ * Architecture:
+ * - Fragment assembly is a TRIGGERED CINEMATIC ANIMATION managed via CinematicCueController.
+ * - When scroll reaches 0.12, the assembly tween plays automatically over 700ms into final layout.
+ * - Sits stationary in HOLD state across 0.35 - 0.60.
+ * - Exits cleanly into BUILD capability statement.
+ */
 export function Scene06Build() {
   const config = getSceneConfig("scene-06-build")!;
 
   const assemblyContainerRef = useRef<HTMLDivElement>(null);
   const fragmentRefs = useRef<{ [id: string]: HTMLDivElement | null }>({});
   const revealContainerRef = useRef<HTMLDivElement>(null);
+  const cueControllerRef = useRef<CinematicCueController | null>(null);
 
   const buildTimeline = (timeline: gsap.core.Timeline) => {
     timeline.addLabel("entry", 0);
-    timeline.addLabel("assemble_start", 0.08);
-    timeline.addLabel("assemble_land", 0.35);
-    timeline.addLabel("assemble_hold", 0.60);
-    timeline.addLabel("capability_reveal", 0.74);
+    timeline.addLabel("assemble_cue", 0.12);
+    timeline.addLabel("assemble_hold", 0.35);
+    timeline.addLabel("capability_reveal", 0.70);
     timeline.addLabel("handoff", 0.94);
 
-    // 0.00 - 0.72: Fragment Assembly Container
-    if (assemblyContainerRef.current) {
-      timeline.fromTo(
-        assemblyContainerRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.08 },
-        0
-      );
-      // Fade out after hold
-      timeline.to(
-        assemblyContainerRef.current,
-        { opacity: 0, duration: 0.08 },
-        0.66
-      );
-    }
+    // Initialise Cue Controller for triggered events
+    const cueController = new CinematicCueController();
+    cueControllerRef.current = cueController;
 
-    // Fragment assembly from initial spatial offsets to 0,0 (Triggered & Scrubbed precision)
+    // Create self-playing triggered assembly timeline (700ms)
+    const assemblyTl = gsap.timeline({ paused: true });
+
     BUILD_FRAGMENTS.forEach((frag) => {
       const el = fragmentRefs.current[frag.id];
       if (el) {
         const xOffset = (frag.initialX - frag.assembledX) * 10;
         const yOffset = (frag.initialY - frag.assembledY) * 10;
 
-        timeline.fromTo(
+        assemblyTl.fromTo(
           el,
           {
             x: xOffset,
@@ -58,20 +60,50 @@ export function Scene06Build() {
             y: 0,
             scale: 1,
             opacity: 1,
-            duration: 0.28,
+            duration: 0.70,
+            ease: "power2.out",
           },
-          0.08
+          0
         );
       }
     });
 
-    // 0.74 - 0.98: BUILD Capability Reveal (Move -> Land -> Hold -> Exit)
+    // Register cue at 0.12 progress
+    cueController.registerCue({
+      id: "build_assemble",
+      at: 0.12,
+      resetAt: 0.06,
+      animation: assemblyTl,
+    });
+
+    // Evaluate cue controller on timeline progress
+    timeline.eventCallback("onUpdate", () => {
+      cueController.evaluate(timeline.progress());
+    });
+
+    // 0.00 - 0.68: Assembly Container Visibility & Exit
+    if (assemblyContainerRef.current) {
+      timeline.fromTo(
+        assemblyContainerRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.08 },
+        0
+      );
+      // Fade out after hold
+      timeline.to(
+        assemblyContainerRef.current,
+        { opacity: 0, duration: 0.08 },
+        0.62
+      );
+    }
+
+    // 0.70 - 0.96: BUILD Capability Reveal (Move -> Land -> Hold -> Exit)
     if (revealContainerRef.current) {
       timeline.fromTo(
         revealContainerRef.current,
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.08 },
-        0.74
+        0.70
       );
       timeline.to(
         revealContainerRef.current,
@@ -88,7 +120,7 @@ export function Scene06Build() {
       fallback={<BuildFallback />}
       buildTimeline={buildTimeline}
     >
-      <div className="w-full h-full relative overflow-hidden flex flex-col justify-between p-6 sm:p-12 lg:p-16">
+      <SceneSafeFrame>
         {/* Semantic Accessibility Heading */}
         <h2 className="sr-only">
           Build — We Engineer Digital Flagships, Custom Software, and Connected Hardware.
@@ -118,7 +150,7 @@ export function Scene06Build() {
             06 / 18
           </div>
         </div>
-      </div>
+      </SceneSafeFrame>
     </CinematicSceneViewport>
   );
 }

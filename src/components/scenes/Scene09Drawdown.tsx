@@ -5,14 +5,25 @@ import { DrawdownInterfaceStage } from "./drawdown/DrawdownInterfaceStage";
 import { DrawdownPrincipleStage } from "./drawdown/DrawdownPrincipleStage";
 import { DrawdownFallback } from "./drawdown/DrawdownFallback";
 import { CinematicSceneViewport } from "./CinematicSceneViewport";
+import { SceneSafeFrame } from "./SceneSafeFrame";
 import { getSceneConfig } from "./registry";
 
+/**
+ * SCENE 09 — DRAWDOWN.TRADING (PROJECT 004)
+ *
+ * Progression:
+ * 1. Chart / Terminal dashboard lands (0.00 - 0.34) -> Holds stationary
+ * 2. Interface Stage arrives unified (0.36 - 0.48) -> Decomposes into 3D modules (0.48 - 0.62) -> Reassembles (0.62 - 0.70)
+ * 3. Principle & Delivered Scope (0.74 - 0.94)
+ */
 export function Scene09Drawdown() {
   const config = getSceneConfig("scene-09-drawdown")!;
 
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartImageRef = useRef<HTMLDivElement>(null);
   const interfaceContainerRef = useRef<HTMLDivElement>(null);
+  const unifiedRef = useRef<HTMLDivElement>(null);
+  const modulesContainerRef = useRef<HTMLDivElement>(null);
   const principleContainerRef = useRef<HTMLDivElement>(null);
 
   const buildTimeline = (timeline: gsap.core.Timeline) => {
@@ -22,7 +33,7 @@ export function Scene09Drawdown() {
     timeline.addLabel("principle", 0.76);
     timeline.addLabel("handoff", 0.94);
 
-    // 0.00 - 0.38: Dashboard Entry & Hold (Move -> Land -> Hold -> Exit)
+    // 0.00 - 0.36: Dashboard Entry & Hold (Move -> Land -> Hold -> Exit)
     if (chartContainerRef.current) {
       timeline.fromTo(
         chartContainerRef.current,
@@ -30,7 +41,7 @@ export function Scene09Drawdown() {
         { opacity: 1, duration: 0.08 },
         0
       );
-      // Hold 0.08 - 0.28
+      // Hold stationary 0.08 - 0.28
       timeline.to(
         chartContainerRef.current,
         { opacity: 0, duration: 0.06 },
@@ -41,12 +52,12 @@ export function Scene09Drawdown() {
       timeline.fromTo(
         chartImageRef.current,
         { scale: 0.98 },
-        { scale: 1.03, duration: 0.34 },
+        { scale: 1.0, duration: 0.08 },
         0
       );
     }
 
-    // 0.36 - 0.74: Decomposed Interface Modules (3D perspective within safe bounds)
+    // 0.36 - 0.74: Unified -> Decomposed Modules -> Reassembled
     if (interfaceContainerRef.current) {
       timeline.fromTo(
         interfaceContainerRef.current,
@@ -54,7 +65,6 @@ export function Scene09Drawdown() {
         { opacity: 1, duration: 0.06 },
         0.36
       );
-      // Hold 0.48 - 0.66
       timeline.to(
         interfaceContainerRef.current,
         { opacity: 0, duration: 0.06 },
@@ -62,13 +72,44 @@ export function Scene09Drawdown() {
       );
     }
 
-    // 0.76 - 0.98: Quantitative Principle & Delivered Scope
+    // Unified view visible 0.36 - 0.48, then fades out as decomposed modules take over
+    if (unifiedRef.current) {
+      timeline.fromTo(
+        unifiedRef.current,
+        { opacity: 1 },
+        { opacity: 0, duration: 0.06 },
+        0.48
+      );
+      // Reassembles back at 0.64
+      timeline.to(
+        unifiedRef.current,
+        { opacity: 1, duration: 0.06 },
+        0.64
+      );
+    }
+
+    // Decomposed modules visible 0.48 - 0.64
+    if (modulesContainerRef.current) {
+      timeline.fromTo(
+        modulesContainerRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.06 },
+        0.48
+      );
+      timeline.to(
+        modulesContainerRef.current,
+        { opacity: 0, duration: 0.06 },
+        0.64
+      );
+    }
+
+    // 0.74 - 0.96: Quantitative Principle & Delivered Scope
     if (principleContainerRef.current) {
       timeline.fromTo(
         principleContainerRef.current,
         { opacity: 0, y: 25 },
         { opacity: 1, y: 0, duration: 0.06 },
-        0.76
+        0.74
       );
       timeline.to(
         principleContainerRef.current,
@@ -85,7 +126,7 @@ export function Scene09Drawdown() {
       fallback={<DrawdownFallback />}
       buildTimeline={buildTimeline}
     >
-      <div className="w-full h-full relative overflow-hidden flex flex-col justify-between p-6 sm:p-12 lg:p-16">
+      <SceneSafeFrame>
         {/* Semantic Accessibility Heading */}
         <h2 className="sr-only">
           Drawdown.Trading — Quantitative Risk and Execution Interface engineered by Avorria
@@ -104,9 +145,11 @@ export function Scene09Drawdown() {
         />
 
         {/* Chapters 3, 4 & 5: Exploded 3D Modules & Decomposition */}
-        <div ref={interfaceContainerRef} className="absolute inset-0 w-full h-full opacity-0">
-          <DrawdownInterfaceStage progress={0.55} />
-        </div>
+        <DrawdownInterfaceStage
+          containerRef={interfaceContainerRef}
+          unifiedRef={unifiedRef}
+          modulesContainerRef={modulesContainerRef}
+        />
 
         {/* Chapter 6: Quantitative Principle & Delivered Scope */}
         <DrawdownPrincipleStage containerRef={principleContainerRef} />
@@ -120,7 +163,7 @@ export function Scene09Drawdown() {
             09 / 18
           </div>
         </div>
-      </div>
+      </SceneSafeFrame>
     </CinematicSceneViewport>
   );
 }

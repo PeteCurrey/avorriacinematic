@@ -5,8 +5,17 @@ import { SearchGraphStage } from "./search/SearchGraphStage";
 import { SearchCapabilityReveal } from "./search/SearchCapabilityReveal";
 import { SearchFallback } from "./search/SearchFallback";
 import { CinematicSceneViewport } from "./CinematicSceneViewport";
+import { SceneSafeFrame } from "./SceneSafeFrame";
 import { getSceneConfig } from "./registry";
 
+/**
+ * SCENE 08 — SEARCH CAPABILITY (02 / CAPABILITY)
+ *
+ * Sequence:
+ * 1. Single Page Hero & Wireframe breakdown (0.00 - 0.40)
+ * 2. Site Expansion & Topology Graph (0.42 - 0.72)
+ * 3. SEARCH Capability Reveal (0.74 - 0.96)
+ */
 export function Scene08Search() {
   const config = getSceneConfig("scene-08-search")!;
 
@@ -31,6 +40,7 @@ export function Scene08Search() {
         { opacity: 1, duration: 0.08 },
         0
       );
+      // Hold 0.16 - 0.32
       timeline.to(
         pageContainerRef.current,
         { opacity: 0, duration: 0.06 },
@@ -54,6 +64,7 @@ export function Scene08Search() {
         { opacity: 1, duration: 0.08 },
         0.42
       );
+      // Hold 0.50 - 0.66
       timeline.to(
         graphContainerRef.current,
         { opacity: 0, duration: 0.06 },
@@ -84,7 +95,7 @@ export function Scene08Search() {
       fallback={<SearchFallback />}
       buildTimeline={buildTimeline}
     >
-      <div className="w-full h-full relative overflow-hidden flex flex-col justify-between p-6 sm:p-12 lg:p-16">
+      <SceneSafeFrame>
         {/* Semantic Accessibility Heading */}
         <h2 className="sr-only">
           Search — Visibility is Engineered. Technical SEO, Content Architecture, Authority, Discovery.
@@ -103,9 +114,7 @@ export function Scene08Search() {
         />
 
         {/* Chapters 3, 4, 5, 6: Site Expansion & Deterministic Topology Graph */}
-        <div ref={graphContainerRef} className="absolute inset-0 w-full h-full opacity-0">
-          <SearchGraphStage progress={0.65} />
-        </div>
+        <SearchGraphStage containerRef={graphContainerRef} />
 
         {/* Chapters 7 & 8: SEARCH Capability Reveal */}
         <SearchCapabilityReveal containerRef={revealContainerRef} />
@@ -119,7 +128,7 @@ export function Scene08Search() {
             08 / 18
           </div>
         </div>
-      </div>
+      </SceneSafeFrame>
     </CinematicSceneViewport>
   );
 }

@@ -1,7 +1,5 @@
 import { SceneErrorBoundary } from "@/components/cinematic/SceneErrorBoundary";
-import { Scene00Void } from "@/components/scenes/Scene00Void";
 import { Scene01Precision } from "@/components/scenes/Scene01Precision";
-import { Scene02Signal } from "@/components/scenes/Scene02Signal";
 import { Scene03Alkota } from "@/components/scenes/Scene03Alkota";
 import { Scene04Breath } from "@/components/scenes/Scene04Breath";
 import { Scene05CareerOS } from "@/components/scenes/Scene05CareerOS";
@@ -22,17 +20,9 @@ import { Scene18Finale } from "@/components/scenes/Scene18Finale";
 export default function HomePage() {
   return (
     <div className="w-full flex flex-col">
-      {/* 19 Typed Homepage Scenes with Independent Error Boundaries */}
-      <SceneErrorBoundary sceneId="scene-00-void" sceneLabel="The Void">
-        <Scene00Void />
-      </SceneErrorBoundary>
-
+      {/* 17 Typed Homepage Scenes with Single Hero and Direct Alkota First Image */}
       <SceneErrorBoundary sceneId="scene-01-precision" sceneLabel="Precision As Power">
         <Scene01Precision />
-      </SceneErrorBoundary>
-
-      <SceneErrorBoundary sceneId="scene-02-signal" sceneLabel="The Avorria Signal">
-        <Scene02Signal />
       </SceneErrorBoundary>
 
       <SceneErrorBoundary sceneId="scene-03-alkota" sceneLabel="Alkota Bikes">
@@ -101,4 +91,3 @@ export default function HomePage() {
     </div>
   );
 }
-

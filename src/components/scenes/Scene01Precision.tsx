@@ -4,136 +4,188 @@ import React, { useRef } from "react";
 import { useReducedMotion } from "@/providers/ReducedMotionProvider";
 import { useHeaderActions } from "@/providers/HeaderContext";
 import { CinematicSceneViewport } from "./CinematicSceneViewport";
+import { SceneSafeFrame } from "./SceneSafeFrame";
 import { getSceneConfig } from "./registry";
 
+/**
+ * SCENE 01 — PRECISION AS POWER
+ *
+ * THE SINGLE HOMEPAGE HERO.
+ *
+ * Scene00Void has been removed. This scene is now the first viewport.
+ * Signal dot behaviour from Void is absorbed here.
+ *
+ * INITIAL VIEWPORT (before scrolling):
+ *   - Avorria wordmark (via Header, always visible)
+ *   - Label: DIGITAL MARKETING & ENGINEERING STUDIO
+ *   - H1:    PRECISION / AS POWER.
+ *   - Body:  WE BUILD WEBSITES, SEARCH VISIBILITY AND AI SYSTEMS...
+ *   - Line:  WEB DESIGN / DEVELOPMENT / SEO / AI SYSTEMS
+ *   - Signal dot → precision line (animates on first scroll)
+ *
+ * Navigation is available from page load (nav visible from 0%).
+ *
+ * AS POWER. is always one line — whitespace-nowrap, no large left offset.
+ * Font size: clamp(3rem, 9.5vw, 10.75rem) — AS POWER. stays on one line at all tested viewports.
+ */
 export function Scene01Precision() {
-  const compositionRef = useRef<HTMLDivElement | null>(null);
+  const signalDotRef = useRef<HTMLDivElement | null>(null);
   const signalLineRef = useRef<HTMLDivElement | null>(null);
   const slitHandoffRef = useRef<HTMLDivElement | null>(null);
-  const precisionMaskRef = useRef<HTMLDivElement | null>(null);
-  const powerMaskRef = useRef<HTMLDivElement | null>(null);
-  const metadataRef = useRef<HTMLDivElement | null>(null);
-  const descriptorRef = useRef<HTMLDivElement | null>(null);
+  const labelRef = useRef<HTMLDivElement | null>(null);
+  const precisionRef = useRef<HTMLDivElement | null>(null);
+  const powerRef = useRef<HTMLDivElement | null>(null);
+  const bodyRef = useRef<HTMLDivElement | null>(null);
+  const serviceLineRef = useRef<HTMLDivElement | null>(null);
+  const compositionRef = useRef<HTMLDivElement | null>(null);
 
-  const lastHeaderStateRef = useRef<string>("void");
+  const lastHeaderStateRef = useRef<string>("standard");
 
   const { effectiveReducedMotion } = useReducedMotion();
   const { setNavVisible, setWordmarkOpacity, setHeaderState } = useHeaderActions();
   const config = getSceneConfig("scene-01-precision")!;
 
   const buildTimeline = (timeline: gsap.core.Timeline) => {
+    // Labels
     timeline.addLabel("entry", 0);
-    timeline.addLabel("line_expand", 0.05);
-    timeline.addLabel("precision_reveal", 0.20);
-    timeline.addLabel("power_reveal", 0.40);
-    timeline.addLabel("meta_reveal", 0.56);
-    timeline.addLabel("hold", 0.72);
-    timeline.addLabel("exit", 0.85);
+    timeline.addLabel("dot_pulse", 0.04);
+    timeline.addLabel("line_expand", 0.10);
+    timeline.addLabel("hold", 0.70);
+    timeline.addLabel("exit", 0.82);
     timeline.addLabel("handoff", 0.94);
 
-    // Direction-aware imperative header state evaluation attached to timeline update
-    timeline.eventCallback("onUpdate", () => {
-      const p = timeline.progress();
-      const desiredState = p < 0.62 ? "void" : "standard";
+    // Nav is visible from the start — set state immediately on init
+    setNavVisible(true);
+    setWordmarkOpacity(1.0);
+    setHeaderState("standard");
 
-      if (desiredState !== lastHeaderStateRef.current) {
-        lastHeaderStateRef.current = desiredState;
-        if (desiredState === "void") {
-          setNavVisible(false);
-          setWordmarkOpacity(0.75);
-          setHeaderState("void");
-        } else {
-          setNavVisible(true);
-          setWordmarkOpacity(1.0);
-          setHeaderState("standard");
-        }
+    // Direction-aware header evaluation (stays standard throughout this hero)
+    timeline.eventCallback("onUpdate", () => {
+      if (lastHeaderStateRef.current !== "standard") {
+        lastHeaderStateRef.current = "standard";
+        setNavVisible(true);
+        setWordmarkOpacity(1.0);
+        setHeaderState("standard");
       }
     });
 
-    // 1. Stage 0 - 15%: Line expands outward from center across the grid
+    // 0. Signal dot: pulse on load (opacity 0 → 1 → 0.7), then stays until line expands
+    if (signalDotRef.current) {
+      timeline.fromTo(
+        signalDotRef.current,
+        { opacity: 0, scale: 0 },
+        { opacity: 1, scale: 1, duration: 0.04, ease: "power2.out" },
+        0
+      );
+      // Dot fades as line expands
+      timeline.to(
+        signalDotRef.current,
+        { opacity: 0, scale: 0.6, duration: 0.06 },
+        0.10
+      );
+    }
+
+    // 1. Signal line expands outward from center
     if (signalLineRef.current) {
       timeline.fromTo(
         signalLineRef.current,
-        { scaleX: 0.08, opacity: 0.8 },
-        { scaleX: 1, opacity: 1, duration: 0.15 },
-        0
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.14, ease: "power2.out" },
+        0.10
       );
+      // Line contracts as exit begins
       timeline.to(
         signalLineRef.current,
         { scaleX: 0, opacity: 0, duration: 0.08 },
-        0.92
+        0.84
       );
     }
 
-    // 2. Stage 15 - 35%: Masked reveal of PRECISION
-    if (precisionMaskRef.current) {
+    // 2. Label — DIGITAL MARKETING & ENGINEERING STUDIO
+    if (labelRef.current) {
       timeline.fromTo(
-        precisionMaskRef.current,
-        { yPercent: 105, opacity: 0.2 },
-        { yPercent: 0, opacity: 1, duration: 0.20 },
-        0.15
+        labelRef.current,
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: 0.10 },
+        0.06
       );
       timeline.to(
-        precisionMaskRef.current,
-        { yPercent: -40, opacity: 0, duration: 0.10 },
+        labelRef.current,
+        { opacity: 0, y: -6, duration: 0.08 },
+        0.84
+      );
+    }
+
+    // 3. PRECISION — mask reveal upward
+    if (precisionRef.current) {
+      timeline.fromTo(
+        precisionRef.current,
+        { yPercent: 110, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 0.16, ease: "power2.out" },
+        0.14
+      );
+      timeline.to(
+        precisionRef.current,
+        { yPercent: -45, opacity: 0, duration: 0.10 },
         0.82
       );
     }
 
-    // 3. Stage 35 - 52%: Masked reveal of AS POWER.
-    if (powerMaskRef.current) {
+    // 4. AS POWER. — mask reveal downward
+    if (powerRef.current) {
       timeline.fromTo(
-        powerMaskRef.current,
-        { yPercent: -105, opacity: 0.2 },
-        { yPercent: 0, opacity: 1, duration: 0.17 },
-        0.35
+        powerRef.current,
+        { yPercent: -110, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 0.16, ease: "power2.out" },
+        0.22
       );
       timeline.to(
-        powerMaskRef.current,
-        { yPercent: 40, opacity: 0, duration: 0.10 },
+        powerRef.current,
+        { yPercent: 45, opacity: 0, duration: 0.10 },
         0.82
       );
     }
 
-    // 4. Stage 52 - 62%: Micro technical metadata & descriptor
-    if (metadataRef.current) {
+    // 5. Body descriptor
+    if (bodyRef.current) {
       timeline.fromTo(
-        metadataRef.current,
+        bodyRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 0.10 },
-        0.52
+        0.36
       );
       timeline.to(
-        metadataRef.current,
+        bodyRef.current,
         { opacity: 0, duration: 0.08 },
-        0.82
+        0.84
       );
     }
 
-    if (descriptorRef.current) {
+    // 6. Service line
+    if (serviceLineRef.current) {
       timeline.fromTo(
-        descriptorRef.current,
+        serviceLineRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 0.10 },
-        0.54
+        0.40
       );
       timeline.to(
-        descriptorRef.current,
+        serviceLineRef.current,
         { opacity: 0, duration: 0.08 },
-        0.82
+        0.84
       );
     }
 
-    // 5. Stage 72 - 82%: Hold moment with subtle scale pull-back (1.0 -> 0.985)
+    // 7. Exit composition scale-back
     if (compositionRef.current) {
       timeline.to(
         compositionRef.current,
-        { scale: 0.985, duration: 0.10 },
+        { scale: 0.985, duration: 0.12 },
         0.72
       );
     }
 
-    // 7. Stage 93 - 100%: Vertical slit handoff anchor
+    // 8. Slit handoff anchor for Scene03 Alkota entry
     if (slitHandoffRef.current) {
       timeline.fromTo(
         slitHandoffRef.current,
@@ -150,70 +202,107 @@ export function Scene01Precision() {
       sceneIndex={1}
       buildTimeline={buildTimeline}
     >
-      <div className="w-full h-full flex flex-col justify-between p-6 sm:p-10 lg:p-16 overflow-hidden relative">
-        {/* Semantic SEO Accessibility H1 */}
-        <h1 className="sr-only">Precision as Power. Avorria Digital Design and Engineering Studio.</h1>
+      <SceneSafeFrame>
+        {/* Semantic H1 — essential for SEO and screen readers */}
+        <h1 className="sr-only">
+          Precision as Power. Avorria — Digital Marketing, Web Design, SEO and AI Systems Studio.
+        </h1>
 
-        {/* Top Instrumentation Metadata */}
-        <div
-          ref={metadataRef}
-          className="max-w-[1760px] w-full mx-auto flex items-center justify-between font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet opacity-0"
-          aria-hidden="true"
-        >
-          <span className="text-avorria-quiet">SCENE 01 // STATEMENT</span>
-          <span className="text-avorria-white">AVORRIA / DIGITAL ENGINEERING</span>
+        {/* Top: Scene label + service line */}
+        <div className="flex items-start justify-between w-full">
+          {/* Label — primary commercial identifier */}
+          <div
+            ref={labelRef}
+            className="font-mono text-[11px] sm:text-xs uppercase tracking-widest text-avorria-quiet opacity-0"
+          >
+            DIGITAL MARKETING &amp; ENGINEERING STUDIO
+          </div>
+
+          {/* Service line — top right */}
+          <div
+            ref={serviceLineRef}
+            className="hidden sm:block font-mono text-[10px] uppercase tracking-widest text-avorria-quiet opacity-0 text-right"
+            aria-hidden="true"
+          >
+            WEB DESIGN / DEVELOPMENT<br />SEO / AI SYSTEMS
+          </div>
         </div>
 
-        {/* Central Architectural Statement Composition */}
+        {/* Central composition */}
         <div
           ref={compositionRef}
-          className="max-w-[1760px] w-full mx-auto my-auto flex flex-col justify-center relative py-6"
+          className="flex flex-col justify-center my-auto py-4 sm:py-6"
+          style={{ willChange: "transform" }}
         >
-          {/* Top Line: PRECISION */}
-          <div className="overflow-hidden pb-1 sm:pb-3">
+          {/* PRECISION */}
+          <div className="overflow-hidden pb-1 sm:pb-2">
             <div
-              ref={precisionMaskRef}
-              className="display-xxl text-avorria-white select-none pl-2 sm:pl-8 lg:pl-16 tracking-tight opacity-0"
+              ref={precisionRef}
+              className="select-none tracking-tight leading-none text-avorria-white opacity-0"
+              style={{ fontSize: "clamp(3rem, 9.5vw, 10.75rem)" }}
             >
               PRECISION
             </div>
           </div>
 
-          {/* Central 1px Chartreuse Dividing Rule */}
+          {/* Signal line + dot — between the two words */}
           <div className="relative w-full my-2 sm:my-4 flex items-center justify-center">
+            {/* Chartreuse dot — pulse on load, then collapses as line appears */}
+            <div
+              ref={signalDotRef}
+              className="absolute w-1.5 h-1.5 rounded-full bg-avorria-signal opacity-0 z-10"
+              style={{ willChange: "transform, opacity" }}
+              aria-hidden="true"
+            />
+            {/* Precision rule — expands from center */}
             <div
               ref={signalLineRef}
               className="w-full h-[1px] bg-avorria-signal origin-center opacity-0"
               style={{ willChange: "transform, opacity" }}
               aria-hidden="true"
             />
-            {/* Center Vertical Slit Handoff Anchor (Becomes active in exit stage) */}
+            {/* Vertical slit — handoff anchor to Alkota */}
             <div
               ref={slitHandoffRef}
-              className="absolute w-[1px] h-16 bg-avorria-signal origin-center opacity-0"
+              className="absolute w-[1px] h-16 sm:h-20 bg-avorria-signal origin-center opacity-0"
               style={{ willChange: "transform, opacity" }}
               aria-hidden="true"
             />
           </div>
 
-          {/* Bottom Line: AS POWER. */}
-          <div className="overflow-hidden pt-1 sm:pt-3">
+          {/* AS POWER. — never wraps */}
+          <div className="overflow-hidden pt-1 sm:pt-2">
             <div
-              ref={powerMaskRef}
-              className="display-xxl text-avorria-signal select-none pl-8 sm:pl-28 lg:pl-56 tracking-tight opacity-0"
+              ref={powerRef}
+              className="select-none tracking-tight leading-none text-avorria-signal opacity-0 whitespace-nowrap"
+              style={{ fontSize: "clamp(3rem, 9.5vw, 10.75rem)" }}
             >
               AS POWER<span className="text-avorria-signal">.</span>
             </div>
           </div>
-        </div>
 
-        {/* Bottom Editorial Capability Descriptor */}
-        <div className="max-w-[1760px] w-full mx-auto flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-[10px] sm:text-xs text-avorria-quiet uppercase tracking-widest">
-          <div ref={descriptorRef} className="text-avorria-white opacity-0">
-            DESIGN / ENGINEERING / SEARCH / INTELLIGENCE
+          {/* Supporting commercial descriptor */}
+          <div
+            ref={bodyRef}
+            className="mt-6 sm:mt-8 max-w-[640px] opacity-0"
+          >
+            <p className="font-body text-sm sm:text-base text-avorria-muted leading-relaxed uppercase tracking-wide">
+              We build websites, search visibility and AI systems
+              <br className="hidden sm:block" />
+              that make businesses harder to compete with.
+            </p>
           </div>
         </div>
-      </div>
+
+        {/* Bottom: service line on mobile */}
+        <div
+          className="sm:hidden font-mono text-[10px] uppercase tracking-widest text-avorria-quiet opacity-0"
+          ref={serviceLineRef as unknown as React.RefObject<HTMLDivElement>}
+          aria-hidden="true"
+        >
+          WEB DESIGN / DEVELOPMENT / SEO / AI SYSTEMS
+        </div>
+      </SceneSafeFrame>
     </CinematicSceneViewport>
   );
 }
