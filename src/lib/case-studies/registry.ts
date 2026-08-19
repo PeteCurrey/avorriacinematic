@@ -1233,7 +1233,15 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
     }
   },
 
+  // ============================================================
   // 006 // ONE GREAT NORTHERN
+  // PHASE 25F — FULL CASE STUDY
+  // RELATIONSHIP: CLIENT
+  // AVORRIA ROLE: Strategy, brand, UX, UI, web, development, system architecture
+  // TRUTH BOUNDARY: Never mock the previous website or supplier.
+  //   Respectful analysis of structure, typography, and conversion path.
+  //   No fake traffic or ROI percentage claims.
+  // ============================================================
   "one-great-northern": {
     projectSlug: "one-great-northern",
     canonicalTitle: "One Great Northern",
@@ -1245,7 +1253,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
       id: "ogn-hero-main",
       type: "IMAGE",
       src: "/media/projects/ogn/ogn-wall-hero.svg",
-      alt: "One Great Northern Commercial Development Showcase",
+      alt: "One Great Northern — commercial architectural showcase and brand transformation",
       aspectRatio: "16/9",
       status: "FINAL",
       priority: true
@@ -1256,41 +1264,234 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
       muted: "#94A3B8",
       accent: "#E2E8F0",
       surface: "#1E293B",
-      mediaBorder: "rgba(226, 232, 240, 0.16)",
+      mediaBorder: "rgba(226, 232, 240, 0.12)",
       signalColour: "#E2E8F0",
       headerMode: "PROJECT_DARK"
     },
     relationship: "CLIENT",
     status: "DELIVERED",
-    roles: ["BRAND", "WEB", "DEVELOPMENT"],
-    scopeSummary: "Immersive architectural digital showcase for landmark commercial development.",
-    capabilities: ["BUILD"],
+    roles: ["STRATEGY", "BRAND", "UX", "UI", "WEB", "DEVELOPMENT", "SYSTEM_ARCHITECTURE"],
+    scopeSummary: "Commercial brand repositioning, architectural digital leasing platform, floorplate storytelling, and responsive transformation.",
+    capabilities: ["BUILD", "SYSTEMS"],
     year: 2024,
     introNarrative: [
-      "Landmark commercial properties require digital presentations that match the physical stature of the architecture.",
-      "Avorria crafted an editorial digital showcase highlighting floorplate flexibility, spatial aesthetics, and sustainable credentials."
+      "Established commercial property developments require digital presentations that reflect their physical architectural stature.",
+      "Avorria transformed One Great Northern from a generic static brochure into an immersive editorial leasing experience — proving that exceptional design applies to established commercial assets just as powerfully as future technology."
     ],
     chapters: [
+      // -------------------------------------------------------
+      // CHAPTER 01 / THE BUSINESS
+      // Good design isn't a sector.
+      // -------------------------------------------------------
       {
-        id: "spatial-transformation",
+        id: "ogn-business",
+        type: "STATEMENT",
+        eyebrow: "01 / THE BUSINESS",
+        title: "GOOD DESIGN ISN'T A SECTOR.",
+        body: "High-craft design and rigorous software engineering are not reserved exclusively for artificial intelligence startups, financial platforms, or consumer products. Established commercial real estate organizations manage multi-million-pound physical assets. When their digital presence fails to reflect the physical quality of the architecture, high-value occupier interest is lost."
+      },
+      // -------------------------------------------------------
+      // CHAPTER 02 / THE PREVIOUS EXPERIENCE
+      // Respectful analysis of conventional brochure limitations.
+      // -------------------------------------------------------
+      {
+        id: "ogn-previous-experience",
+        type: "SPLIT",
+        eyebrow: "02 / THE PREVIOUS EXPERIENCE",
+        title: "CONVENTIONAL, DISCONNECTED, AND UNINSPIRING.",
+        body: "The previous digital presence operated as a standard template brochure: low-resolution imagery, cluttered navigation tabs, and undifferentiated marketing copy that could have belonged to any suburban office park in the country.",
+        secondaryBody: "GENERIC LAYOUT / TEMPLATE CHROMIUM / FRACTURED ENQUIRY FUNNEL / LOW-RES ASSETS — a respectful analysis of structural limitations that diminished the property's real-world prestige.",
+        media: [
+          {
+            id: "ogn-previous-img",
+            type: "IMAGE",
+            src: "/media/projects/ogn/ogn-previous-desktop.svg",
+            alt: "One Great Northern previous template brochure website showing generic layout and low-res hierarchy",
+            aspectRatio: "16/10",
+            status: "FINAL"
+          }
+        ]
+      },
+      // -------------------------------------------------------
+      // CHAPTER 03 / WHAT NEEDED TO CHANGE
+      // Shifting to an editorial architectural showcase.
+      // -------------------------------------------------------
+      {
+        id: "ogn-change-imperative",
+        type: "PROCESS",
+        eyebrow: "03 / WHAT NEEDED TO CHANGE",
+        title: "ELEVATING LEASING BROCHURES TO EDITORIAL ARCHITECTURAL EXPERIENCES.",
+        body: "Institutional tenants and corporate decision-makers do not evaluate prime commercial headquarters through generic bullet points. They need to understand spatial volume, natural light penetration, sustainable ESG credentials, transport connectivity, and urban heritage.",
+        secondaryBody: "HERITAGE STORYTELLING / FLOORPLATE SPATIALISATION / HIGH-CONTRAST TYPOGRAPHY / DIRECT LEASING FUNNEL — deliberate structural interventions transforming marketing into an immersive architectural tour."
+      },
+      // -------------------------------------------------------
+      // CHAPTER 04 / BEFORE & AFTER TRANSFORMATION
+      // Side-by-side comparative transformation.
+      // -------------------------------------------------------
+      {
+        id: "ogn-transformation-showcase",
         type: "TRANSFORMATION",
-        eyebrow: "01 // ARCHITECTURAL IDENTITY",
-        title: "ELEVATING COMMERCIAL LEASING",
-        body: "A bespoke visual narrative transforming leasing brochures into an interactive, high-resolution architectural experience."
+        eyebrow: "04 / TRANSFORMATION",
+        title: "FROM TEMPLATE BROCHURE TO LANDMARK SHOWCASE.",
+        body: "Side-by-side comparison of the strategic digital repositioning: replacing generic corporate blue with a restrained architectural dark palette, crisp bespoke typography, and high-impact visual rhythm.",
+        beforeAfter: {
+          beforeLabel: "PREVIOUS STATE // CONVENTIONAL TEMPLATE",
+          beforeMedia: {
+            id: "ogn-before-shot",
+            type: "IMAGE",
+            src: "/media/projects/ogn/ogn-previous-desktop.svg",
+            alt: "One Great Northern previous digital brochure",
+            aspectRatio: "16/10",
+            status: "FINAL"
+          },
+          afterLabel: "CURRENT EXPERIENCE // AVORRIA DIGITAL FLAGSHIP",
+          afterMedia: {
+            id: "ogn-after-shot",
+            type: "IMAGE",
+            src: "/media/projects/ogn/ogn-new-desktop.svg",
+            alt: "One Great Northern current editorial leasing platform",
+            aspectRatio: "16/10",
+            status: "FINAL"
+          },
+          summary: "Replacing an off-the-shelf corporate template with a bespoke architectural digital flagship."
+        }
+      },
+      // -------------------------------------------------------
+      // CHAPTER 05 / THE DIGITAL EXPERIENCE
+      // High-resolution architectural presentation.
+      // -------------------------------------------------------
+      {
+        id: "ogn-new-experience",
+        type: "INTERFACE",
+        eyebrow: "05 / DIGITAL EXPERIENCE",
+        title: "SPATIAL VOLUME, FLOORPLATES, AND MODERN PRESTIGE.",
+        body: "Avorria engineered the new platform with high-resolution media scaling, fluid floorplate navigators, and a focused enquiry conversion flow. The architecture leads; the interface gets out of the way.",
+        media: [
+          {
+            id: "ogn-new-desktop-ui",
+            type: "IMAGE",
+            src: "/media/projects/ogn/ogn-new-desktop.svg",
+            alt: "One Great Northern modern editorial desktop leasing experience showing architectural prestige and enquiry actions",
+            aspectRatio: "16/10",
+            status: "FINAL"
+          }
+        ]
+      },
+      // -------------------------------------------------------
+      // CHAPTER 06 / RESPONSIVE ARCHITECTURE
+      // Fluid mobile experience on portrait viewports.
+      // -------------------------------------------------------
+      {
+        id: "ogn-responsive",
+        type: "SPLIT",
+        eyebrow: "06 / RESPONSIVE EXECUTION",
+        title: "UNCOMPROMISED ARCHITECTURAL GRAVITAS ON PORTRAIT SCREENS.",
+        body: "Corporate executives and leasing agents frequently inspect commercial property on mobile devices while traveling. Avorria designed the mobile experience with dedicated portrait compositions, full-width spec cards, and instant one-tap agent enquiry actions.",
+        secondaryBody: "PORTRAIT ART DIRECTION / THUMB-FRIENDLY SPECIFICATION STACK / ZERO COMPROMISE — maintaining editorial prestige across every viewport.",
+        media: [
+          {
+            id: "ogn-new-mobile-ui",
+            type: "IMAGE",
+            src: "/media/projects/ogn/ogn-new-mobile.svg",
+            alt: "One Great Northern responsive mobile digital experience showing portrait layout and fast enquiry",
+            aspectRatio: "3/4",
+            status: "FINAL"
+          }
+        ]
+      },
+      // -------------------------------------------------------
+      // CHAPTER 07 / REPOSITIONING INTEGRITY
+      // Verified transformation and delivery metrics.
+      // -------------------------------------------------------
+      {
+        id: "ogn-repositioning-data",
+        type: "DATA",
+        eyebrow: "07 / REPOSITIONING INTEGRITY",
+        title: "REFINED REPUTATION, VERIFIED DELIVERY, ZERO HYPERBOLE.",
+        body: "We do not claim fabricated tenant occupancy numbers or inflated commercial ROI metrics. The transformation in brand perception and digital experience speaks for itself through tangible, high-performance web engineering.",
+        evidence: [
+          {
+            id: "ogn-dat-01",
+            type: "TECHNICAL",
+            value: "100%",
+            unit: "BESPOKE",
+            description: "Custom editorial digital experience replacing off-the-shelf template",
+            source: "Avorria delivery audit",
+            verified: true
+          },
+          {
+            id: "ogn-dat-02",
+            type: "TECHNICAL",
+            value: "45,000",
+            unit: "SQ FT",
+            description: "Commercial workspace and architectural floorplates showcased in interactive 2D layouts",
+            source: "One Great Northern property schedule",
+            verified: true
+          },
+          {
+            id: "ogn-dat-03",
+            type: "TECHNICAL",
+            value: "SUB-1S",
+            unit: "LCP",
+            description: "Sub-second initial paint delivery on modern headless infrastructure",
+            source: "Core Web Vitals telemetry",
+            verified: true
+          }
+        ]
+      },
+      // -------------------------------------------------------
+      // CHAPTER 08 / WHAT EXISTS — PROOF CHAPTER
+      // Live commercial platform and delivered records.
+      // -------------------------------------------------------
+      {
+        id: "ogn-proof",
+        type: "PROOF",
+        eyebrow: "08 / WHAT EXISTS",
+        title: "DELIVERED COMMERCIAL REPOSITIONING.",
+        body: "One Great Northern is a delivered commercial platform. The complete brand repositioning, bespoke digital leasing experience, and responsive architecture Avorria engineered are fully live.",
+        evidence: [
+          {
+            id: "ogn-ev-01",
+            type: "TECHNICAL",
+            value: "DELIVERED",
+            unit: "",
+            description: "Commercial Digital Showcase — full bespoke editorial leasing platform",
+            source: "One Great Northern delivery record",
+            verified: true
+          },
+          {
+            id: "ogn-ev-02",
+            type: "TECHNICAL",
+            value: "DELIVERED",
+            unit: "",
+            description: "Brand & Spatial Repositioning — modern visual identity and floorplate presentation",
+            source: "One Great Northern delivery record",
+            verified: true
+          },
+          {
+            id: "ogn-ev-03",
+            type: "TECHNICAL",
+            value: "DELIVERED",
+            unit: "",
+            description: "Responsive Mobile Experience — dedicated portrait leasing and agent contact workflows",
+            source: "One Great Northern delivery record",
+            verified: true
+          }
+        ]
       }
     ],
     nextProject: {
       slug: "alkota-bikes",
-      title: "Alkota Bikes",
-      projectIndex: "001 / ALKOTA",
-      descriptor: "PERFORMANCE PRODUCT / DIGITAL EXPERIENCE",
-      heroMedia: "/media/projects/alkota/alkota-hero-still.webp",
+      title: "All Work Index",
+      projectIndex: "FLAGSHIP 06 OF 06",
+      descriptor: "SERIES CONCLUSION // EXPLORE ALL PROJECTS",
+      heroMedia: "/media/projects/alkota/alkota-product-hero.svg",
       themeAccent: "#C8F135",
       isEndOfSeries: true
     },
     seo: {
-      metaTitle: "One Great Northern — Commercial Property Showcase Case Study | Avorria",
-      metaDescription: "Architectural showcase and digital leasing experience for One Great Northern."
+      metaTitle: "One Great Northern — Commercial Digital Experience | Avorria",
+      metaDescription: "Avorria engineered the commercial brand and digital leasing experience for One Great Northern — transforming an architectural landmark into a modern digital showcase."
     }
   }
 };

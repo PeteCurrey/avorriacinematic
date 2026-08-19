@@ -108,7 +108,7 @@ export interface CaseStudyChapter {
     beforeMedia: CaseStudyMediaItem;
     afterLabel: string;
     afterMedia: CaseStudyMediaItem;
-    summary: string;
+    summary?: string;
   };
 }
 
