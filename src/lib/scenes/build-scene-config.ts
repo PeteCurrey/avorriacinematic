@@ -69,10 +69,10 @@ export const BUILD_FRAGMENTS: BuildFragmentConfig[] = [
 ];
 
 export const BUILD_PROPOSITION = {
-  label: "01 / CAPABILITY",
+  label: "01 / DISCIPLINE",
   title: "BUILD.",
   proposition: "DIGITAL PRODUCTS PEOPLE WANT TO USE.",
   capabilities: "WEB / PRODUCT / UX / DEVELOPMENT / COMMERCE",
-  ctaText: "EXPLORE BUILD",
-  ctaHref: "/capabilities/build"
+  ctaText: "EXPLORE WEBSITES",
+  ctaHref: "/services/websites"
 };

@@ -34,13 +34,17 @@ export function WorkWallItem({ project }: WorkWallItemProps) {
   };
 
   const spanClasses: Record<number, string> = {
+    3: "lg:col-span-3",
     4: "lg:col-span-4",
     5: "lg:col-span-5",
     6: "lg:col-span-6",
     7: "lg:col-span-7",
     8: "lg:col-span-8",
+    9: "lg:col-span-9",
     12: "lg:col-span-12"
   };
+
+  const isContain = project.objectFit === "contain";
 
   const content = (
     <article
@@ -49,14 +53,18 @@ export function WorkWallItem({ project }: WorkWallItemProps) {
       className={`group flex flex-col gap-4 col-span-12 ${colClasses[project.colStart] || ""} ${spanClasses[project.colSpan] || ""}`}
     >
       {/* Media Frame */}
-      <div className={`relative w-full ${aspectClasses[project.aspectRatio] || "aspect-video"} bg-avorria-surface border border-avorria-line overflow-hidden transition-all duration-300 ${isHovered ? "border-avorria-signal/60 scale-[1.015]" : ""}`}>
-
+      <div
+        className={`relative w-full ${aspectClasses[project.aspectRatio] || "aspect-video"} border border-avorria-line overflow-hidden transition-all duration-300 ${isHovered ? "border-avorria-signal/60 scale-[1.015]" : ""}`}
+        style={{ backgroundColor: project.mediaBackground || "#0c0e14" }}
+      >
         <Image
           src={project.imagePath}
           alt={`${project.title} - ${project.sector}`}
           fill
           loading="lazy"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className={`${isContain ? "object-contain p-4" : "object-cover"} transition-transform duration-500 group-hover:scale-105`}
+          style={{ objectPosition: project.objectPosition || "center center" }}
         />
       </div>
 

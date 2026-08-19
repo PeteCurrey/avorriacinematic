@@ -10,11 +10,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/work`,                   lastModified: new Date(), changeFrequency: "weekly",  priority: 0.9 },
     { url: `${SITE_URL}/start-project`,          lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
 
-    // ── Capabilities ───────────────────────────────────────────
-    { url: `${SITE_URL}/capabilities`,           lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/capabilities/build`,     lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/capabilities/search`,    lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/capabilities/systems`,   lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    // ── Services Hub & 5 Core Disciplines ─────────────────────
+    { url: `${SITE_URL}/services`,                         lastModified: new Date(), changeFrequency: "weekly",  priority: 0.9 },
+    { url: `${SITE_URL}/services/websites`,                lastModified: new Date(), changeFrequency: "monthly", priority: 0.85 },
+    { url: `${SITE_URL}/services/digital-products`,         lastModified: new Date(), changeFrequency: "monthly", priority: 0.85 },
+    { url: `${SITE_URL}/services/seo`,                     lastModified: new Date(), changeFrequency: "monthly", priority: 0.85 },
+    { url: `${SITE_URL}/services/performance-marketing`,   lastModified: new Date(), changeFrequency: "monthly", priority: 0.85 },
+    { url: `${SITE_URL}/services/ai-automation`,           lastModified: new Date(), changeFrequency: "monthly", priority: 0.85 },
 
     // ── Editorial + Studio ─────────────────────────────────────
     { url: `${SITE_URL}/intelligence`,           lastModified: new Date(), changeFrequency: "weekly",  priority: 0.8 },

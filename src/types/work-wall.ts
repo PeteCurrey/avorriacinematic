@@ -10,4 +10,7 @@ export interface WorkWallProject {
   colStart: number;
   colSpan: number;
   caseStudyAvailable: boolean;
+  objectFit?: "cover" | "contain";
+  objectPosition?: string;
+  mediaBackground?: string;
 }

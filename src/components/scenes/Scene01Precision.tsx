@@ -14,8 +14,8 @@ import { getSceneConfig } from "./registry";
  *
  * READABILITY & TIMING:
  * - 0.00 – 0.12: Intro animation completes (dot pulse -> line expand -> text reveals)
- * - 0.12 – 0.20: Commercial proposition & service lines resolve
- * - 0.20 – 0.78: READABLE HOLD (58% of scene timeline completely stationary, 0 drift, 0 scale creep)
+ * - 0.12 – 0.18: Commercial proposition & service lines resolve
+ * - 0.18 – 0.78: READABLE HOLD (60% of scene timeline completely stationary, 0 drift, 0 scale creep)
  * - 0.78 – 0.88: Prepare Alkota transition
  * - 0.88 – 1.00: Alkota website handoff
  */
@@ -27,7 +27,8 @@ export function Scene01Precision() {
   const precisionRef = useRef<HTMLDivElement | null>(null);
   const powerRef = useRef<HTMLDivElement | null>(null);
   const bodyRef = useRef<HTMLDivElement | null>(null);
-  const serviceLineRef = useRef<HTMLDivElement | null>(null);
+  const desktopServiceLineRef = useRef<HTMLDivElement | null>(null);
+  const mobileServiceLineRef = useRef<HTMLDivElement | null>(null);
   const compositionRef = useRef<HTMLDivElement | null>(null);
 
   const lastHeaderStateRef = useRef<string>("standard");
@@ -134,12 +135,12 @@ export function Scene01Precision() {
       );
     }
 
-    // 5. Commercial body descriptor (0.12 -> 0.19)
+    // 5. Commercial body descriptor (0.12 -> 0.18)
     if (bodyRef.current) {
       timeline.fromTo(
         bodyRef.current,
         { opacity: 0, y: 6 },
-        { opacity: 1, y: 0, duration: 0.07 },
+        { opacity: 1, y: 0, duration: 0.06 },
         0.12
       );
       timeline.to(
@@ -149,16 +150,29 @@ export function Scene01Precision() {
       );
     }
 
-    // 6. Service line (0.12 -> 0.19)
-    if (serviceLineRef.current) {
+    // 6. Service lines (Desktop & Mobile distinct refs)
+    if (desktopServiceLineRef.current) {
       timeline.fromTo(
-        serviceLineRef.current,
+        desktopServiceLineRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.07 },
+        { opacity: 1, duration: 0.06 },
         0.12
       );
       timeline.to(
-        serviceLineRef.current,
+        desktopServiceLineRef.current,
+        { opacity: 0, duration: 0.08 },
+        0.80
+      );
+    }
+    if (mobileServiceLineRef.current) {
+      timeline.fromTo(
+        mobileServiceLineRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.06 },
+        0.12
+      );
+      timeline.to(
+        mobileServiceLineRef.current,
         { opacity: 0, duration: 0.08 },
         0.80
       );
@@ -197,7 +211,7 @@ export function Scene01Precision() {
           </div>
 
           <div
-            ref={serviceLineRef}
+            ref={desktopServiceLineRef}
             className="hidden sm:block font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-muted opacity-0 text-right"
             aria-hidden="true"
           >
@@ -268,7 +282,7 @@ export function Scene01Precision() {
         {/* Mobile Service Line */}
         <div
           className="sm:hidden font-mono text-[10px] uppercase tracking-widest text-avorria-muted opacity-0"
-          ref={serviceLineRef as unknown as React.RefObject<HTMLDivElement>}
+          ref={mobileServiceLineRef}
           aria-hidden="true"
         >
           WEB DESIGN / DEVELOPMENT / SEO / AI SYSTEMS

@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import Link from "next/link";
 import { CinematicSceneViewport } from "@/components/scenes/CinematicSceneViewport";
+import { SceneSafeFrame } from "@/components/scenes/SceneSafeFrame";
 import { SceneConfig } from "@/types/scene";
 
 const CAPABILITIES_CONFIG: SceneConfig = {
@@ -10,8 +11,8 @@ const CAPABILITIES_CONFIG: SceneConfig = {
   index: 3,
   label: "CAPABILITIES SHOWCASE",
   chapter: "CAPABILITY",
-  minHeight: "300vh",
-  mobileHeight: "270svh",
+  minHeight: "360vh",
+  mobileHeight: "300svh",
   mobileSceneClass: "B",
   bgMode: "black",
   pinningEligibility: true,
@@ -25,13 +26,13 @@ const CAPABILITIES_CONFIG: SceneConfig = {
 /**
  * HOME CAPABILITIES SHOWCASE
  *
- * Consolidated, grouped capability presentation.
- * Explains: BUILD, SEARCH, and SYSTEMS in one continuous argument.
+ * Spatial, un-boxed architecture for Avorria capabilities.
+ * Explains: BUILD, SEARCH, and SYSTEMS across 360vh (~120vh per discipline).
  *
  * Sequence:
- * 0.00 – 0.32: 01 / BUILD (Digital Products, Web Design, Commerce)
- * 0.34 – 0.64: 02 / SEARCH (Technical SEO, Content Architecture, Visibility)
- * 0.66 – 0.98: 03 / SYSTEMS (AI Systems, Automations, Internal Operations)
+ * 0.00 – 0.33: 01 / BUILD (Digital Products, Web Design, Commerce) -> Holds 0.03 – 0.30 (~97vh)
+ * 0.33 – 0.66: 02 / SEARCH (Technical SEO, Content Architecture, Visibility) -> Holds 0.36 – 0.63 (~97vh)
+ * 0.66 – 0.99: 03 / SYSTEMS (AI Systems, Automations, Internal Operations) -> Holds 0.69 – 0.96 (~97vh)
  */
 export function HomeCapabilitiesShowcase() {
   const c1Ref = useRef<HTMLDivElement>(null);
@@ -40,52 +41,55 @@ export function HomeCapabilitiesShowcase() {
 
   const buildTimeline = (timeline: gsap.core.Timeline) => {
     timeline.addLabel("entry", 0);
-    timeline.addLabel("build", 0.02);
-    timeline.addLabel("search", 0.34);
-    timeline.addLabel("systems", 0.66);
-    timeline.addLabel("handoff", 0.96);
+    timeline.addLabel("build", 0.03);
+    timeline.addLabel("search", 0.36);
+    timeline.addLabel("systems", 0.69);
+    timeline.addLabel("handoff", 0.98);
 
-    // 01 / BUILD (0.00 – 0.32)
+    // 01 / BUILD (0.00 – 0.33)
     if (c1Ref.current) {
       timeline.fromTo(
         c1Ref.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.04 },
-        0.02
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.03, ease: "power2.out" },
+        0.00
       );
+      // Zero drift during hold (0.03 - 0.30)
       timeline.to(
         c1Ref.current,
-        { opacity: 0, y: -20, duration: 0.04 },
+        { opacity: 0, y: -10, duration: 0.03, ease: "power2.in" },
         0.30
       );
     }
 
-    // 02 / SEARCH (0.34 – 0.64)
+    // 02 / SEARCH (0.33 – 0.66)
     if (c2Ref.current) {
       timeline.fromTo(
         c2Ref.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.04 },
-        0.34
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.03, ease: "power2.out" },
+        0.33
       );
+      // Zero drift during hold (0.36 - 0.63)
       timeline.to(
         c2Ref.current,
-        { opacity: 0, y: -20, duration: 0.04 },
-        0.62
+        { opacity: 0, y: -10, duration: 0.03, ease: "power2.in" },
+        0.63
       );
     }
 
-    // 03 / SYSTEMS (0.66 – 0.98)
+    // 03 / SYSTEMS (0.66 – 0.99)
     if (c3Ref.current) {
       timeline.fromTo(
         c3Ref.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.04 },
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.03, ease: "power2.out" },
         0.66
       );
+      // Zero drift during hold (0.69 - 0.96)
       timeline.to(
         c3Ref.current,
-        { opacity: 0, y: -20, duration: 0.04 },
+        { opacity: 0, y: -10, duration: 0.03, ease: "power2.in" },
         0.96
       );
     }
@@ -97,7 +101,7 @@ export function HomeCapabilitiesShowcase() {
       sceneIndex={3}
       buildTimeline={buildTimeline}
     >
-      <div className="w-full h-full relative overflow-hidden flex items-center justify-center p-6 sm:p-12 lg:p-16">
+      <SceneSafeFrame>
         {/* Semantic Section Heading */}
         <h2 className="sr-only">
           Avorria Capabilities — Build, Search, Systems Engineering
@@ -106,21 +110,26 @@ export function HomeCapabilitiesShowcase() {
         {/* 01 / BUILD */}
         <div
           ref={c1Ref}
-          className="absolute inset-x-6 sm:inset-x-16 max-w-5xl mx-auto flex flex-col justify-between h-[70vh] border border-avorria-line bg-avorria-surface/80 p-8 sm:p-14 backdrop-blur-md opacity-0 pointer-events-auto select-none"
+          className="absolute inset-x-6 sm:inset-x-12 lg:inset-x-16 max-w-6xl mx-auto flex flex-col justify-between h-full py-6 opacity-0 pointer-events-auto select-none"
         >
+          {/* Header */}
           <div className="flex items-center justify-between font-mono text-xs uppercase tracking-widest text-avorria-quiet border-b border-avorria-line/40 pb-4">
-            <span className="text-avorria-signal">01 / CAPABILITY</span>
-            <span className="text-avorria-white">DIGITAL PRODUCTS</span>
+            <span className="text-avorria-signal font-medium">01 / CAPABILITY</span>
+            <span className="text-avorria-white font-medium">DIGITAL PRODUCTS &amp; ENGINEERING</span>
           </div>
 
-          <div className="my-auto flex flex-col gap-4">
-            <div className="display-xl text-avorria-white font-normal tracking-tight">
+          {/* Central Architecture */}
+          <div className="my-auto flex flex-col gap-6 max-w-3xl">
+            <div
+              className="tracking-tight leading-none text-avorria-white font-bold"
+              style={{ fontSize: "clamp(3.5rem, 9vw, 9.5rem)" }}
+            >
               BUILD<span className="text-avorria-signal">.</span>
             </div>
-            <div className="display-md text-avorria-muted max-w-2xl font-light">
-              Digital flagships, custom software, and bespoke web platforms engineered to dominate markets.
+            <div className="display-md text-avorria-white font-light">
+              Digital flagships, custom web applications, and high-conversion commerce infrastructure.
             </div>
-            <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-avorria-signal uppercase tracking-widest pt-2">
+            <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs sm:text-sm text-avorria-signal uppercase tracking-widest pt-2">
               <span>WEB DESIGN</span>
               <span>•</span>
               <span>DEVELOPMENT</span>
@@ -131,6 +140,7 @@ export function HomeCapabilitiesShowcase() {
             </div>
           </div>
 
+          {/* Footer */}
           <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4">
             <span className="font-mono text-xs text-avorria-quiet uppercase">WE DON&apos;T DECORATE. WE ENGINEER ADVANTAGE.</span>
             <Link
@@ -146,33 +156,39 @@ export function HomeCapabilitiesShowcase() {
         {/* 02 / SEARCH */}
         <div
           ref={c2Ref}
-          className="absolute inset-x-6 sm:inset-x-16 max-w-5xl mx-auto flex flex-col justify-between h-[70vh] border border-avorria-line bg-avorria-surface/80 p-8 sm:p-14 backdrop-blur-md opacity-0 pointer-events-auto select-none"
+          className="absolute inset-x-6 sm:inset-x-12 lg:inset-x-16 max-w-6xl mx-auto flex flex-col justify-between h-full py-6 opacity-0 pointer-events-auto select-none"
         >
+          {/* Header */}
           <div className="flex items-center justify-between font-mono text-xs uppercase tracking-widest text-avorria-quiet border-b border-avorria-line/40 pb-4">
-            <span className="text-avorria-signal">02 / CAPABILITY</span>
-            <span className="text-avorria-white">TECHNICAL VISIBILITY</span>
+            <span className="text-avorria-signal font-medium">02 / CAPABILITY</span>
+            <span className="text-avorria-white font-medium">TECHNICAL SEARCH &amp; VISIBILITY</span>
           </div>
 
-          <div className="my-auto flex flex-col gap-4">
-            <div className="display-xl text-avorria-white font-normal tracking-tight">
+          {/* Central Architecture */}
+          <div className="my-auto flex flex-col gap-6 max-w-3xl">
+            <div
+              className="tracking-tight leading-none text-avorria-white font-bold"
+              style={{ fontSize: "clamp(3.5rem, 9vw, 9.5rem)" }}
+            >
               SEARCH<span className="text-avorria-signal">.</span>
             </div>
-            <div className="display-md text-avorria-muted max-w-2xl font-light">
-              Visibility is engineered. Technical SEO architecture, entity graphs, and high-intent discovery engines.
+            <div className="display-md text-avorria-white font-light">
+              Visibility is engineered. Technical SEO architecture, entity graphs, and algorithmic discovery systems.
             </div>
-            <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-avorria-signal uppercase tracking-widest pt-2">
+            <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs sm:text-sm text-avorria-signal uppercase tracking-widest pt-2">
               <span>TECHNICAL SEO</span>
               <span>•</span>
               <span>CONTENT ARCHITECTURE</span>
               <span>•</span>
               <span>MIGRATIONS</span>
               <span>•</span>
-              <span>AUTHORITY</span>
+              <span>DISCOVERY</span>
             </div>
           </div>
 
+          {/* Footer */}
           <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4">
-            <span className="font-mono text-xs text-avorria-quiet uppercase">SEARCH VALUATION BY ARCHITECTURE</span>
+            <span className="font-mono text-xs text-avorria-quiet uppercase">SEARCH ADVANTAGE THROUGH ARCHITECTURE</span>
             <Link
               href="/capabilities/search"
               className="font-mono text-xs sm:text-sm text-avorria-signal uppercase tracking-widest hover:underline flex items-center gap-2"
@@ -186,21 +202,26 @@ export function HomeCapabilitiesShowcase() {
         {/* 03 / SYSTEMS */}
         <div
           ref={c3Ref}
-          className="absolute inset-x-6 sm:inset-x-16 max-w-5xl mx-auto flex flex-col justify-between h-[70vh] border border-avorria-line bg-avorria-surface/80 p-8 sm:p-14 backdrop-blur-md opacity-0 pointer-events-auto select-none"
+          className="absolute inset-x-6 sm:inset-x-12 lg:inset-x-16 max-w-6xl mx-auto flex flex-col justify-between h-full py-6 opacity-0 pointer-events-auto select-none"
         >
+          {/* Header */}
           <div className="flex items-center justify-between font-mono text-xs uppercase tracking-widest text-avorria-quiet border-b border-avorria-line/40 pb-4">
-            <span className="text-avorria-signal">03 / CAPABILITY</span>
-            <span className="text-avorria-white">INTELLIGENCE &amp; AUTOMATION</span>
+            <span className="text-avorria-signal font-medium">03 / CAPABILITY</span>
+            <span className="text-avorria-white font-medium">AI SYSTEMS &amp; AUTOMATION</span>
           </div>
 
-          <div className="my-auto flex flex-col gap-4">
-            <div className="display-xl text-avorria-white font-normal tracking-tight">
+          {/* Central Architecture */}
+          <div className="my-auto flex flex-col gap-6 max-w-3xl">
+            <div
+              className="tracking-tight leading-none text-avorria-white font-bold"
+              style={{ fontSize: "clamp(3.5rem, 9vw, 9.5rem)" }}
+            >
               SYSTEMS<span className="text-avorria-signal">.</span>
             </div>
-            <div className="display-md text-avorria-muted max-w-2xl font-light">
-              Make it think. Autonomous workflows, custom AI integrations, internal tools, and closed-loop operations.
+            <div className="display-md text-avorria-white font-light">
+              Make it think. Autonomous workflows, custom AI integrations, internal tools, and closed-loop pipelines.
             </div>
-            <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-avorria-signal uppercase tracking-widest pt-2">
+            <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs sm:text-sm text-avorria-signal uppercase tracking-widest pt-2">
               <span>AI SYSTEMS</span>
               <span>•</span>
               <span>AUTOMATION</span>
@@ -211,6 +232,7 @@ export function HomeCapabilitiesShowcase() {
             </div>
           </div>
 
+          {/* Footer */}
           <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4">
             <span className="font-mono text-xs text-avorria-quiet uppercase">CLOSED-LOOP AUTONOMOUS PIPELINES</span>
             <Link
@@ -222,7 +244,7 @@ export function HomeCapabilitiesShowcase() {
             </Link>
           </div>
         </div>
-      </div>
+      </SceneSafeFrame>
     </CinematicSceneViewport>
   );
 }

@@ -90,4 +90,26 @@ export function getWebSiteSchema() {
   };
 }
 
+export function getServiceSchema(service: {
+  title: string;
+  description: string;
+  slug: string;
+  category: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: service.category,
+    name: service.title,
+    description: service.description,
+    provider: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL
+    },
+    url: `${SITE_URL}/services/${service.slug}`
+  };
+}
+
+
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { StartProjectJourney } from "@/components/project/StartProjectJourney";
 
@@ -37,9 +37,11 @@ export default function StartProjectPage() {
           </p>
         </div>
 
-        {/* Multi-Step Journey */}
+        {/* Multi-Step Journey wrapped in Suspense for useSearchParams */}
         <div className="pt-6 border-t border-avorria-line">
-          <StartProjectJourney />
+          <Suspense fallback={<div className="font-mono text-xs text-avorria-muted p-12">INITIALIZING INTAKE SYSTEM...</div>}>
+            <StartProjectJourney />
+          </Suspense>
         </div>
       </div>
     </main>

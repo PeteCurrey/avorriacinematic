@@ -12,7 +12,9 @@ export const CLIENT_WORK_PROJECTS: WorkWallProject[] = [
     aspectRatio: "16/10",
     colStart: 1,
     colSpan: 8,
-    caseStudyAvailable: true
+    caseStudyAvailable: true,
+    objectFit: "cover",
+    objectPosition: "center center"
   },
   {
     id: "entirefm",
@@ -25,7 +27,10 @@ export const CLIENT_WORK_PROJECTS: WorkWallProject[] = [
     aspectRatio: "16/10",
     colStart: 9,
     colSpan: 4,
-    caseStudyAvailable: true
+    caseStudyAvailable: true,
+    objectFit: "contain",
+    objectPosition: "center center",
+    mediaBackground: "#080d1a"
   },
   {
     id: "aesuk",
@@ -38,7 +43,9 @@ export const CLIENT_WORK_PROJECTS: WorkWallProject[] = [
     aspectRatio: "4/3",
     colStart: 1,
     colSpan: 5,
-    caseStudyAvailable: true
+    caseStudyAvailable: true,
+    objectFit: "cover",
+    objectPosition: "center center"
   },
   {
     id: "travis",
@@ -51,7 +58,10 @@ export const CLIENT_WORK_PROJECTS: WorkWallProject[] = [
     aspectRatio: "1/1",
     colStart: 6,
     colSpan: 3,
-    caseStudyAvailable: true
+    caseStudyAvailable: true,
+    objectFit: "contain",
+    objectPosition: "center center",
+    mediaBackground: "#0b101b"
   },
   {
     id: "steward",
@@ -64,7 +74,9 @@ export const CLIENT_WORK_PROJECTS: WorkWallProject[] = [
     aspectRatio: "16/10",
     colStart: 9,
     colSpan: 4,
-    caseStudyAvailable: true
+    caseStudyAvailable: true,
+    objectFit: "cover",
+    objectPosition: "center center"
   },
   {
     id: "amplios",
@@ -77,7 +89,9 @@ export const CLIENT_WORK_PROJECTS: WorkWallProject[] = [
     aspectRatio: "4/3",
     colStart: 1,
     colSpan: 6,
-    caseStudyAvailable: true
+    caseStudyAvailable: true,
+    objectFit: "cover",
+    objectPosition: "center center"
   },
   {
     id: "ogn",
@@ -90,7 +104,9 @@ export const CLIENT_WORK_PROJECTS: WorkWallProject[] = [
     aspectRatio: "16/9",
     colStart: 7,
     colSpan: 6,
-    caseStudyAvailable: false
+    caseStudyAvailable: false,
+    objectFit: "cover",
+    objectPosition: "center center"
   }
 ];
 
@@ -106,7 +122,9 @@ export const VENTURE_PROJECTS: WorkWallProject[] = [
     aspectRatio: "3/4",
     colStart: 1,
     colSpan: 4,
-    caseStudyAvailable: true
+    caseStudyAvailable: true,
+    objectFit: "cover",
+    objectPosition: "50% 30%"
   },
   {
     id: "nestiq",
@@ -119,7 +137,10 @@ export const VENTURE_PROJECTS: WorkWallProject[] = [
     aspectRatio: "4/3",
     colStart: 5,
     colSpan: 4,
-    caseStudyAvailable: true
+    caseStudyAvailable: true,
+    objectFit: "contain",
+    objectPosition: "center center",
+    mediaBackground: "#0a0e17"
   },
   {
     id: "drawdown",
@@ -132,7 +153,10 @@ export const VENTURE_PROJECTS: WorkWallProject[] = [
     aspectRatio: "16/10",
     colStart: 9,
     colSpan: 4,
-    caseStudyAvailable: true
+    caseStudyAvailable: true,
+    objectFit: "contain",
+    objectPosition: "center center",
+    mediaBackground: "#18181b"
   }
 ];
 

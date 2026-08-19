@@ -45,6 +45,7 @@ const PRIMARY_NAVIGATION: { section: string; items: NavItem[] }[] = [
     items: [
       { label: "Command", href: "/admin", icon: LayoutDashboard },
       { label: "AI Auto", href: "/admin/ai-auto", icon: Sparkles, highlight: true },
+      { label: "Optimisation", href: "/admin/optimisation", icon: TrendingUp },
       { label: "Review Queue", href: "/admin/ai-auto/review", icon: CheckSquare, badge: "DAILY" },
       { label: "Prospects", href: "/admin/prospects", icon: Users },
       { label: "Automations", href: "/admin/automations", icon: Cpu },

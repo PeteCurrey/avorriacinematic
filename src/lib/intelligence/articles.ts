@@ -77,8 +77,8 @@ export const INTELLIGENCE_ARTICLES: IntelligenceArticle[] = [
       }
     ],
     relatedCapability: {
-      name: "SEARCH CAPABILITY",
-      href: "/capabilities/search"
+      name: "SEARCH DISCIPLINE",
+      href: "/services/seo"
     },
     relatedProjects: [
       { slug: "nestiq", title: "NestIQ", category: "SPATIAL SEARCH ARCHITECTURE" },
@@ -161,8 +161,8 @@ export const INTELLIGENCE_ARTICLES: IntelligenceArticle[] = [
       }
     ],
     relatedCapability: {
-      name: "SYSTEMS CAPABILITY",
-      href: "/capabilities/systems"
+      name: "SYSTEMS & AI DISCIPLINE",
+      href: "/services/ai-automation"
     },
     relatedProjects: [
       { slug: "careeros", title: "CareerOS", category: "HUMAN-CENTRED AI PLATFORM" },
@@ -245,8 +245,8 @@ export const INTELLIGENCE_ARTICLES: IntelligenceArticle[] = [
       }
     ],
     relatedCapability: {
-      name: "BUILD CAPABILITY",
-      href: "/capabilities/build"
+      name: "WEB ENGINEERING DISCIPLINE",
+      href: "/services/websites"
     },
     relatedProjects: [
       { slug: "alkota-bikes", title: "Alkota Bikes", category: "PERFORMANCE PRODUCT & CONFIGURATOR" },

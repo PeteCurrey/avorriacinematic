@@ -1,102 +1,106 @@
-export interface HomeSectionDef {
-  id: string;
-  order: number;
-  title: string;
-  questionAnswered: string;
-  motionEnergy: "HIGH" | "MEDIUM-HIGH" | "MEDIUM" | "LOW" | "VERY LOW";
-  isPinned: boolean;
-  targetHeightDesktop: string;
-  targetHeightMobile: string;
-  purpose: string;
-}
+import { HomeSectionStory } from "@/types/home-story";
 
-export const HOME_SECTIONS: HomeSectionDef[] = [
+export const HOME_SECTIONS: HomeSectionStory[] = [
   {
-    id: "hero",
-    order: 1,
+    id: "01-hero",
+    number: "01",
     title: "01 / HERO — PRECISION AS POWER",
-    questionAnswered: "WHO IS AVORRIA & WHAT DO WE DO?",
+    questionAnswered: "Who is Avorria & what do we sell?",
+    purpose: "Establishes commercial identity (Digital Marketing / Web / AI Studio) with high contrast and early settled typography.",
     motionEnergy: "HIGH",
-    isPinned: true,
     targetHeightDesktop: "170vh",
     targetHeightMobile: "140svh",
-    purpose: "Definitive studio statement, commercial proposition, and capability line."
+    componentsMounted: ["Scene01Precision"],
+    primaryMedia: ["Signal Line WebGL / CSS Hybrid"]
   },
   {
-    id: "selected-work",
-    order: 2,
+    id: "02-selected-work",
+    number: "02",
     title: "02 / SELECTED WORK SHOWCASE",
-    questionAnswered: "WHAT CALIBRE OF WORK DOES AVORRIA PRODUCE?",
+    questionAnswered: "What calibre of work does Avorria build?",
+    purpose: "Film-reel showreel presenting 4 flagships (Alkota, CareerOS, NestIQ, EntireFM) in one uniform canonical aperture.",
     motionEnergy: "HIGH",
-    isPinned: true,
-    targetHeightDesktop: "460vh",
-    targetHeightMobile: "410svh",
-    purpose: "Film-reel showcase of 4 flagships: Alkota (Client), CareerOS (Venture), NestIQ (Venture), EntireFM (Client)."
+    targetHeightDesktop: "540vh",
+    targetHeightMobile: "460svh",
+    componentsMounted: ["HomeSelectedWorkShowcase", "HomepageProjectFeature", "ShowcaseMediaAperture"],
+    primaryMedia: [
+      "/media/projects/alkota/interface/homepage-desktop.png",
+      "/media/projects/alkota/product/naked-carbon-hero.jpg",
+      "/media/projects/careeros/hero/woman_looking_into_camera_lens.jpeg",
+      "/media/projects/nestiq/interface/agent-dashboard-preview.png",
+      "/media/projects/entirefm/entirefm-operational.svg"
+    ]
   },
   {
-    id: "capabilities",
-    order: 3,
+    id: "03-capabilities",
+    number: "03",
     title: "03 / CAPABILITIES SHOWCASE",
-    questionAnswered: "WHAT CAN AVORRIA DO FOR MY BUSINESS?",
+    questionAnswered: "What can Avorria do for your business?",
+    purpose: "Spatial un-boxed presentation grouping BUILD (Web/Products), SEARCH (Technical SEO), and SYSTEMS (AI Systems).",
     motionEnergy: "MEDIUM-HIGH",
-    isPinned: true,
-    targetHeightDesktop: "300vh",
-    targetHeightMobile: "270svh",
-    purpose: "Consolidated, grouped capabilities: BUILD (Digital Products), SEARCH (Technical SEO), SYSTEMS (AI & Automation)."
+    targetHeightDesktop: "360vh",
+    targetHeightMobile: "300svh",
+    componentsMounted: ["HomeCapabilitiesShowcase"],
+    primaryMedia: ["Vector Typography & Engineering Principles"]
   },
   {
-    id: "work-index",
-    order: 4,
+    id: "04-work-index",
+    number: "04",
     title: "04 / WORK INDEX & ARCHIVE",
-    questionAnswered: "WHAT IS THE BROADER RANGE & PROOF OF CLIENT WORK?",
+    questionAnswered: "What is the broader range of client work?",
+    purpose: "Natural scroll dual-tier portfolio wall split into Selected Client Work and Avorria Ventures with art-directed image framing.",
     motionEnergy: "LOW",
-    isPinned: false,
-    targetHeightDesktop: "natural",
-    targetHeightMobile: "natural",
-    purpose: "Natural editorial grid organized strictly into Selected Client Work and Avorria Ventures."
+    targetHeightDesktop: "Natural Scroll",
+    targetHeightMobile: "Natural Scroll",
+    componentsMounted: ["Scene12Work", "WorkWallItem"],
+    primaryMedia: ["7 Client Case Studies + 3 Venture Case Studies"]
   },
   {
-    id: "lab",
-    order: 5,
+    id: "05-lab",
+    number: "05",
     title: "05 / AVORRIA LAB",
-    questionAnswered: "WHAT CUTTING-EDGE SYSTEMS & INTERFACES ARE WE EXPLORING?",
+    questionAnswered: "What cutting-edge systems and interfaces are we exploring?",
+    purpose: "Natural scroll preview of top 3 active research prototypes (Adaptive UI, Voice Navigation, Vision Structure).",
     motionEnergy: "MEDIUM",
-    isPinned: false,
-    targetHeightDesktop: "natural",
-    targetHeightMobile: "natural",
-    purpose: "Curated 3-experiment interactive preview into generative UI, voice, and spatial models."
+    targetHeightDesktop: "Natural Scroll",
+    targetHeightMobile: "Natural Scroll",
+    componentsMounted: ["HomeLabTeaser"],
+    primaryMedia: ["Interactive Lab Prototype Previews"]
   },
   {
-    id: "manifesto",
-    order: 6,
+    id: "06-manifesto",
+    number: "06",
     title: "06 / MANIFESTO",
-    questionAnswered: "WHAT ARE AVORRIA'S FIRST PRINCIPLES?",
+    questionAnswered: "What are Avorria's first principles?",
+    purpose: "Silent, confident 4-statement grid with 84vh of stationary hold time.",
     motionEnergy: "VERY LOW",
-    isPinned: true,
     targetHeightDesktop: "140vh",
     targetHeightMobile: "130svh",
-    purpose: "Silent, stationary 4-principle grid holding for over 70vh of physical scroll distance."
+    componentsMounted: ["Scene15Manifesto"],
+    primaryMedia: ["High-Contrast Typography"]
   },
   {
-    id: "intelligence",
-    order: 7,
+    id: "07-intelligence",
+    number: "07",
     title: "07 / INTELLIGENCE",
-    questionAnswered: "HOW DOES AVORRIA THINK ABOUT TECHNICAL ADVANTAGE?",
+    questionAnswered: "How does Avorria think about digital advantage?",
+    purpose: "Natural scroll editorial perspectives, architectural essays, and strategic thinking.",
     motionEnergy: "LOW",
-    isPinned: false,
-    targetHeightDesktop: "natural",
-    targetHeightMobile: "natural",
-    purpose: "Quiet editorial perspectives and architectural essays."
+    targetHeightDesktop: "Natural Scroll",
+    targetHeightMobile: "Natural Scroll",
+    componentsMounted: ["Scene17Intelligence"],
+    primaryMedia: ["Editorial Articles & Technical Guides"]
   },
   {
-    id: "finale",
-    order: 8,
-    title: "08 / FINALE — START A PROJECT",
-    questionAnswered: "HOW DO WE ENGAGE AND BUILD SOMETHING UNFAIR?",
+    id: "08-finale",
+    number: "08",
+    title: "08 / FINALE",
+    questionAnswered: "How do we engage and start a project?",
+    purpose: "High-impact closing scene with 102vh stationary hold and direct CTA channels.",
     motionEnergy: "HIGH",
-    isPinned: true,
     targetHeightDesktop: "170vh",
     targetHeightMobile: "150svh",
-    purpose: "Direct commercial proposition and long-hold interactive CTA."
+    componentsMounted: ["Scene18Finale"],
+    primaryMedia: ["Engagement Form / Direct Contact Channels"]
   }
 ];

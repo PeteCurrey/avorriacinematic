@@ -1288,3 +1288,342 @@ export async function getSiteProjectAICost(projectId: string): Promise<{ total: 
   }
   return { total, byPhase };
 }
+
+
+
+// ============================================================================
+// PHASE 7: OPTIMISATION & COMMERCIAL INTELLIGENCE STORE
+// ============================================================================
+
+import type {
+  ProspectOutcome,
+  Experiment,
+  ExperimentVariant,
+  ExperimentAssignment,
+  OptimisationRecommendation,
+  OptimisationPlaybook,
+  ScoringShadowEvaluation,
+  DailyCEOBrief,
+} from "@/types/admin";
+
+interface Phase7State {
+  outcomes: ProspectOutcome[];
+  experiments: Experiment[];
+  variants: ExperimentVariant[];
+  assignments: ExperimentAssignment[];
+  recommendations: OptimisationRecommendation[];
+  playbooks: OptimisationPlaybook[];
+  shadowEvaluations: ScoringShadowEvaluation[];
+  dailyBriefs: DailyCEOBrief[];
+}
+
+let _p7: Phase7State | null = null;
+function getP7(): Phase7State {
+  if (!_p7) {
+    _p7 = {
+      outcomes: seedInitialOutcomes(),
+      experiments: seedInitialExperiments(),
+      variants: seedInitialVariants(),
+      assignments: [],
+      recommendations: seedInitialRecommendations(),
+      playbooks: seedInitialPlaybooks(),
+      shadowEvaluations: [],
+      dailyBriefs: [seedInitialBrief()],
+    };
+  }
+  return _p7;
+}
+
+function seedInitialOutcomes(): ProspectOutcome[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "out-1",
+      prospect_id: "demo-prospect-1",
+      business_id: "demo-biz-1",
+      final_status: "client",
+      contacted: true,
+      preview_viewed: true,
+      replied: true,
+      became_opportunity: true,
+      proposal_sent: true,
+      proposal_accepted: true,
+      became_client: true,
+      revenue: 1850,
+      currency: "GBP",
+      time_to_reply_hours: 1.5,
+      time_to_close_days: 3,
+      loss_reason: null,
+      created_at: now,
+      updated_at: now,
+    },
+  ];
+}
+
+function seedInitialExperiments(): Experiment[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "exp-1",
+      name: "Outreach Copy: Short Direct vs Reputation Gap",
+      hypothesis: "Leading with the digital reputation gap increases preview click-through rate in automotive prospects",
+      entity_type: "outreach",
+      metric: "preview_view_rate",
+      status: "running",
+      started_at: now,
+      minimum_sample_size: 40,
+      confidence_target: 0.95,
+      winner_variant_id: null,
+      created_by: "system",
+      created_at: now,
+    },
+    {
+      id: "exp-2",
+      name: "Hero Architecture: Cinematic Dark vs Editorial Light",
+      hypothesis: "Cinematic dark hero creates higher dwell time and higher proposal conversion for prestige services",
+      entity_type: "creative",
+      metric: "client_conversion_rate",
+      status: "draft",
+      started_at: null,
+      minimum_sample_size: 50,
+      confidence_target: 0.95,
+      winner_variant_id: null,
+      created_by: "system",
+      created_at: now,
+    },
+  ];
+}
+
+function seedInitialVariants(): ExperimentVariant[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "var-1a",
+      experiment_id: "exp-1",
+      name: "Variant A: Short Direct",
+      allocation: 0.50,
+      configuration: { style: "SHORT_DIRECT", max_words: 75 },
+      sample_size: 28,
+      conversions: 8,
+      created_at: now,
+    },
+    {
+      id: "var-1b",
+      experiment_id: "exp-1",
+      name: "Variant B: Reputation Gap Lead",
+      allocation: 0.50,
+      configuration: { style: "REPUTATION_GAP", focus: "google_reviews_vs_website" },
+      sample_size: 31,
+      conversions: 14,
+      created_at: now,
+    },
+  ];
+}
+
+function seedInitialRecommendations(): OptimisationRecommendation[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "rec-1",
+      category: "TARGETING",
+      title: "Increase Automotive Scout Allocation",
+      summary: "Automotive prospects demonstrate a 14.8% reply rate and 5.2% close rate versus a 2.1% cross-sector average across 42 sample contacts.",
+      evidence: {
+        sector: "Automotive",
+        contacted: 42,
+        replies: 6,
+        clients: 2,
+        close_rate: "4.8%",
+        benchmark_close_rate: "2.1%",
+        average_order_value: "£1,850",
+      },
+      expected_impact: "+35% projected client pipeline volume for equivalent AI spend",
+      confidence: "MODERATE",
+      risk: "LOW",
+      action_type: "ADJUST_SCOUT_ALLOCATION",
+      proposed_config_change: { sector_increase: "Automotive", suggested_allocation: "35%" },
+      status: "new",
+      created_at: now,
+    },
+    {
+      id: "rec-2",
+      category: "SCORING",
+      title: "Calibrate Digital Reputation Gap Weight",
+      summary: "Prospects with >50 Google reviews and website quality scores below 40 close at 3.2x higher rate than prospects with high website scores.",
+      evidence: {
+        feature: "digital_reputation_gap",
+        correlation_with_close: 0.68,
+        historical_sample: 64,
+      },
+      expected_impact: "Refines Scout filtering to eliminate lower-probability candidates earlier, reducing unnecessary website generation costs by ~18%.",
+      confidence: "STRONG",
+      risk: "LOW",
+      action_type: "UPDATE_SCORING_WEIGHTS",
+      proposed_config_change: { new_version: "v3_data_informed", reputation_gap_weight: 0.35 },
+      status: "new",
+      created_at: now,
+    },
+    {
+      id: "rec-3",
+      category: "COST",
+      title: "Downgrade Routine Business Verification Model",
+      summary: "Business verification task currently runs on GPT-4o. Shadow testing shows GPT-4o-mini produces identical schema extraction accuracy at 92% lower cost.",
+      evidence: {
+        task: "business_verification",
+        current_cost_per_1k: "£2.50",
+        proposed_cost_per_1k: "£0.18",
+        accuracy_parity: "99.8%",
+      },
+      expected_impact: "Saves ~£45/month across 1,000 processed candidates with zero degradation in verification accuracy.",
+      confidence: "STRONG",
+      risk: "LOW",
+      action_type: "UPDATE_MODEL_ROUTING",
+      proposed_config_change: { task_key: "business_verification", model: "gpt-4o-mini" },
+      status: "new",
+      created_at: now,
+    },
+  ];
+}
+
+function seedInitialPlaybooks(): OptimisationPlaybook[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "play-1",
+      sector: "Automotive Specialists",
+      title: "Prestige Automotive High-Trust Playbook",
+      strategy_tag: "high_energy_automotive",
+      recommended_structure: ["HeroCinematic", "TrustStrip", "ServiceGrid", "SplitContent", "ReviewFeature", "CTASection", "Footer"],
+      creative_direction_guidance: "Use deep carbon/slate background with emerald or amber performance accents. Feature MOT/service booking prominently above fold. Showcase 5-star Google review count immediately.",
+      conversion_features: ["mot_checker", "booking_cta", "whatsapp_cta", "google_reviews"],
+      outreach_strategy_guidance: "Highlight disparity between their exceptional Google review rating and aging mobile presence.",
+      sample_size: 42,
+      conversion_rate: 4.8,
+      created_at: now,
+      updated_at: now,
+    },
+    {
+      id: "play-2",
+      sector: "Plumbing & Heating",
+      title: "Local Authority & Emergency Trades Playbook",
+      strategy_tag: "bold_trades",
+      recommended_structure: ["HeroEditorial", "TrustStrip", "ServiceGrid", "LocationSection", "ReviewFeature", "CTASection", "Footer"],
+      creative_direction_guidance: "High-contrast clean layout with immediate emergency contact and Gas Safe accreditation badge visibility.",
+      conversion_features: ["quote_form", "whatsapp_cta", "accreditation_badges", "service_area_map"],
+      sample_size: 36,
+      conversion_rate: 3.5,
+      created_at: now,
+      updated_at: now,
+    },
+  ];
+}
+
+function seedInitialBrief(): DailyCEOBrief {
+  const now = new Date().toISOString();
+  return {
+    date: new Date().toISOString().slice(0, 10),
+    generated_at: now,
+    what_happened: "Yesterday AI Scout analysed 18 businesses and qualified 4 high-probability targets. 1 new proposal (£1,850) was accepted for Apex Autocare Ltd.",
+    what_matters: "Automotive continues to outpace other sectors in preview engagement (48% vs 22% overall). Variant B in the outreach experiment shows early positive lift (+75% reply rate).",
+    what_needs_you: "2 new qualified prospects are in the human review queue. 1 proposal awaits commercial authorisation.",
+    what_ai_auto_recommends: "Increase automotive Scout allocation from 20% to 35%. Calibrate digital reputation gap weight in scoring engine.",
+    risks_and_anomalies: "No operational blockers. All circuit breakers healthy. AI spend tracking within the £10.00 daily safety ceiling (£2.40 spent yesterday).",
+    key_metrics: {
+      contacted_yesterday: 12,
+      replies_yesterday: 2,
+      proposals_sent: 1,
+      clients_won: 1,
+      ai_spend_yesterday: 2.40,
+      top_converting_sector: "Automotive",
+    },
+  };
+}
+
+// ── REPOSITORY EXPORT FUNCTIONS ───────────────────────────────────────────────
+
+export async function getProspectOutcomes(): Promise<ProspectOutcome[]> {
+  return [...getP7().outcomes];
+}
+
+export async function saveProspectOutcome(data: Omit<ProspectOutcome, "id" | "created_at" | "updated_at"> & { id?: string }): Promise<ProspectOutcome> {
+  const p7 = getP7();
+  const now = new Date().toISOString();
+  const outcome: ProspectOutcome = {
+    ...data,
+    id: data.id ?? crypto.randomUUID(),
+    created_at: now,
+    updated_at: now,
+  };
+  const idx = p7.outcomes.findIndex(o => o.prospect_id === data.prospect_id || o.id === outcome.id);
+  if (idx >= 0) p7.outcomes[idx] = outcome;
+  else p7.outcomes.push(outcome);
+  return outcome;
+}
+
+export async function getExperiments(): Promise<Experiment[]> {
+  const p7 = getP7();
+  return p7.experiments.map(exp => ({
+    ...exp,
+    variants: p7.variants.filter(v => v.experiment_id === exp.id),
+  }));
+}
+
+export async function getExperiment(id: string): Promise<Experiment | null> {
+  const p7 = getP7();
+  const exp = p7.experiments.find(e => e.id === id);
+  if (!exp) return null;
+  return {
+    ...exp,
+    variants: p7.variants.filter(v => v.experiment_id === id),
+  };
+}
+
+export async function createExperiment(data: Omit<Experiment, "id" | "created_at">): Promise<Experiment> {
+  const p7 = getP7();
+  const exp: Experiment = { ...data, id: crypto.randomUUID(), created_at: new Date().toISOString() };
+  p7.experiments.push(exp);
+  return exp;
+}
+
+export async function updateExperiment(id: string, updates: Partial<Experiment>): Promise<Experiment> {
+  const p7 = getP7();
+  const idx = p7.experiments.findIndex(e => e.id === id);
+  if (idx === -1) throw new Error(`Experiment ${id} not found`);
+  p7.experiments[idx] = { ...p7.experiments[idx], ...updates };
+  return p7.experiments[idx];
+}
+
+export async function getOptimisationRecommendations(status?: string): Promise<OptimisationRecommendation[]> {
+  const p7 = getP7();
+  let recs = [...p7.recommendations];
+  if (status) recs = recs.filter(r => r.status === status);
+  return recs.sort((a, b) => b.created_at.localeCompare(a.created_at));
+}
+
+export async function updateRecommendationStatus(
+  id: string,
+  status: OptimisationRecommendation["status"],
+  reviewer: string,
+  rejectionReason?: string
+): Promise<OptimisationRecommendation> {
+  const p7 = getP7();
+  const idx = p7.recommendations.findIndex(r => r.id === id);
+  if (idx === -1) throw new Error(`Recommendation ${id} not found`);
+  p7.recommendations[idx] = {
+    ...p7.recommendations[idx],
+    status,
+    reviewed_at: new Date().toISOString(),
+    reviewed_by: reviewer,
+    rejection_reason: rejectionReason ?? null,
+  };
+  return p7.recommendations[idx];
+}
+
+export async function getOptimisationPlaybooks(): Promise<OptimisationPlaybook[]> {
+  return [...getP7().playbooks];
+}
+
+export async function getDailyCEOBrief(): Promise<DailyCEOBrief> {
+  const p7 = getP7();
+  return p7.dailyBriefs[0] ?? seedInitialBrief();
+}

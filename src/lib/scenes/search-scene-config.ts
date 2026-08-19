@@ -3,9 +3,9 @@ import { SearchNode, SearchEdge, SearchQueryItem } from "@/types/search-scene";
 export const SEARCH_NODES: SearchNode[] = [
   // Hubs
   { id: "home", label: "HOME", route: "/", x: 50, y: 15, type: "hub" },
-  { id: "cap-build", label: "BUILD", route: "/capabilities/build", x: 22, y: 35, type: "hub" },
-  { id: "cap-search", label: "SEARCH", route: "/capabilities/search", x: 50, y: 35, type: "hub" },
-  { id: "cap-systems", label: "SYSTEMS", route: "/capabilities/systems", x: 78, y: 35, type: "hub" },
+  { id: "cap-build", label: "WEB", route: "/services/websites", x: 22, y: 35, type: "hub" },
+  { id: "cap-search", label: "SEO", route: "/services/seo", x: 50, y: 35, type: "hub" },
+  { id: "cap-systems", label: "AI SYSTEMS", route: "/services/ai-automation", x: 78, y: 35, type: "hub" },
 
   // Case Studies
   { id: "work-alkota", label: "ALKOTA BIKES", route: "/work/alkota-bikes", x: 14, y: 60, type: "case-study" },
@@ -42,10 +42,10 @@ export const SEARCH_QUERIES: SearchQueryItem[] = [
 ];
 
 export const SEARCH_PROPOSITION = {
-  label: "02 / CAPABILITY",
+  label: "03 / DISCIPLINE",
   title: "SEARCH.",
   proposition: "VISIBILITY IS ENGINEERED.",
   capabilities: "TECHNICAL SEO / CONTENT ARCHITECTURE / AUTHORITY / DISCOVERY",
   ctaText: "EXPLORE SEARCH",
-  ctaHref: "/capabilities/search"
+  ctaHref: "/services/seo"
 };

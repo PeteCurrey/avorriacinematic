@@ -6,17 +6,26 @@ import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
   { label: "Work", href: "/work", code: "01" },
-  { label: "Capabilities", href: "/capabilities", code: "02" },
-  { label: "Lab", href: "/lab", code: "03" },
-  { label: "Studio", href: "/studio", code: "04" },
+  { label: "Services", href: "/services", code: "02" },
+  { label: "Studio", href: "/studio", code: "03" },
+  { label: "Lab", href: "/lab", code: "04" },
   { label: "Intelligence", href: "/intelligence", code: "05" },
   { label: "Start a Project", href: "/start-project", code: "06" }
+];
+
+const SUB_SERVICES = [
+  { label: "01 Websites & Digital Experiences", href: "/services/websites" },
+  { label: "02 Digital Products & Software", href: "/services/digital-products" },
+  { label: "03 SEO & Organic Growth", href: "/services/seo" },
+  { label: "04 Performance Marketing", href: "/services/performance-marketing" },
+  { label: "05 AI, Automation & Systems", href: "/services/ai-automation" }
 ];
 
 const MENU_ID = "mobile-navigation-menu";
 
 export function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [servicesExpanded, setServicesExpanded] = useState(true);
   const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
@@ -31,7 +40,6 @@ export function MobileNavigation() {
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("scroll-locked");
-      // WCAG 2.1: Move focus to first interactive element when dialog opens
       const focusTimer = setTimeout(() => {
         firstLinkRef.current?.focus();
       }, 50);
@@ -54,7 +62,6 @@ export function MobileNavigation() {
 
   const handleClose = () => {
     setIsOpen(false);
-    // WCAG 2.1: Return focus to trigger on close
     requestAnimationFrame(() => {
       triggerRef.current?.focus();
     });
@@ -78,13 +85,13 @@ export function MobileNavigation() {
         <div
           ref={menuRef}
           id={MENU_ID}
-          className="fixed inset-0 top-0 left-0 w-full h-[100dvh] bg-avorria-black z-[95] flex flex-col justify-between p-8 sm:p-12 overflow-y-auto"
+          className="fixed inset-0 top-0 left-0 w-full h-[100dvh] bg-avorria-black z-[95] flex flex-col justify-between p-6 sm:p-10 overflow-y-auto"
           role="dialog"
           aria-modal="true"
           aria-label="Navigation menu"
         >
           {/* Top Bar inside Menu */}
-          <div className="flex items-center justify-between border-b border-avorria-line pb-6">
+          <div className="flex items-center justify-between border-b border-avorria-line pb-5">
             <Link
               href="/"
               onClick={handleClose}
@@ -102,25 +109,68 @@ export function MobileNavigation() {
           </div>
 
           {/* Navigation Items */}
-          <nav className="my-auto py-10 flex flex-col gap-6" aria-label="Mobile navigation">
-            {NAV_ITEMS.map((item, index) => (
-              <Link
-                key={item.href}
-                ref={index === 0 ? firstLinkRef : undefined}
-                href={item.href}
-                onClick={handleClose}
-                className="group flex items-center justify-between py-2 border-b border-avorria-line/40 text-3xl font-display font-bold uppercase tracking-tight text-avorria-white hover:text-avorria-signal transition-colors duration-200 focus:outline-none focus-visible:ring-1 focus-visible:ring-avorria-signal"
-              >
-                <span>{item.label}</span>
-                <span className="font-mono text-xs text-avorria-quiet group-hover:text-avorria-signal" aria-hidden="true">
-                  {item.code}
-                </span>
-              </Link>
-            ))}
+          <nav className="my-auto py-6 flex flex-col gap-4" aria-label="Mobile navigation">
+            {NAV_ITEMS.map((item, index) => {
+              const isServices = item.href === "/services";
+
+              if (isServices) {
+                return (
+                  <div key={item.href} className="border-b border-avorria-line/40 pb-3">
+                    <div className="flex items-center justify-between py-2">
+                      <Link
+                        href={item.href}
+                        onClick={handleClose}
+                        className="text-2xl sm:text-3xl font-display font-bold uppercase tracking-tight text-avorria-white hover:text-avorria-signal transition-colors"
+                      >
+                        {item.label}
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => setServicesExpanded(!servicesExpanded)}
+                        className="p-1 font-mono text-xs text-avorria-signal border border-avorria-line/60"
+                        aria-label="Toggle sub-services"
+                      >
+                        {servicesExpanded ? "−" : "+"}
+                      </button>
+                    </div>
+
+                    {servicesExpanded && (
+                      <div className="pl-3 mt-2 space-y-2 border-l-2 border-avorria-signal/40">
+                        {SUB_SERVICES.map((sub) => (
+                          <Link
+                            key={sub.href}
+                            href={sub.href}
+                            onClick={handleClose}
+                            className="block font-mono text-xs text-avorria-muted hover:text-avorria-white py-1 transition-colors"
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              return (
+                <Link
+                  key={item.href}
+                  ref={index === 0 ? firstLinkRef : undefined}
+                  href={item.href}
+                  onClick={handleClose}
+                  className="group flex items-center justify-between py-2 border-b border-avorria-line/40 text-2xl sm:text-3xl font-display font-bold uppercase tracking-tight text-avorria-white hover:text-avorria-signal transition-colors duration-200 focus:outline-none focus-visible:ring-1 focus-visible:ring-avorria-signal"
+                >
+                  <span>{item.label}</span>
+                  <span className="font-mono text-xs text-avorria-quiet group-hover:text-avorria-signal" aria-hidden="true">
+                    {item.code}
+                  </span>
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Bottom Technical Metadata */}
-          <div className="pt-6 border-t border-avorria-line flex flex-col sm:flex-row justify-between gap-4 font-mono text-[11px] text-avorria-quiet uppercase tracking-wider">
+          <div className="pt-5 border-t border-avorria-line flex flex-col sm:flex-row justify-between gap-3 font-mono text-[11px] text-avorria-quiet uppercase tracking-wider">
             <span>Direct Inquiries: enquiries@avorria.com</span>
             <span aria-hidden="true">Avorria V2.0 / Studio</span>
           </div>

@@ -61,6 +61,86 @@ export interface Capability {
   relatedProjects: string[]; // project slugs
 }
 
+export type ServiceSlug =
+  | "websites"
+  | "digital-products"
+  | "seo"
+  | "performance-marketing"
+  | "ai-automation";
+
+export interface ServiceOfferingItem {
+  id: string;
+  code: string;
+  title: string;
+  description: string;
+  deliverables: string[];
+}
+
+export interface ProblemSolutionItem {
+  problem: string;
+  symptom: string;
+  solution: string;
+  outcome: string;
+}
+
+export interface ServiceProofItem {
+  projectSlug: string;
+  title: string;
+  entityType: "CLIENT WORK" | "AVORRIA VENTURE";
+  sector: string;
+  problem: string;
+  role: string;
+  whatWasBuilt: string;
+  mediaSrc: string;
+  mediaAlt: string;
+  caseStudyAvailable: boolean;
+  tags: string[];
+}
+
+export interface ServiceMethodologyStep {
+  number: string;
+  phase: string;
+  title: string;
+  duration?: string;
+  description: string;
+  deliverables: string[];
+  technicalDetails?: string[];
+}
+
+export interface ServiceDefinition {
+  slug: ServiceSlug;
+  code: string;
+  number: string;
+  title: string;
+  shortTitle: string;
+  category: string;
+  proposition: string;
+  supportingStatement: string;
+  heroSummary: string;
+  deliverablesSummary: string[];
+  offerings: ServiceOfferingItem[];
+  problemsSolved: ProblemSolutionItem[];
+  methodology: ServiceMethodologyStep[];
+  proofProjects: ServiceProofItem[];
+  relatedServices: {
+    slug: ServiceSlug;
+    code: string;
+    title: string;
+    reason: string;
+  }[];
+  finalCta: {
+    heading: string;
+    description: string;
+    buttonText: string;
+    projectServiceParam: string;
+  };
+  seo: {
+    metaTitle: string;
+    metaDescription: string;
+    schemaType?: string;
+  };
+}
+
 export interface LabItem {
   slug: string;
   title: string;

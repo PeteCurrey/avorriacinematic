@@ -40,21 +40,24 @@ export function SiteFooter() {
             </h3>
             <ul className="space-y-2.5 font-mono text-xs">
               <li><Link href="/work" className="text-avorria-white hover:text-avorria-signal transition-colors">Work</Link></li>
-              <li><Link href="/capabilities" className="text-avorria-white hover:text-avorria-signal transition-colors">Capabilities</Link></li>
-              <li><Link href="/lab" className="text-avorria-white hover:text-avorria-signal transition-colors">Lab</Link></li>
+              <li><Link href="/services" className="text-avorria-white hover:text-avorria-signal transition-colors">Services</Link></li>
               <li><Link href="/studio" className="text-avorria-white hover:text-avorria-signal transition-colors">Studio</Link></li>
+              <li><Link href="/lab" className="text-avorria-white hover:text-avorria-signal transition-colors">Lab</Link></li>
               <li><Link href="/intelligence" className="text-avorria-white hover:text-avorria-signal transition-colors">Intelligence</Link></li>
+              <li><Link href="/start-project" className="text-avorria-white hover:text-avorria-signal transition-colors">Start a Project</Link></li>
             </ul>
           </div>
 
           <div className="md:col-span-2">
             <h3 className="font-mono text-[11px] uppercase tracking-widest text-avorria-muted mb-4">
-              Capabilities
+              Services
             </h3>
             <ul className="space-y-2.5 font-mono text-xs">
-              <li><Link href="/capabilities/build" className="text-avorria-white hover:text-avorria-signal transition-colors">Build</Link></li>
-              <li><Link href="/capabilities/search" className="text-avorria-white hover:text-avorria-signal transition-colors">Search</Link></li>
-              <li><Link href="/capabilities/systems" className="text-avorria-white hover:text-avorria-signal transition-colors">Systems</Link></li>
+              <li><Link href="/services/websites" className="text-avorria-white hover:text-avorria-signal transition-colors">01 Websites</Link></li>
+              <li><Link href="/services/digital-products" className="text-avorria-white hover:text-avorria-signal transition-colors">02 Digital Products</Link></li>
+              <li><Link href="/services/seo" className="text-avorria-white hover:text-avorria-signal transition-colors">03 SEO &amp; Search</Link></li>
+              <li><Link href="/services/performance-marketing" className="text-avorria-white hover:text-avorria-signal transition-colors">04 Performance Marketing</Link></li>
+              <li><Link href="/services/ai-automation" className="text-avorria-white hover:text-avorria-signal transition-colors">05 AI &amp; Automation</Link></li>
             </ul>
           </div>
 

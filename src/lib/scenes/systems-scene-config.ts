@@ -33,10 +33,10 @@ export const SYSTEMS_DELIVERABLES: SystemsDeliverable[] = [
 ];
 
 export const SYSTEMS_PROPOSITION = {
-  label: "03 / CAPABILITY",
+  label: "05 / DISCIPLINE",
   title: "SYSTEMS.",
   proposition: "MAKE IT THINK.",
   capabilities: "AI / AUTOMATION / DATA / WORKFLOWS / INTEGRATION",
-  ctaText: "EXPLORE SYSTEMS",
-  ctaHref: "/capabilities/systems"
+  ctaText: "EXPLORE AI & AUTOMATION",
+  ctaHref: "/services/ai-automation"
 };

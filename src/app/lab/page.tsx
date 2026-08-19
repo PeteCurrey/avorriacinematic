@@ -199,17 +199,17 @@ export default function LabPage() {
 
               <div className="pt-4 flex flex-wrap items-center gap-6">
                 <Link
-                  href="/capabilities/systems"
+                  href="/services/ai-automation"
                   className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-avorria-signal hover:text-avorria-white transition-colors"
                 >
-                  <span>SYSTEMS CAPABILITY</span>
+                  <span>AI &amp; AUTOMATION</span>
                   <span>→</span>
                 </Link>
                 <Link
-                  href="/capabilities/build"
+                  href="/services/websites"
                   className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-avorria-muted hover:text-avorria-white transition-colors"
                 >
-                  <span>BUILD CAPABILITY</span>
+                  <span>WEB ENGINEERING</span>
                   <span>→</span>
                 </Link>
                 <Link

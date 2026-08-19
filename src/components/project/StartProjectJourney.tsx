@@ -1,10 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { trackEvent } from "@/lib/analytics/track";
 
-type DisciplineType = "BUILD" | "SEARCH" | "SYSTEMS" | "COMBINATION" | "NOT_SURE";
+type DisciplineType =
+  | "WEBSITES"
+  | "DIGITAL_PRODUCTS"
+  | "SEO"
+  | "GROWTH"
+  | "AI_AUTOMATION"
+  | "COMBINATION"
+  | "NOT_SURE"
+  | "BUILD"
+  | "SEARCH"
+  | "SYSTEMS";
+
 type ExistingStateType = "NEW_VENTURE" | "EXISTING_PLATFORM" | "OPERATIONAL_SYSTEM" | "SEARCH_CRISIS" | "OTHER";
 type TimelineType = "IMMEDIATE" | "1_TO_3_MONTHS" | "3_TO_6_MONTHS" | "FLEXIBLE";
 type BudgetTerritoryType = "TERRITORY_15_30" | "TERRITORY_30_75" | "TERRITORY_75_PLUS" | "SCOPE_FIRST";
@@ -26,9 +38,10 @@ interface ProjectIntakeData {
 const TOTAL_STEPS = 5;
 
 export function StartProjectJourney() {
+  const searchParams = useSearchParams();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<ProjectIntakeData>({
-    discipline: "BUILD",
+    discipline: "WEBSITES",
     existingState: "NEW_VENTURE",
     objective: "",
     websiteUrl: "",
@@ -40,6 +53,26 @@ export function StartProjectJourney() {
     honeypot: "",
     consent: false,
   });
+
+  // Pre-populate discipline from query param if available
+  useEffect(() => {
+    const serviceParam = searchParams.get("service");
+    if (serviceParam) {
+      const mapping: Record<string, DisciplineType> = {
+        websites: "WEBSITES",
+        "digital-products": "DIGITAL_PRODUCTS",
+        seo: "SEO",
+        "performance-marketing": "GROWTH",
+        "ai-automation": "AI_AUTOMATION",
+        build: "WEBSITES",
+        search: "SEO",
+        systems: "AI_AUTOMATION",
+      };
+      if (mapping[serviceParam]) {
+        setFormData((prev) => ({ ...prev, discipline: mapping[serviceParam] }));
+      }
+    }
+  }, [searchParams]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -213,13 +246,15 @@ export function StartProjectJourney() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
               {[
-                { id: "BUILD", title: "BUILD // DIGITAL PRODUCT", desc: "Flagship website, web application, configurator, or design system." },
-                { id: "SEARCH", title: "SEARCH // TECHNICAL VISIBILITY", desc: "Technical SEO, crawl architecture, entity schemas, or platform migration." },
-                { id: "SYSTEMS", title: "SYSTEMS // AI & AUTOMATION", desc: "Bounded AI product integration, operational dashboards, or workflow state machines." },
-                { id: "COMBINATION", title: "MULTIDISCIPLINARY COMMISSION", desc: "Full-stack transformation spanning design, technical search, and backend systems." },
+                { id: "WEBSITES", title: "01 // WEBSITES & EXPERIENCES", desc: "Digital flagships, custom Next.js engineering, product configurators, or commerce." },
+                { id: "DIGITAL_PRODUCTS", title: "02 // DIGITAL PRODUCTS & SOFTWARE", desc: "Custom SaaS platforms, customer portals, internal workspaces, or data apps." },
+                { id: "SEO", title: "03 // SEO & ORGANIC GROWTH", desc: "Technical SEO audits, crawl architecture, entity modeling, or search migrations." },
+                { id: "GROWTH", title: "04 // PERFORMANCE MARKETING", desc: "Google Ads, paid social, dedicated landing funnels, CRM lead nurture & attribution." },
+                { id: "AI_AUTOMATION", title: "05 // AI & BUSINESS SYSTEMS", desc: "Custom AI agents, deterministic workflows, lead triage, API integrations & human review gates." },
+                { id: "COMBINATION", title: "MULTIDISCIPLINARY COMMISSION", desc: "Full-stack transformation spanning design, software, search, and AI systems." },
                 { id: "NOT_SURE", title: "STRATEGIC DIAGNOSIS", desc: "Evaluate problem space and define appropriate architectural scope." }
               ].map((item) => {
-                const isSelected = formData.discipline === item.id;
+                const isSelected = formData.discipline === item.id || (item.id === "WEBSITES" && formData.discipline === "BUILD") || (item.id === "SEO" && formData.discipline === "SEARCH") || (item.id === "AI_AUTOMATION" && formData.discipline === "SYSTEMS");
                 return (
                   <button
                     key={item.id}

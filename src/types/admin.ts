@@ -645,3 +645,147 @@ export interface SiteMedia {
   metadata?: Record<string, unknown>;
   created_at: string;
 }
+
+
+// ============================================================================
+// PHASE 7: OPTIMISATION & COMMERCIAL INTELLIGENCE TYPES
+// ============================================================================
+
+export interface ProspectOutcome {
+  id: string;
+  prospect_id: string;
+  business_id: string;
+  final_status: string;
+  contacted: boolean;
+  preview_viewed: boolean;
+  replied: boolean;
+  became_opportunity: boolean;
+  proposal_sent: boolean;
+  proposal_accepted: boolean;
+  became_client: boolean;
+  revenue: number;
+  currency: string;
+  time_to_reply_hours?: number | null;
+  time_to_close_days?: number | null;
+  loss_reason?: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export type ExperimentStatus = "draft" | "running" | "paused" | "completed" | "inconclusive" | "cancelled";
+
+export interface Experiment {
+  id: string;
+  name: string;
+  hypothesis: string;
+  entity_type: string;
+  metric: string;
+  status: ExperimentStatus;
+  started_at?: string | null;
+  ended_at?: string | null;
+  minimum_sample_size: number;
+  confidence_target: number;
+  winner_variant_id?: string | null;
+  created_by: string;
+  created_at: string;
+  variants?: ExperimentVariant[];
+}
+
+export interface ExperimentVariant {
+  id: string;
+  experiment_id: string;
+  name: string;
+  allocation: number;
+  configuration: Record<string, unknown>;
+  sample_size: number;
+  conversions: number;
+  created_at: string;
+}
+
+export interface ExperimentAssignment {
+  id: string;
+  experiment_id: string;
+  entity_id: string;
+  variant_id: string;
+  assigned_at: string;
+}
+
+export type RecommendationCategory =
+  | "TARGETING"
+  | "SCORING"
+  | "MODEL_ROUTING"
+  | "CREATIVE"
+  | "OUTREACH"
+  | "FOLLOWUP"
+  | "PRICING"
+  | "COST"
+  | "CAPACITY"
+  | "OPERATION";
+
+export type RecommendationConfidence = "INSUFFICIENT_DATA" | "EARLY_SIGNAL" | "MODERATE" | "STRONG";
+export type RecommendationRisk = "LOW" | "MEDIUM" | "HIGH";
+export type RecommendationStatus = "new" | "accepted" | "rejected" | "deferred" | "implemented" | "expired";
+
+export interface OptimisationRecommendation {
+  id: string;
+  category: RecommendationCategory;
+  title: string;
+  summary: string;
+  evidence: Record<string, unknown>;
+  expected_impact: string;
+  confidence: RecommendationConfidence;
+  risk: RecommendationRisk;
+  action_type: string;
+  proposed_config_change: Record<string, unknown>;
+  status: RecommendationStatus;
+  rejection_reason?: string | null;
+  reviewed_at?: string | null;
+  reviewed_by?: string | null;
+  created_at: string;
+}
+
+export interface OptimisationPlaybook {
+  id: string;
+  sector: string;
+  title: string;
+  strategy_tag: string;
+  recommended_structure: unknown[];
+  creative_direction_guidance?: string | null;
+  conversion_features: unknown[];
+  outreach_strategy_guidance?: string | null;
+  sample_size: number;
+  conversion_rate?: number | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ScoringShadowEvaluation {
+  id: string;
+  scoring_version: string;
+  weights: Record<string, number>;
+  prospect_id: string;
+  original_score: number;
+  shadow_score: number;
+  original_decision: string;
+  shadow_decision: string;
+  actual_outcome?: string | null;
+  created_at: string;
+}
+
+export interface DailyCEOBrief {
+  date: string;
+  generated_at: string;
+  what_happened: string;
+  what_matters: string;
+  what_needs_you: string;
+  what_ai_auto_recommends: string;
+  risks_and_anomalies: string;
+  key_metrics: {
+    contacted_yesterday: number;
+    replies_yesterday: number;
+    proposals_sent: number;
+    clients_won: number;
+    ai_spend_yesterday: number;
+    top_converting_sector: string;
+  };
+}

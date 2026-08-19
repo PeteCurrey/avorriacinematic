@@ -72,7 +72,32 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/capabilities",
+        destination: "/services",
+        permanent: true,
+      },
+      {
+        source: "/capabilities/build",
+        destination: "/services/websites",
+        permanent: true,
+      },
+      {
+        source: "/capabilities/search",
+        destination: "/services/seo",
+        permanent: true,
+      },
+      {
+        source: "/capabilities/systems",
+        destination: "/services/ai-automation",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
+
 
