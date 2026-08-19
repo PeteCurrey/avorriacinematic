@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { HOMEPAGE_SCENES } from "@/components/scenes/registry";
 import { HOMEPAGE_TRANSITIONS } from "@/lib/transitions/transition-registry";
 import { CANONICAL_PROJECTS } from "@/lib/projects/project-registry";
+import { WORK_PORTFOLIO } from "@/lib/projects/work-registry";
 import Link from "next/link";
 
 export default function DevTimelinePage() {
@@ -335,8 +336,71 @@ export default function DevTimelinePage() {
             </div>
           </div>
         </div>
+
+        {/* Phase 23: Work Index & Portfolio Architecture Review */}
+        <div className="space-y-4">
+          <div className="flex justify-between items-center border-b border-avorria-line pb-3">
+            <span className="font-bold text-avorria-signal uppercase tracking-wider">
+              06 // PHASE 23: /WORK EDITORIAL PORTFOLIO REGISTRY
+            </span>
+            <span className="text-avorria-quiet text-[11px]">
+              FEATURED (6) / SELECTED (4) / ARCHIVE (5) — TOTAL {WORK_PORTFOLIO.length} PROJECTS
+            </span>
+          </div>
+
+          <div className="overflow-x-auto border border-avorria-line bg-avorria-surface">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b border-avorria-line bg-avorria-black text-avorria-quiet text-[10px] uppercase tracking-wider">
+                  <th className="p-3">INDEX / TIER</th>
+                  <th className="p-3">PROJECT TITLE</th>
+                  <th className="p-3">SLUG</th>
+                  <th className="p-3">SECTOR / DESCRIPTOR</th>
+                  <th className="p-3">RELATIONSHIP</th>
+                  <th className="p-3">LAYOUT TYPE</th>
+                  <th className="p-3">STATUS</th>
+                  <th className="p-3">CASE STUDY</th>
+                </tr>
+              </thead>
+              <tbody>
+                {WORK_PORTFOLIO.map((p) => (
+                  <tr key={p.slug} className="border-b border-avorria-line/40 hover:bg-avorria-black/50 transition-colors">
+                    <td className="p-3">
+                      <span className={`px-2 py-0.5 text-[10px] font-bold ${
+                        p.tier === "FEATURED" ? "bg-avorria-signal/20 text-avorria-signal border border-avorria-signal/40" :
+                        p.tier === "SELECTED" ? "bg-blue-500/20 text-blue-300 border border-blue-500/40" :
+                        "bg-neutral-800 text-neutral-400 border border-neutral-700"
+                      }`}>
+                        {p.projectIndex || p.tier}
+                      </span>
+                    </td>
+                    <td className="p-3 text-avorria-white font-bold">{p.title}</td>
+                    <td className="p-3 text-avorria-quiet">/work/{p.slug}</td>
+                    <td className="p-3 text-avorria-muted text-[11px]">
+                      <div>{p.sector}</div>
+                      <div className="text-[10px] text-avorria-quiet">{p.descriptor}</div>
+                    </td>
+                    <td className="p-3 text-avorria-white font-bold">{p.relationship}</td>
+                    <td className="p-3 text-avorria-signal text-[11px] font-mono">{p.layoutVariant || "MAGAZINE"}</td>
+                    <td className="p-3 text-avorria-signal font-bold">{p.status}</td>
+                    <td className="p-3">
+                      {p.caseStudyAvailable ? (
+                        <span className="text-emerald-400 font-bold">YES (READY)</span>
+                      ) : p.externalUrl ? (
+                        <span className="text-blue-400">EXTERNAL ↗</span>
+                      ) : (
+                        <span className="text-avorria-quiet">INDEXED</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
+
 
