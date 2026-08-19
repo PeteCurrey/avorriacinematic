@@ -2020,3 +2020,380 @@ export async function dismissNotification(id: string): Promise<void> {
     p8.notifications[idx] = { ...p8.notifications[idx], dismissed_at: new Date().toISOString() };
   }
 }
+
+
+
+// ============================================================================
+// PHASE 9: EXECUTIVE COMMAND & FINANCE STORE
+// ============================================================================
+
+import type {
+  FinancialEvent,
+  BusinessTarget,
+  ForecastSnapshot,
+  ExecutiveAnomaly,
+  ExecutiveDecision,
+  InternalCostRate,
+  BusinessEntity,
+  ClientProfitability,
+  ServiceProfitability,
+  ExecutiveKPIs
+} from "@/types/admin";
+import { calculateTargetPace } from "@/lib/finance/engine";
+
+interface Phase9State {
+  financialEvents: FinancialEvent[];
+  targets: BusinessTarget[];
+  forecastSnapshots: ForecastSnapshot[];
+  anomalies: ExecutiveAnomaly[];
+  decisions: ExecutiveDecision[];
+  costRates: InternalCostRate[];
+  entities: BusinessEntity[];
+}
+
+let _p9: Phase9State | null = null;
+function getP9(): Phase9State {
+  if (!_p9) {
+    _p9 = {
+      financialEvents: seedFinancialEvents(),
+      targets: seedBusinessTargets(),
+      forecastSnapshots: seedForecastSnapshots(),
+      anomalies: seedExecutiveAnomalies(),
+      decisions: seedExecutiveDecisions(),
+      costRates: seedInternalCostRates(),
+      entities: [
+        {
+          id: "ent-1",
+          name: "Avorria UK",
+          legal_name: "Avorria Ltd",
+          country: "GB",
+          currency: "GBP",
+          tax_identifier: "GB123456789",
+          active: true,
+        },
+      ],
+    };
+  }
+  return _p9;
+}
+
+function seedFinancialEvents(): FinancialEvent[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "fe-1",
+      event_type: "contracted_revenue",
+      client_id: "client-1",
+      proposal_id: "prop-1",
+      amount: 1850.00,
+      currency: "GBP",
+      amount_reporting_currency: 1850.00,
+      reporting_fx_rate: 1.000000,
+      occurred_at: now,
+      recognised_at: now,
+      metadata: { package: "Bespoke Commercial Website", client_name: "Apex Autocare Ltd" },
+      created_at: now,
+    },
+    {
+      id: "fe-2",
+      event_type: "payment_received",
+      client_id: "client-1",
+      payment_id: "pay-1",
+      amount: 925.00,
+      currency: "GBP",
+      amount_reporting_currency: 925.00,
+      reporting_fx_rate: 1.000000,
+      occurred_at: now,
+      recognised_at: now,
+      metadata: { milestone: "Deposit (50%)", method: "stripe_card" },
+      created_at: now,
+    },
+    {
+      id: "fe-3",
+      event_type: "ai_cost",
+      amount: 4.80,
+      currency: "GBP",
+      amount_reporting_currency: 4.80,
+      reporting_fx_rate: 1.000000,
+      occurred_at: now,
+      recognised_at: now,
+      metadata: { task: "website_generation_claude_sonnet", client_id: "client-1" },
+      created_at: now,
+    },
+  ];
+}
+
+function seedBusinessTargets(): BusinessTarget[] {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const periodStart = `${year}-${month}-01`;
+  const periodEnd = `${year}-${month}-28`;
+
+  return [
+    {
+      id: "tgt-1",
+      metric_key: "monthly_revenue",
+      period_type: "monthly",
+      period_start: periodStart,
+      period_end: periodEnd,
+      target_value: 20000.00,
+      currency: "GBP",
+      notes: "August target: 10 website builds + retainers",
+      created_by: "Pete Currey",
+      created_at: now.toISOString(),
+    },
+    {
+      id: "tgt-2",
+      metric_key: "monthly_cash",
+      period_type: "monthly",
+      period_start: periodStart,
+      period_end: periodEnd,
+      target_value: 15000.00,
+      currency: "GBP",
+      notes: "Cash collected target",
+      created_by: "Pete Currey",
+      created_at: now.toISOString(),
+    },
+    {
+      id: "tgt-3",
+      metric_key: "clients_won",
+      period_type: "monthly",
+      period_start: periodStart,
+      period_end: periodEnd,
+      target_value: 8,
+      currency: "GBP",
+      notes: "New client acquisition target",
+      created_by: "Pete Currey",
+      created_at: now.toISOString(),
+    },
+  ];
+}
+
+function seedForecastSnapshots(): ForecastSnapshot[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "fcs-1",
+      forecast_type: "30_day_revenue",
+      as_of_date: now.slice(0, 10),
+      period_start: now.slice(0, 10),
+      period_end: "2026-09-19",
+      base_value: 18500.00,
+      downside_value: 12000.00,
+      upside_value: 24500.00,
+      assumptions: {
+        active_proposals_weighted: 14800,
+        recurring_mrr: 2100,
+        expected_close_probability: "42%",
+      },
+      created_at: now,
+    },
+  ];
+}
+
+function seedExecutiveAnomalies(): ExecutiveAnomaly[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "anom-1",
+      metric_key: "ai_spend_spike",
+      severity: "LOW",
+      detected_value: 2.40,
+      baseline_value: 1.80,
+      threshold: 5.00,
+      period: "yesterday",
+      status: "active",
+      explanation: "Scout run #42 executed deep research on 6 candidates simultaneously. Spend is within daily safety budget (£10.00).",
+      created_at: now,
+    },
+  ];
+}
+
+function seedExecutiveDecisions(): ExecutiveDecision[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "dec-1",
+      title: "Increased Automotive Scout Allocation",
+      decision: "Raised Scout capacity for automotive sector to 35% from 20%",
+      rationale: "Data confirmed 4.8% close rate and superior preview dwell time.",
+      decided_by: "Pete Currey",
+      decided_at: now,
+      review_at: "2026-09-01T00:00:00Z",
+      outcome: "Early reply rate increased by +58%",
+      notes: "Approved via Phase 7 recommendation engine",
+    },
+  ];
+}
+
+function seedInternalCostRates(): InternalCostRate[] {
+  return [
+    { id: "rate-1", role: "CEO / Strategic Direction", hourly_cost: 65.00, currency: "GBP", effective_from: "2026-01-01" },
+    { id: "rate-2", role: "Senior Design & Polish", hourly_cost: 45.00, currency: "GBP", effective_from: "2026-01-01" },
+    { id: "rate-3", role: "Technical Engineering", hourly_cost: 50.00, currency: "GBP", effective_from: "2026-01-01" },
+  ];
+}
+
+// ── REPOSITORY PHASE 9 EXPORTS ───────────────────────────────────────────────
+
+export async function getExecutiveKPIs(): Promise<ExecutiveKPIs> {
+  const targets = await getBusinessTargets();
+  const revTarget = targets.find(t => t.metric_key === "monthly_revenue");
+  const targetVal = revTarget ? revTarget.target_value : 20000;
+
+  const contractedMonth = 5550.00;
+  const cashMonth = 3700.00;
+  const receivables = 1850.00;
+  const weightedPipeline = 9250.00;
+  const clientsWon = 3;
+  const aov = 1850.00;
+  const mrr = 340.00;
+  const trackedContrib = 5120.00;
+
+  const pace = calculateTargetPace(
+    contractedMonth,
+    targetVal,
+    revTarget?.period_start ?? "2026-08-01",
+    revTarget?.period_end ?? "2026-08-31"
+  );
+
+  return {
+    cash_collected_month: cashMonth,
+    contracted_revenue_month: contractedMonth,
+    outstanding_receivables: receivables,
+    active_pipeline_weighted: weightedPipeline,
+    clients_won_month: clientsWon,
+    average_sale_value: aov,
+    active_mrr: mrr,
+    tracked_contribution_month: trackedContrib,
+    monthly_revenue_target: targetVal,
+    revenue_pace_status: pace.paceStatus,
+  };
+}
+
+export async function getFinancialEvents(limit = 50): Promise<FinancialEvent[]> {
+  const p9 = getP9();
+  return [...p9.financialEvents]
+    .sort((a, b) => b.occurred_at.localeCompare(a.occurred_at))
+    .slice(0, limit);
+}
+
+export async function recordFinancialEvent(event: Omit<FinancialEvent, "id" | "created_at">): Promise<FinancialEvent> {
+  const p9 = getP9();
+  const fe: FinancialEvent = {
+    ...event,
+    id: crypto.randomUUID(),
+    created_at: new Date().toISOString(),
+  };
+  p9.financialEvents.push(fe);
+  return fe;
+}
+
+export async function getBusinessTargets(): Promise<BusinessTarget[]> {
+  const p9 = getP9();
+  return p9.targets.map(t => {
+    const actual = t.metric_key === "monthly_revenue" ? 5550.00 : t.metric_key === "monthly_cash" ? 3700.00 : 3;
+    const pace = calculateTargetPace(actual, t.target_value, t.period_start, t.period_end);
+    return {
+      ...t,
+      actual_value: actual,
+      pace_status: pace.paceStatus,
+      progress_pct: Math.round(pace.progressPct),
+    };
+  });
+}
+
+export async function createBusinessTarget(data: Omit<BusinessTarget, "id" | "created_at">): Promise<BusinessTarget> {
+  const p9 = getP9();
+  const tgt: BusinessTarget = {
+    ...data,
+    id: crypto.randomUUID(),
+    created_at: new Date().toISOString(),
+  };
+  p9.targets.push(tgt);
+  return tgt;
+}
+
+export async function getForecastSnapshots(): Promise<ForecastSnapshot[]> {
+  return [...getP9().forecastSnapshots];
+}
+
+export async function getExecutiveAnomalies(): Promise<ExecutiveAnomaly[]> {
+  return [...getP9().anomalies];
+}
+
+export async function getExecutiveDecisions(): Promise<ExecutiveDecision[]> {
+  return [...getP9().decisions].sort((a, b) => b.decided_at.localeCompare(a.decided_at));
+}
+
+export async function getClientProfitability(): Promise<ClientProfitability[]> {
+  return [
+    {
+      client_id: "client-1",
+      client_name: "Apex Autocare Ltd",
+      contracted_revenue: 1850.00,
+      cash_collected: 925.00,
+      recurring_mrr: 65.00,
+      ai_acquisition_cost: 1.84,
+      ai_generation_cost: 3.20,
+      external_costs: 12.00,
+      manual_labour_cost: 90.00,
+      payment_fees: 14.08,
+      tracked_contribution: 1728.88,
+      contribution_margin_pct: 93.5,
+    },
+    {
+      client_id: "client-2",
+      client_name: "Vance Precision Engineering",
+      contracted_revenue: 3700.00,
+      cash_collected: 1850.00,
+      recurring_mrr: 120.00,
+      ai_acquisition_cost: 0.85,
+      ai_generation_cost: 4.50,
+      external_costs: 24.00,
+      manual_labour_cost: 180.00,
+      payment_fees: 28.15,
+      tracked_contribution: 3462.50,
+      contribution_margin_pct: 93.6,
+    },
+  ];
+}
+
+export async function getServiceProfitability(): Promise<ServiceProfitability[]> {
+  return [
+    {
+      service_id: "srv-websites",
+      service_name: "Bespoke Commercial Websites",
+      units_sold: 4,
+      total_revenue: 7400.00,
+      average_order_value: 1850.00,
+      average_delivery_days: 5.2,
+      direct_cost_per_unit: 110.00,
+      tracked_contribution: 6960.00,
+      contribution_margin_pct: 94.1,
+    },
+    {
+      service_id: "srv-digital-products",
+      service_name: "Digital Products & Custom Portals",
+      units_sold: 1,
+      total_revenue: 4500.00,
+      average_order_value: 4500.00,
+      average_delivery_days: 14.0,
+      direct_cost_per_unit: 420.00,
+      tracked_contribution: 4080.00,
+      contribution_margin_pct: 90.7,
+    },
+    {
+      service_id: "srv-retainers",
+      service_name: "Hosting, SEO & Infrastructure Retainers",
+      units_sold: 5,
+      total_revenue: 340.00,
+      average_order_value: 68.00,
+      average_delivery_days: 0.5,
+      direct_cost_per_unit: 8.00,
+      tracked_contribution: 300.00,
+      contribution_margin_pct: 88.2,
+    },
+  ];
+}

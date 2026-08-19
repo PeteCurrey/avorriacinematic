@@ -177,7 +177,83 @@ export const PROJECT_MEDIA_REGISTRY: ProjectMediaAsset[] = [
     notes: "Laboratory stress and fatigue bench test."
   },
 
+  // ── FORECOURIQ (PeteCurrey/forecourIQ.ag.v002) ─────────────────────
+  {
+    id: "forecour-iq-homepage-desktop",
+    projectSlug: "forecour-iq",
+    localPath: "/media/projects/forecour-iq/interface/homepage-desktop.png",
+    sourceRepo: "PeteCurrey/forecourIQ.ag.v002",
+    sourcePath: "src/app/page.tsx",
+    sourceRoute: "/",
+    mediaType: "UI_CAPTURE",
+    sourceStatus: "SOURCE_VERIFIED",
+    productionApproved: true,
+    notes: "Authentic desktop homepage capture (1920x1080) of ForecourIQ dealer valuation platform."
+  },
+  {
+    id: "forecour-iq-homepage-mobile",
+    projectSlug: "forecour-iq",
+    localPath: "/media/projects/forecour-iq/interface/homepage-mobile.png",
+    sourceRepo: "PeteCurrey/forecourIQ.ag.v002",
+    sourcePath: "src/app/page.tsx",
+    sourceRoute: "/",
+    mediaType: "UI_CAPTURE",
+    sourceStatus: "SOURCE_VERIFIED",
+    productionApproved: true,
+    notes: "Authentic mobile homepage capture (390x844) of ForecourIQ dealer valuation platform."
+  },
+
+  // ── AMPLIOS (https://amplios.co.uk/) ────────────────────────────────
+  {
+    id: "amplios-homepage-desktop",
+    projectSlug: "amplios",
+    localPath: "/media/projects/amplios/interface/homepage-desktop.png",
+    sourceRepo: "amplios.co.uk",
+    sourcePath: "src/app/page.tsx",
+    sourceRoute: "/",
+    mediaType: "UI_CAPTURE",
+    sourceStatus: "SOURCE_VERIFIED",
+    productionApproved: true,
+    notes: "Authentic desktop homepage capture (1920x1080) of Amplios campervan engineering platform."
+  },
+  {
+    id: "amplios-homepage-mobile",
+    projectSlug: "amplios",
+    localPath: "/media/projects/amplios/interface/homepage-mobile.png",
+    sourceRepo: "amplios.co.uk",
+    sourcePath: "src/app/page.tsx",
+    sourceRoute: "/",
+    mediaType: "UI_CAPTURE",
+    sourceStatus: "SOURCE_VERIFIED",
+    productionApproved: true,
+    notes: "Authentic mobile homepage capture (390x844) of Amplios campervan engineering platform."
+  },
+
   // ── CAREEROS (PeteCurrey/careeros) ───────────────────────────────────
+  {
+    id: "careeros-homepage-desktop",
+    projectSlug: "careeros",
+    localPath: "/media/projects/careeros/interface/homepage-desktop.png",
+    sourceRepo: "PeteCurrey/careeros",
+    sourcePath: "src/app/(marketing)/page.tsx",
+    sourceRoute: "/",
+    mediaType: "UI_CAPTURE",
+    sourceStatus: "SOURCE_VERIFIED",
+    productionApproved: true,
+    notes: "Authentic desktop homepage capture (1920x1080) of CareerOS public marketing site."
+  },
+  {
+    id: "careeros-homepage-mobile",
+    projectSlug: "careeros",
+    localPath: "/media/projects/careeros/interface/homepage-mobile.png",
+    sourceRepo: "PeteCurrey/careeros",
+    sourcePath: "src/app/(marketing)/page.tsx",
+    sourceRoute: "/",
+    mediaType: "UI_CAPTURE",
+    sourceStatus: "SOURCE_VERIFIED",
+    productionApproved: true,
+    notes: "Authentic mobile homepage capture (390x844) of CareerOS public marketing site."
+  },
   {
     id: "careeros-portrait-hero",
     projectSlug: "careeros",
@@ -258,13 +334,37 @@ export const PROJECT_MEDIA_REGISTRY: ProjectMediaAsset[] = [
 
   // ── NESTIQ (PeteCurrey/nestiq.ag.v001) ───────────────────────────────
   {
+    id: "nestiq-homepage-desktop",
+    projectSlug: "nestiq",
+    localPath: "/media/projects/nestiq/interface/homepage-desktop.png",
+    sourceRepo: "PeteCurrey/nestiq.ag.v001",
+    sourcePath: "src/app/page.tsx",
+    sourceRoute: "/",
+    mediaType: "UI_CAPTURE",
+    sourceStatus: "SOURCE_VERIFIED",
+    productionApproved: true,
+    notes: "Authentic desktop homepage capture (1920x1080) of NestIQ property intelligence platform."
+  },
+  {
+    id: "nestiq-homepage-mobile",
+    projectSlug: "nestiq",
+    localPath: "/media/projects/nestiq/interface/homepage-mobile.png",
+    sourceRepo: "PeteCurrey/nestiq.ag.v001",
+    sourcePath: "src/app/page.tsx",
+    sourceRoute: "/",
+    mediaType: "UI_CAPTURE",
+    sourceStatus: "SOURCE_VERIFIED",
+    productionApproved: true,
+    notes: "Authentic mobile homepage capture (390x844) of NestIQ property intelligence platform."
+  },
+  {
     id: "nestiq-agent-dashboard",
     projectSlug: "nestiq",
     localPath: "/media/projects/nestiq/interface/agent-dashboard-preview.png",
     sourceRepo: "PeteCurrey/nestiq.ag.v001",
     sourcePath: "public/agent-dashboard-preview.png",
     mediaType: "UI_CAPTURE",
-    sourceStatus: "APPROVED_MASTER",
+    sourceStatus: "APPROVED_SECONDARY",
     productionApproved: true,
     notes: "Authentic NestIQ agent intelligence dashboard."
   },
@@ -361,15 +461,39 @@ export const PROJECT_MEDIA_REGISTRY: ProjectMediaAsset[] = [
 
   // ── ENTIREFM (PeteCurrey/entirefm.v002) ──────────────────────────────
   {
+    id: "entirefm-homepage-desktop",
+    projectSlug: "entirefm",
+    localPath: "/media/projects/entirefm/interface/homepage-desktop.png",
+    sourceRepo: "PeteCurrey/entirefm.v002",
+    sourcePath: "src/app/page.tsx",
+    sourceRoute: "/",
+    mediaType: "UI_CAPTURE",
+    sourceStatus: "SOURCE_VERIFIED",
+    productionApproved: true,
+    notes: "Authentic desktop homepage capture (1920x1080) of EntireFM facilities management platform."
+  },
+  {
+    id: "entirefm-homepage-mobile",
+    projectSlug: "entirefm",
+    localPath: "/media/projects/entirefm/interface/homepage-mobile.png",
+    sourceRepo: "PeteCurrey/entirefm.v002",
+    sourcePath: "src/app/page.tsx",
+    sourceRoute: "/",
+    mediaType: "UI_CAPTURE",
+    sourceStatus: "SOURCE_VERIFIED",
+    productionApproved: true,
+    notes: "Authentic mobile homepage capture (390x844) of EntireFM facilities management platform."
+  },
+  {
     id: "entirefm-operational-environment",
     projectSlug: "entirefm",
     localPath: "/media/projects/entirefm/entirefm-operational.svg",
     sourceRepo: "PeteCurrey/entirefm.v002",
     sourcePath: "public/images/hero-background.jpg",
     mediaType: "IMAGE",
-    sourceStatus: "SOURCE_VERIFIED",
-    productionApproved: false,
-    notes: "EntireFM operational facilities context. CAFM work-order UI quarantined until source app verified."
+    sourceStatus: "APPROVED_SECONDARY",
+    productionApproved: true,
+    notes: "EntireFM operational facilities context vector asset."
   },
 
   // ── ONE GREAT NORTHERN ──────────────────────────────────────────────

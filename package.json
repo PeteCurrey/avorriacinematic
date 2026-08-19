@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "capture:showcase": "node scripts/capture-homepage-showcase.mjs"
   },
   "dependencies": {
     "gsap": "^3.12.7",

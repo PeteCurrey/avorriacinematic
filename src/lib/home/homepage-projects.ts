@@ -8,16 +8,13 @@ export interface ShowcaseMediaFitConfig {
 export interface HomepageProjectFeatureDef {
   projectIndex: string;
   slug: string;
-  relationship: "CLIENT WORK" | "AVORRIA VENTURE";
+  relationship: "CLIENT WORK" | "AVORRIA VENTURE" | "SELECTED WORK";
   headline: string;
   capabilitiesLine: string;
   desktopMedia: string;
   mobileMedia: string;
-  secondaryMedia?: string;
-  secondaryFitConfig?: ShowcaseMediaFitConfig;
   caseStudyAvailable: boolean;
   fitConfig: ShowcaseMediaFitConfig;
-  isComposition?: boolean; // For custom layout inside the canonical aperture (e.g. CareerOS split)
 }
 
 export const HOMEPAGE_FEATURED_PROJECTS: HomepageProjectFeatureDef[] = [
@@ -29,68 +26,92 @@ export const HOMEPAGE_FEATURED_PROJECTS: HomepageProjectFeatureDef[] = [
     capabilitiesLine: "WEB DESIGN / UX ARCHITECTURE / BESPOKE COMMERCE",
     desktopMedia: "/media/projects/alkota/interface/homepage-desktop.png",
     mobileMedia: "/media/projects/alkota/interface/homepage-mobile.png",
-    secondaryMedia: "/media/projects/alkota/product/naked-carbon-hero.jpg",
     caseStudyAvailable: true,
     fitConfig: {
       fit: "cover",
       desktopObjectPosition: "center top",
       mobileObjectPosition: "center top",
       background: "#080808"
-    },
-    secondaryFitConfig: {
+    }
+  },
+  {
+    projectIndex: "002 / FORECOURIQ",
+    slug: "forecour-iq",
+    relationship: "SELECTED WORK",
+    headline: "Automated appraisal and valuation intelligence for UK dealerships.",
+    capabilitiesLine: "AUTOMOTIVE VALUATION / APPRAISAL ENGINE / DEALER PLATFORM",
+    desktopMedia: "/media/projects/forecour-iq/interface/homepage-desktop.png",
+    mobileMedia: "/media/projects/forecour-iq/interface/homepage-mobile.png",
+    caseStudyAvailable: false,
+    fitConfig: {
       fit: "cover",
-      desktopObjectPosition: "50% 50%",
-      mobileObjectPosition: "45% 50%",
+      desktopObjectPosition: "center top",
+      mobileObjectPosition: "center top",
       background: "#080808"
     }
   },
   {
-    projectIndex: "002 / CAREEROS",
+    projectIndex: "003 / AMPLIOS",
+    slug: "amplios",
+    relationship: "AVORRIA VENTURE",
+    headline: "The UK's definitive engineering platform for serious self-build conversions.",
+    capabilitiesLine: "VEHICLE SCHEMATICS / BUILD SYSTEMS / TECHNICAL GEAR COMMERCE",
+    desktopMedia: "/media/projects/amplios/interface/homepage-desktop.png",
+    mobileMedia: "/media/projects/amplios/interface/homepage-mobile.png",
+    caseStudyAvailable: false,
+    fitConfig: {
+      fit: "cover",
+      desktopObjectPosition: "center top",
+      mobileObjectPosition: "center top",
+      background: "#080808"
+    }
+  },
+  {
+    projectIndex: "004 / CAREEROS",
     slug: "careeros",
     relationship: "AVORRIA VENTURE",
     headline: "Human-centred career intelligence.",
     capabilitiesLine: "AI SYSTEMS / PRODUCT DESIGN / UX ARCHITECTURE",
-    desktopMedia: "/media/projects/careeros/hero/woman_looking_into_camera_lens.jpeg",
-    mobileMedia: "/media/projects/careeros/hero/woman_looking_into_camera_lens.jpeg",
+    desktopMedia: "/media/projects/careeros/interface/homepage-desktop.png",
+    mobileMedia: "/media/projects/careeros/interface/homepage-mobile.png",
     caseStudyAvailable: true,
-    isComposition: true,
     fitConfig: {
       fit: "cover",
-      desktopObjectPosition: "50% 30%",
-      mobileObjectPosition: "50% 25%",
-      background: "#0a0d14"
+      desktopObjectPosition: "center top",
+      mobileObjectPosition: "center top",
+      background: "#080808"
     }
   },
   {
-    projectIndex: "003 / NESTIQ",
+    projectIndex: "005 / NESTIQ",
     slug: "nestiq",
     relationship: "AVORRIA VENTURE",
     headline: "Property intelligence built around better decisions.",
     capabilitiesLine: "SPATIAL DATA / SEARCH ARCHITECTURE / PRODUCT",
-    desktopMedia: "/media/projects/nestiq/interface/agent-dashboard-preview.png",
-    mobileMedia: "/media/projects/nestiq/interface/agent-dashboard-preview.png",
+    desktopMedia: "/media/projects/nestiq/interface/homepage-desktop.png",
+    mobileMedia: "/media/projects/nestiq/interface/homepage-mobile.png",
     caseStudyAvailable: true,
     fitConfig: {
-      fit: "contain",
-      desktopObjectPosition: "50% 50%",
-      mobileObjectPosition: "50% 50%",
-      background: "#0a0e17"
+      fit: "cover",
+      desktopObjectPosition: "center top",
+      mobileObjectPosition: "center top",
+      background: "#080808"
     }
   },
   {
-    projectIndex: "005 / ENTIREFM",
+    projectIndex: "006 / ENTIREFM",
     slug: "entirefm",
     relationship: "CLIENT WORK",
     headline: "Digital operations for facilities that never stop.",
     capabilitiesLine: "OPERATIONAL SYSTEMS / DISPATCH AUTOMATION / TECHNICAL SEO",
-    desktopMedia: "/media/projects/entirefm/entirefm-operational.svg",
-    mobileMedia: "/media/projects/entirefm/entirefm-operational.svg",
+    desktopMedia: "/media/projects/entirefm/interface/homepage-desktop.png",
+    mobileMedia: "/media/projects/entirefm/interface/homepage-mobile.png",
     caseStudyAvailable: true,
     fitConfig: {
-      fit: "contain",
-      desktopObjectPosition: "50% 50%",
-      mobileObjectPosition: "50% 50%",
-      background: "#080d1a"
+      fit: "cover",
+      desktopObjectPosition: "center top",
+      mobileObjectPosition: "center top",
+      background: "#080808"
     }
   }
 ];

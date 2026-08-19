@@ -18,17 +18,18 @@ export const HOME_SECTIONS: HomeSectionStory[] = [
     number: "02",
     title: "02 / SELECTED WORK SHOWCASE",
     questionAnswered: "What calibre of work does Avorria build?",
-    purpose: "Film-reel showreel presenting 4 flagships (Alkota, CareerOS, NestIQ, EntireFM) in one uniform canonical aperture.",
+    purpose: "Film-reel showreel presenting 6 authentic homepages (Alkota, ForecourIQ, Amplios, CareerOS, NestIQ, EntireFM) in one uniform canonical 16:9 aperture.",
     motionEnergy: "HIGH",
-    targetHeightDesktop: "540vh",
-    targetHeightMobile: "460svh",
+    targetHeightDesktop: "700vh",
+    targetHeightMobile: "640svh",
     componentsMounted: ["HomeSelectedWorkShowcase", "HomepageProjectFeature", "ShowcaseMediaAperture"],
     primaryMedia: [
       "/media/projects/alkota/interface/homepage-desktop.png",
-      "/media/projects/alkota/product/naked-carbon-hero.jpg",
-      "/media/projects/careeros/hero/woman_looking_into_camera_lens.jpeg",
-      "/media/projects/nestiq/interface/agent-dashboard-preview.png",
-      "/media/projects/entirefm/entirefm-operational.svg"
+      "/media/projects/forecour-iq/interface/homepage-desktop.png",
+      "/media/projects/amplios/interface/homepage-desktop.png",
+      "/media/projects/careeros/interface/homepage-desktop.png",
+      "/media/projects/nestiq/interface/homepage-desktop.png",
+      "/media/projects/entirefm/interface/homepage-desktop.png"
     ]
   },
   {

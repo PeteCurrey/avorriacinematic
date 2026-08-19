@@ -1000,3 +1000,154 @@ export interface AdminNotification {
   dismissed_at?: string | null;
   created_at: string;
 }
+
+
+// ============================================================================
+// PHASE 9: EXECUTIVE COMMAND & FINANCIAL INTELLIGENCE TYPES
+// ============================================================================
+
+export type FinancialEventType =
+  | "contracted_revenue"
+  | "payment_received"
+  | "refund"
+  | "external_cost"
+  | "ai_cost"
+  | "email_cost"
+  | "data_cost"
+  | "hosting_cost"
+  | "contractor_cost"
+  | "manual_adjustment";
+
+export interface FinancialEvent {
+  id: string;
+  event_type: FinancialEventType;
+  client_id?: string | null;
+  project_id?: string | null;
+  proposal_id?: string | null;
+  payment_id?: string | null;
+  service_id?: string | null;
+  amount: number;
+  currency: string;
+  amount_reporting_currency: number;
+  reporting_fx_rate: number;
+  occurred_at: string;
+  recognised_at?: string | null;
+  metadata: Record<string, unknown>;
+  created_at: string;
+}
+
+export type TargetPaceStatus = "AHEAD" | "ON_TRACK" | "AT_RISK" | "BEHIND";
+
+export interface BusinessTarget {
+  id: string;
+  metric_key: string;
+  period_type: "monthly" | "quarterly" | "annual";
+  period_start: string;
+  period_end: string;
+  target_value: number;
+  currency: string;
+  notes?: string | null;
+  created_by: string;
+  created_at: string;
+  actual_value?: number;
+  pace_status?: TargetPaceStatus;
+  progress_pct?: number;
+}
+
+export interface ForecastSnapshot {
+  id: string;
+  forecast_type: string;
+  as_of_date: string;
+  period_start: string;
+  period_end: string;
+  base_value: number;
+  downside_value: number;
+  upside_value: number;
+  assumptions: Record<string, unknown>;
+  created_at: string;
+}
+
+export interface ExecutiveAnomaly {
+  id: string;
+  metric_key: string;
+  severity: "CRITICAL" | "HIGH" | "MEDIUM" | "LOW";
+  detected_value: number;
+  baseline_value: number;
+  threshold: number;
+  period: string;
+  status: "active" | "investigating" | "resolved" | "ignored";
+  explanation: string;
+  created_at: string;
+  resolved_at?: string | null;
+}
+
+export interface ExecutiveDecision {
+  id: string;
+  title: string;
+  decision: string;
+  rationale: string;
+  linked_recommendation_id?: string | null;
+  decided_by: string;
+  decided_at: string;
+  review_at?: string | null;
+  outcome?: string | null;
+  notes?: string | null;
+}
+
+export interface InternalCostRate {
+  id: string;
+  role: string;
+  hourly_cost: number;
+  currency: string;
+  effective_from: string;
+}
+
+export interface BusinessEntity {
+  id: string;
+  name: string;
+  legal_name: string;
+  country: string;
+  currency: string;
+  tax_identifier?: string | null;
+  active: boolean;
+}
+
+export interface ClientProfitability {
+  client_id: string;
+  client_name: string;
+  contracted_revenue: number;
+  cash_collected: number;
+  recurring_mrr: number;
+  ai_acquisition_cost: number;
+  ai_generation_cost: number;
+  external_costs: number;
+  manual_labour_cost: number;
+  payment_fees: number;
+  tracked_contribution: number;
+  contribution_margin_pct: number;
+}
+
+export interface ServiceProfitability {
+  service_id: string;
+  service_name: string;
+  units_sold: number;
+  total_revenue: number;
+  average_order_value: number;
+  average_delivery_days: number;
+  direct_cost_per_unit: number;
+  tracked_contribution: number;
+  contribution_margin_pct: number;
+}
+
+export interface ExecutiveKPIs {
+  cash_collected_month: number;
+  contracted_revenue_month: number;
+  outstanding_receivables: number;
+  active_pipeline_weighted: number;
+  clients_won_month: number;
+  average_sale_value: number;
+  active_mrr: number;
+  tracked_contribution_month: number;
+  monthly_revenue_target: number;
+  revenue_pace_status: TargetPaceStatus;
+}

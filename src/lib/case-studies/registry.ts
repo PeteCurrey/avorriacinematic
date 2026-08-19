@@ -1798,76 +1798,52 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
     projectSlug: "amplios",
     canonicalTitle: "Amplios",
     projectIndex: "SELECTED // AMPLIOS",
-    publicationStatus: "PUBLISHED",
-    publishedAt: "2023-05-19",
+    publicationStatus: "DRAFT",
+    publishedAt: "2024-02-10",
     heroMode: "INTERFACE",
     heroMedia: {
       id: "amplios-hero-main",
       type: "IMAGE",
-      src: "/media/projects/amplios/amplios-hero.svg",
-      alt: "Amplios clinical trial operations and patient recruitment platform",
-      aspectRatio: "4/3",
+      src: "/media/projects/amplios/interface/homepage-desktop.png",
+      alt: "Amplios overland and self-build motorhome engineering platform",
+      aspectRatio: "16/9",
       status: "FINAL",
       priority: true
     },
     theme: {
-      background: "#0A1214",
-      foreground: "#F0FDFA",
+      background: "#0A0A0A",
+      foreground: "#F5F5F0",
       muted: "#94A3B8",
-      accent: "#2DD4BF",
-      surface: "#0E1A1C",
-      mediaBorder: "rgba(45, 212, 191, 0.2)",
-      signalColour: "#2DD4BF",
+      accent: "#FF6B00",
+      surface: "#121212",
+      mediaBorder: "rgba(255, 107, 0, 0.2)",
+      signalColour: "#FF6B00",
       headerMode: "PROJECT_DARK"
     },
-    relationship: "CLIENT",
+    relationship: "INTERNAL",
     status: "LIVE",
-    roles: ["STRATEGY", "PRODUCT", "UX", "DEVELOPMENT", "SEARCH"],
-    scopeSummary: "Clinical trial portal, patient pre-screener eligibility engine, and regulatory search taxonomy.",
-    capabilities: ["BUILD", "SEARCH"],
-    year: 2023,
+    roles: ["STRATEGY", "PRODUCT", "UX", "DEVELOPMENT", "SYSTEMS"],
+    scopeSummary: "Engineering platform, vehicle schematics database, build systems logic, and technical gear catalog for self-build conversions.",
+    capabilities: ["BUILD", "SYSTEMS"],
+    year: 2024,
     introNarrative: [
-      "Amplios provides digital infrastructure for pharmaceutical sponsors and clinical research sites to accelerate patient recruitment and trial protocol adherence.",
-      "Avorria engineered the patient pre-screening qualification journey and trial protocol hub, ensuring full HIPAA/GDPR data protection standards while optimizing recruitment funnel velocity."
+      "Amplios provides engineering-grade digital infrastructure and interactive build tools for serious off-grid motorhome and campervan conversions.",
+      "Avorria engineered the vehicle layout schematics, payload balancing logic, and technical component integration directory."
     ],
     chapters: [
       {
         id: "amplios-ch1",
         type: "STATEMENT",
-        title: "Clinical Trial Recruitment Friction",
+        title: "Self-Build Conversion Complexity",
         eyebrow: "01 // THE PROBLEM",
-        body: "Over 80% of clinical trials experience delays due to patient recruitment bottlenecks. Confusing medical eligibility criteria often alienate eligible participants."
+        body: "Van and overland conversions require complex multidisciplinary engineering — electrical load sizing, weight distribution, and heating dynamics — rarely supported by traditional retail channels."
       },
       {
         id: "amplios-ch2",
         type: "INTERFACE",
-        title: "Patient Pre-Screener & Protocol Hub",
+        title: "Vehicle Schematics & Systems Architecture",
         eyebrow: "02 // UX ARCHITECTURE",
-        body: "We designed an accessible, branching questionnaire that translates dense clinical inclusion/exclusion criteria into plain-language questions with immediate eligibility feedback."
-      },
-      {
-        id: "amplios-ch3",
-        type: "PROCESS",
-        title: "Strict Compliance & Data Privacy",
-        eyebrow: "03 // SECURITY ARCHITECTURE",
-        body: "Engineered end-to-end client encryption, zero third-party marketing trackers, and HIPAA-compliant lead routing into investigator site databases."
-      },
-      {
-        id: "amplios-ch4",
-        type: "PROOF",
-        title: "Trial Operations Verification",
-        eyebrow: "04 // VERIFICATION",
-        body: "Successfully deployed across multi-site Phase II and Phase III clinical oncology and neurology trials.",
-        evidence: [
-          {
-            id: "amplios-ev1",
-            type: "TECHNICAL",
-            value: "100%",
-            description: "Zero third-party trackers and strict zero-retention pre-screener security",
-            source: "Privacy & Compliance Audit",
-            verified: true
-          }
-        ]
+        body: "We designed a CAD-aligned web architecture allowing builders to compare base chassis dimensions, plan electrical topologies, and calculate payload margins in real time."
       }
     ],
     nextProject: {
@@ -1879,8 +1855,8 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
       themeAccent: "#C8F135"
     },
     seo: {
-      metaTitle: "Amplios — Clinical Trial Infrastructure Platform | Avorria",
-      metaDescription: "Avorria designed and built the patient pre-screening platform and clinical operations infrastructure for Amplios."
+      metaTitle: "Amplios — Self-Build Motorhome Engineering Platform | Avorria",
+      metaDescription: "Avorria designed and built the vehicle schematics and engineering platform for Amplios."
     }
   }
 };

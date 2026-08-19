@@ -90,6 +90,32 @@ export const CANONICAL_PROJECTS: ProjectIdentity[] = [
     relationship: "CLIENT",
     status: "DELIVERED",
     caseStudyAvailable: false
+  },
+  {
+    projectIndex: "SELECTED // FORECOURIQ",
+    canonicalName: "ForecourIQ",
+    slug: "forecour-iq",
+    category: "AUTOMOTIVE VALUATION & APPRAISAL",
+    descriptor: "DEALER APPRAISAL & VALUATION INTELLIGENCE",
+    galleryOrder: 7,
+    workWallOrder: 7,
+    featuredPriority: 7,
+    relationship: "CLIENT",
+    status: "LIVE",
+    caseStudyAvailable: false
+  },
+  {
+    projectIndex: "SELECTED // AMPLIOS",
+    canonicalName: "Amplios",
+    slug: "amplios",
+    category: "CAMPERVAN & OVERLAND ENGINEERING",
+    descriptor: "SELF-BUILD MOTORHOME ENGINEERING PLATFORM",
+    galleryOrder: 8,
+    workWallOrder: 8,
+    featuredPriority: 8,
+    relationship: "VENTURE",
+    status: "LIVE",
+    caseStudyAvailable: false
   }
 ];
 

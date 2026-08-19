@@ -44,6 +44,8 @@ const PRIMARY_NAVIGATION: { section: string; items: NavItem[] }[] = [
     section: "COMMAND",
     items: [
       { label: "Command", href: "/admin", icon: LayoutDashboard },
+      { label: "Finance & P&L", href: "/admin/finance", icon: TrendingUp },
+      { label: "Targets & Pace", href: "/admin/targets", icon: Sliders },
     ]
   },
   {
