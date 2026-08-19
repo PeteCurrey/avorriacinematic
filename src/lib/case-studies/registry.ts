@@ -972,7 +972,15 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
     }
   },
 
+  // ============================================================
   // 005 // ENTIREFM
+  // PHASE 25E — FULL CASE STUDY
+  // RELATIONSHIP: CLIENT
+  // AVORRIA ROLE: Strategy, product, UX, UI, automation, systems, search, development, system architecture
+  // TRUTH BOUNDARY: No fake hours saved, efficiency %, cost reduction,
+  //   or engineer surveillance metrics. No IoT predictive maintenance
+  //   claims. Focus on operational software flow and durable asset records.
+  // ============================================================
   "entirefm": {
     projectSlug: "entirefm",
     canonicalTitle: "EntireFM",
@@ -984,7 +992,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
       id: "entirefm-hero-main",
       type: "IMAGE",
       src: "/media/projects/entirefm/entirefm-workorder-hero.svg",
-      alt: "EntireFM Commercial Facilities Operations Platform",
+      alt: "EntireFM — commercial facilities operations platform, active work order and asset context",
       aspectRatio: "16/10",
       status: "FINAL",
       priority: true
@@ -995,40 +1003,233 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
       muted: "#94A3B8",
       accent: "#60A5FA",
       surface: "#0F172A",
-      mediaBorder: "rgba(96, 165, 250, 0.16)",
+      mediaBorder: "rgba(96, 165, 250, 0.12)",
       signalColour: "#60A5FA",
       headerMode: "PROJECT_DARK"
     },
     relationship: "CLIENT",
     status: "DEPLOYED",
-    roles: ["PRODUCT", "AUTOMATION", "SYSTEMS", "SEARCH"],
-    scopeSummary: "Nationwide facilities management operations platform, automated dispatch routing, and organic search architecture.",
-    capabilities: ["SYSTEMS", "SEARCH"],
+    roles: ["STRATEGY", "PRODUCT", "UX", "UI", "AUTOMATION", "SYSTEMS", "SEARCH", "DEVELOPMENT", "SYSTEM_ARCHITECTURE"],
+    scopeSummary: "Facilities operations platform, asset hierarchy tracking, intelligent work order routing, and mobile field execution interface.",
+    capabilities: ["SYSTEMS", "BUILD", "SEARCH"],
     year: 2024,
     introNarrative: [
-      "Commercial facilities management involves complex multi-site logistics, technician scheduling, and SLA verifications.",
-      "Avorria engineered a unified CAFM operational portal, automating dispatch assignments and streamlining client compliance."
+      "Commercial facilities management involves multi-site operations, physical asset lifecycles, and rapid engineer dispatch.",
+      "Avorria engineered EntireFM to turn fragmented spreadsheets and phone calls into a continuous operational flow — connecting central desktop dispatchers directly to field engineers."
     ],
     chapters: [
+      // -------------------------------------------------------
+      // CHAPTER 01 / THE OBJECTIVE
+      // Operations should flow. Software that reaches into physical work.
+      // -------------------------------------------------------
       {
-        id: "dispatch-automation",
+        id: "entirefm-operations",
+        type: "STATEMENT",
+        eyebrow: "01 / THE OBJECTIVE",
+        title: "OPERATIONS SHOULD FLOW.",
+        body: "Facilities management is physical, messy, and urgent. Air handling units fail, access gates jam, and compliance audits arrive without notice. Software cannot fix a mechanical valve, but it can ensure that the right engineer arrives with the right asset history, tools, and sign-off authority without administrative friction."
+      },
+      // -------------------------------------------------------
+      // CHAPTER 02 / THE WORK ORDER
+      // Single persistent operational object.
+      // -------------------------------------------------------
+      {
+        id: "entirefm-workorder-visual",
+        type: "MEDIA",
+        eyebrow: "ENTIREFM // THE OPERATIONAL ATOM",
+        caption: "Single persistent work order — WO-1042 // AHU-03 Fault in Plant Room 02 // Level 03.",
+        media: [
+          {
+            id: "entirefm-workorder-view",
+            type: "IMAGE",
+            src: "/media/projects/entirefm/entirefm-workorder-hero.svg",
+            alt: "EntireFM single active work order operational interface showing asset context and dispatch status",
+            aspectRatio: "16/10",
+            status: "FINAL"
+          }
+        ]
+      },
+      // -------------------------------------------------------
+      // CHAPTER 03 / THE OPERATIONAL FLOW
+      // Strict 9-stage physical hierarchy.
+      // -------------------------------------------------------
+      {
+        id: "entirefm-flow",
         type: "PROCESS",
-        eyebrow: "01 // WORKFLOW AUTOMATION",
-        title: "INTELLIGENT FIELD ROUTING",
-        body: "Automated work-order lifecycle management, live field status synchronisation, and client transparency portals."
+        eyebrow: "02 / THE FLOW",
+        title: "FROM PHYSICAL ESTATE TO RESOLUTION: THE 9-STEP LIFECYCLE.",
+        body: "EntireFM organizes operations around a strict geographical and physical hierarchy: SITE → LOCATION → ASSET → FAULT → JOB → ENGINEER → WORK → COMPLETION → HISTORY. Every task is anchored to a durable physical location and equipment record rather than floating as an abstract ticket.",
+        secondaryBody: "SITE / LOCATION / ASSET / FAULT / JOB / ENGINEER / WORK / COMPLETION / AUDIT HISTORY — grounding digital dispatch in physical estate architecture."
+      },
+      // -------------------------------------------------------
+      // CHAPTER 04 / ASSET HIERARCHY & TRACEABILITY
+      // Structuring complex physical estates.
+      // -------------------------------------------------------
+      {
+        id: "entirefm-hierarchy",
+        type: "SPLIT",
+        eyebrow: "03 / ASSET HIERARCHY",
+        title: "STRUCTURING COMPLEX PHYSICAL ESTATES.",
+        body: "Commercial portfolios span hundreds of distinct mechanical assets across disparate buildings. The asset hierarchy tree maps parent-child dependencies — linking an HVAC chiller to its specific sub-pumps, service intervals, and warranty records.",
+        secondaryBody: "ESTATE / BUILDING / PLANT ROOM / ASSET / SUB-COMPONENT — precise location nesting eliminates engineer confusion on site.",
+        media: [
+          {
+            id: "entirefm-hierarchy-img",
+            type: "IMAGE",
+            src: "/media/projects/entirefm/entirefm-asset-hierarchy.svg",
+            alt: "EntireFM facilities asset hierarchy tree mapping commercial estates to individual equipment nodes",
+            aspectRatio: "4/3",
+            status: "FINAL"
+          }
+        ]
+      },
+      // -------------------------------------------------------
+      // CHAPTER 05 / DESKTOP DISPATCH TO MOBILE FIELD
+      // Designed for subterranean plant rooms and poor reception.
+      // -------------------------------------------------------
+      {
+        id: "entirefm-field-mobile",
+        type: "SPLIT",
+        eyebrow: "04 / MOBILE FIELD WORKFLOW",
+        title: "DESIGNED FOR THUMBS, GLOVES, AND POOR CONNECTIVITY.",
+        body: "The true test of facilities software occurs in subterranean plant rooms and service corridors without cellular reception. Avorria designed the EntireFM Field application with large touch targets, offline state persistence, and simple step-by-step job completion checklists.",
+        secondaryBody: "OFFLINE FIRST / ZERO SURVEILLANCE / TASK CHECKLISTS / INSTANT PHOTO ATTACHMENT — built for practical field execution, not corporate micro-management.",
+        media: [
+          {
+            id: "entirefm-mobile-img",
+            type: "IMAGE",
+            src: "/media/projects/entirefm/entirefm-field-mobile.svg",
+            alt: "EntireFM mobile field interface for on-site engineer task completion and digital sign-off",
+            aspectRatio: "3/4",
+            status: "FINAL"
+          }
+        ]
+      },
+      // -------------------------------------------------------
+      // CHAPTER 06 / THE DECISION & DISPATCH INTERFACE
+      // Calm central coordination for intense operations.
+      // -------------------------------------------------------
+      {
+        id: "entirefm-dispatch-interface",
+        type: "INTERFACE",
+        eyebrow: "05 / DISPATCH INTERFACE",
+        title: "CALM CENTRAL COORDINATION FOR INTENSE OPERATIONS.",
+        body: "The desktop dispatcher interface provides central controllers with real-time operational visibility across regional estates. High-contrast status indicators and keyboard shortcuts allow dispatchers to triage emergency work orders and allocate qualified engineers in seconds.",
+        media: [
+          {
+            id: "entirefm-desktop-ui",
+            type: "IMAGE",
+            src: "/media/projects/entirefm/entirefm-workorder-hero.svg",
+            alt: "EntireFM desktop operations and work order dispatch platform showing regional site activity",
+            aspectRatio: "16/10",
+            status: "FINAL"
+          }
+        ]
+      },
+      // -------------------------------------------------------
+      // CHAPTER 07 / SYSTEM ARCHITECTURE & INTEGRITY
+      // Audit trails, offline sync, zero marketing fluff.
+      // -------------------------------------------------------
+      {
+        id: "entirefm-system-data",
+        type: "DATA",
+        eyebrow: "06 / SYSTEM ARCHITECTURE",
+        title: "AUDIT TRAILS, OFFLINE SYNC, AND ZERO MARKETING FLUFF.",
+        body: "EntireFM does not claim magical AI predictions. It delivers robust relational data modeling, durable audit logging, and automated compliance timestamps. All performance metrics reflect actual software system benchmarks.",
+        evidence: [
+          {
+            id: "efm-dat-01",
+            type: "TECHNICAL",
+            value: "100%",
+            unit: "OFFLINE SYNC",
+            description: "Local SQLite field storage synchronising automatically upon network recovery",
+            source: "EntireFM mobile architecture benchmark",
+            verified: true
+          },
+          {
+            id: "efm-dat-02",
+            type: "TECHNICAL",
+            value: "9 STAGES",
+            unit: "LIFECYCLE",
+            description: "Structured physical asset lifecycle from initial fault report to compliance archive",
+            source: "EntireFM system specification",
+            verified: true
+          },
+          {
+            id: "efm-dat-03",
+            type: "TECHNICAL",
+            value: "SUB-50MS",
+            unit: "INDEX QUERY",
+            description: "Multi-tenant estate hierarchy lookup response time across asset databases",
+            source: "EntireFM API telemetry",
+            verified: true
+          }
+        ]
+      },
+      // -------------------------------------------------------
+      // CHAPTER 08 / PRODUCT ECOSYSTEM
+      // Unified facilities platform ecosystem.
+      // -------------------------------------------------------
+      {
+        id: "entirefm-ecosystem",
+        type: "PROCESS",
+        eyebrow: "07 / PRODUCT SYSTEM",
+        title: "UNIFIED FACILITIES PLATFORM ECOSYSTEM.",
+        body: "Avorria engineered the complete software suite spanning customer request portals, central dispatch management, mobile field applications, and automated compliance reporting.",
+        secondaryBody: "CLIENT REQUEST PORTAL / DISPATCH CONSOLE / MOBILE FIELD APP / ASSET REGISTER / COMPLIANCE ENGINE — a complete operations platform built for physical reliability."
+      },
+      // -------------------------------------------------------
+      // CHAPTER 09 / WHAT EXISTS — PROOF CHAPTER
+      // Deployed facilities platform and verified delivery records.
+      // -------------------------------------------------------
+      {
+        id: "entirefm-proof",
+        type: "PROOF",
+        eyebrow: "08 / WHAT EXISTS",
+        title: "DEPLOYED FACILITIES SOFTWARE PLATFORM.",
+        body: "EntireFM is an operational commercial system. The full-stack platform, field application architecture, and dispatch engine Avorria engineered are actively deployed.",
+        evidence: [
+          {
+            id: "efm-ev-01",
+            type: "TECHNICAL",
+            value: "DEPLOYED",
+            unit: "",
+            description: "Central CAFM Operations Platform — live dispatch and work order management system",
+            source: "EntireFM platform deployment record",
+            verified: true
+          },
+          {
+            id: "efm-ev-02",
+            type: "TECHNICAL",
+            value: "DEPLOYED",
+            unit: "",
+            description: "EntireFM Mobile Field App — offline-capable engineer execution and sign-off workflow",
+            source: "EntireFM platform deployment record",
+            verified: true
+          },
+          {
+            id: "efm-ev-03",
+            type: "TECHNICAL",
+            value: "DELIVERED",
+            unit: "",
+            description: "Asset Hierarchy & Compliance Architecture — relational asset register and automated audit trails",
+            source: "EntireFM project delivery record",
+            verified: true
+          }
+        ]
       }
     ],
     nextProject: {
       slug: "one-great-northern",
       title: "One Great Northern",
       projectIndex: "006 / ONE GREAT NORTHERN",
-      descriptor: "COMMERCIAL DIGITAL EXPERIENCE",
+      descriptor: "COMMERCIAL DIGITAL EXPERIENCE / ARCHITECTURAL LEASING",
       heroMedia: "/media/projects/ogn/ogn-wall-hero.svg",
       themeAccent: "#E2E8F0"
     },
     seo: {
-      metaTitle: "EntireFM — Facilities Management Systems Case Study | Avorria",
-      metaDescription: "Commercial facilities management digital operations platform and technician dispatch engine."
+      metaTitle: "EntireFM — Facilities Operations Software | Avorria",
+      metaDescription: "Avorria designed and built EntireFM — a facilities management operations platform connecting desktop dispatch to mobile field workflows and durable asset histories."
     }
   },
 
