@@ -37,11 +37,11 @@ export function NestIQPropertyStage({ progress }: NestIQPropertyStageProps) {
           style={{ transform: `scale(${scale})` }}
         >
           <Image
-            src="/media/projects/nestiq/nestiq-property-hero.svg"
-            alt="NestIQ Property Focus"
+            src="/media/projects/nestiq/interface/agent-dashboard-preview.png"
+            alt="NestIQ Agent Intelligence Interface"
             fill
             priority
-            className="object-cover"
+            className="object-cover object-top"
           />
 
           {/* Intelligence Lens Probe Circle */}

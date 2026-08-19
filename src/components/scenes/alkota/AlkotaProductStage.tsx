@@ -25,17 +25,17 @@ export function AlkotaProductStage({ progress }: AlkotaProductStageProps) {
         style={{ transform: `scale(${scale})` }}
       >
         <Image
-          src="/media/projects/alkota/alkota-product-hero.svg"
-          alt="Alkota Titanium 001 Performance Flagship"
+          src="/media/projects/alkota/product/naked-carbon-hero.jpg"
+          alt="Alkota Project 01 Naked Carbon Flagship"
           fill
-          className="object-contain"
+          className="object-cover"
         />
       </div>
 
       {/* Top Header */}
       <div className="flex items-center justify-between font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet z-20">
-        <span className="text-avorria-signal">006 / THE OBJECT</span>
-        <span className="text-avorria-white">TITANIUM 001 // CHASSIS</span>
+        <span className="text-avorria-signal">001 / THE OBJECT</span>
+        <span className="text-avorria-white">NAKED CARBON // CHASSIS</span>
       </div>
 
       {/* Monumental Editorial Brand Statement */}
@@ -50,7 +50,7 @@ export function AlkotaProductStage({ progress }: AlkotaProductStageProps) {
 
       {/* Bottom Specs Marker */}
       <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet z-20">
-        <span>3AL-2.5V SEAMLESS TITANIUM</span>
+        <span>PRE-PRODUCTION CARBON DEVELOPMENT</span>
         <span className="text-avorria-white">03 / 18 // ALKOTA BIKES</span>
       </div>
     </div>

@@ -27,7 +27,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
     heroMedia: {
       id: "alkota-hero-main",
       type: "IMAGE",
-      src: "/media/projects/alkota/alkota-product-hero.svg",
+      src: "/media/projects/alkota/product/naked-carbon-hero.jpg",
       alt: "Alkota high-performance bicycle — complete bike composition on dark studio ground",
       aspectRatio: "16/10",
       status: "FINAL",
@@ -79,7 +79,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "alkota-product-full",
             type: "IMAGE",
-            src: "/media/projects/alkota/alkota-product-hero.svg",
+            src: "/media/projects/alkota/product/naked-carbon-hero.jpg",
             alt: "Alkota performance bicycle — complete frame, fork, rear suspension, and drivetrain visible in full product composition",
             aspectRatio: "16/10",
             status: "FINAL"
@@ -115,7 +115,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "alkota-macro-frame",
             type: "IMAGE",
-            src: "/media/projects/alkota/alkota-macro-frame.svg",
+            src: "/media/projects/alkota/engineering/carbon-layup.jpg",
             alt: "Alkota bicycle macro detail — rear triangle, suspension linkage, and hardware close-up",
             aspectRatio: "4/3",
             status: "FINAL"
@@ -137,7 +137,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "alkota-digital-interface",
             type: "IMAGE",
-            src: "/media/projects/alkota/alkota-digital-flagship.svg",
+            src: "/media/projects/alkota/product/naked-carbon-studio.png",
             alt: "Alkota digital experience — product configuration interface showing colourway and specification selection",
             aspectRatio: "16/10",
             status: "FINAL"
@@ -160,7 +160,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "alkota-engineering",
             type: "IMAGE",
-            src: "/media/projects/alkota/alkota-engineering.svg",
+            src: "/media/projects/alkota/engineering/kinematics.jpg",
             alt: "Alkota technical presentation — geometry and component specification display within the digital experience",
             aspectRatio: "4/3",
             status: "FINAL"
@@ -226,7 +226,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
       title: "CareerOS",
       projectIndex: "002 / CAREEROS",
       descriptor: "AI CAREER PLATFORM / HUMAN INTELLIGENCE",
-      heroMedia: "/media/projects/careeros/careeros-portrait.svg",
+      heroMedia: "/media/projects/careeros/hero/woman_looking_into_camera_lens.jpeg",
       themeAccent: "#38BDF8"
     },
     seo: {
@@ -255,7 +255,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
     heroMedia: {
       id: "careeros-hero-main",
       type: "IMAGE",
-      src: "/media/projects/careeros/careeros-portrait.svg",
+      src: "/media/projects/careeros/hero/woman_looking_into_camera_lens.jpeg",
       alt: "CareerOS — human-centred AI career platform, portrait composition",
       aspectRatio: "3/4",
       status: "FINAL",
@@ -306,7 +306,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "careeros-portrait-main",
             type: "IMAGE",
-            src: "/media/projects/careeros/careeros-portrait.svg",
+            src: "/media/projects/careeros/hero/woman_looking_into_camera_lens.jpeg",
             alt: "CareerOS human-centred interface — person at centre of the career intelligence system",
             aspectRatio: "3/4",
             status: "FINAL"
@@ -340,7 +340,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "careeros-ui-interface",
             type: "IMAGE",
-            src: "/media/projects/careeros/careeros-ui-preview.svg",
+            src: "/media/projects/careeros/hero/hero_career_world_desktop.jpg",
             alt: "CareerOS AI mentor interface — structured conversational career guidance showing professional interaction design",
             aspectRatio: "16/10",
             status: "FINAL"
@@ -363,7 +363,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "careeros-twin-visual",
             type: "IMAGE",
-            src: "/media/projects/careeros/careeros-portrait.svg",
+            src: "/media/projects/careeros/hero/woman_looking_into_camera_lens.jpeg",
             alt: "CareerOS Career Twin — structured career profile graph illustrating how individual dimensions connect to opportunity",
             aspectRatio: "4/3",
             status: "TEMPORARY"
@@ -441,7 +441,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
       title: "NestIQ",
       projectIndex: "003 / NESTIQ",
       descriptor: "SPATIAL DATA & PROPERTY INTELLIGENCE",
-      heroMedia: "/media/projects/nestiq/nestiq-property-hero.svg",
+      heroMedia: "/media/projects/nestiq/interface/agent-dashboard-preview.png",
       themeAccent: "#34D399"
     },
     seo: {
@@ -469,7 +469,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
     heroMedia: {
       id: "nestiq-hero-main",
       type: "IMAGE",
-      src: "/media/projects/nestiq/nestiq-property-hero.svg",
+      src: "/media/projects/nestiq/interface/agent-dashboard-preview.png",
       alt: "NestIQ — institutional property intelligence platform, spatial architecture view",
       aspectRatio: "4/3",
       status: "FINAL",
@@ -521,7 +521,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "nestiq-property-still",
             type: "IMAGE",
-            src: "/media/projects/nestiq/nestiq-property-hero.svg",
+            src: "/media/projects/nestiq/interface/agent-dashboard-preview.png",
             alt: "NestIQ architectural asset framing — commercial property in structured spatial isolation",
             aspectRatio: "4/3",
             status: "FINAL"
@@ -554,7 +554,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "nestiq-search-ui",
             type: "IMAGE",
-            src: "/media/projects/nestiq/nestiq-ui-preview.svg",
+            src: "/media/projects/nestiq/interface/agent-dashboard-preview.png",
             alt: "NestIQ search filter and spatial query interface showing multi-criteria property filtering",
             aspectRatio: "16/10",
             status: "FINAL"
@@ -576,7 +576,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "nestiq-spatial-map-visual",
             type: "IMAGE",
-            src: "/media/projects/nestiq/nestiq-spatial-map.svg",
+            src: "/media/projects/nestiq/interface/agent-dashboard-preview.png",
             alt: "NestIQ vector spatial map with arterial corridors, River Thames curve, and district boundary layers",
             aspectRatio: "16/10",
             status: "FINAL"
@@ -637,7 +637,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "nestiq-decision-ui",
             type: "IMAGE",
-            src: "/media/projects/nestiq/nestiq-ui-preview.svg",
+            src: "/media/projects/nestiq/interface/agent-dashboard-preview.png",
             alt: "NestIQ complete operational decision dashboard showing property metrics alongside vector map context",
             aspectRatio: "16/10",
             status: "FINAL"
@@ -702,7 +702,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
       title: "Drawdown.Trading",
       projectIndex: "004 / DRAWDOWN.TRADING",
       descriptor: "HIGH-DENSITY FINANCIAL SOFTWARE / QUANTITATIVE RISK",
-      heroMedia: "/media/projects/drawdown/drawdown-chart-hero.svg",
+      heroMedia: "/media/projects/drawdown/interface/dashboard.png",
       themeAccent: "#F59E0B"
     },
     seo: {
@@ -730,7 +730,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
     heroMedia: {
       id: "drawdown-hero-main",
       type: "IMAGE",
-      src: "/media/projects/drawdown/drawdown-chart-hero.svg",
+      src: "/media/projects/drawdown/interface/dashboard.png",
       alt: "Drawdown.Trading — single clean market chart and trade planning canvas",
       aspectRatio: "16/10",
       status: "FINAL",
@@ -781,7 +781,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "drawdown-chart-view",
             type: "IMAGE",
-            src: "/media/projects/drawdown/drawdown-chart-hero.svg",
+            src: "/media/projects/drawdown/interface/dashboard.png",
             alt: "Drawdown.Trading single market chart view with clear price action and structural grid",
             aspectRatio: "16/10",
             status: "FINAL"
@@ -815,7 +815,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "drawdown-plan-module-img",
             type: "IMAGE",
-            src: "/media/projects/drawdown/drawdown-module-plan.svg",
+            src: "/media/projects/drawdown/interface/terminal.png",
             alt: "Drawdown.Trading Trade Playbook & Plan module showing structured trade preparation checklist",
             aspectRatio: "16/10",
             status: "FINAL"
@@ -837,7 +837,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "drawdown-risk-module-img",
             type: "IMAGE",
-            src: "/media/projects/drawdown/drawdown-module-risk.svg",
+            src: "/media/projects/drawdown/interface/risk-calculator.png",
             alt: "Drawdown.Trading Risk Boundary Engine module showing capital exposure calculations",
             aspectRatio: "16/10",
             status: "FINAL"
@@ -858,7 +858,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "drawdown-full-ui-view",
             type: "IMAGE",
-            src: "/media/projects/drawdown/drawdown-full-ui.svg",
+            src: "/media/projects/drawdown/interface/dashboard.png",
             alt: "Drawdown.Trading complete multi-module operational workspace showing market, playbook, risk, and journal modules",
             aspectRatio: "16/10",
             status: "FINAL"
@@ -963,7 +963,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
       title: "EntireFM",
       projectIndex: "005 / ENTIREFM",
       descriptor: "OPERATIONAL CAFM SYSTEM / FIELD DISPATCH AUTOMATION",
-      heroMedia: "/media/projects/entirefm/entirefm-workorder-hero.svg",
+      heroMedia: "/media/projects/entirefm/entirefm-operational.svg",
       themeAccent: "#60A5FA"
     },
     seo: {
@@ -991,7 +991,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
     heroMedia: {
       id: "entirefm-hero-main",
       type: "IMAGE",
-      src: "/media/projects/entirefm/entirefm-workorder-hero.svg",
+      src: "/media/projects/entirefm/entirefm-operational.svg",
       alt: "EntireFM — commercial facilities operations platform, active work order and asset context",
       aspectRatio: "16/10",
       status: "FINAL",
@@ -1042,7 +1042,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "entirefm-workorder-view",
             type: "IMAGE",
-            src: "/media/projects/entirefm/entirefm-workorder-hero.svg",
+            src: "/media/projects/entirefm/entirefm-operational.svg",
             alt: "EntireFM single active work order operational interface showing asset context and dispatch status",
             aspectRatio: "16/10",
             status: "FINAL"
@@ -1076,7 +1076,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "entirefm-hierarchy-img",
             type: "IMAGE",
-            src: "/media/projects/entirefm/entirefm-asset-hierarchy.svg",
+            src: "/media/projects/entirefm/entirefm-operational.svg",
             alt: "EntireFM facilities asset hierarchy tree mapping commercial estates to individual equipment nodes",
             aspectRatio: "4/3",
             status: "FINAL"
@@ -1098,7 +1098,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "entirefm-mobile-img",
             type: "IMAGE",
-            src: "/media/projects/entirefm/entirefm-field-mobile.svg",
+            src: "/media/projects/entirefm/entirefm-operational.svg",
             alt: "EntireFM mobile field interface for on-site engineer task completion and digital sign-off",
             aspectRatio: "3/4",
             status: "FINAL"
@@ -1119,7 +1119,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "entirefm-desktop-ui",
             type: "IMAGE",
-            src: "/media/projects/entirefm/entirefm-workorder-hero.svg",
+            src: "/media/projects/entirefm/entirefm-operational.svg",
             alt: "EntireFM desktop operations and work order dispatch platform showing regional site activity",
             aspectRatio: "16/10",
             status: "FINAL"
@@ -1224,7 +1224,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
       title: "One Great Northern",
       projectIndex: "006 / ONE GREAT NORTHERN",
       descriptor: "COMMERCIAL DIGITAL EXPERIENCE / ARCHITECTURAL LEASING",
-      heroMedia: "/media/projects/ogn/ogn-wall-hero.svg",
+      heroMedia: "/media/projects/ogn/ogn-industrial.svg",
       themeAccent: "#E2E8F0"
     },
     seo: {
@@ -1252,7 +1252,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
     heroMedia: {
       id: "ogn-hero-main",
       type: "IMAGE",
-      src: "/media/projects/ogn/ogn-wall-hero.svg",
+      src: "/media/projects/ogn/ogn-industrial.svg",
       alt: "One Great Northern — commercial architectural showcase and brand transformation",
       aspectRatio: "16/9",
       status: "FINAL",
@@ -1305,7 +1305,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "ogn-previous-img",
             type: "IMAGE",
-            src: "/media/projects/ogn/ogn-previous-desktop.svg",
+            src: "/media/projects/ogn/ogn-industrial.svg",
             alt: "One Great Northern previous template brochure website showing generic layout and low-res hierarchy",
             aspectRatio: "16/10",
             status: "FINAL"
@@ -1339,7 +1339,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           beforeMedia: {
             id: "ogn-before-shot",
             type: "IMAGE",
-            src: "/media/projects/ogn/ogn-previous-desktop.svg",
+            src: "/media/projects/ogn/ogn-industrial.svg",
             alt: "One Great Northern previous digital brochure",
             aspectRatio: "16/10",
             status: "FINAL"
@@ -1348,7 +1348,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           afterMedia: {
             id: "ogn-after-shot",
             type: "IMAGE",
-            src: "/media/projects/ogn/ogn-new-desktop.svg",
+            src: "/media/projects/ogn/ogn-industrial.svg",
             alt: "One Great Northern current editorial leasing platform",
             aspectRatio: "16/10",
             status: "FINAL"
@@ -1370,7 +1370,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "ogn-new-desktop-ui",
             type: "IMAGE",
-            src: "/media/projects/ogn/ogn-new-desktop.svg",
+            src: "/media/projects/ogn/ogn-industrial.svg",
             alt: "One Great Northern modern editorial desktop leasing experience showing architectural prestige and enquiry actions",
             aspectRatio: "16/10",
             status: "FINAL"
@@ -1392,7 +1392,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
           {
             id: "ogn-new-mobile-ui",
             type: "IMAGE",
-            src: "/media/projects/ogn/ogn-new-mobile.svg",
+            src: "/media/projects/ogn/ogn-industrial.svg",
             alt: "One Great Northern responsive mobile digital experience showing portrait layout and fast enquiry",
             aspectRatio: "3/4",
             status: "FINAL"
@@ -1485,7 +1485,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
       title: "All Work Index",
       projectIndex: "FLAGSHIP 06 OF 06",
       descriptor: "SERIES CONCLUSION // EXPLORE ALL PROJECTS",
-      heroMedia: "/media/projects/alkota/alkota-product-hero.svg",
+      heroMedia: "/media/projects/alkota/product/naked-carbon-hero.jpg",
       themeAccent: "#C8F135",
       isEndOfSeries: true
     },
@@ -1875,7 +1875,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
       title: "Alkota Bikes",
       projectIndex: "001 / ALKOTA",
       descriptor: "PERFORMANCE PRODUCT // DIGITAL EXPERIENCE",
-      heroMedia: "/media/projects/alkota/alkota-product-hero.svg",
+      heroMedia: "/media/projects/alkota/product/naked-carbon-hero.jpg",
       themeAccent: "#C8F135"
     },
     seo: {

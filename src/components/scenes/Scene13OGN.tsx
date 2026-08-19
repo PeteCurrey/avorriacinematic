@@ -77,19 +77,38 @@ export function Scene13OGN() {
       id={config.id}
       data-scene-id={config.id}
       data-scene-index="13"
-      className="relative w-full h-screen bg-avorria-black select-none overflow-hidden border-t border-avorria-line"
+      className="relative w-full min-h-screen bg-avorria-black select-none flex items-center justify-center border-t border-avorria-line px-6 sm:px-16"
     >
       {/* Semantic Accessibility Heading */}
       <h2 className="sr-only">
-        One Great Northern — Commercial Digital Experience &amp; Transformation by Avorria
+        One Great Northern — Industrial Crane Hire, Lifting and Infrastructure
       </h2>
 
-      <OGNHandoffStage opacity={handoffOpacity} />
-      <OGNPreviousStage opacity={prevOpacity} />
-      <OGNStructureStage opacity={structOpacity} />
-      <OGNTransformationStage opacity={transformOpacity} progress={transformProgress} />
-      <OGNNewStage opacity={newOpacity} />
-      <OGNPrincipleStage opacity={principleOpacity} yTranslate={principleY} />
+      <div className="max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-24">
+        <div className="lg:col-span-8 flex flex-col gap-6">
+          <div className="font-mono text-xs text-avorria-signal uppercase tracking-widest">
+            006 // ONE GREAT NORTHERN // INDUSTRIAL INFRASTRUCTURE
+          </div>
+          <h3 className="font-display font-black text-4xl sm:text-7xl uppercase tracking-tight text-avorria-white leading-none whitespace-pre-line">
+            ONE GREAT NORTHERN<br />INDUSTRIAL OPERATIONS<span className="text-avorria-signal">.</span>
+          </h3>
+          <p className="font-body text-base sm:text-lg text-avorria-muted leading-relaxed max-w-xl">
+            Mobile crane hire, contract lifting, plant equipment, and industrial infrastructure services.
+          </p>
+          <div className="pt-4 flex items-center gap-4">
+            <span className="font-mono text-xs uppercase text-avorria-quiet border border-avorria-line px-3 py-1.5">
+              SOURCE MEDIA: PENDING VERIFICATION
+            </span>
+          </div>
+        </div>
+
+        <div className="lg:col-span-4 flex flex-col gap-4 font-mono text-xs text-avorria-quiet border-l border-avorria-line/40 pl-8">
+          <span className="text-avorria-signal uppercase">SECTOR TRUTH</span>
+          <span className="text-avorria-white">CRANE HIRE &amp; CONTRACT LIFTING</span>
+          <span className="text-avorria-muted">PLANT &amp; ACCESS EQUIPMENT</span>
+          <span className="text-avorria-muted">CIVILS &amp; INDUSTRIAL WORK</span>
+        </div>
+      </div>
     </section>
   );
 }

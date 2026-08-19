@@ -20,20 +20,20 @@ export const WORK_PORTFOLIO: WorkProject[] = [
     tier: "FEATURED",
     layoutVariant: "WIDE_EDITORIAL",
     relationship: "CLIENT",
-    status: "DELIVERED",
+    status: "IN DEVELOPMENT",
     caseStudyAvailable: true,
     capabilities: ["PRODUCT", "BRAND", "DIGITAL ENGINEERING"],
     role: "Digital flagship platform, frame architecture visualizer, and brand identity",
     year: 2025,
-    heroMedia: "/media/projects/alkota/alkota-hero-still.webp",
-    mobileMedia: "/media/projects/alkota/alkota-hero-still.webp",
+    heroMedia: "/media/projects/alkota/product/naked-carbon-hero.jpg",
+    mobileMedia: "/media/projects/alkota/product/naked-carbon-hero.jpg",
     aspectRatio: "16/10",
     mediaStatus: "FINAL",
     palette: {
       accent: "#C8F135",
       surface: "#111111"
     },
-    shortSummary: "High-performance digital flagship and custom frame architecture for bespoke titanium bicycles."
+    shortSummary: "High-performance digital flagship and custom frame architecture for bespoke carbon bicycles."
   },
   {
     projectIndex: "002 / CAREEROS",
@@ -50,8 +50,8 @@ export const WORK_PORTFOLIO: WorkProject[] = [
     capabilities: ["AI SYSTEMS", "PRODUCT DESIGN", "UX ARCHITECTURE"],
     role: "Autonomous talent acceleration platform and intelligent Career Twin workflow",
     year: 2025,
-    heroMedia: "/media/projects/careeros/careeros-human-still.webp",
-    mobileMedia: "/media/projects/careeros/careeros-human-still.webp",
+    heroMedia: "/media/projects/careeros/hero/woman_looking_into_camera_lens.jpeg",
+    mobileMedia: "/media/projects/careeros/hero/woman_looking_into_camera_lens.jpeg",
     aspectRatio: "3/4",
     mediaStatus: "FINAL",
     palette: {
@@ -75,8 +75,8 @@ export const WORK_PORTFOLIO: WorkProject[] = [
     capabilities: ["SPATIAL DATA", "SEARCH ARCHITECTURE", "PRODUCT"],
     role: "Institutional real estate search intelligence and automated valuation modeling",
     year: 2024,
-    heroMedia: "/media/projects/nestiq/nestiq-property-hero.svg",
-    mobileMedia: "/media/projects/nestiq/nestiq-property-hero.svg",
+    heroMedia: "/media/projects/nestiq/interface/agent-dashboard-preview.png",
+    mobileMedia: "/media/projects/nestiq/interface/agent-dashboard-preview.png",
     aspectRatio: "4/3",
     mediaStatus: "FINAL",
     palette: {
@@ -100,8 +100,8 @@ export const WORK_PORTFOLIO: WorkProject[] = [
     capabilities: ["DATA VISUALISATION", "SYSTEMS ARCHITECTURE", "UX"],
     role: "Low-latency trading analytics interface and disciplined risk control systems",
     year: 2024,
-    heroMedia: "/media/projects/drawdown/drawdown-chart-hero.svg",
-    mobileMedia: "/media/projects/drawdown/drawdown-chart-hero.svg",
+    heroMedia: "/media/projects/drawdown/interface/dashboard.png",
+    mobileMedia: "/media/projects/drawdown/interface/dashboard.png",
     aspectRatio: "16/10",
     mediaStatus: "FINAL",
     palette: {
@@ -125,8 +125,8 @@ export const WORK_PORTFOLIO: WorkProject[] = [
     capabilities: ["SYSTEMS", "DISPATCH AUTOMATION", "SEARCH ARCHITECTURE"],
     role: "Commercial facilities management digital operations platform and technician dispatch",
     year: 2024,
-    heroMedia: "/media/projects/entirefm/entirefm-workorder-hero.svg",
-    mobileMedia: "/media/projects/entirefm/entirefm-workorder-hero.svg",
+    heroMedia: "/media/projects/entirefm/entirefm-operational.svg",
+    mobileMedia: "/media/projects/entirefm/entirefm-operational.svg",
     aspectRatio: "16/10",
     mediaStatus: "FINAL",
     palette: {
@@ -140,25 +140,25 @@ export const WORK_PORTFOLIO: WorkProject[] = [
     slug: "one-great-northern",
     title: "One Great Northern",
     shortTitle: "One Great Northern",
-    sector: "COMMERCIAL PROPERTY / ARCHITECTURAL",
-    descriptor: "COMMERCIAL DIGITAL EXPERIENCE",
+    sector: "INDUSTRIAL INFRASTRUCTURE",
+    descriptor: "MOBILE CRANE HIRE & CONTRACT LIFTING",
     tier: "FEATURED",
     layoutVariant: "TRANSFORMATION",
     relationship: "CLIENT",
     status: "DELIVERED",
-    caseStudyAvailable: true,
-    capabilities: ["DIGITAL PLATFORM", "BRAND ARCHITECTURE", "LEASING UX"],
-    role: "Immersive architectural digital showcase for landmark commercial development",
+    caseStudyAvailable: false,
+    capabilities: ["DIGITAL PLATFORM", "BRAND ARCHITECTURE"],
+    role: "Industrial operations digital infrastructure and equipment fleet catalog",
     year: 2024,
-    heroMedia: "/media/projects/ogn/ogn-wall-hero.svg",
-    mobileMedia: "/media/projects/ogn/ogn-wall-hero.svg",
+    heroMedia: "/media/projects/ogn/ogn-industrial.svg",
+    mobileMedia: "/media/projects/ogn/ogn-industrial.svg",
     aspectRatio: "16/9",
     mediaStatus: "FINAL",
     palette: {
       accent: "#E2E8F0",
       surface: "#1E293B"
     },
-    shortSummary: "Immersive architectural digital showcase for landmark commercial development."
+    shortSummary: "Mobile crane hire, contract lifting, and industrial plant logistics infrastructure."
   },
 
   // ==========================================

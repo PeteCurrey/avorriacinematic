@@ -17,10 +17,10 @@ export function AlkotaFallback() {
 
       <div className="aspect-video w-full relative overflow-hidden bg-avorria-surface border border-avorria-line">
         <Image
-          src="/media/projects/alkota/alkota-product-hero.svg"
-          alt="Alkota Bikes Titanium 001 Performance Flagship"
+          src="/media/projects/alkota/product/naked-carbon-hero.jpg"
+          alt="Alkota Bikes Project 01 Naked Carbon Flagship"
           fill
-          className="object-contain"
+          className="object-cover"
         />
       </div>
 
@@ -30,7 +30,7 @@ export function AlkotaFallback() {
             A product deserves a digital world built with the same intent.
           </h3>
           <p className="font-body text-base text-avorria-muted leading-relaxed">
-            A high-performance product demanded more than a portfolio website. We engineered the complete brand identity, digital flagship architecture, and interactive product storytelling around the titanium chassis itself.
+            A high-performance product demanded more than a portfolio website. We engineered the complete brand identity, digital flagship architecture, and interactive product storytelling around the pre-production carbon chassis itself.
           </p>
           <Link
             href="/work/alkota-bikes"

@@ -23,7 +23,7 @@ export function EntireFMContextStage({ progress }: EntireFMContextStageProps) {
         style={{ transform: `scale(${scale})` }}
       >
         <Image
-          src="/media/projects/entirefm/entirefm-asset-hierarchy.svg"
+          src="/media/projects/entirefm/entirefm-operational.svg"
           alt="EntireFM Asset Hierarchy Context"
           fill
           priority

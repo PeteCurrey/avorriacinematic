@@ -8,7 +8,7 @@ interface AlkotaDigitalStageProps {
 }
 
 export function AlkotaDigitalStage({ progress }: AlkotaDigitalStageProps) {
-  const [selectedFinish, setSelectedFinish] = useState<"raw" | "obsidian">("raw");
+  const [selectedFinish, setSelectedFinish] = useState<"carbon" | "glacier">("carbon");
 
   // Active between 0.63 and 0.84
   if (progress < 0.62 || progress > 0.85) return null;
@@ -25,10 +25,10 @@ export function AlkotaDigitalStage({ progress }: AlkotaDigitalStageProps) {
       {/* Digital Flagship UI Container */}
       <div className="w-full max-w-[1560px] h-[85vh] relative overflow-hidden bg-avorria-surface border border-avorria-line shadow-2xl flex flex-col justify-between">
         <Image
-          src="/media/projects/alkota/alkota-digital-flagship.svg"
+          src={selectedFinish === "carbon" ? "/media/projects/alkota/product/naked-carbon-studio.png" : "/media/projects/alkota/product/glacier-white-showroom.jpg"}
           alt="Alkota Digital Flagship Interface"
           fill
-          className="object-cover"
+          className="object-contain"
         />
 
         {/* Live Interactive Spec Selection Overlay */}
@@ -39,18 +39,18 @@ export function AlkotaDigitalStage({ progress }: AlkotaDigitalStageProps) {
           <div className="flex items-center gap-2 font-mono text-xs">
             <CursorTrigger state="try" label="TRY">
               <button
-                onClick={() => setSelectedFinish("raw")}
-                className={`px-3 py-1.5 border uppercase transition-colors ${selectedFinish === "raw" ? "border-avorria-signal bg-avorria-signal/20 text-avorria-signal" : "border-avorria-line text-avorria-muted hover:text-avorria-white"}`}
+                onClick={() => setSelectedFinish("carbon")}
+                className={`px-3 py-1.5 border uppercase transition-colors ${selectedFinish === "carbon" ? "border-avorria-signal bg-avorria-signal/20 text-avorria-signal" : "border-avorria-line text-avorria-muted hover:text-avorria-white"}`}
               >
-                Raw Titanium
+                Naked Carbon
               </button>
             </CursorTrigger>
             <CursorTrigger state="try" label="TRY">
               <button
-                onClick={() => setSelectedFinish("obsidian")}
-                className={`px-3 py-1.5 border uppercase transition-colors ${selectedFinish === "obsidian" ? "border-avorria-signal bg-avorria-signal/20 text-avorria-signal" : "border-avorria-line text-avorria-muted hover:text-avorria-white"}`}
+                onClick={() => setSelectedFinish("glacier")}
+                className={`px-3 py-1.5 border uppercase transition-colors ${selectedFinish === "glacier" ? "border-avorria-signal bg-avorria-signal/20 text-avorria-signal" : "border-avorria-line text-avorria-muted hover:text-avorria-white"}`}
               >
-                Obsidian
+                Glacier White
               </button>
             </CursorTrigger>
           </div>

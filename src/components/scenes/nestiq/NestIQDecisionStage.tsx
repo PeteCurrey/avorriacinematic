@@ -19,10 +19,10 @@ export function NestIQDecisionStage({ progress }: NestIQDecisionStageProps) {
     >
       <div className="w-full max-w-[1560px] h-[82vh] relative border border-avorria-line bg-avorria-surface shadow-2xl overflow-hidden">
         <Image
-          src="/media/projects/nestiq/nestiq-ui-preview.svg"
+          src="/media/projects/nestiq/interface/agent-dashboard-preview.png"
           alt="NestIQ Decision Platform UI"
           fill
-          className="object-cover"
+          className="object-cover object-bottom"
         />
       </div>
     </div>

@@ -19,10 +19,10 @@ export function CareerOpportunityStage({ progress }: CareerOpportunityStageProps
     >
       <div className="w-full max-w-[1560px] h-[80vh] relative border border-avorria-line bg-avorria-black/90 overflow-hidden">
         <Image
-          src="/media/projects/careeros/careeros-ui-preview.svg"
+          src="/media/projects/careeros/hero/hero_career_world_desktop.jpg"
           alt="CareerOS Opportunity Landscape"
           fill
-          className="object-contain"
+          className="object-cover"
         />
       </div>
     </div>

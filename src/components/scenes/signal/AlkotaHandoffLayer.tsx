@@ -15,7 +15,7 @@ export function AlkotaHandoffLayer({ opacity }: AlkotaHandoffLayerProps) {
       aria-hidden="true"
     >
       <Image
-        src="/media/projects/alkota/hero/alkota-signal.svg"
+        src="/media/projects/alkota/product/naked-carbon-hero.jpg"
         alt="Alkota Bikes Titanium Platform"
         fill
         priority

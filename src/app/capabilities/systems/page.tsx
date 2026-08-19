@@ -166,7 +166,7 @@ const CURATED_SYSTEMS_PROJECTS: CapabilityProofProject[] = [
     category: "AI PRODUCT // CAREER INTELLIGENCE SYSTEM",
     description: "A human-centred AI career platform orchestrating structured career intelligence — Career Twin graph modeling, AI mentor conversations, and guided opportunity surfaces — with explicit human primacy at every step.",
     impactSummary: "Engineered scoped LLM prompt architecture, Career Twin graph model, and structured AI output pipeline with human correction loops.",
-    mediaSrc: "/media/projects/careeros/careeros-portrait.svg",
+    mediaSrc: "/media/projects/careeros/hero/woman_looking_into_camera_lens.jpeg",
     mediaAlt: "CareerOS AI career intelligence platform",
     tags: ["AI_PRODUCT", "BOUNDED_AGENTS", "GRAPH_INTELLIGENCE", "HUMAN_OVERSIGHT"]
   },
@@ -177,7 +177,7 @@ const CURATED_SYSTEMS_PROJECTS: CapabilityProofProject[] = [
     category: "FACILITIES OPERATIONS // WORKFLOW AUTOMATION",
     description: "A nationwide commercial facilities management platform with deterministic dispatch automation, 9-stage work order lifecycle state machines, and offline-capable field engineer synchronization.",
     impactSummary: "Engineered rule-based dispatch routing, durable work order state machines, and offline data sync — zero AI, full operational reliability.",
-    mediaSrc: "/media/projects/entirefm/entirefm-workorder-hero.svg",
+    mediaSrc: "/media/projects/entirefm/entirefm-operational.svg",
     mediaAlt: "EntireFM operational workflow system",
     tags: ["WORKFLOW_AUTOMATION", "STATE_MACHINES", "OFFLINE_SYNC", "OPERATIONAL_TOOLS"]
   },
@@ -188,7 +188,7 @@ const CURATED_SYSTEMS_PROJECTS: CapabilityProofProject[] = [
     category: "FINANCIAL SOFTWARE // DECISION SYSTEMS",
     description: "A high-density trading discipline platform providing structured 6-stage workflow management, risk boundary engines, and deterministic trade playbook systems.",
     impactSummary: "Engineered disciplined risk boundary engine, structured trade state pipeline, and information-dense decision workspace — no AI, no fabricated signals.",
-    mediaSrc: "/media/projects/drawdown/drawdown-chart-hero.svg",
+    mediaSrc: "/media/projects/drawdown/interface/dashboard.png",
     mediaAlt: "Drawdown.Trading decision discipline system",
     tags: ["DECISION_SYSTEMS", "WORKFLOW_ENGINEERING", "RISK_BOUNDARIES", "DATA_DENSE"]
   }

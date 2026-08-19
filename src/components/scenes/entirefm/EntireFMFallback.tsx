@@ -17,10 +17,10 @@ export function EntireFMFallback() {
 
       <div className="aspect-video w-full relative overflow-hidden bg-avorria-surface border border-avorria-line">
         <Image
-          src="/media/projects/entirefm/entirefm-workorder-hero.svg"
+          src="/media/projects/entirefm/entirefm-operational.svg"
           alt="EntireFM Facilities Platform"
           fill
-          className="object-contain"
+          className="object-cover"
         />
       </div>
 

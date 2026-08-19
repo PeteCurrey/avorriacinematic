@@ -19,8 +19,8 @@ export function EntireFMWorkOrderStage({ progress }: EntireFMWorkOrderStageProps
     >
       <div className="w-full max-w-[1300px] h-[75vh] relative border border-avorria-line bg-avorria-surface shadow-2xl overflow-hidden">
         <Image
-          src="/media/projects/entirefm/entirefm-workorder-hero.svg"
-          alt="EntireFM Work Order Interface"
+          src="/media/projects/entirefm/entirefm-operational.svg"
+          alt="EntireFM Facilities Operations System"
           fill
           className="object-cover"
         />

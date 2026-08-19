@@ -60,7 +60,7 @@ export const DEV_SYNTHETIC_FIXTURE: CaseStudyConfig = {
         {
           id: "dev-media-still",
           type: "IMAGE",
-          src: "/media/projects/ogn/ogn-wall-hero.svg",
+          src: "/media/projects/ogn/ogn-industrial.svg",
           alt: "Synthetic media capture",
           aspectRatio: "16/9",
           status: "FINAL"
@@ -78,7 +78,7 @@ export const DEV_SYNTHETIC_FIXTURE: CaseStudyConfig = {
         {
           id: "dev-split-still",
           type: "IMAGE",
-          src: "/media/projects/nestiq/nestiq-property-hero.svg",
+          src: "/media/projects/nestiq/interface/agent-dashboard-preview.png",
           alt: "Synthetic split media",
           aspectRatio: "4/3",
           status: "FINAL"

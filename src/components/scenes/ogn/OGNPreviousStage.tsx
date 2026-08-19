@@ -14,7 +14,7 @@ export function OGNPreviousStage({ opacity }: OGNPreviousStageProps) {
     >
       <div className="relative w-full max-w-[1320px] aspect-[16/10] bg-avorria-surface border border-avorria-line overflow-hidden shadow-2xl">
         <Image
-          src="/media/projects/ogn/ogn-previous-desktop.svg"
+          src="/media/projects/ogn/ogn-industrial.svg"
           alt="One Great Northern previous digital experience"
           fill
           className="object-contain"

@@ -19,7 +19,7 @@ export function OGNTransformationStage({ opacity, progress }: OGNTransformationS
         {/* Base Layer: Previous Experience */}
         <div className="absolute inset-0">
           <Image
-            src="/media/projects/ogn/ogn-previous-desktop.svg"
+            src="/media/projects/ogn/ogn-industrial.svg"
             alt="Previous digital experience"
             fill
             className="object-contain"
@@ -34,7 +34,7 @@ export function OGNTransformationStage({ opacity, progress }: OGNTransformationS
           }}
         >
           <Image
-            src="/media/projects/ogn/ogn-new-desktop.svg"
+            src="/media/projects/ogn/ogn-industrial.svg"
             alt="New digital experience"
             fill
             className="object-contain"

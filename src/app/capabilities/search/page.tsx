@@ -165,7 +165,7 @@ const CURATED_SEARCH_PROJECTS: CapabilityProofProject[] = [
     category: "SPATIAL DATA // SEARCH ARCHITECTURE",
     description: "An institutional real estate intelligence platform built on a high-throughput spatial query engine, cadastral boundary indexing, and travel-time isochrone search.",
     impactSummary: "Delivered sub-100ms multi-parameter search engine, vector spatial tiles, and rich geographic entity indexing.",
-    mediaSrc: "/media/projects/nestiq/nestiq-ui-preview.svg",
+    mediaSrc: "/media/projects/nestiq/interface/agent-dashboard-preview.png",
     mediaAlt: "NestIQ spatial search query interface",
     tags: ["SPATIAL_SEARCH", "VECTOR_TILES", "SEARCH_ENGINE", "DATA_MODEL"]
   },
@@ -176,7 +176,7 @@ const CURATED_SEARCH_PROJECTS: CapabilityProofProject[] = [
     category: "FACILITIES MANAGEMENT // REGIONAL TAXONOMY",
     description: "A nationwide commercial facilities management operations platform engineered with a multi-location geographic taxonomy and asset hierarchy search architecture.",
     impactSummary: "Delivered regional organic search hierarchy, estate-level entity indexing, and automated work-order dispatch routing.",
-    mediaSrc: "/media/projects/entirefm/entirefm-workorder-hero.svg",
+    mediaSrc: "/media/projects/entirefm/entirefm-operational.svg",
     mediaAlt: "EntireFM operational search and dispatch platform",
     tags: ["REGIONAL_TAXONOMY", "IA_ARCHITECTURE", "MULTI_SITE", "SYSTEMS"]
   },

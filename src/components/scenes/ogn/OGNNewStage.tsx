@@ -14,7 +14,7 @@ export function OGNNewStage({ opacity }: OGNNewStageProps) {
     >
       <div className="relative w-full max-w-[1320px] aspect-[16/10] bg-avorria-surface border border-avorria-line overflow-hidden shadow-2xl flex items-center justify-center">
         <Image
-          src="/media/projects/ogn/ogn-new-desktop.svg"
+          src="/media/projects/ogn/ogn-industrial.svg"
           alt="One Great Northern modern digital experience"
           fill
           className="object-contain"
@@ -23,7 +23,7 @@ export function OGNNewStage({ opacity }: OGNNewStageProps) {
         {/* Floating Mobile Responsive Proof */}
         <div className="hidden lg:block absolute right-8 bottom-8 w-[200px] h-[340px] bg-avorria-black border border-avorria-signal shadow-2xl overflow-hidden animate-fadeIn">
           <Image
-            src="/media/projects/ogn/ogn-new-mobile.svg"
+            src="/media/projects/ogn/ogn-industrial.svg"
             alt="Mobile responsive proof"
             fill
             className="object-cover"

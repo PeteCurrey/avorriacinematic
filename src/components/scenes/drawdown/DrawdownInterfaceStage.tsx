@@ -26,7 +26,7 @@ export function DrawdownInterfaceStage({ progress }: DrawdownInterfaceStageProps
         // Full Unified Interface View
         <div className="w-full max-w-[1600px] h-[80vh] relative border border-avorria-line bg-avorria-surface shadow-2xl overflow-hidden">
           <Image
-            src="/media/projects/drawdown/drawdown-full-ui.svg"
+            src="/media/projects/drawdown/interface/dashboard.png"
             alt="Drawdown Platform Interface"
             fill
             className="object-cover"

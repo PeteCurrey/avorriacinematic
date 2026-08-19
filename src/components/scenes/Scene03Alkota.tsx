@@ -79,8 +79,8 @@ export function Scene03Alkota() {
             aria-hidden="true"
           >
             <Image
-              src="/media/projects/alkota/hero/alkota-signal.svg"
-              alt="Alkota Flagship Entry"
+              src="/media/projects/alkota/product/naked-carbon-hero.jpg"
+              alt="Alkota Naked Carbon Master Entry"
               fill
               priority
               className="object-cover"

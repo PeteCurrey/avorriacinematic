@@ -17,10 +17,10 @@ export function DrawdownFallback() {
 
       <div className="aspect-video w-full relative overflow-hidden bg-avorria-surface border border-avorria-line">
         <Image
-          src="/media/projects/drawdown/drawdown-full-ui.svg"
+          src="/media/projects/drawdown/interface/dashboard.png"
           alt="Drawdown.Trading Interface"
           fill
-          className="object-contain"
+          className="object-cover"
         />
       </div>
 

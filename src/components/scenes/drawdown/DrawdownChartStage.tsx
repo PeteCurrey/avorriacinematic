@@ -37,7 +37,7 @@ export function DrawdownChartStage({ progress }: DrawdownChartStageProps) {
           style={{ transform: `scale(${scale})` }}
         >
           <Image
-            src="/media/projects/drawdown/drawdown-chart-hero.svg"
+            src="/media/projects/drawdown/interface/dashboard.png"
             alt="Drawdown Market Chart Stage"
             fill
             priority

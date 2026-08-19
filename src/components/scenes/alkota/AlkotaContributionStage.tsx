@@ -22,13 +22,13 @@ export function AlkotaContributionStage({ progress }: AlkotaContributionStagePro
         {/* Left Column: Avorria Role & Summary */}
         <div className="lg:col-span-6 flex flex-col gap-6">
           <div className="font-mono text-xs text-avorria-signal uppercase tracking-widest">
-            006 // ALKOTA BIKES // CASE STUDY
+            001 // ALKOTA BIKES // CASE STUDY
           </div>
           <h3 className="font-display font-bold text-3xl sm:text-5xl uppercase tracking-tight text-avorria-white">
             Product.<br />Brand.<br />Digital.
           </h3>
           <p className="font-body text-base text-avorria-muted leading-relaxed max-w-lg">
-            A high-performance product demanded more than a portfolio website. We engineered the complete brand identity, digital flagship architecture, and interactive product storytelling around the titanium chassis itself.
+            A high-performance product demanded more than a portfolio website. We engineered the complete brand identity, digital flagship architecture, and interactive product storytelling around the pre-production carbon chassis itself.
           </p>
 
           <div className="pt-4">

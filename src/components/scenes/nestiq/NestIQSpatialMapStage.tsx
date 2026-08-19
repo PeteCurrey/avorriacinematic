@@ -29,10 +29,10 @@ export function NestIQSpatialMapStage({ progress }: NestIQSpatialMapStageProps) 
         }}
       >
         <Image
-          src="/media/projects/nestiq/nestiq-spatial-map.svg"
-          alt="NestIQ Spatial Neighbourhood Map"
+          src="/media/projects/nestiq/interface/agent-dashboard-preview.png"
+          alt="NestIQ Spatial Property Intelligence"
           fill
-          className="object-cover"
+          className="object-cover object-center"
         />
 
         {/* 3D Vertical Layer Annotation Callout at Peak */}

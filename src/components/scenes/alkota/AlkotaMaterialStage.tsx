@@ -18,28 +18,28 @@ export function AlkotaMaterialStage({ progress }: AlkotaMaterialStageProps) {
 
   return (
     <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden" aria-hidden="true">
-      {/* Material Macro Layer */}
+      {/* Material Macro Layer - Carbon Fiber Layup */}
       <div
         className="absolute inset-0 w-full h-full transition-transform duration-75 ease-out"
         style={{ opacity: macroOpacity, transform: `scale(${macroScale})` }}
       >
         <Image
-          src="/media/projects/alkota/alkota-macro-frame.svg"
-          alt="Alkota Titanium Material Macro"
+          src="/media/projects/alkota/engineering/carbon-layup.jpg"
+          alt="Alkota Carbon Fiber Layup Development"
           fill
           priority
           className="object-cover"
         />
       </div>
 
-      {/* Engineering Kinematics Linework Overlay */}
+      {/* Engineering Kinematics Layer */}
       <div
         className="absolute inset-0 w-full h-full"
         style={{ opacity: engOpacity }}
       >
         <Image
-          src="/media/projects/alkota/alkota-engineering.svg"
-          alt="Alkota Engineering Linework"
+          src="/media/projects/alkota/engineering/kinematics.jpg"
+          alt="Alkota Kinematic Dynamics Analysis"
           fill
           className="object-cover"
         />

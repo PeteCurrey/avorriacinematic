@@ -17,10 +17,10 @@ export function CareerOSFallback() {
 
       <div className="aspect-video w-full relative overflow-hidden bg-avorria-surface border border-avorria-line">
         <Image
-          src="/media/projects/careeros/careeros-ui-preview.svg"
+          src="/media/projects/careeros/hero/hero_career_world_desktop.jpg"
           alt="CareerOS Platform Architecture"
           fill
-          className="object-contain"
+          className="object-cover"
         />
       </div>
 

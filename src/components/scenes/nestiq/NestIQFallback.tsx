@@ -17,10 +17,10 @@ export function NestIQFallback() {
 
       <div className="aspect-video w-full relative overflow-hidden bg-avorria-surface border border-avorria-line">
         <Image
-          src="/media/projects/nestiq/nestiq-ui-preview.svg"
+          src="/media/projects/nestiq/interface/agent-dashboard-preview.png"
           alt="NestIQ Platform Architecture"
           fill
-          className="object-contain"
+          className="object-cover object-top"
         />
       </div>
 

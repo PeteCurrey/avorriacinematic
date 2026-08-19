@@ -3,28 +3,28 @@ import { DrawdownModuleConfig } from "@/types/drawdown-scene";
 export const DRAWDOWN_MODULES: DrawdownModuleConfig[] = [
   {
     id: "market",
-    title: "MARKET INTELLIGENCE",
+    title: "MARKET INTELLIGENCE & TERMINAL",
     code: "01",
-    statement: "DYNAMIC TIME-SERIES & RISK CURVES",
-    svgPath: "/media/projects/drawdown/drawdown-chart-hero.svg",
+    statement: "DYNAMIC TIME-SERIES & EXECUTION",
+    svgPath: "/media/projects/drawdown/interface/terminal.png",
     zDepth: 40,
     yawDeg: 0
   },
   {
-    id: "plan",
-    title: "PLAYBOOK & PLAN",
+    id: "risk",
+    title: "RISK CALCULATOR & BOUNDARY",
     code: "02",
-    statement: "TURN INTENT INTO A PROCESS",
-    svgPath: "/media/projects/drawdown/drawdown-module-plan.svg",
+    statement: "EXPLICIT POSITION & EXPOSURE LIMITS",
+    svgPath: "/media/projects/drawdown/interface/risk-calculator.png",
     zDepth: -20,
     yawDeg: -4
   },
   {
-    id: "risk",
-    title: "RISK BOUNDARY",
+    id: "backtest",
+    title: "STRATEGY BACKTESTER",
     code: "03",
-    statement: "KNOW THE BOUNDARY BEFORE THE DECISION",
-    svgPath: "/media/projects/drawdown/drawdown-module-risk.svg",
+    statement: "QUANTITATIVE PLAYBOOK VALIDATION",
+    svgPath: "/media/projects/drawdown/interface/backtester.png",
     zDepth: -40,
     yawDeg: 4
   }

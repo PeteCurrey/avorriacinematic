@@ -165,7 +165,7 @@ const CURATED_PROOF_PROJECTS: CapabilityProofProject[] = [
     category: "PERFORMANCE PRODUCT // DIGITAL CONFIGURATOR",
     description: "A precision digital flagship and product configuration experience translating high-performance titanium cycling craftsmanship into an interactive digital world.",
     impactSummary: "Delivered bespoke product configurator, reservation journey, and sub-second asset delivery without marketing clutter.",
-    mediaSrc: "/media/projects/alkota/alkota-product-hero.svg",
+    mediaSrc: "/media/projects/alkota/product/naked-carbon-hero.jpg",
     mediaAlt: "Alkota Bikes digital flagship showcase",
     tags: ["PRODUCT_DESIGN", "CONFIGURATOR", "NEXT_JS", "BRAND"]
   },
@@ -176,7 +176,7 @@ const CURATED_PROOF_PROJECTS: CapabilityProofProject[] = [
     category: "AI PRODUCT ARCHITECTURE // TALENT PLATFORM",
     description: "A human-centred AI career platform organizing career intelligence, dynamic Career Twin graph models, and conversational mentor workflows.",
     impactSummary: "Engineered full-stack SaaS platform, conversational interaction design, and structured opportunity surfaces.",
-    mediaSrc: "/media/projects/careeros/careeros-portrait.svg",
+    mediaSrc: "/media/projects/careeros/hero/woman_looking_into_camera_lens.jpeg",
     mediaAlt: "CareerOS human intelligence platform showcase",
     tags: ["AI_PRODUCT", "SAAS", "INTERACTION_DESIGN", "GRAPH_UI"]
   },
@@ -187,7 +187,7 @@ const CURATED_PROOF_PROJECTS: CapabilityProofProject[] = [
     category: "SPATIAL DATA // PROPERTY INTELLIGENCE",
     description: "An institutional real estate intelligence platform synthesizing cadastral boundaries, planning permissions, and travel-time isochrones into an actionable decision interface.",
     impactSummary: "Engineered high-throughput spatial search engine, vector map tiling, and multi-criteria query interface.",
-    mediaSrc: "/media/projects/nestiq/nestiq-ui-preview.svg",
+    mediaSrc: "/media/projects/nestiq/interface/agent-dashboard-preview.png",
     mediaAlt: "NestIQ property intelligence decision interface",
     tags: ["SPATIAL_DATA", "SEARCH_ENGINE", "DECISION_UI", "VECTOR_MAP"]
   },
@@ -198,7 +198,7 @@ const CURATED_PROOF_PROJECTS: CapabilityProofProject[] = [
     category: "COMMERCIAL TRANSFORMATION // LEASING SHOWCASE",
     description: "Strategic commercial brand repositioning and editorial digital leasing platform transforming an architectural landmark into a modern showcase.",
     impactSummary: "Transformed static template brochure into high-resolution editorial floorplate experience with direct leasing enquiry funnel.",
-    mediaSrc: "/media/projects/ogn/ogn-new-desktop.svg",
+    mediaSrc: "/media/projects/ogn/ogn-industrial.svg",
     mediaAlt: "One Great Northern editorial leasing platform",
     tags: ["REPOSITIONING", "EDITORIAL", "WEB_DEVELOPMENT", "COMMERCIAL"]
   }

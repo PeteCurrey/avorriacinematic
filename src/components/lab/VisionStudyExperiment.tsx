@@ -27,7 +27,7 @@ const VISION_SAMPLES: VisionSample[] = [
     id: "sample-alkota",
     name: "Alkota Frame Geometry",
     category: "PHYSICAL CRAFTSMANSHIP & 3D TOPOLOGY",
-    imageSrc: "/media/projects/alkota/alkota-product-hero.svg",
+    imageSrc: "/media/projects/alkota/product/naked-carbon-hero.jpg",
     description: "Structural analysis of bespoke titanium bicycle tubing, weld fillets, and aerodynamic down-tube angles.",
     metrics: {
       gridColumns: "12-Col Modular",
@@ -45,7 +45,7 @@ const VISION_SAMPLES: VisionSample[] = [
     id: "sample-nestiq",
     name: "NestIQ Spatial Vector Map",
     category: "SPATIAL DATA & GEOGRAPHIC VECTORS",
-    imageSrc: "/media/projects/nestiq/nestiq-spatial-map.svg",
+    imageSrc: "/media/projects/nestiq/interface/agent-dashboard-preview.png",
     description: "Cadastral boundary indexing, travel-time isochrones, and spatial heat clustering across urban parcels.",
     metrics: {
       gridColumns: "Vector Quadtree",
@@ -63,7 +63,7 @@ const VISION_SAMPLES: VisionSample[] = [
     id: "sample-drawdown",
     name: "Drawdown Orderbook & Chart",
     category: "QUANTITATIVE DATA & FINANCIAL DENSITY",
-    imageSrc: "/media/projects/drawdown/drawdown-chart-hero.svg",
+    imageSrc: "/media/projects/drawdown/interface/dashboard.png",
     description: "High-density tick-level candlestick telemetry, risk boundary bands, and modular execution panels.",
     metrics: {
       gridColumns: "8-Col Telemetry",
@@ -81,7 +81,7 @@ const VISION_SAMPLES: VisionSample[] = [
     id: "sample-ogn",
     name: "One Great Northern Facade",
     category: "ARCHITECTURAL PROPORTION & LEASING UX",
-    imageSrc: "/media/projects/ogn/ogn-wall-hero.svg",
+    imageSrc: "/media/projects/ogn/ogn-industrial.svg",
     description: "Floorplate volume calculation, curtain-wall mullion spacing, and daylight penetration ratios.",
     metrics: {
       gridColumns: "Golden Ratio Cadence",

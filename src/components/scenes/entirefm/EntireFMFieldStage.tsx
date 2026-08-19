@@ -24,10 +24,10 @@ export function EntireFMFieldStage({ progress }: EntireFMFieldStageProps) {
       <div className="relative w-full max-w-[480px] h-[75vh] border border-avorria-line bg-avorria-surface shadow-2xl overflow-hidden flex flex-col justify-between p-4">
         <div className="relative w-full h-[85%] overflow-hidden">
           <Image
-            src="/media/projects/entirefm/entirefm-field-mobile.svg"
-            alt="EntireFM Field Technician View"
+            src="/media/projects/entirefm/entirefm-operational.svg"
+            alt="EntireFM Field Technician Operations"
             fill
-            className="object-contain"
+            className="object-cover"
           />
         </div>
 

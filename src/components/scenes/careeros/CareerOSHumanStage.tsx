@@ -24,7 +24,7 @@ export function CareerOSHumanStage({ progress }: CareerOSHumanStageProps) {
         style={{ transform: `scale(${scale})` }}
       >
         <Image
-          src="/media/projects/careeros/careeros-portrait.svg"
+          src="/media/projects/careeros/hero/woman_looking_into_camera_lens.jpeg"
           alt="CareerOS Human Portrait"
           fill
           priority
