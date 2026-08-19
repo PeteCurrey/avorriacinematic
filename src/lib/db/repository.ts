@@ -840,21 +840,451 @@ export async function seedDevelopmentFixture(): Promise<{
   };
 }
 
-export async function recordAIUsage(params: {
-  provider: string;
-  model: string;
-  task_key: string;
-  entity_type?: string;
-  entity_id?: string;
-  automation_job_id?: string;
-  input_tokens: number;
-  output_tokens: number;
-  cached_tokens?: number;
-  search_calls?: number;
-  latency_ms: number;
-  success: boolean;
-  error_code?: string;
-  estimated_cost?: number;
-}): Promise<void> {
-  // Telemetry event recorded
+
+
+
+// ============================================================================
+// PHASE 2 EXTENDED STATE — initialised lazily
+// ============================================================================
+
+// We extend the global state with Phase 2/3 entities using module-level state
+interface Phase2State {
+  targetingProfiles: TargetingProfile[];
+  scoutRuns: ScoutRun[];
+  suppressions: BusinessSuppression[];
+  businessSources: BusinessSource[];
+  websiteCaptures: WebsiteCapture[];
+  businessResearch: BusinessResearch[];
+  aiUsageEvents: AIUsageEvent[];
+  systemSettings: Map<string, string>;
+  // Phase 3
+  creativeBriefs: CreativeBrief[];
+  siteStrategies: SiteStrategy[];
+  siteProjects: SiteProject[];
+  siteVersions: SiteVersion[];
+  designReviews: DesignReview[];
+  previewLinks: PreviewLink[];
+  siteMedia: SiteMedia[];
+}
+
+import type {
+  TargetingProfile, ScoutRun, BusinessSuppression, BusinessSource,
+  WebsiteCapture, BusinessResearch, AIUsageEvent, AITaskConfig,
+  CreativeBrief, SiteStrategy, SiteProject, SiteVersion,
+  DesignReview, PreviewLink, SiteMedia,
+} from "@/types/admin";
+
+let _p2: Phase2State | null = null;
+function getP2(): Phase2State {
+  if (!_p2) {
+    _p2 = {
+      targetingProfiles: [defaultTargetingProfile()],
+      scoutRuns: [],
+      suppressions: [],
+      businessSources: [],
+      websiteCaptures: [],
+      businessResearch: [],
+      aiUsageEvents: [],
+      systemSettings: new Map([["ai_auto_paused", "false"]]),
+      creativeBriefs: [],
+      siteStrategies: [],
+      siteProjects: [],
+      siteVersions: [],
+      designReviews: [],
+      previewLinks: [],
+      siteMedia: [],
+    };
+  }
+  return _p2;
+}
+
+function defaultTargetingProfile(): TargetingProfile {
+  const now = new Date().toISOString();
+  return {
+    id: "default-profile",
+    name: "UK Local Businesses",
+    enabled: true,
+    countries: ["GB"],
+    regions: [],
+    cities: ["Sheffield", "Chesterfield", "Rotherham"],
+    postcode_areas: [],
+    radius_km: 30,
+    sectors: ["Automotive", "Plumbing", "Electrical", "Construction", "Landscaping", "Dental"],
+    sub_sectors: [],
+    excluded_sectors: [],
+    excluded_domains: [],
+    min_google_rating: 3.8,
+    min_review_count: 5,
+    max_website_quality_score: 60,
+    min_opportunity_score: 65,
+    max_prospects_per_run: 10,
+    max_qualified_per_day: 5,
+    max_search_operations: 10,
+    max_ai_spend_per_run: 1.50,
+    max_daily_ai_spend: 5.00,
+    priority: 5,
+    notes: "Default targeting profile",
+    created_by: "system",
+    created_at: now,
+    updated_at: now,
+  };
+}
+
+// ── TARGETING PROFILES ────────────────────────────────────────────────────────
+
+export async function getTargetingProfiles(): Promise<TargetingProfile[]> {
+  return [...getP2().targetingProfiles];
+}
+export async function getTargetingProfile(id: string): Promise<TargetingProfile | null> {
+  return getP2().targetingProfiles.find(p => p.id === id) ?? null;
+}
+export async function createTargetingProfile(data: Omit<TargetingProfile, "id" | "created_at" | "updated_at">): Promise<TargetingProfile> {
+  const now = new Date().toISOString();
+  const profile: TargetingProfile = { ...data, id: crypto.randomUUID(), created_at: now, updated_at: now };
+  getP2().targetingProfiles.push(profile);
+  return profile;
+}
+export async function updateTargetingProfile(id: string, updates: Partial<TargetingProfile>): Promise<TargetingProfile> {
+  const p2 = getP2();
+  const idx = p2.targetingProfiles.findIndex(p => p.id === id);
+  if (idx === -1) throw new Error(`TargetingProfile ${id} not found`);
+  p2.targetingProfiles[idx] = { ...p2.targetingProfiles[idx], ...updates, updated_at: new Date().toISOString() };
+  return p2.targetingProfiles[idx];
+}
+
+// ── SCOUT RUNS ────────────────────────────────────────────────────────────────
+
+export async function getScoutRuns(limit = 50): Promise<ScoutRun[]> {
+  return [...getP2().scoutRuns].sort((a, b) => b.created_at.localeCompare(a.created_at)).slice(0, limit);
+}
+export async function getScoutRun(id: string): Promise<ScoutRun | null> {
+  return getP2().scoutRuns.find(r => r.id === id) ?? null;
+}
+export async function createScoutRun(data: Omit<ScoutRun, "id" | "created_at">): Promise<ScoutRun> {
+  const run: ScoutRun = { ...data, id: crypto.randomUUID(), created_at: new Date().toISOString() };
+  getP2().scoutRuns.push(run);
+  return run;
+}
+export async function updateScoutRun(id: string, updates: Partial<ScoutRun>): Promise<ScoutRun> {
+  const p2 = getP2();
+  const idx = p2.scoutRuns.findIndex(r => r.id === id);
+  if (idx === -1) throw new Error(`ScoutRun ${id} not found`);
+  p2.scoutRuns[idx] = { ...p2.scoutRuns[idx], ...updates };
+  return p2.scoutRuns[idx];
+}
+
+// ── SUPPRESSIONS ───────────────────────────────────────────────────────────────
+
+export async function getSuppressions(): Promise<BusinessSuppression[]> {
+  return [...getP2().suppressions];
+}
+export async function getSuppression(domain: string): Promise<BusinessSuppression | null> {
+  return getP2().suppressions.find(s => s.domain === domain) ?? null;
+}
+export async function addSuppression(data: Omit<BusinessSuppression, "id" | "created_at">): Promise<BusinessSuppression> {
+  const s: BusinessSuppression = { ...data, id: crypto.randomUUID(), created_at: new Date().toISOString() };
+  getP2().suppressions.push(s);
+  return s;
+}
+
+// ── BUSINESS SOURCES ──────────────────────────────────────────────────────────
+
+export async function getBusinessSources(businessId: string): Promise<BusinessSource[]> {
+  return getP2().businessSources.filter(s => s.business_id === businessId);
+}
+export async function addBusinessSource(data: Omit<BusinessSource, "id">): Promise<BusinessSource> {
+  const s: BusinessSource = { ...data, id: crypto.randomUUID() };
+  getP2().businessSources.push(s);
+  return s;
+}
+
+// ── WEBSITE CAPTURES ──────────────────────────────────────────────────────────
+
+export async function getWebsiteCaptures(businessId: string): Promise<WebsiteCapture[]> {
+  return getP2().websiteCaptures.filter(c => c.business_id === businessId);
+}
+export async function saveWebsiteCapture(data: Omit<WebsiteCapture, "id">): Promise<WebsiteCapture> {
+  const c: WebsiteCapture = { ...data, id: crypto.randomUUID() };
+  getP2().websiteCaptures.push(c);
+  return c;
+}
+
+// ── BUSINESS RESEARCH ─────────────────────────────────────────────────────────
+
+export async function getBusinessResearch(businessId: string): Promise<BusinessResearch[]> {
+  return getP2().businessResearch.filter(r => r.business_id === businessId);
+}
+export async function getLatestBusinessResearch(businessId: string): Promise<BusinessResearch | null> {
+  const records = getP2().businessResearch
+    .filter(r => r.business_id === businessId)
+    .sort((a, b) => b.research_version - a.research_version);
+  return records[0] ?? null;
+}
+export async function saveBusinessResearch(data: Omit<BusinessResearch, "id">): Promise<BusinessResearch> {
+  const r: BusinessResearch = { ...data, id: crypto.randomUUID() };
+  getP2().businessResearch.push(r);
+  return r;
+}
+
+// ── AI USAGE ──────────────────────────────────────────────────────────────────
+
+export async function recordAIUsage(data: Omit<AIUsageEvent, "id" | "created_at">): Promise<void> {
+  const event: AIUsageEvent = { ...data, id: crypto.randomUUID(), created_at: new Date().toISOString() };
+  getP2().aiUsageEvents.push(event);
+  // Keep last 1000 events to avoid unbounded memory growth
+  const events = getP2().aiUsageEvents;
+  if (events.length > 1000) events.splice(0, events.length - 1000);
+}
+
+export async function getAIUsageEvents(opts: { limit?: number; provider?: string; taskKey?: string } = {}): Promise<AIUsageEvent[]> {
+  let events = [...getP2().aiUsageEvents];
+  if (opts.provider) events = events.filter(e => e.provider === opts.provider);
+  if (opts.taskKey) events = events.filter(e => e.task_key === opts.taskKey);
+  return events.sort((a, b) => b.created_at.localeCompare(a.created_at)).slice(0, opts.limit ?? 100);
+}
+
+export async function getAIUsageSummary(): Promise<{
+  todayTokens: number; todayCost: number; monthCost: number;
+  byProvider: Record<string, { calls: number; tokens: number; cost: number }>;
+  byTask: Record<string, { calls: number; avgLatency: number; cost: number }>;
+}> {
+  const events = getP2().aiUsageEvents;
+  const now = new Date();
+  const todayStr = now.toISOString().slice(0, 10);
+  const monthStr = now.toISOString().slice(0, 7);
+
+  const todayEvents  = events.filter(e => e.created_at.startsWith(todayStr));
+  const monthEvents  = events.filter(e => e.created_at.startsWith(monthStr));
+
+  const byProvider: Record<string, { calls: number; tokens: number; cost: number }> = {};
+  const byTask:     Record<string, { calls: number; totalLatency: number; cost: number }> = {};
+
+  for (const e of events) {
+    const p = byProvider[e.provider] ?? { calls: 0, tokens: 0, cost: 0 };
+    p.calls++; p.tokens += e.input_tokens + e.output_tokens; p.cost += e.estimated_cost;
+    byProvider[e.provider] = p;
+
+    const t = byTask[e.task_key] ?? { calls: 0, totalLatency: 0, cost: 0 };
+    t.calls++; t.totalLatency += e.latency_ms; t.cost += e.estimated_cost;
+    byTask[e.task_key] = t;
+  }
+
+  return {
+    todayTokens: todayEvents.reduce((s, e) => s + e.input_tokens + e.output_tokens, 0),
+    todayCost:   todayEvents.reduce((s, e) => s + e.estimated_cost, 0),
+    monthCost:   monthEvents.reduce((s, e) => s + e.estimated_cost, 0),
+    byProvider,
+    byTask: Object.fromEntries(
+      Object.entries(byTask).map(([k, v]) => [k, { calls: v.calls, avgLatency: v.calls > 0 ? v.totalLatency / v.calls : 0, cost: v.cost }])
+    ),
+  };
+}
+
+// ── SYSTEM SETTINGS ───────────────────────────────────────────────────────────
+
+export async function getAiAutoSystemPaused(): Promise<boolean> {
+  return getP2().systemSettings.get("ai_auto_paused") === "true";
+}
+export async function setAiAutoSystemPaused(paused: boolean, by: string): Promise<void> {
+  getP2().systemSettings.set("ai_auto_paused", paused ? "true" : "false");
+  void by;
+}
+
+// ── PHASE 3: CREATIVE BRIEFS ──────────────────────────────────────────────────
+
+export async function getCreativeBriefs(prospectId?: string): Promise<CreativeBrief[]> {
+  const p2 = getP2();
+  if (prospectId) return p2.creativeBriefs.filter(b => b.prospect_id === prospectId);
+  return [...p2.creativeBriefs].sort((a, b) => b.created_at.localeCompare(a.created_at));
+}
+export async function getCreativeBrief(id: string): Promise<CreativeBrief | null> {
+  return getP2().creativeBriefs.find(b => b.id === id) ?? null;
+}
+export async function saveCreativeBrief(data: Omit<CreativeBrief, "created_at"> & { id?: string }): Promise<CreativeBrief> {
+  const p2 = getP2();
+  const brief: CreativeBrief = { ...data, id: data.id ?? crypto.randomUUID(), created_at: new Date().toISOString() };
+  const idx = p2.creativeBriefs.findIndex(b => b.id === brief.id);
+  if (idx >= 0) p2.creativeBriefs[idx] = brief;
+  else p2.creativeBriefs.push(brief);
+  return brief;
+}
+export async function updateCreativeBrief(id: string, updates: Partial<CreativeBrief>): Promise<CreativeBrief> {
+  const p2 = getP2();
+  const idx = p2.creativeBriefs.findIndex(b => b.id === id);
+  if (idx === -1) throw new Error(`CreativeBrief ${id} not found`);
+  p2.creativeBriefs[idx] = { ...p2.creativeBriefs[idx], ...updates };
+  return p2.creativeBriefs[idx];
+}
+
+// ── PHASE 3: SITE PROJECTS ────────────────────────────────────────────────────
+
+export async function getSiteProjects(status?: string): Promise<SiteProject[]> {
+  const p2 = getP2();
+  let projects = [...p2.siteProjects];
+  if (status) projects = projects.filter(p => p.status === status);
+  return projects.sort((a, b) => b.updated_at.localeCompare(a.updated_at));
+}
+export async function getSiteProject(id: string): Promise<SiteProject | null> {
+  return getP2().siteProjects.find(p => p.id === id) ?? null;
+}
+export async function getSiteProjectBySlug(slug: string): Promise<SiteProject | null> {
+  return getP2().siteProjects.find(p => p.slug === slug) ?? null;
+}
+export async function createSiteProject(data: Omit<SiteProject, "id" | "created_at" | "updated_at">): Promise<SiteProject> {
+  const now = new Date().toISOString();
+  const project: SiteProject = { ...data, id: crypto.randomUUID(), created_at: now, updated_at: now };
+  getP2().siteProjects.push(project);
+  return project;
+}
+export async function updateSiteProject(id: string, updates: Partial<SiteProject>): Promise<SiteProject> {
+  const p2 = getP2();
+  const idx = p2.siteProjects.findIndex(p => p.id === id);
+  if (idx === -1) throw new Error(`SiteProject ${id} not found`);
+  p2.siteProjects[idx] = { ...p2.siteProjects[idx], ...updates, updated_at: new Date().toISOString() };
+  return p2.siteProjects[idx];
+}
+
+// ── PHASE 3: SITE VERSIONS ────────────────────────────────────────────────────
+
+export async function getSiteVersions(projectId: string): Promise<SiteVersion[]> {
+  return getP2().siteVersions
+    .filter(v => v.site_project_id === projectId)
+    .sort((a, b) => b.version - a.version);
+}
+export async function getSiteVersion(id: string): Promise<SiteVersion | null> {
+  return getP2().siteVersions.find(v => v.id === id) ?? null;
+}
+export async function saveSiteVersion(data: SiteVersion): Promise<SiteVersion> {
+  const p2 = getP2();
+  const idx = p2.siteVersions.findIndex(v => v.id === data.id);
+  if (idx >= 0) p2.siteVersions[idx] = data;
+  else p2.siteVersions.push(data);
+  return data;
+}
+
+// ── PHASE 3: DESIGN REVIEWS ────────────────────────────────────────────────────
+
+export async function getDesignReviews(projectId: string): Promise<DesignReview[]> {
+  return getP2().designReviews
+    .filter(r => r.site_project_id === projectId)
+    .sort((a, b) => b.created_at.localeCompare(a.created_at));
+}
+export async function saveDesignReview(data: Omit<DesignReview, "id" | "created_at">): Promise<DesignReview> {
+  const review: DesignReview = { ...data, id: crypto.randomUUID(), created_at: new Date().toISOString() };
+  getP2().designReviews.push(review);
+  return review;
+}
+
+// ── PHASE 3: PREVIEW LINKS ────────────────────────────────────────────────────
+
+export async function getPreviewLinkByToken(token: string): Promise<PreviewLink | null> {
+  return getP2().previewLinks.find(l => l.token === token && l.status === "active") ?? null;
+}
+export async function getPreviewLinksByProject(projectId: string): Promise<PreviewLink[]> {
+  return getP2().previewLinks.filter(l => l.site_project_id === projectId);
+}
+export async function createPreviewLink(projectId: string, opts: { expiresInDays?: number; presentationMode?: boolean } = {}): Promise<PreviewLink> {
+  const token = generateSecureToken();
+  const expiresAt = opts.expiresInDays
+    ? new Date(Date.now() + opts.expiresInDays * 86400_000).toISOString()
+    : null;
+  const link: PreviewLink = {
+    id: crypto.randomUUID(),
+    site_project_id: projectId,
+    token,
+    status: "active",
+    expires_at: expiresAt,
+    presentation_mode: opts.presentationMode ?? true,
+    view_count: 0,
+    created_at: new Date().toISOString(),
+  };
+  getP2().previewLinks.push(link);
+  return link;
+}
+export async function incrementPreviewLinkView(token: string): Promise<void> {
+  const p2 = getP2();
+  const idx = p2.previewLinks.findIndex(l => l.token === token);
+  if (idx === -1) return;
+  const now = new Date().toISOString();
+  p2.previewLinks[idx] = {
+    ...p2.previewLinks[idx],
+    view_count: p2.previewLinks[idx].view_count + 1,
+    last_viewed_at: now,
+    first_viewed_at: p2.previewLinks[idx].first_viewed_at ?? now,
+  };
+}
+export async function revokePreviewLink(token: string): Promise<void> {
+  const p2 = getP2();
+  const idx = p2.previewLinks.findIndex(l => l.token === token);
+  if (idx === -1) return;
+  p2.previewLinks[idx] = { ...p2.previewLinks[idx], status: "revoked", revoked_at: new Date().toISOString() };
+}
+
+// ── PHASE 3: SITE MEDIA ────────────────────────────────────────────────────────
+
+export async function getSiteMedia(projectId: string): Promise<SiteMedia[]> {
+  return getP2().siteMedia.filter(m => m.site_project_id === projectId);
+}
+export async function saveSiteMedia(data: Omit<SiteMedia, "id" | "created_at">): Promise<SiteMedia> {
+  const media: SiteMedia = { ...data, id: crypto.randomUUID(), created_at: new Date().toISOString() };
+  getP2().siteMedia.push(media);
+  return media;
+}
+
+// ── PHASE 3: SITE STRATEGIES ──────────────────────────────────────────────────
+
+export async function getSiteStrategy(id: string): Promise<SiteStrategy | null> {
+  return getP2().siteStrategies.find(s => s.id === id) ?? null;
+}
+export async function getSiteStrategiesByProspect(prospectId: string): Promise<SiteStrategy[]> {
+  return getP2().siteStrategies.filter(s => s.prospect_id === prospectId).sort((a, b) => b.version - a.version);
+}
+export async function saveSiteStrategy(data: Omit<SiteStrategy, "id" | "created_at">): Promise<SiteStrategy> {
+  const strategy: SiteStrategy = { ...data, id: crypto.randomUUID(), created_at: new Date().toISOString() };
+  getP2().siteStrategies.push(strategy);
+  return strategy;
+}
+
+// ── SECURE TOKEN GENERATION ────────────────────────────────────────────────────
+
+function generateSecureToken(length = 12): string {
+  const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+  let token = "";
+  // Use Math.random as a fallback (crypto.randomUUID provides the UUID uniqueness)
+  for (let i = 0; i < length; i++) {
+    token += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return token;
+}
+
+// ── FACTORY PIPELINE HELPERS ──────────────────────────────────────────────────
+
+/** Get a site project with all hydrated relations */
+export async function getSiteProjectHydrated(id: string): Promise<SiteProject | null> {
+  const project = await getSiteProject(id);
+  if (!project) return null;
+
+  const hydrated = { ...project };
+  if (project.creative_brief_id) {
+    hydrated.creative_brief = await getCreativeBrief(project.creative_brief_id) ?? undefined;
+  }
+  if (project.current_version_id) {
+    hydrated.current_version = await getSiteVersion(project.current_version_id) ?? undefined;
+  }
+  const reviews = await getDesignReviews(id);
+  if (reviews.length > 0) hydrated.latest_design_review = reviews[0];
+
+  return hydrated;
+}
+
+/** Compute total AI cost for a site project */
+export async function getSiteProjectAICost(projectId: string): Promise<{ total: number; byPhase: Record<string, number> }> {
+  const events = getP2().aiUsageEvents.filter(e => e.entity_id === projectId || e.entity_type === "site_project");
+  const byPhase: Record<string, number> = {};
+  let total = 0;
+  for (const e of events) {
+    byPhase[e.task_key] = (byPhase[e.task_key] ?? 0) + e.estimated_cost;
+    total += e.estimated_cost;
+  }
+  return { total, byPhase };
 }
