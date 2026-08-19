@@ -4,8 +4,8 @@ import { STUDIO_INFO } from "@/content/studio";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = generatePageMetadata({
-  title: "Contact",
-  description: "Direct studio contact details for Avorria.",
+  title: "Contact — Commission Enquiries & Studio Communications | Avorria",
+  description: "Direct contact for new project commissions, strategic enquiries, and studio communications. Avorria responds to all qualified project briefs.",
   path: "/contact"
 });
 

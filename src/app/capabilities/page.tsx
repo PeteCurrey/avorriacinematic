@@ -4,8 +4,8 @@ import { CAPABILITIES } from "@/content/capabilities";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = generatePageMetadata({
-  title: "Studio Capabilities",
-  description: "High-end digital design, front-end engineering, technical search architecture, and autonomous AI systems.",
+  title: "Capabilities — Build, Search & Systems | Avorria",
+  description: "Three unified engineering disciplines: digital product engineering (Build), technical search architecture (Search), and AI-assisted operational software (Systems).",
   path: "/capabilities"
 });
 

@@ -165,6 +165,7 @@ export const WORK_PORTFOLIO: WorkProject[] = [
   // SELECTED WORK (SECONDARY CURATED SET)
   // ==========================================
   {
+    projectIndex: "SELECTED // AESUK",
     slug: "aesuk",
     title: "AESUK",
     shortTitle: "AESUK",
@@ -173,18 +174,24 @@ export const WORK_PORTFOLIO: WorkProject[] = [
     tier: "SELECTED",
     relationship: "CLIENT",
     status: "LIVE",
-    caseStudyAvailable: false,
+    caseStudyAvailable: true,
     externalUrl: "https://aesuk.co",
     capabilities: ["BUILD", "TECHNICAL VISIBILITY"],
+    role: "Digital platform engineering, industrial energy sizing engine, and technical SEO architecture",
     year: 2024,
     heroMedia: "/media/projects/aesuk/aesuk-hero.svg",
     aspectRatio: "4/3",
     colStart: 1,
     colSpan: 7,
     mediaStatus: "FINAL",
+    palette: {
+      accent: "#10B981",
+      surface: "#0C0E14"
+    },
     shortSummary: "Renewable energy engineering systems and commercial installation platform for solar and storage."
   },
   {
+    projectIndex: "SELECTED // TRAVIS GPS",
     slug: "travis-gps",
     title: "Travis GPS",
     shortTitle: "Travis GPS",
@@ -193,17 +200,23 @@ export const WORK_PORTFOLIO: WorkProject[] = [
     tier: "SELECTED",
     relationship: "CLIENT",
     status: "LIVE",
-    caseStudyAvailable: false,
+    caseStudyAvailable: true,
     capabilities: ["SYSTEMS", "IOT INTERFACE"],
+    role: "Real-time telematics dashboard, geofence event engine, and IoT hardware data ingestion",
     year: 2023,
     heroMedia: "/media/projects/travis/travis-hero.svg",
     aspectRatio: "1/1",
     colStart: 8,
     colSpan: 5,
     mediaStatus: "FINAL",
+    palette: {
+      accent: "#38BDF8",
+      surface: "#0B101B"
+    },
     shortSummary: "Real-time fleet tracking hardware integration with responsive management console."
   },
   {
+    projectIndex: "SELECTED // STEWARD",
     slug: "steward-farming",
     title: "Steward Farming",
     shortTitle: "Steward",
@@ -212,17 +225,23 @@ export const WORK_PORTFOLIO: WorkProject[] = [
     tier: "SELECTED",
     relationship: "CLIENT",
     status: "LIVE",
-    caseStudyAvailable: false,
+    caseStudyAvailable: true,
     capabilities: ["BUILD", "DATA SYSTEMS"],
+    role: "Spatial parcel heatmap UI, soil carbon measurement engine, and farmer mobile data capture",
     year: 2023,
     heroMedia: "/media/projects/steward/steward-hero.svg",
     aspectRatio: "16/10",
     colStart: 1,
     colSpan: 5,
     mediaStatus: "FINAL",
+    palette: {
+      accent: "#84CC16",
+      surface: "#0D1309"
+    },
     shortSummary: "Ecological data visualisations and farmer portal for measuring soil carbon capture."
   },
   {
+    projectIndex: "SELECTED // AMPLIOS",
     slug: "amplios",
     title: "Amplios",
     shortTitle: "Amplios",
@@ -231,14 +250,19 @@ export const WORK_PORTFOLIO: WorkProject[] = [
     tier: "SELECTED",
     relationship: "CLIENT",
     status: "LIVE",
-    caseStudyAvailable: false,
+    caseStudyAvailable: true,
     capabilities: ["BUILD", "SEARCH ARCHITECTURE"],
+    role: "Clinical trial portal, patient pre-screener eligibility engine, and regulatory search taxonomy",
     year: 2023,
     heroMedia: "/media/projects/amplios/amplios-hero.svg",
     aspectRatio: "4/3",
     colStart: 6,
     colSpan: 7,
     mediaStatus: "FINAL",
+    palette: {
+      accent: "#2DD4BF",
+      surface: "#0A1214"
+    },
     shortSummary: "Secure digital infrastructure for clinical operations, patient recruitment, and trial management."
   },
 

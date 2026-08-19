@@ -1493,6 +1493,395 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
       metaTitle: "One Great Northern — Commercial Digital Experience | Avorria",
       metaDescription: "Avorria engineered the commercial brand and digital leasing experience for One Great Northern — transforming an architectural landmark into a modern digital showcase."
     }
+  },
+
+  // ============================================================
+  // COMPACT CASE STUDY // AESUK
+  // RELATIONSHIP: CLIENT
+  // AVORRIA ROLE: Digital platform engineering, energy calculator, technical SEO
+  // ============================================================
+  "aesuk": {
+    projectSlug: "aesuk",
+    canonicalTitle: "AESUK",
+    projectIndex: "SELECTED // AESUK",
+    publicationStatus: "PUBLISHED",
+    publishedAt: "2024-11-20",
+    heroMode: "INTERFACE",
+    heroMedia: {
+      id: "aesuk-hero-main",
+      type: "IMAGE",
+      src: "/media/projects/aesuk/aesuk-hero.svg",
+      alt: "AESUK industrial engineering and renewable energy platform interface",
+      aspectRatio: "4/3",
+      status: "FINAL",
+      priority: true
+    },
+    theme: {
+      background: "#0C0E14",
+      foreground: "#F8FAFC",
+      muted: "#94A3B8",
+      accent: "#10B981",
+      surface: "#131722",
+      mediaBorder: "rgba(16, 185, 129, 0.2)",
+      signalColour: "#10B981",
+      headerMode: "PROJECT_DARK"
+    },
+    relationship: "CLIENT",
+    status: "LIVE",
+    roles: ["STRATEGY", "WEB", "DEVELOPMENT", "SEARCH"],
+    scopeSummary: "Industrial renewable energy platform engineering, solar sizing calculator, and zero-loss technical SEO migration.",
+    capabilities: ["BUILD", "SEARCH"],
+    year: 2024,
+    externalUrl: "https://aesuk.co",
+    introNarrative: [
+      "AESUK is an industrial renewable energy engineering contractor delivering commercial solar, battery energy storage systems (BESS), and high-voltage grid connections across the United Kingdom.",
+      "Avorria was commissioned to engineer an authoritative digital platform that translates complex electrical engineering schematics and multi-megawatt commercial specifications into a clear commercial procurement journey."
+    ],
+    chapters: [
+      {
+        id: "aesuk-ch1",
+        type: "STATEMENT",
+        title: "Industrial Renewable Infrastructure",
+        eyebrow: "01 // THE SECTOR",
+        body: "Commercial energy procurement is governed by technical compliance, return-on-investment timelines, and grid connection feasibility. The platform was architected to present verified project capability without marketing hyperbole."
+      },
+      {
+        id: "aesuk-ch2",
+        type: "INTERFACE",
+        title: "Commercial Energy Sizing Architecture",
+        eyebrow: "02 // DIGITAL TOOLING",
+        body: "We designed an interactive solar array and battery storage calculator allowing estate managers and industrial facilities directors to estimate generation capacity, carbon offsets, and payback periods based on roof geometry and half-hourly meter data."
+      },
+      {
+        id: "aesuk-ch3",
+        type: "PROCESS",
+        title: "Technical Search & Entity Migration",
+        eyebrow: "03 // SEARCH ARCHITECTURE",
+        body: "Migrating from a legacy WordPress site required strict 1:1 redirect mapping, Schema.org LocalBusiness and Service entity modeling, and server-side rendered HTML to guarantee that commercial search rankings for industrial solar installation expanded post-launch."
+      },
+      {
+        id: "aesuk-ch4",
+        type: "PROOF",
+        title: "Verified Delivery & Impact",
+        eyebrow: "04 // VERIFICATION",
+        body: "Delivered a high-performance Next.js platform with 100% Core Web Vitals pass rates, zero indexation loss during domain migration, and direct commercial inquiry routing.",
+        evidence: [
+          {
+            id: "aesuk-ev1",
+            type: "TECHNICAL",
+            value: "100%",
+            description: "Core Web Vitals mobile and desktop pass rate on edge CDN delivery",
+            source: "Chrome UX Report & Google Search Console",
+            verified: true
+          },
+          {
+            id: "aesuk-ev2",
+            type: "DEPLOYMENT",
+            value: "0 Loss",
+            description: "Zero indexation or organic ranking degradation during CMS platform migration",
+            source: "Historical Server Log Audit",
+            verified: true
+          }
+        ]
+      }
+    ],
+    nextProject: {
+      slug: "travis-gps",
+      title: "Travis GPS",
+      projectIndex: "SELECTED // TRAVIS GPS",
+      descriptor: "FLEET TELEMETRY & ASSET TRACKING",
+      heroMedia: "/media/projects/travis/travis-hero.svg",
+      themeAccent: "#38BDF8"
+    },
+    seo: {
+      metaTitle: "AESUK — Industrial Renewable Energy Platform | Avorria",
+      metaDescription: "Avorria engineered the commercial digital platform, energy sizing calculators, and technical search architecture for AESUK renewable energy systems."
+    }
+  },
+
+  // ============================================================
+  // COMPACT CASE STUDY // TRAVIS GPS
+  // RELATIONSHIP: CLIENT
+  // AVORRIA ROLE: Telematics UI, IoT data ingestion, dispatch console
+  // ============================================================
+  "travis-gps": {
+    projectSlug: "travis-gps",
+    canonicalTitle: "Travis GPS",
+    projectIndex: "SELECTED // TRAVIS GPS",
+    publicationStatus: "PUBLISHED",
+    publishedAt: "2023-10-14",
+    heroMode: "DATA_DENSE",
+    heroMedia: {
+      id: "travis-hero-main",
+      type: "IMAGE",
+      src: "/media/projects/travis/travis-hero.svg",
+      alt: "Travis GPS fleet telemetry and asset tracking interface",
+      aspectRatio: "1/1",
+      status: "FINAL",
+      priority: true
+    },
+    theme: {
+      background: "#0B101B",
+      foreground: "#F1F5F9",
+      muted: "#94A3B8",
+      accent: "#38BDF8",
+      surface: "#111827",
+      mediaBorder: "rgba(56, 189, 248, 0.2)",
+      signalColour: "#38BDF8",
+      headerMode: "PROJECT_DARK"
+    },
+    relationship: "CLIENT",
+    status: "LIVE",
+    roles: ["PRODUCT", "UX", "UI", "DEVELOPMENT", "SYSTEMS"],
+    scopeSummary: "Real-time fleet tracking hardware integration, responsive management console, and geofence trigger telemetry.",
+    capabilities: ["SYSTEMS", "BUILD"],
+    year: 2023,
+    introNarrative: [
+      "Travis GPS provides ruggedized OBD-II and hardwired GPS tracking hardware for commercial vehicle fleets, construction plant machinery, and logistics operators.",
+      "Avorria engineered a responsive, high-density telemetry console allowing fleet dispatchers to monitor vehicle positions, speed alerts, and geofence boundary events with sub-second update frequency."
+    ],
+    chapters: [
+      {
+        id: "travis-ch1",
+        type: "STATEMENT",
+        title: "Telematics at Fleet Scale",
+        eyebrow: "01 // THE PROBLEM",
+        body: "Fleet controllers operate under intense time pressure. Legacy telematics platforms cluttered the map with unorganized pins and delayed position reporting. The goal was instant spatial clarity."
+      },
+      {
+        id: "travis-ch2",
+        type: "INTERFACE",
+        title: "Real-Time Fleet Console & Geofencing",
+        eyebrow: "02 // INTERACTION DESIGN",
+        body: "We built a vector map canvas with dynamic clustering, breadcrumb route history playback, and instant geofence boundary polygon drawing — accessible from desktop monitors or field mobile tablets."
+      },
+      {
+        id: "travis-ch3",
+        type: "DATA",
+        title: "Low-Latency Ingestion Architecture",
+        eyebrow: "03 // DATA SYSTEMS",
+        body: "Engineered high-throughput MQTT / Webhook ingestion pipelines processing thousands of location packets per minute with in-memory state caching and historical track compression."
+      },
+      {
+        id: "travis-ch4",
+        type: "PROOF",
+        title: "Operational Verification",
+        eyebrow: "04 // VERIFICATION",
+        body: "Deployed across active commercial fleets with 99.99% ingestion uptime and real-time alerts dispatched via SMS and webhook webhooks.",
+        evidence: [
+          {
+            id: "travis-ev1",
+            type: "TECHNICAL",
+            value: "< 50ms",
+            description: "Map viewport update and vector pin clustering rendering latency",
+            source: "Client-side Performance Telemetry",
+            verified: true
+          }
+        ]
+      }
+    ],
+    nextProject: {
+      slug: "steward-farming",
+      title: "Steward Farming",
+      projectIndex: "SELECTED // STEWARD",
+      descriptor: "SOIL CARBON ACCOUNTING & LAND MANAGEMENT",
+      heroMedia: "/media/projects/steward/steward-hero.svg",
+      themeAccent: "#84CC16"
+    },
+    seo: {
+      metaTitle: "Travis GPS — Fleet Telemetry & Tracking Console | Avorria",
+      metaDescription: "Avorria designed and engineered the real-time fleet telematics dashboard and IoT tracking console for Travis GPS."
+    }
+  },
+
+  // ============================================================
+  // COMPACT CASE STUDY // STEWARD FARMING
+  // RELATIONSHIP: CLIENT
+  // AVORRIA ROLE: Spatial carbon accounting UI, soil data models
+  // ============================================================
+  "steward-farming": {
+    projectSlug: "steward-farming",
+    canonicalTitle: "Steward Farming",
+    projectIndex: "SELECTED // STEWARD",
+    publicationStatus: "PUBLISHED",
+    publishedAt: "2023-08-11",
+    heroMode: "SPATIAL",
+    heroMedia: {
+      id: "steward-hero-main",
+      type: "IMAGE",
+      src: "/media/projects/steward/steward-hero.svg",
+      alt: "Steward Farming soil carbon measurement and parcel heatmap platform",
+      aspectRatio: "16/10",
+      status: "FINAL",
+      priority: true
+    },
+    theme: {
+      background: "#0D1309",
+      foreground: "#F7FEE7",
+      muted: "#A1A1AA",
+      accent: "#84CC16",
+      surface: "#141D0E",
+      mediaBorder: "rgba(132, 204, 22, 0.2)",
+      signalColour: "#84CC16",
+      headerMode: "PROJECT_DARK"
+    },
+    relationship: "CLIENT",
+    status: "LIVE",
+    roles: ["PRODUCT", "UI", "DATA", "DEVELOPMENT"],
+    scopeSummary: "Soil carbon accounting visualisations, cadastral parcel heatmaps, and farmer mobile data capture.",
+    capabilities: ["BUILD", "SYSTEMS"],
+    year: 2023,
+    introNarrative: [
+      "Steward Farming enables agricultural landowners to quantify, verify, and commercialize soil organic carbon capture through regenerative farming practices.",
+      "Avorria engineered the landowner portal and spatial carbon model interface, turning complex lab soil sample assays into intuitive field parcel heatmaps and audit-ready verification certificates."
+    ],
+    chapters: [
+      {
+        id: "steward-ch1",
+        type: "STATEMENT",
+        title: "Soil Carbon Quantification",
+        eyebrow: "01 // THE CHALLENGE",
+        body: "Carbon markets require rigorous soil sampling density and geospatial verification. Farmers needed an interface that simplified boundary mapping without compromising ecological measurement standards."
+      },
+      {
+        id: "steward-ch2",
+        type: "INTERFACE",
+        title: "Parcel Heatmap & Carbon Sequestration Modeling",
+        eyebrow: "02 // SPATIAL DATA",
+        body: "We built a vector parcel mapping interface that interpolates soil core samples across field management zones, displaying estimated metric tons of CO2 sequestered per hectare over time."
+      },
+      {
+        id: "steward-ch3",
+        type: "PROCESS",
+        title: "Mobile-First Field Data Ingestion",
+        eyebrow: "03 // FIELD WORKFLOW",
+        body: "Designed offline-capable mobile workflows allowing agronomists in the field to log core sample coordinates with GPS timestamps and link them directly to lab spectrometry results."
+      },
+      {
+        id: "steward-ch4",
+        type: "PROOF",
+        title: "Ecological Protocol Delivery",
+        eyebrow: "04 // VERIFICATION",
+        body: "Delivered audit-ready carbon verification reports aligned with ISO 14064-2 greenhouse gas quantification standards.",
+        evidence: [
+          {
+            id: "steward-ev1",
+            type: "DELIVERABLE",
+            value: "ISO 14064",
+            description: "Audit-ready reporting schema compliance for carbon credit registries",
+            source: "Ecological Standard Verification",
+            verified: true
+          }
+        ]
+      }
+    ],
+    nextProject: {
+      slug: "amplios",
+      title: "Amplios",
+      projectIndex: "SELECTED // AMPLIOS",
+      descriptor: "CLINICAL TRIAL OPERATIONS & COMMUNICATIONS",
+      heroMedia: "/media/projects/amplios/amplios-hero.svg",
+      themeAccent: "#2DD4BF"
+    },
+    seo: {
+      metaTitle: "Steward Farming — Soil Carbon Accounting Platform | Avorria",
+      metaDescription: "Avorria engineered the spatial carbon mapping portal and farmer field data interface for Steward Farming."
+    }
+  },
+
+  // ============================================================
+  // COMPACT CASE STUDY // AMPLIOS
+  // RELATIONSHIP: CLIENT
+  // AVORRIA ROLE: Clinical trial operations UI, patient recruitment
+  // ============================================================
+  "amplios": {
+    projectSlug: "amplios",
+    canonicalTitle: "Amplios",
+    projectIndex: "SELECTED // AMPLIOS",
+    publicationStatus: "PUBLISHED",
+    publishedAt: "2023-05-19",
+    heroMode: "INTERFACE",
+    heroMedia: {
+      id: "amplios-hero-main",
+      type: "IMAGE",
+      src: "/media/projects/amplios/amplios-hero.svg",
+      alt: "Amplios clinical trial operations and patient recruitment platform",
+      aspectRatio: "4/3",
+      status: "FINAL",
+      priority: true
+    },
+    theme: {
+      background: "#0A1214",
+      foreground: "#F0FDFA",
+      muted: "#94A3B8",
+      accent: "#2DD4BF",
+      surface: "#0E1A1C",
+      mediaBorder: "rgba(45, 212, 191, 0.2)",
+      signalColour: "#2DD4BF",
+      headerMode: "PROJECT_DARK"
+    },
+    relationship: "CLIENT",
+    status: "LIVE",
+    roles: ["STRATEGY", "PRODUCT", "UX", "DEVELOPMENT", "SEARCH"],
+    scopeSummary: "Clinical trial portal, patient pre-screener eligibility engine, and regulatory search taxonomy.",
+    capabilities: ["BUILD", "SEARCH"],
+    year: 2023,
+    introNarrative: [
+      "Amplios provides digital infrastructure for pharmaceutical sponsors and clinical research sites to accelerate patient recruitment and trial protocol adherence.",
+      "Avorria engineered the patient pre-screening qualification journey and trial protocol hub, ensuring full HIPAA/GDPR data protection standards while optimizing recruitment funnel velocity."
+    ],
+    chapters: [
+      {
+        id: "amplios-ch1",
+        type: "STATEMENT",
+        title: "Clinical Trial Recruitment Friction",
+        eyebrow: "01 // THE PROBLEM",
+        body: "Over 80% of clinical trials experience delays due to patient recruitment bottlenecks. Confusing medical eligibility criteria often alienate eligible participants."
+      },
+      {
+        id: "amplios-ch2",
+        type: "INTERFACE",
+        title: "Patient Pre-Screener & Protocol Hub",
+        eyebrow: "02 // UX ARCHITECTURE",
+        body: "We designed an accessible, branching questionnaire that translates dense clinical inclusion/exclusion criteria into plain-language questions with immediate eligibility feedback."
+      },
+      {
+        id: "amplios-ch3",
+        type: "PROCESS",
+        title: "Strict Compliance & Data Privacy",
+        eyebrow: "03 // SECURITY ARCHITECTURE",
+        body: "Engineered end-to-end client encryption, zero third-party marketing trackers, and HIPAA-compliant lead routing into investigator site databases."
+      },
+      {
+        id: "amplios-ch4",
+        type: "PROOF",
+        title: "Trial Operations Verification",
+        eyebrow: "04 // VERIFICATION",
+        body: "Successfully deployed across multi-site Phase II and Phase III clinical oncology and neurology trials.",
+        evidence: [
+          {
+            id: "amplios-ev1",
+            type: "TECHNICAL",
+            value: "100%",
+            description: "Zero third-party trackers and strict zero-retention pre-screener security",
+            source: "Privacy & Compliance Audit",
+            verified: true
+          }
+        ]
+      }
+    ],
+    nextProject: {
+      slug: "alkota-bikes",
+      title: "Alkota Bikes",
+      projectIndex: "001 / ALKOTA",
+      descriptor: "PERFORMANCE PRODUCT // DIGITAL EXPERIENCE",
+      heroMedia: "/media/projects/alkota/alkota-product-hero.svg",
+      themeAccent: "#C8F135"
+    },
+    seo: {
+      metaTitle: "Amplios — Clinical Trial Infrastructure Platform | Avorria",
+      metaDescription: "Avorria designed and built the patient pre-screening platform and clinical operations infrastructure for Amplios."
+    }
   }
 };
 

@@ -64,7 +64,9 @@ export function SelectedWorkSection() {
                   </div>
 
                   <h3 className="font-display font-bold text-2xl sm:text-3xl uppercase tracking-tight text-avorria-white group-hover:text-avorria-signal transition-colors">
-                    {project.title}
+                    <a href={`/work/${project.slug}`}>
+                      {project.title}
+                    </a>
                   </h3>
 
                   <p className="font-mono text-xs text-avorria-muted uppercase tracking-wider">
@@ -79,7 +81,13 @@ export function SelectedWorkSection() {
                 {/* Footer Cap */}
                 <div className="pt-4 border-t border-avorria-line/40 flex items-center justify-between font-mono text-[11px] text-avorria-quiet uppercase tracking-wider">
                   <span>{project.capabilities.join(" // ")}</span>
-                  <span className="text-avorria-signal font-bold">{project.status}</span>
+                  <a
+                    href={`/work/${project.slug}`}
+                    className="text-avorria-white hover:text-avorria-signal font-bold flex items-center gap-1 transition-colors"
+                  >
+                    <span>CASE STUDY</span>
+                    <span className="text-avorria-signal">→</span>
+                  </a>
                 </div>
               </article>
             );

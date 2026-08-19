@@ -21,10 +21,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   if (!article) return {};
 
+  // Always canonical to the article's own slug, never an alias
   return generatePageMetadata({
     title: `${article.title} — Avorria Intelligence`,
     description: article.thesis,
-    path: `/intelligence/${slug}`
+    path: `/intelligence/${article.slug}`
   });
 }
 
@@ -45,6 +46,20 @@ export default async function IntelligenceArticlePage({
   const nextArticle =
     INTELLIGENCE_ARTICLES[(currentIndex + 1) % INTELLIGENCE_ARTICLES.length];
 
+  // Derive ISO date from article publishedAt string e.g. "AUG 2026" → "2026-08-01"
+  const publishedIso = (() => {
+    const monthMap: Record<string, string> = {
+      JAN: "01", FEB: "02", MAR: "03", APR: "04", MAY: "05", JUN: "06",
+      JUL: "07", AUG: "08", SEP: "09", OCT: "10", NOV: "11", DEC: "12"
+    };
+    const parts = (article.publishedAt || "").toUpperCase().split(" ");
+    if (parts.length === 2) {
+      const month = monthMap[parts[0]] || "01";
+      return `${parts[1]}-${month}-01`;
+    }
+    return new Date().toISOString().split("T")[0];
+  })();
+
   // Structured Data Schema for Article
   const jsonLd = {
     "@context": "https://schema.org",
@@ -61,8 +76,8 @@ export default async function IntelligenceArticlePage({
       name: "Avorria",
       url: "https://avorria.com"
     },
-    datePublished: "2026-08-01",
-    inLanguage: "en-US"
+    datePublished: publishedIso,
+    inLanguage: "en-GB"
   };
 
   return (

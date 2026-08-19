@@ -1,4 +1,11 @@
 import React from "react";
+import { generatePageMetadata } from "@/lib/seo/metadata";
+
+export const metadata = generatePageMetadata({
+  title: "Privacy Policy — Avorria",
+  description: "Avorria's privacy policy covering how visitor and client data is handled, stored, and protected.",
+  path: "/legal/privacy"
+});
 
 export default function PrivacyPage() {
   return (

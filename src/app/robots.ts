@@ -10,7 +10,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           "/dev/",       // Internal tooling — never index
           "/api/",       // API routes — not crawlable content
-          "/studio/",    // Placeholder stub route
         ]
       }
     ],
