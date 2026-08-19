@@ -64,7 +64,7 @@ export function Scene00Void() {
       id="scene-00-void"
       data-scene-id="scene-00-void"
       data-scene-index="0"
-      className="relative w-full h-[100vh] sm:h-[110vh] flex flex-col items-center justify-center bg-avorria-black select-none"
+      className="relative w-full h-[100dvh] flex flex-col items-center justify-center bg-avorria-black select-none"
     >
       {/* Central Chartreuse Signal Dot (Transforms to Line) */}
       <div className="relative flex items-center justify-center pointer-events-none">

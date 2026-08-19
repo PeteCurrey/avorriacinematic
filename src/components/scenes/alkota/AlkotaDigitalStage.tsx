@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { CursorTrigger } from "@/providers/CursorContext";
+import { Z } from "@/lib/scene-z";
 
 interface AlkotaDigitalStageProps {
   progress: number; // 0.0 to 1.0
@@ -10,7 +10,7 @@ interface AlkotaDigitalStageProps {
 export function AlkotaDigitalStage({ progress }: AlkotaDigitalStageProps) {
   const [selectedFinish, setSelectedFinish] = useState<"carbon" | "glacier">("carbon");
 
-  // Active between 0.63 and 0.84
+  // Active between 0.62 and 0.85
   if (progress < 0.62 || progress > 0.85) return null;
 
   // Scan line progress crossing the screen (0.64 -> 0.72)
@@ -19,52 +19,66 @@ export function AlkotaDigitalStage({ progress }: AlkotaDigitalStageProps) {
 
   return (
     <div
-      className="absolute inset-0 w-full h-full flex flex-col justify-center items-center p-4 sm:p-12 z-20"
-      style={{ opacity }}
+      className="absolute inset-0 w-full h-full"
+      style={{ opacity, zIndex: Z.media }}
     >
-      {/* Digital Flagship UI Container */}
-      <div className="w-full max-w-[1560px] h-[85vh] relative overflow-hidden bg-avorria-surface border border-avorria-line shadow-2xl flex flex-col justify-between">
+      {/* Full-bleed right composition: image owns the field without box wrapper */}
+      <div className="absolute inset-0 w-full h-full">
         <Image
           src={selectedFinish === "carbon" ? "/media/projects/alkota/product/naked-carbon-studio.png" : "/media/projects/alkota/product/glacier-white-showroom.jpg"}
           alt="Alkota Digital Flagship Interface"
           fill
-          className="object-contain"
+          className="object-cover object-right sm:object-center"
         />
+        {/* Left gradient for text safety */}
+        <div className="absolute inset-y-0 left-0 w-full sm:w-1/2 bg-gradient-to-r from-avorria-black via-avorria-black/85 to-transparent" />
+      </div>
 
-        {/* Live Interactive Spec Selection Overlay */}
-        <div className="absolute top-36 left-8 sm:left-16 z-30 flex flex-col gap-3 max-w-xs pointer-events-auto">
+      {/* Left editorial column */}
+      <div
+        className="absolute inset-y-0 left-0 w-full max-w-[580px] flex flex-col justify-center px-6 sm:px-12 lg:px-16 gap-6 pointer-events-auto"
+        style={{ zIndex: Z.copy }}
+      >
+        <div className="font-mono text-[10px] sm:text-xs text-avorria-signal uppercase tracking-widest">
+          001 / ALKOTA // DIGITAL FLAGSHIP
+        </div>
+        <div className="font-display font-bold text-3xl sm:text-5xl uppercase tracking-tight text-avorria-white leading-tight">
+          The website is part of the product.
+        </div>
+        <p className="font-body text-sm sm:text-base text-avorria-muted leading-relaxed">
+          Product configuration, precision fit architecture, and pre-order reservation engineered around the carbon chassis.
+        </p>
+
+        {/* Live Finish Selector */}
+        <div className="flex flex-col gap-2 pt-2">
           <span className="font-mono text-[10px] text-avorria-quiet uppercase tracking-wider">
-            Interactive Finish Demonstration
+            FINISH SPECIFICATION
           </span>
           <div className="flex items-center gap-2 font-mono text-xs">
-            <CursorTrigger state="try" label="TRY">
-              <button
-                onClick={() => setSelectedFinish("carbon")}
-                className={`px-3 py-1.5 border uppercase transition-colors ${selectedFinish === "carbon" ? "border-avorria-signal bg-avorria-signal/20 text-avorria-signal" : "border-avorria-line text-avorria-muted hover:text-avorria-white"}`}
-              >
-                Naked Carbon
-              </button>
-            </CursorTrigger>
-            <CursorTrigger state="try" label="TRY">
-              <button
-                onClick={() => setSelectedFinish("glacier")}
-                className={`px-3 py-1.5 border uppercase transition-colors ${selectedFinish === "glacier" ? "border-avorria-signal bg-avorria-signal/20 text-avorria-signal" : "border-avorria-line text-avorria-muted hover:text-avorria-white"}`}
-              >
-                Glacier White
-              </button>
-            </CursorTrigger>
+            <button
+              onClick={() => setSelectedFinish("carbon")}
+              className={`px-4 py-2 border uppercase transition-colors ${selectedFinish === "carbon" ? "border-avorria-signal bg-avorria-signal/15 text-avorria-signal" : "border-avorria-line/60 text-avorria-muted hover:text-avorria-white hover:border-avorria-line"}`}
+            >
+              Naked Carbon
+            </button>
+            <button
+              onClick={() => setSelectedFinish("glacier")}
+              className={`px-4 py-2 border uppercase transition-colors ${selectedFinish === "glacier" ? "border-avorria-signal bg-avorria-signal/15 text-avorria-signal" : "border-avorria-line/60 text-avorria-muted hover:text-avorria-white hover:border-avorria-line"}`}
+            >
+              Glacier White
+            </button>
           </div>
         </div>
-
-        {/* Scanning Engineering Transformation Line */}
-        {scanT > 0 && scanT < 1 && (
-          <div
-            className="absolute top-0 bottom-0 w-[2px] bg-avorria-signal shadow-[0_0_12px_#C8F135] pointer-events-none"
-            style={{ left: `${scanT * 100}%` }}
-            aria-hidden="true"
-          />
-        )}
       </div>
+
+      {/* Scanning Engineering Line */}
+      {scanT > 0 && scanT < 1 && (
+        <div
+          className="absolute top-0 bottom-0 w-[2px] bg-avorria-signal shadow-[0_0_12px_#C8F135] pointer-events-none"
+          style={{ left: `${scanT * 100}%`, zIndex: Z.overlay }}
+          aria-hidden="true"
+        />
+      )}
     </div>
   );
 }

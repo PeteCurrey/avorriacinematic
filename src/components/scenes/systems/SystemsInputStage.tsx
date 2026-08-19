@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { Z } from "@/lib/scene-z";
 
 interface SystemsInputStageProps {
   progress: number; // 0.0 to 1.0
@@ -14,12 +15,12 @@ export function SystemsInputStage({ progress }: SystemsInputStageProps) {
 
   return (
     <div
-      className="absolute inset-0 w-full h-full flex items-center justify-center p-4 sm:p-12 z-10 pointer-events-none transition-opacity duration-150"
-      style={{ opacity }}
+      className="absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-150 overflow-hidden"
+      style={{ opacity, zIndex: Z.media }}
       aria-hidden="true"
     >
       <div
-        className="relative w-full max-w-[1300px] h-[75vh] border border-avorria-line bg-avorria-surface overflow-hidden shadow-2xl transition-transform duration-75"
+        className="absolute inset-0 w-full h-full transition-transform duration-75"
         style={{ transform: `scale(${scale})` }}
       >
         <Image

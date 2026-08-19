@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { CursorTrigger } from "@/providers/CursorContext";
+import { Z } from "@/lib/scene-z";
 
 interface NestIQPropertyStageProps {
   progress: number; // 0.0 to 1.0
@@ -25,15 +26,15 @@ export function NestIQPropertyStage({ progress }: NestIQPropertyStageProps) {
 
   return (
     <div
-      className="absolute inset-0 w-full h-full flex items-center justify-center p-4 sm:p-12 z-10 pointer-events-auto transition-opacity duration-150"
-      style={{ opacity }}
+      className="absolute inset-0 w-full h-full pointer-events-auto transition-opacity duration-150 overflow-hidden"
+      style={{ opacity, zIndex: Z.media }}
       aria-hidden="true"
     >
       <CursorTrigger state="try" label="CONTEXT">
         <div
           onMouseMove={handleMouseMove}
           onMouseLeave={() => setLensPos((p) => ({ ...p, active: false }))}
-          className="relative w-full max-w-[1300px] h-[75vh] border border-avorria-line bg-avorria-surface overflow-hidden shadow-2xl transition-transform duration-75"
+          className="absolute inset-0 w-full h-full transition-transform duration-75"
           style={{ transform: `scale(${scale})` }}
         >
           <Image
@@ -48,7 +49,7 @@ export function NestIQPropertyStage({ progress }: NestIQPropertyStageProps) {
           {lensPos.active && (
             <div
               className="absolute w-32 h-32 rounded-full border border-avorria-signal/80 bg-avorria-signal/10 pointer-events-none -translate-x-1/2 -translate-y-1/2 flex items-center justify-center shadow-[0_0_20px_#C8F135]"
-              style={{ left: `${lensPos.x}%`, top: `${lensPos.y}%` }}
+              style={{ left: `${lensPos.x}%`, top: `${lensPos.y}%`, zIndex: Z.overlay }}
             >
               <span className="font-mono text-[9px] text-avorria-signal tracking-widest uppercase bg-avorria-black/80 px-2 py-0.5 border border-avorria-signal/40">
                 CONTEXT

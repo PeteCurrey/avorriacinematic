@@ -48,7 +48,7 @@ export function AlkotaMaterialStage({ progress }: AlkotaMaterialStageProps) {
       {/* Precision Annotation Callouts */}
       {progress >= 0.12 && progress < 0.46 && (
         <div className="absolute top-24 left-6 sm:left-16 font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet z-10">
-          <span className="text-avorria-signal">006 / ALKOTA BIKES</span>
+          <span className="text-avorria-signal">001 / ALKOTA BIKES</span>
           <span className="mx-2 text-avorria-line-strong">{"//"}</span>
           <span className="text-avorria-white">{progress < 0.26 ? "MATERIAL & FINISH" : "STRUCTURAL KINEMATICS"}</span>
         </div>

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { CursorTrigger } from "@/providers/CursorContext";
+import { Z } from "@/lib/scene-z";
 
 interface DrawdownChartStageProps {
   progress: number; // 0.0 to 1.0
@@ -25,15 +26,15 @@ export function DrawdownChartStage({ progress }: DrawdownChartStageProps) {
 
   return (
     <div
-      className="absolute inset-0 w-full h-full flex items-center justify-center p-4 sm:p-12 z-10 pointer-events-auto transition-opacity duration-150"
-      style={{ opacity }}
+      className="absolute inset-0 w-full h-full pointer-events-auto transition-opacity duration-150 overflow-hidden"
+      style={{ opacity, zIndex: Z.media }}
       aria-hidden="true"
     >
       <CursorTrigger state="try" label="INSPECT">
         <div
           onMouseMove={handleMouseMove}
           onMouseLeave={() => setCrosshairPos((p) => ({ ...p, active: false }))}
-          className="relative w-full max-w-[1300px] h-[72vh] border border-avorria-line bg-avorria-surface overflow-hidden shadow-2xl transition-transform duration-75"
+          className="absolute inset-0 w-full h-full transition-transform duration-75"
           style={{ transform: `scale(${scale})` }}
         >
           <Image
@@ -48,12 +49,13 @@ export function DrawdownChartStage({ progress }: DrawdownChartStageProps) {
           {crosshairPos.active && (
             <div
               className="absolute inset-0 pointer-events-none"
+              style={{ zIndex: Z.overlay }}
             >
-              <line
+              <div
                 className="absolute top-0 bottom-0 w-px bg-avorria-signal/60"
                 style={{ left: `${crosshairPos.x}%` }}
               />
-              <line
+              <div
                 className="absolute left-0 right-0 h-px bg-avorria-signal/60"
                 style={{ top: `${crosshairPos.y}%` }}
               />

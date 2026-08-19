@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { Z } from "@/lib/scene-z";
 
 interface SearchPageStageProps {
   progress: number; // 0.0 to 1.0
@@ -14,11 +15,11 @@ export function SearchPageStage({ progress }: SearchPageStageProps) {
 
   return (
     <div
-      className="absolute inset-0 w-full h-full flex items-center justify-center p-4 sm:p-12 z-10 pointer-events-none"
-      style={{ opacity, perspective: "1200px" }}
+      className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden"
+      style={{ opacity, perspective: "1200px", zIndex: Z.media }}
       aria-hidden="true"
     >
-      <div className="relative w-full max-w-[1100px] h-[70vh] border border-avorria-line bg-avorria-surface shadow-2xl overflow-hidden">
+      <div className="absolute inset-0 w-full h-full">
         {/* Base Real Webpage Visual */}
         <Image
           src="/media/projects/search/search-page-hero.svg"

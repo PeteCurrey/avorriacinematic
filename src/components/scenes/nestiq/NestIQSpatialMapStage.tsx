@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { Z } from "@/lib/scene-z";
 
 interface NestIQSpatialMapStageProps {
   progress: number; // 0.0 to 1.0
@@ -17,12 +18,12 @@ export function NestIQSpatialMapStage({ progress }: NestIQSpatialMapStageProps) 
 
   return (
     <div
-      className="absolute inset-0 w-full h-full flex items-center justify-center p-4 sm:p-12 z-20 pointer-events-none"
-      style={{ opacity, perspective: "1400px" }}
+      className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden"
+      style={{ opacity, perspective: "1400px", zIndex: Z.media }}
       aria-hidden="true"
     >
       <div
-        className="w-full max-w-[1600px] h-[82vh] relative border border-avorria-line bg-avorria-black shadow-2xl overflow-hidden transition-transform duration-75"
+        className="absolute inset-0 w-full h-full transition-transform duration-75"
         style={{
           transform: `rotateX(${pitchDeg}deg) scale(${scale})`,
           transformOrigin: "50% 60%"
@@ -37,7 +38,10 @@ export function NestIQSpatialMapStage({ progress }: NestIQSpatialMapStageProps) 
 
         {/* 3D Vertical Layer Annotation Callout at Peak */}
         {pitchT > 0.5 && (
-          <div className="absolute top-8 left-8 flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-avorria-quiet z-30 bg-avorria-black/80 p-3 border border-avorria-line">
+          <div
+            className="absolute top-8 left-8 sm:left-16 flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-avorria-quiet"
+            style={{ zIndex: Z.instrumentation }}
+          >
             <span className="w-2 h-2 rounded-full bg-avorria-signal animate-pulse" />
             <span className="text-avorria-signal">DATA BECOMES SPACE</span>
             <span>{"//"}</span>

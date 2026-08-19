@@ -40,7 +40,7 @@ export function AlkotaProductStage({ progress }: AlkotaProductStageProps) {
 
       {/* Monumental Editorial Brand Statement */}
       <div className="max-w-3xl z-20 my-auto pl-2 sm:pl-8">
-        <div className="font-display font-extrabold text-2xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-avorria-white leading-tight mb-3">
+        <div className="display-xl text-avorria-white mb-3">
           A product deserves a digital world built with the same intent.
         </div>
         <div className="font-mono text-xs text-avorria-signal uppercase tracking-widest">
