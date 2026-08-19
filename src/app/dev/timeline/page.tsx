@@ -27,6 +27,9 @@ export default function DevTimelinePage() {
             </h1>
           </div>
           <div className="flex items-center gap-4">
+            <Link href="/dev/case-study" className="px-3 py-1.5 border border-blue-400 text-blue-300 hover:bg-blue-500/20 transition-colors">
+              DEV CASE STUDY LAB →
+            </Link>
             <Link href="/dev/scenes" className="px-3 py-1.5 border border-avorria-signal text-avorria-signal hover:bg-avorria-signal/20 transition-colors">
               DEV SCENES LAB →
             </Link>

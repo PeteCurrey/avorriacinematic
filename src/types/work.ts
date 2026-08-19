@@ -12,7 +12,7 @@ export type ProjectRelationship = "CLIENT" | "VENTURE" | "INTERNAL" | "PARTNERSH
 
 export type ProjectStatus = "LIVE" | "DELIVERED" | "DEPLOYED" | "IN DEVELOPMENT" | "ARCHIVED" | "CONCEPT";
 
-export type MediaStatus = "FINAL" | "TEMPORARY" | "MISSING" | "ARCHIVE_QUALITY";
+export type MediaStatus = "FINAL" | "TEMPORARY" | "MISSING" | "ARCHIVE_QUALITY" | "DEV_ONLY" | "STALE";
 
 export interface WorkProject {
   projectIndex?: string; // e.g. "001 / ALKOTA" (Canonical featured only)
