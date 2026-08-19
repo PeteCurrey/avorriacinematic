@@ -36,21 +36,30 @@ export function Product3DExperiment() {
           }}
           className="relative w-full aspect-[21/9] min-h-[300px] bg-avorria-black border border-avorria-line flex items-center justify-center cursor-grab active:cursor-grabbing select-none overflow-hidden"
         >
-          {/* Simulated 3D Geometry Cube */}
+          {/* Architectural Product Component Visualizer */}
           <div
             style={{
-              transform: `perspective(800px) rotateY(${rotation}deg) rotateX(15deg)`,
+              transform: `perspective(800px) rotateY(${rotation}deg) rotateX(12deg)`,
               transition: "transform 0.1s ease-out"
             }}
-            className="w-36 h-36 border-2 border-avorria-signal bg-avorria-surface/80 shadow-[0_0_40px_rgba(200,241,53,0.2)] flex flex-col items-center justify-center p-4 text-center"
+            className="w-56 h-36 border border-avorria-signal/40 bg-avorria-surface flex flex-col justify-between p-4 text-left relative shadow-2xl"
           >
-            <span className="font-mono text-[10px] text-avorria-signal uppercase">FINISH</span>
-            <span className="font-sans text-xs font-bold text-avorria-white mt-1">{finish}</span>
-            <span className="font-mono text-[9px] text-avorria-muted mt-2">ROTATION: {Math.round(rotation)}°</span>
+            <div className="flex items-center justify-between border-b border-avorria-line/40 pb-2">
+              <span className="font-mono text-[9px] text-avorria-signal uppercase">CHASSIS CORE // 01</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-avorria-signal" />
+            </div>
+            <div className="space-y-1">
+              <div className="font-sans text-xs font-bold text-avorria-white">{finish}</div>
+              <div className="font-mono text-[9px] text-avorria-muted">TITANIUM / GRAPHITE BLEND</div>
+            </div>
+            <div className="flex items-center justify-between border-t border-avorria-line/40 pt-2 font-mono text-[9px] text-avorria-quiet">
+              <span>ROTATION: {Math.round(rotation)}°</span>
+              <span>GEOMETRY: FIXED</span>
+            </div>
           </div>
 
           <div className="absolute bottom-4 left-4 font-mono text-[10px] text-avorria-quiet uppercase tracking-wider">
-            CLICK &amp; DRAG TO ROTATE OBJECT // CAPPED DPR 2X
+            DRAG TO INSPECT COMPONENT GEOMETRY
           </div>
         </div>
       </CursorTrigger>

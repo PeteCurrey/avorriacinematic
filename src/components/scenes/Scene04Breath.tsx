@@ -82,7 +82,7 @@ export function Scene04Breath() {
         {/* Bottom Scene Index & CareerOS Handoff Anchor (94 - 100%) */}
         <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-[10px] sm:text-xs text-avorria-quiet uppercase tracking-widest z-30">
           <div className="text-avorria-white">
-            {scrollProgress >= 0.92 ? "05 / CAREEROS // NEXT PHASE" : "AVORRIA / BRAND POSITION"}
+            {scrollProgress >= 0.92 ? "HUMAN INTELLIGENCE // CAREEROS" : "AVORRIA / BRAND POSITION"}
           </div>
           <div className="text-avorria-signal">
             04 / 18

@@ -9,19 +9,19 @@ export function DataExperiment() {
 
   const metrics: Record<Lens, Array<{ label: string; val: string; pct: number }>> = {
     GROWTH: [
-      { label: "GLOBAL PIPELINE", val: "+34.2%", pct: 88 },
-      { label: "ACTIVE INTEGRATIONS", val: "142 NODES", pct: 72 },
-      { label: "NEW CAPACITY", val: "85.0k", pct: 64 }
+      { label: "USER ACQUISITION PATHWAYS", val: "MULTI-CHANNEL", pct: 85 },
+      { label: "DATA INGESTION FREQUENCY", val: "REAL-TIME", pct: 75 },
+      { label: "STATE REHYDRATION", val: "SUB-SECOND", pct: 90 }
     ],
     RISK: [
-      { label: "DRIFT DETECTED", val: "0.01%", pct: 12 },
-      { label: "FALLBACK LATENCY", val: "< 18ms", pct: 24 },
-      { label: "CIRCUIT HEALTH", val: "99.98%", pct: 99 }
+      { label: "SCHEMA DRIFT TOLERANCE", val: "ZERO TOLERANCE", pct: 15 },
+      { label: "FAILOVER LATENCY BOUND", val: "< 50MS", pct: 30 },
+      { label: "AUDIT TRAIL LOGGING", val: "DURABLE / IMMUTABLE", pct: 100 }
     ],
     EFFICIENCY: [
-      { label: "RESOURCE UTILIZATION", val: "91.4%", pct: 91 },
-      { label: "AVG CYCLE DURATION", val: "1.2s", pct: 82 },
-      { label: "CACHE HIT RATE", val: "98.6%", pct: 98 }
+      { label: "CLIENT COMPONENT OVERHEAD", val: "MINIMAL / PRUNED", pct: 90 },
+      { label: "STATIC PRERENDER RATIO", val: "SSG PRIORITY", pct: 95 },
+      { label: "CDN EDGE CACHING", val: "ACTIVE", pct: 98 }
     ]
   };
 

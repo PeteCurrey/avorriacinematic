@@ -86,7 +86,7 @@ export function Scene09Drawdown() {
         {/* Bottom Handoff Anchor for Scene 10 (SYSTEMS) */}
         <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-[10px] sm:text-xs text-avorria-quiet uppercase tracking-widest z-30">
           <div className="text-avorria-white">
-            {scrollProgress >= 0.94 ? "10 / SYSTEMS // NEXT PHASE" : "COMPLEX SYSTEMS MADE SIMPLE"}
+            {scrollProgress >= 0.94 ? "OPERATIONAL SYSTEMS // AUTOMATION" : "COMPLEX SYSTEMS MADE SIMPLE"}
           </div>
           <div className="text-avorria-signal">
             09 / 18

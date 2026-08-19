@@ -99,7 +99,7 @@ export function Scene15Manifesto() {
         className="absolute bottom-8 left-8 sm:left-16 font-mono text-xs text-avorria-signal uppercase tracking-widest transition-opacity duration-300 pointer-events-none z-10"
         style={{ opacity: progress > 0.92 ? 1 : 0 }}
       >
-        16 / PROOF <span>{"//"}</span> NEXT PHASE
+        VERIFIED DELIVERIES <span>{"//"}</span> PROOF
       </div>
     </section>
   );

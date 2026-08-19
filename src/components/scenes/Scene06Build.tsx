@@ -82,7 +82,7 @@ export function Scene06Build() {
         {/* Bottom Handoff Anchor for Scene 07 (Active during 0.94 - 1.00) */}
         <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-[10px] sm:text-xs text-avorria-quiet uppercase tracking-widest z-30">
           <div className="text-avorria-white">
-            {scrollProgress >= 0.92 ? "07 / NESTIQ // NEXT PHASE" : "INTERFACE & PRODUCT ENGINEERING"}
+            {scrollProgress >= 0.92 ? "PROPERTY INTELLIGENCE // NESTIQ" : "INTERFACE & PRODUCT ENGINEERING"}
           </div>
           <div className="text-avorria-signal">
             06 / 18

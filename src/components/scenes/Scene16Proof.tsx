@@ -44,7 +44,7 @@ export function Scene16Proof() {
       {/* Intelligence Handoff Anchor */}
       <div className="w-full max-w-[1760px] mx-auto px-6 sm:px-12 py-20 flex justify-between items-center border-t border-avorria-line font-mono text-xs text-avorria-quiet uppercase tracking-widest">
         <span>EVIDENCE COMPLETE // 5 VERIFIED DELIVERIES</span>
-        <span className="text-avorria-signal">17 / INTELLIGENCE // NEXT PHASE</span>
+        <span className="text-avorria-signal">EDITORIAL // INTELLIGENCE</span>
       </div>
     </section>
   );

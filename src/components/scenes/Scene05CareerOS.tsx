@@ -96,7 +96,7 @@ export function Scene05CareerOS() {
         {/* Bottom Handoff Anchor for Scene 06 (Active during 0.94 - 1.00) */}
         <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-[10px] sm:text-xs text-avorria-quiet uppercase tracking-widest z-30">
           <div className="text-avorria-white">
-            {scrollProgress >= 0.92 ? "06 / BUILD // NEXT PHASE" : "CAREEROS PLATFORM ARCHITECTURE"}
+            {scrollProgress >= 0.92 ? "DIGITAL PRODUCTS // BUILD" : "CAREEROS PLATFORM ARCHITECTURE"}
           </div>
           <div className="text-avorria-signal">
             05 / 18

@@ -69,8 +69,8 @@ export function Scene17Intelligence() {
 
       {/* Finale Signal Line Handoff Anchor (Scene 18 Callback) */}
       <div className="w-full max-w-[1760px] mx-auto px-6 sm:px-12 pt-8 pb-16 flex justify-between items-center font-mono text-xs text-avorria-quiet uppercase tracking-widest border-b border-avorria-line">
-        <span>THINKING COMPLETE</span>
-        <span className="text-avorria-signal">18 / FINALE // NEXT PHASE</span>
+        <span>PERSPECTIVES</span>
+        <span className="text-avorria-signal">START A PROJECT // ENGAGEMENT</span>
       </div>
     </section>
   );

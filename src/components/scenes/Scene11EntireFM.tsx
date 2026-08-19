@@ -94,7 +94,7 @@ export function Scene11EntireFM() {
         {/* Bottom Handoff Anchor for Scene 12 (Selected Work) */}
         <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-[10px] sm:text-xs text-avorria-quiet uppercase tracking-widest z-30">
           <div className="text-avorria-white">
-            {scrollProgress >= 0.94 ? "12 / SELECTED WORK // NEXT PHASE" : "OPERATIONS SHOULD FLOW"}
+            {scrollProgress >= 0.94 ? "PORTFOLIO // SELECTED WORK" : "OPERATIONS SHOULD FLOW"}
           </div>
           <div className="text-avorria-signal">
             11 / 18

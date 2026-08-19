@@ -42,8 +42,8 @@ export function OGNPrincipleStage({ opacity, yTranslate }: OGNPrincipleStageProp
 
         {/* Right: Lab Handoff Anchor */}
         <div className="lg:col-span-4 flex flex-col gap-3 font-mono text-xs text-avorria-quiet border-l border-avorria-line/40 pl-8">
-          <span className="text-avorria-signal">TRANSITION // PRODUCTION → EXPERIMENT</span>
-          <span className="text-avorria-muted">14 / AVORRIA LAB // NEXT PHASE</span>
+          <span className="text-avorria-signal">TRANSITION</span>
+          <span className="text-avorria-muted">EXPERIMENTAL INTERFACES</span>
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@ export function VisionExperiment() {
   const sampleData: Record<SampleType, { img: string; tags: string[] }> = {
     PRODUCT: {
       img: "/media/lab/sample-product.svg",
-      tags: ["FORM: CYLINDRICAL", "MATERIAL: COMPOSITE", "COMPONENT: CENTRAL CORE", "TOLERANCE: ±0.02MM"]
+      tags: ["FORM: CYLINDRICAL", "MATERIAL: COMPOSITE", "COMPONENT: CENTRAL CORE", "SURFACE: MATTE ANODIZED"]
     },
     INTERFACE: {
       img: "/media/lab/sample-interface.svg",

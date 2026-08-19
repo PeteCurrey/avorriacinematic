@@ -90,7 +90,7 @@ export function Scene10Systems() {
         {/* Bottom Handoff Anchor for Scene 11 (EntireFM) */}
         <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-[10px] sm:text-xs text-avorria-quiet uppercase tracking-widest z-30">
           <div className="text-avorria-white">
-            {scrollProgress >= 0.94 ? "11 / ENTIREFM // NEXT PHASE" : "OPERATIONAL LEVERAGE"}
+            {scrollProgress >= 0.94 ? "FACILITIES WORKFLOW // ENTIREFM" : "OPERATIONAL LEVERAGE"}
           </div>
           <div className="text-avorria-signal">
             10 / 18

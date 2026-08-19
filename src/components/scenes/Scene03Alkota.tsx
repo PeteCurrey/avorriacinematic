@@ -106,7 +106,7 @@ export function Scene03Alkota() {
             className="absolute bottom-10 left-1/2 -translate-x-1/2 font-mono text-[11px] text-avorria-quiet uppercase tracking-widest z-30 transition-opacity duration-300"
             aria-hidden="true"
           >
-            <span>04 / BREATH // NEXT PHASE</span>
+            <span>PHILOSOPHY // 04</span>
           </div>
         )}
       </div>

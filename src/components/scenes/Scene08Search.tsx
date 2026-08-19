@@ -86,7 +86,7 @@ export function Scene08Search() {
         {/* Bottom Handoff Anchor for Scene 09 (Drawdown.Trading) */}
         <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-[10px] sm:text-xs text-avorria-quiet uppercase tracking-widest z-30">
           <div className="text-avorria-white">
-            {scrollProgress >= 0.94 ? "09 / DRAWDOWN.TRADING // NEXT PHASE" : "VISIBILITY IS ENGINEERED"}
+            {scrollProgress >= 0.94 ? "FINANCIAL INTELLIGENCE // DRAWDOWN.TRADING" : "VISIBILITY IS ENGINEERED"}
           </div>
           <div className="text-avorria-signal">
             08 / 18
