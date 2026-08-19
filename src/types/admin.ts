@@ -262,3 +262,386 @@ export interface AiAutoSettings {
   updated_by: string;
   updated_at: string;
 }
+
+
+// ============================================================================
+// PHASE 2 TYPES — AI SCOUT
+// ============================================================================
+
+export interface TargetingProfile {
+  id: string;
+  name: string;
+  enabled: boolean;
+  countries: string[];
+  regions: string[];
+  cities: string[];
+  postcode_areas: string[];
+  radius_km: number;
+  sectors: string[];
+  sub_sectors: string[];
+  excluded_sectors: string[];
+  excluded_domains: string[];
+  min_google_rating: number;
+  min_review_count: number;
+  max_website_quality_score: number;
+  min_opportunity_score: number;
+  max_prospects_per_run: number;
+  max_qualified_per_day: number;
+  max_search_operations: number;
+  max_ai_spend_per_run: number;
+  max_daily_ai_spend: number;
+  priority: number;
+  notes?: string | null;
+  last_run_at?: string | null;
+  last_run_status?: string | null;
+  created_by: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export type ScoutRunStatus = "queued" | "running" | "completed" | "completed_with_errors" | "failed" | "cancelled";
+
+export interface ScoutRun {
+  id: string;
+  targeting_profile_id?: string | null;
+  status: ScoutRunStatus;
+  test_mode: boolean;
+  started_at?: string | null;
+  completed_at?: string | null;
+  businesses_found: number;
+  businesses_new: number;
+  businesses_duplicate: number;
+  businesses_verified: number;
+  websites_analysed: number;
+  prospects_qualified: number;
+  prospects_rejected: number;
+  ai_cost_estimate: number;
+  error_count: number;
+  error_log: string[];
+  triggered_by: string;
+  notes?: string | null;
+  created_at: string;
+  // Hydrated
+  targeting_profile?: TargetingProfile;
+}
+
+export interface BusinessSource {
+  id: string;
+  business_id: string;
+  source_type: string;
+  source_url?: string | null;
+  source_name?: string | null;
+  captured_at: string;
+  confidence?: number | null;
+  raw_reference?: string | null;
+  metadata?: Record<string, unknown>;
+}
+
+export interface BusinessSuppression {
+  id: string;
+  domain?: string | null;
+  company_name_pattern?: string | null;
+  reason: string;
+  suppressed_by: string;
+  notes?: string | null;
+  created_at: string;
+}
+
+export interface WebsiteCapture {
+  id: string;
+  business_id: string;
+  url: string;
+  viewport: "desktop" | "mobile";
+  storage_path?: string | null;
+  captured_at?: string | null;
+  status: "pending" | "captured" | "not_configured" | "failed";
+  error_message?: string | null;
+  width?: number | null;
+  height?: number | null;
+}
+
+export interface BusinessResearch {
+  id: string;
+  business_id: string;
+  prospect_id?: string | null;
+  research_version: number;
+  company_summary?: string | null;
+  positioning?: string | null;
+  services?: unknown[];
+  service_areas?: unknown[];
+  target_customers?: string | null;
+  differentiators?: unknown[];
+  reputation_summary?: string | null;
+  reviews_summary?: string | null;
+  brand_observations?: string | null;
+  logo_assets?: unknown[];
+  brand_colours?: unknown[];
+  typography_observations?: string | null;
+  contact_information?: Record<string, unknown>;
+  social_profiles?: Record<string, unknown>;
+  accreditations?: unknown[];
+  team_information?: unknown[];
+  opening_hours?: Record<string, unknown>;
+  frequently_asked_questions?: unknown[];
+  key_claims?: unknown[];
+  content_sources?: unknown[];
+  competitor_context?: string | null;
+  recommended_site_features?: unknown[];
+  potential_conversion_improvements?: unknown[];
+  unresolved_questions?: unknown[];
+  confidence?: number | null;
+  researched_at: string;
+  provider?: string | null;
+  model?: string | null;
+  prompt_version?: string | null;
+  scoring_version?: string | null;
+}
+
+export interface AITaskConfig {
+  id: string;
+  task_key: string;
+  provider: "openai" | "anthropic";
+  model: string;
+  reasoning_effort?: "low" | "medium" | "high";
+  enabled: boolean;
+  fallback_provider?: "openai" | "anthropic";
+  fallback_model?: string;
+  temperature?: number;
+  max_output_tokens?: number;
+  timeout_seconds: number;
+  max_retries: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AIUsageEvent {
+  id: string;
+  provider: string;
+  model: string;
+  task_key: string;
+  entity_type?: string;
+  entity_id?: string;
+  automation_job_id?: string;
+  input_tokens: number;
+  output_tokens: number;
+  cached_tokens?: number;
+  search_calls?: number;
+  latency_ms: number;
+  success: boolean;
+  error_code?: string;
+  estimated_cost: number;
+  created_at: string;
+}
+
+export interface AIProviderStatus {
+  provider: "openai" | "anthropic";
+  configured: boolean;
+  connected: boolean;
+  error?: string;
+  testedAt?: string;
+}
+
+// ============================================================================
+// PHASE 3 TYPES — CREATIVE DIRECTOR & WEBSITE FACTORY
+// ============================================================================
+
+export type CreativeBriefStatus = "draft" | "approved" | "superseded" | "archived";
+
+export interface CreativeBrief {
+  id: string;
+  prospect_id: string;
+  business_id: string;
+  research_id?: string | null;
+  version: number;
+  status: CreativeBriefStatus;
+  provider: string;
+  model?: string | null;
+  prompt_version?: string | null;
+  strategy_summary?: string | null;
+  positioning?: string | null;
+  primary_objective?: string | null;
+  target_audience?: unknown[];
+  tone?: unknown[];
+  visual_direction?: Record<string, unknown>;
+  photography_direction?: Record<string, unknown>;
+  typography_direction?: Record<string, unknown>;
+  colour_strategy?: Record<string, unknown>;
+  layout_direction?: string | null;
+  interaction_direction?: unknown[];
+  animation_direction?: unknown[];
+  hero_concept?: Record<string, unknown>;
+  narrative_flow?: string | null;
+  trust_strategy?: unknown[];
+  conversion_strategy?: unknown[];
+  recommended_pages?: unknown[];
+  homepage_sections?: unknown[];
+  recommended_features?: unknown[];
+  avoid_list?: unknown[];
+  implementation_notes?: string | null;
+  confidence?: number | null;
+  approved_at?: string | null;
+  approved_by?: string | null;
+  created_at: string;
+}
+
+export interface SiteStrategy {
+  id: string;
+  prospect_id: string;
+  creative_brief_id?: string | null;
+  version: number;
+  provider?: string | null;
+  model?: string | null;
+  prompt_version?: string | null;
+  primary_conversion_goal?: string | null;
+  secondary_conversion_goals?: unknown[];
+  navigation?: unknown[];
+  page_map?: unknown[];
+  homepage_strategy?: Record<string, unknown>;
+  page_strategies?: unknown[];
+  feature_strategy?: unknown[];
+  content_strategy?: string | null;
+  seo_considerations?: unknown[];
+  mobile_strategy?: string | null;
+  created_at: string;
+}
+
+export type SiteProjectStatus =
+  | "strategy" | "generating" | "generated" | "needs_review"
+  | "revision_requested" | "ready_for_qa" | "qa" | "preview_ready" | "archived";
+
+export interface SiteProject {
+  id: string;
+  prospect_id: string;
+  business_id: string;
+  creative_brief_id?: string | null;
+  site_strategy_id?: string | null;
+  status: SiteProjectStatus;
+  slug: string;
+  title: string;
+  current_version_id?: string | null;
+  preview_status: "none" | "generating" | "live" | "error";
+  ai_cost_total: number;
+  auto_revision_count: number;
+  max_auto_revisions: number;
+  created_at: string;
+  updated_at: string;
+  // Hydrated
+  creative_brief?: CreativeBrief;
+  current_version?: SiteVersion;
+  latest_design_review?: DesignReview;
+}
+
+export interface SiteVersion {
+  id: string;
+  site_project_id: string;
+  version: number;
+  source_type: "generated" | "revised" | "manual" | "restored";
+  configuration: Record<string, unknown>;
+  content: Record<string, unknown>;
+  design_tokens: DesignTokens;
+  page_definitions: PageDefinition[];
+  component_definitions: ComponentDefinition[];
+  generated_code_reference?: string | null;
+  provider?: string | null;
+  model?: string | null;
+  prompt_version?: string | null;
+  generation_status: "pending" | "generating" | "complete" | "failed";
+  notes?: string | null;
+  created_at: string;
+  created_by: string;
+}
+
+export interface DesignTokens {
+  background: string;
+  surface: string;
+  text_primary: string;
+  text_secondary: string;
+  border: string;
+  accent: string;
+  accent_secondary?: string;
+  heading_font: string;
+  body_font: string;
+  type_scale: "compact" | "standard" | "generous";
+  spacing_scale: "tight" | "standard" | "spacious";
+  radius_scale: "none" | "subtle" | "moderate";
+  content_width: "narrow" | "standard" | "wide" | "full";
+  animation_intensity: "none" | "subtle" | "moderate";
+  motion_duration: "fast" | "standard" | "cinematic";
+  image_treatment: "sharp" | "slightly-dark" | "warm" | "cool" | "natural";
+  navigation_style: "minimal" | "standard" | "bold";
+}
+
+export interface ComponentDefinition {
+  id: string;
+  component_key: string;
+  variant?: string;
+  props: Record<string, unknown>;
+  order: number;
+  page_id?: string;
+  section_id?: string;
+}
+
+export interface PageDefinition {
+  id: string;
+  slug: string;
+  title: string;
+  meta_description?: string;
+  sections: ComponentDefinition[];
+  seo_priority?: number;
+}
+
+export interface DesignReview {
+  id: string;
+  site_project_id: string;
+  site_version_id?: string | null;
+  provider: string;
+  model: string;
+  prompt_version?: string | null;
+  overall_score?: number | null;
+  visual_score?: number | null;
+  hierarchy_score?: number | null;
+  typography_score?: number | null;
+  imagery_score?: number | null;
+  brand_score?: number | null;
+  conversion_score?: number | null;
+  mobile_score?: number | null;
+  originality_score?: number | null;
+  ai_slop_score?: number | null;
+  issues?: unknown[];
+  recommendations?: unknown[];
+  auto_revision_applied?: boolean;
+  passed_threshold?: boolean;
+  created_at: string;
+}
+
+export interface PreviewLink {
+  id: string;
+  site_project_id: string;
+  token: string;
+  status: "active" | "expired" | "revoked";
+  expires_at?: string | null;
+  presentation_mode: boolean;
+  first_viewed_at?: string | null;
+  last_viewed_at?: string | null;
+  view_count: number;
+  created_at: string;
+  revoked_at?: string | null;
+}
+
+export interface SiteMedia {
+  id: string;
+  site_project_id?: string | null;
+  business_id?: string | null;
+  source_type: "business_website" | "social" | "stock" | "generated" | "manual_upload" | "placeholder";
+  source_url?: string | null;
+  storage_path?: string | null;
+  media_type: "image" | "video" | "logo" | "icon" | "background";
+  width?: number | null;
+  height?: number | null;
+  quality_score?: number | null;
+  usage_status: "available" | "hero" | "gallery" | "service" | "background" | "logo" | "archived";
+  rights_notes?: string | null;
+  alt_text?: string | null;
+  metadata?: Record<string, unknown>;
+  created_at: string;
+}

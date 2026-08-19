@@ -19,6 +19,7 @@ export interface ProjectMediaAsset {
   localPath: string;
   sourceRepo: string;
   sourcePath: string;
+  sourceRoute?: string;
   sourceCommit?: string;
   mediaType: ProjectMediaType;
   sourceStatus: MediaSourceStatus;
@@ -29,6 +30,32 @@ export interface ProjectMediaAsset {
 export const PROJECT_MEDIA_REGISTRY: ProjectMediaAsset[] = [
   // ── ALKOTA (PeteCurrey/alkotabikes.ag.v001) ──────────────────────────
   {
+    id: "alkota-homepage-desktop",
+    projectSlug: "alkota-bikes",
+    localPath: "/media/projects/alkota/interface/homepage-desktop.png",
+    sourceRepo: "PeteCurrey/alkotabikes.ag.v001",
+    sourcePath: "src/app/[region]/page.tsx",
+    sourceRoute: "/uk",
+    sourceCommit: "cd46be5",
+    mediaType: "UI_CAPTURE",
+    sourceStatus: "SOURCE_VERIFIED",
+    productionApproved: true,
+    notes: "Authentic desktop homepage capture (1920x1080) of Alkota digital flagship."
+  },
+  {
+    id: "alkota-homepage-mobile",
+    projectSlug: "alkota-bikes",
+    localPath: "/media/projects/alkota/interface/homepage-mobile.png",
+    sourceRepo: "PeteCurrey/alkotabikes.ag.v001",
+    sourcePath: "src/app/[region]/page.tsx",
+    sourceRoute: "/uk",
+    sourceCommit: "cd46be5",
+    mediaType: "UI_CAPTURE",
+    sourceStatus: "SOURCE_VERIFIED",
+    productionApproved: true,
+    notes: "Authentic mobile homepage capture (390x844) of Alkota digital flagship."
+  },
+  {
     id: "alkota-naked-carbon-hero",
     projectSlug: "alkota-bikes",
     localPath: "/media/projects/alkota/product/naked-carbon-hero.jpg",
@@ -37,7 +64,7 @@ export const PROJECT_MEDIA_REGISTRY: ProjectMediaAsset[] = [
     mediaType: "PRODUCT_MASTER",
     sourceStatus: "APPROVED_MASTER",
     productionApproved: true,
-    notes: "Naked Carbon flagship hero shot. Project 01 material truth."
+    notes: "Naked Carbon flagship hero shot. Project 01 product truth."
   },
   {
     id: "alkota-naked-carbon-studio",

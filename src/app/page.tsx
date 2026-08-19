@@ -10,7 +10,6 @@ import { Scene09Drawdown } from "@/components/scenes/Scene09Drawdown";
 import { Scene10Systems } from "@/components/scenes/Scene10Systems";
 import { Scene11EntireFM } from "@/components/scenes/Scene11EntireFM";
 import { Scene12Work } from "@/components/scenes/Scene12Work";
-import { Scene13OGN } from "@/components/scenes/Scene13OGN";
 import { Scene14Lab } from "@/components/scenes/Scene14Lab";
 import { Scene15Manifesto } from "@/components/scenes/Scene15Manifesto";
 import { Scene16Proof } from "@/components/scenes/Scene16Proof";
@@ -20,7 +19,7 @@ import { Scene18Finale } from "@/components/scenes/Scene18Finale";
 export default function HomePage() {
   return (
     <div className="w-full flex flex-col">
-      {/* 17 Typed Homepage Scenes with Single Hero and Direct Alkota First Image */}
+      {/* 16 Focused Homepage Scenes */}
       <SceneErrorBoundary sceneId="scene-01-precision" sceneLabel="Precision As Power">
         <Scene01Precision />
       </SceneErrorBoundary>
@@ -63,10 +62,6 @@ export default function HomePage() {
 
       <SceneErrorBoundary sceneId="scene-12-work" sceneLabel="Selected Work">
         <Scene12Work />
-      </SceneErrorBoundary>
-
-      <SceneErrorBoundary sceneId="scene-13-ogn" sceneLabel="One Great Northern">
-        <Scene13OGN />
       </SceneErrorBoundary>
 
       <SceneErrorBoundary sceneId="scene-14-lab" sceneLabel="Avorria Lab">

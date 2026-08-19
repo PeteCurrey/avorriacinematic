@@ -1,163 +1,94 @@
 "use client";
 import React, { useRef } from "react";
-import { NestIQPropertyStage } from "./nestiq/NestIQPropertyStage";
-import { NestIQContextStage } from "./nestiq/NestIQContextStage";
-import { NestIQSpatialMapStage } from "./nestiq/NestIQSpatialMapStage";
-import { NestIQDecisionStage } from "./nestiq/NestIQDecisionStage";
-import { NestIQContributionStage } from "./nestiq/NestIQContributionStage";
+import Image from "next/image";
+import Link from "next/link";
 import { NestIQFallback } from "./nestiq/NestIQFallback";
 import { CinematicSceneViewport } from "./CinematicSceneViewport";
 import { SceneSafeFrame } from "./SceneSafeFrame";
+import { CinematicMediaFrame } from "@/components/cinematic/CinematicMediaFrame";
 import { getSceneConfig } from "./registry";
 
 /**
- * SCENE 07 — NESTIQ (PROJECT 003)
+ * SCENE 07 — NESTIQ (003 / AVORRIA VENTURE)
  *
- * Fixed motion contract:
- * - Property image scale completes within 0.00 - 0.07, holds stationary 0.07 - 0.22, exits 0.22 - 0.28
- * - Spatial 3D rotation completes within 0.48 - 0.56, holds stationary 0.56 - 0.66, exits 0.66 - 0.72
+ * SIMPLIFIED TEASER MODEL:
+ * 1. Property Intelligence Dashboard (0.00 – 0.50) -> Lands 0.00-0.08, Holds stationary 0.08-0.42
+ * 2. Spatial 3D Map / Context Analysis (0.50 – 0.80) -> Lands 0.50-0.56, Holds stationary 0.56-0.74
+ * 3. Venture Contribution & Case Study Link (0.80 – 0.94) -> Holds stationary 0.84-0.94
  */
 export function Scene07NestIQ() {
   const config = getSceneConfig("scene-07-nestiq")!;
 
-  const propertyContainerRef = useRef<HTMLDivElement>(null);
-  const propertyImageRef = useRef<HTMLDivElement>(null);
-  const contextContainerRef = useRef<HTMLDivElement>(null);
-  const contextLineRef = useRef<HTMLDivElement>(null);
+  const dashboardContainerRef = useRef<HTMLDivElement>(null);
+  const dashboardImageRef = useRef<HTMLDivElement>(null);
   const spatialContainerRef = useRef<HTMLDivElement>(null);
-  const spatialInnerRef = useRef<HTMLDivElement>(null);
-  const spatialAnnotationRef = useRef<HTMLDivElement>(null);
-  const decisionContainerRef = useRef<HTMLDivElement>(null);
   const contributionContainerRef = useRef<HTMLDivElement>(null);
   const footerMarkerRef = useRef<HTMLDivElement>(null);
 
   const buildTimeline = (timeline: gsap.core.Timeline) => {
     timeline.addLabel("entry", 0);
-    timeline.addLabel("property", 0.08);
-    timeline.addLabel("context", 0.28);
-    timeline.addLabel("spatial", 0.50);
-    timeline.addLabel("decision", 0.72);
-    timeline.addLabel("contribution", 0.88);
-    timeline.addLabel("handoff", 0.96);
+    timeline.addLabel("dashboard_hold", 0.08);
+    timeline.addLabel("spatial_entry", 0.50);
+    timeline.addLabel("spatial_hold", 0.56);
+    timeline.addLabel("contribution", 0.80);
+    timeline.addLabel("handoff", 0.94);
 
-    // 0.00 - 0.28: Property Hero (Move -> Land -> Hold -> Exit)
-    if (propertyContainerRef.current) {
+    // 1. Dashboard Interface (0.00 - 0.48)
+    if (dashboardContainerRef.current) {
       timeline.fromTo(
-        propertyContainerRef.current,
+        dashboardContainerRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.07 },
+        { opacity: 1, duration: 0.08 },
         0
       );
-      // Hold stationary 0.07 - 0.22
+      // Stable hold 0.08 - 0.42
       timeline.to(
-        propertyContainerRef.current,
+        dashboardContainerRef.current,
         { opacity: 0, duration: 0.06 },
-        0.22
-      );
-    }
-    if (propertyImageRef.current) {
-      timeline.fromTo(
-        propertyImageRef.current,
-        { scale: 0.98 },
-        { scale: 1.0, duration: 0.07 },
-        0
-      );
-    }
-
-    // 0.28 - 0.48: Context Engine
-    if (contextContainerRef.current) {
-      timeline.fromTo(
-        contextContainerRef.current,
-        { opacity: 0, y: 25 },
-        { opacity: 1, y: 0, duration: 0.08 },
-        0.28
-      );
-      // Hold 0.36 - 0.42
-      timeline.to(
-        contextContainerRef.current,
-        { opacity: 0, y: -15, duration: 0.06 },
         0.44
       );
     }
-    if (contextLineRef.current) {
+    if (dashboardImageRef.current) {
       timeline.fromTo(
-        contextLineRef.current,
-        { width: "0%" },
-        { width: "100%", duration: 0.10 },
-        0.30
+        dashboardImageRef.current,
+        { scale: 0.98 },
+        { scale: 1.0, duration: 0.08 },
+        0
       );
     }
 
-    // 0.48 - 0.72: Spatial 3D Map
+    // 2. Spatial Context Stage (0.50 - 0.78)
     if (spatialContainerRef.current) {
       timeline.fromTo(
         spatialContainerRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.08 },
-        0.48
-      );
-      // Hold stationary 0.56 - 0.66
-      timeline.to(
-        spatialContainerRef.current,
-        { opacity: 0, duration: 0.06 },
-        0.66
-      );
-    }
-    if (spatialInnerRef.current) {
-      // Rotation completes early at 0.56, then holds static
-      timeline.fromTo(
-        spatialInnerRef.current,
-        { rotateX: 0, scale: 1.0 },
-        { rotateX: 20, scale: 1.05, duration: 0.08 },
-        0.48
-      );
-    }
-    if (spatialAnnotationRef.current) {
-      timeline.fromTo(
-        spatialAnnotationRef.current,
-        { opacity: 0 },
         { opacity: 1, duration: 0.06 },
         0.50
       );
+      // Stable hold 0.56 - 0.72
       timeline.to(
-        spatialAnnotationRef.current,
-        { opacity: 0, duration: 0.04 },
-        0.64
+        spatialContainerRef.current,
+        { opacity: 0, duration: 0.06 },
+        0.74
       );
     }
 
-    // 0.72 - 0.86: Decision Platform
-    if (decisionContainerRef.current) {
-      timeline.fromTo(
-        decisionContainerRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.06 },
-        0.72
-      );
-      // Hold 0.78 - 0.82
-      timeline.to(
-        decisionContainerRef.current,
-        { opacity: 0, duration: 0.04 },
-        0.84
-      );
-    }
-
-    // 0.86 - 0.95: Contribution
+    // 3. Contribution & Case Study Link (0.80 - 0.94)
     if (contributionContainerRef.current) {
       timeline.fromTo(
         contributionContainerRef.current,
         { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.05 },
-        0.86
+        { opacity: 1, y: 0, duration: 0.06 },
+        0.80
       );
       timeline.to(
         contributionContainerRef.current,
-        { opacity: 0, y: -15, duration: 0.04 },
-        0.95
+        { opacity: 0, y: -10, duration: 0.04 },
+        0.94
       );
     }
 
-    // 0.94 - 1.00: Bottom Marker
+    // 4. Footer marker (0.94 - 1.00)
     if (footerMarkerRef.current) {
       timeline.fromTo(
         footerMarkerRef.current,
@@ -177,44 +108,75 @@ export function Scene07NestIQ() {
     >
       <SceneSafeFrame>
         {/* Semantic Accessibility Heading */}
-        <h2 className="sr-only">NestIQ — Property Intelligence and Spatial Data engineered by Avorria</h2>
+        <h2 className="sr-only">NestIQ — Institutional Real Estate Search and Valuation Intelligence by Avorria</h2>
 
         {/* Top Minimal Scene Marker */}
-        <div className="flex items-center justify-between font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet z-30">
+        <div className="flex items-center justify-between font-mono text-xs uppercase tracking-widest text-avorria-quiet z-30">
           <span className="text-avorria-signal">003 / NESTIQ</span>
-          <span className="text-avorria-white">PROPERTY INTELLIGENCE // 07</span>
+          <span className="text-avorria-white font-medium">AVORRIA VENTURE</span>
         </div>
 
-        {/* Chapters 1 & 2: Property Hero & Intelligence Lens */}
-        <NestIQPropertyStage
-          containerRef={propertyContainerRef}
-          imageRef={propertyImageRef}
-        />
+        {/* Stage 1: Real Estate Dashboard Capture */}
+        <CinematicMediaFrame
+          src="/media/projects/nestiq/interface/agent-dashboard-preview.png"
+          alt="NestIQ Agent Intelligence Dashboard"
+          mode="UI_LANDSCAPE"
+          fit="contain"
+          containerRef={dashboardContainerRef}
+          innerRef={dashboardImageRef}
+        >
+          <div className="absolute top-4 left-4 font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet z-20">
+            <span>003 // SEARCH INTELLIGENCE ENGINE</span>
+          </div>
+        </CinematicMediaFrame>
 
-        {/* Chapter 3: Contextual Signal Extension */}
-        <NestIQContextStage
-          containerRef={contextContainerRef}
-          lineRef={contextLineRef}
-        />
+        {/* Stage 2: Spatial Data Layer */}
+        <div
+          ref={spatialContainerRef}
+          className="absolute inset-0 w-full h-full flex items-center justify-center p-6 sm:p-12 pointer-events-none opacity-0"
+        >
+          <div className="relative w-full max-w-[min(86vw,1380px)] h-[min(70dvh,800px)] overflow-hidden bg-avorria-surface border border-avorria-line p-8 flex flex-col justify-between">
+            <div className="flex items-center justify-between font-mono text-xs text-avorria-quiet uppercase tracking-widest">
+              <span className="text-avorria-signal">SPATIAL CONTEXT ENGINE</span>
+              <span>12 DETERMINISTIC DATA LAYERS</span>
+            </div>
+            <div className="my-auto max-w-xl">
+              <div className="display-lg text-avorria-white mb-2">
+                Automated valuation modeling with multi-source spatial telemetry.
+              </div>
+            </div>
+            <div className="font-mono text-[10px] text-avorria-quiet uppercase tracking-widest border-t border-avorria-line/40 pt-4">
+              PARCEL BOUNDARIES / TRANSPORT VECTORS / INFRASTRUCTURE PROXIMITY
+            </div>
+          </div>
+        </div>
 
-        {/* Chapters 4 & 5: Spatial Map & 3D Landscape */}
-        <NestIQSpatialMapStage
-          containerRef={spatialContainerRef}
-          innerRef={spatialInnerRef}
-          annotationRef={spatialAnnotationRef}
-        />
+        {/* Stage 3: Venture Contribution & Case Study Link */}
+        <div
+          ref={contributionContainerRef}
+          className="absolute inset-x-6 sm:inset-x-16 max-w-4xl mx-auto flex flex-col gap-6 bg-avorria-surface/90 border border-avorria-line p-8 sm:p-12 backdrop-blur-md z-30 opacity-0"
+        >
+          <div className="font-mono text-xs text-avorria-signal uppercase tracking-widest">
+            003 / NESTIQ // AVORRIA VENTURE
+          </div>
+          <div className="display-lg text-avorria-white">
+            Institutional real estate search intelligence, spatial data layers, and valuation models.
+          </div>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-avorria-line pt-6">
+            <div className="font-mono text-xs uppercase tracking-widest text-avorria-muted">
+              SPATIAL DATA / SEARCH ARCHITECTURE / PRODUCT
+            </div>
+            <Link
+              href="/work/nestiq"
+              className="inline-flex items-center gap-3 font-mono text-xs text-avorria-signal uppercase tracking-widest hover:underline"
+            >
+              <span>VIEW CASE STUDY</span>
+              <span>→</span>
+            </Link>
+          </div>
+        </div>
 
-        {/* Chapter 6: Decision Intelligence & Product UI */}
-        <NestIQDecisionStage
-          containerRef={decisionContainerRef}
-        />
-
-        {/* Chapter 7: Avorria Contribution & Case Study Link */}
-        <NestIQContributionStage
-          containerRef={contributionContainerRef}
-        />
-
-        {/* Bottom Handoff Anchor for Scene 08 */}
+        {/* Bottom Handoff Anchor */}
         <div
           ref={footerMarkerRef}
           className="flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-[10px] sm:text-xs text-avorria-quiet uppercase tracking-widest z-30"

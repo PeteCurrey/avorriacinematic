@@ -1,39 +1,34 @@
 "use client";
 import React, { useRef } from "react";
+import Link from "next/link";
 import { DrawdownChartStage } from "./drawdown/DrawdownChartStage";
-import { DrawdownInterfaceStage } from "./drawdown/DrawdownInterfaceStage";
-import { DrawdownPrincipleStage } from "./drawdown/DrawdownPrincipleStage";
 import { DrawdownFallback } from "./drawdown/DrawdownFallback";
 import { CinematicSceneViewport } from "./CinematicSceneViewport";
 import { SceneSafeFrame } from "./SceneSafeFrame";
 import { getSceneConfig } from "./registry";
 
 /**
- * SCENE 09 — DRAWDOWN.TRADING (PROJECT 004)
+ * SCENE 09 — DRAWDOWN.TRADING (004 / AVORRIA VENTURE)
  *
- * Progression:
- * 1. Chart / Terminal dashboard lands (0.00 - 0.34) -> Holds stationary
- * 2. Interface Stage arrives unified (0.36 - 0.48) -> Decomposes into 3D modules (0.48 - 0.62) -> Reassembles (0.62 - 0.70)
- * 3. Principle & Delivered Scope (0.74 - 0.94)
+ * SIMPLIFIED TEASER MODEL:
+ * 1. High-Density Trading Dashboard (0.00 – 0.52) -> Lands 0.00-0.08, Holds stationary 0.08-0.44
+ * 2. Venture Contribution & Case Study Link (0.54 – 0.94) -> Holds stationary 0.60-0.94
  */
 export function Scene09Drawdown() {
   const config = getSceneConfig("scene-09-drawdown")!;
 
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartImageRef = useRef<HTMLDivElement>(null);
-  const interfaceContainerRef = useRef<HTMLDivElement>(null);
-  const unifiedRef = useRef<HTMLDivElement>(null);
-  const modulesContainerRef = useRef<HTMLDivElement>(null);
-  const principleContainerRef = useRef<HTMLDivElement>(null);
+  const contributionRef = useRef<HTMLDivElement>(null);
 
   const buildTimeline = (timeline: gsap.core.Timeline) => {
     timeline.addLabel("entry", 0);
-    timeline.addLabel("dashboard", 0.08);
-    timeline.addLabel("decompose", 0.40);
-    timeline.addLabel("principle", 0.76);
+    timeline.addLabel("dashboard_hold", 0.08);
+    timeline.addLabel("contribution_entry", 0.54);
+    timeline.addLabel("contribution_hold", 0.60);
     timeline.addLabel("handoff", 0.94);
 
-    // 0.00 - 0.36: Dashboard Entry & Hold (Move -> Land -> Hold -> Exit)
+    // 1. Trading Dashboard (0.00 - 0.50)
     if (chartContainerRef.current) {
       timeline.fromTo(
         chartContainerRef.current,
@@ -41,11 +36,11 @@ export function Scene09Drawdown() {
         { opacity: 1, duration: 0.08 },
         0
       );
-      // Hold stationary 0.08 - 0.28
+      // Stable hold 0.08 - 0.44
       timeline.to(
         chartContainerRef.current,
         { opacity: 0, duration: 0.06 },
-        0.34
+        0.46
       );
     }
     if (chartImageRef.current) {
@@ -57,64 +52,19 @@ export function Scene09Drawdown() {
       );
     }
 
-    // 0.36 - 0.74: Unified -> Decomposed Modules -> Reassembled
-    if (interfaceContainerRef.current) {
+    // 2. Venture Contribution & Case Study Link (0.54 - 0.94)
+    if (contributionRef.current) {
       timeline.fromTo(
-        interfaceContainerRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.06 },
-        0.36
-      );
-      timeline.to(
-        interfaceContainerRef.current,
-        { opacity: 0, duration: 0.06 },
-        0.72
-      );
-    }
-
-    // Unified view visible 0.36 - 0.48, then fades out as decomposed modules take over
-    if (unifiedRef.current) {
-      timeline.fromTo(
-        unifiedRef.current,
-        { opacity: 1 },
-        { opacity: 0, duration: 0.06 },
-        0.48
-      );
-      // Reassembles back at 0.64
-      timeline.to(
-        unifiedRef.current,
-        { opacity: 1, duration: 0.06 },
-        0.64
-      );
-    }
-
-    // Decomposed modules visible 0.48 - 0.64
-    if (modulesContainerRef.current) {
-      timeline.fromTo(
-        modulesContainerRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.06 },
-        0.48
-      );
-      timeline.to(
-        modulesContainerRef.current,
-        { opacity: 0, duration: 0.06 },
-        0.64
-      );
-    }
-
-    // 0.74 - 0.96: Quantitative Principle & Delivered Scope
-    if (principleContainerRef.current) {
-      timeline.fromTo(
-        principleContainerRef.current,
-        { opacity: 0, y: 25 },
+        contributionRef.current,
+        { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.06 },
-        0.74
+        0.54
       );
+      // Stable hold 0.60 - 0.94
       timeline.to(
-        principleContainerRef.current,
-        { opacity: 0, y: -15, duration: 0.04 },
-        0.96
+        contributionRef.current,
+        { opacity: 0, y: -10, duration: 0.04 },
+        0.94
       );
     }
   };
@@ -133,26 +83,41 @@ export function Scene09Drawdown() {
         </h2>
 
         {/* Top Minimal Scene Marker */}
-        <div className="flex items-center justify-between font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet z-30">
+        <div className="flex items-center justify-between font-mono text-xs uppercase tracking-widest text-avorria-quiet z-30">
           <span className="text-avorria-signal">004 / DRAWDOWN.TRADING</span>
-          <span className="text-avorria-white">FINANCIAL INTELLIGENCE // 09</span>
+          <span className="text-avorria-white font-medium">AVORRIA VENTURE</span>
         </div>
 
-        {/* Chapters 1 & 2: Risk Architecture & Institutional Interface */}
+        {/* Stage 1: Risk Architecture Dashboard Capture */}
         <DrawdownChartStage
           containerRef={chartContainerRef}
           imageRef={chartImageRef}
         />
 
-        {/* Chapters 3, 4 & 5: Exploded 3D Modules & Decomposition */}
-        <DrawdownInterfaceStage
-          containerRef={interfaceContainerRef}
-          unifiedRef={unifiedRef}
-          modulesContainerRef={modulesContainerRef}
-        />
-
-        {/* Chapter 6: Quantitative Principle & Delivered Scope */}
-        <DrawdownPrincipleStage containerRef={principleContainerRef} />
+        {/* Stage 2: Venture Contribution & Case Study Link */}
+        <div
+          ref={contributionRef}
+          className="absolute inset-x-6 sm:inset-x-16 max-w-4xl mx-auto flex flex-col gap-6 bg-avorria-surface/90 border border-avorria-line p-8 sm:p-12 backdrop-blur-md z-30 opacity-0"
+        >
+          <div className="font-mono text-xs text-avorria-signal uppercase tracking-widest">
+            004 / DRAWDOWN.TRADING // AVORRIA VENTURE
+          </div>
+          <div className="display-lg text-avorria-white">
+            High-frequency analytics dashboard, risk mitigation architecture, and quantitative execution UI.
+          </div>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-avorria-line pt-6">
+            <div className="font-mono text-xs uppercase tracking-widest text-avorria-muted">
+              DATA VISUALISATION / SYSTEMS ARCHITECTURE / UX
+            </div>
+            <Link
+              href="/work/drawdown-trading"
+              className="inline-flex items-center gap-3 font-mono text-xs text-avorria-signal uppercase tracking-widest hover:underline"
+            >
+              <span>VIEW CASE STUDY</span>
+              <span>→</span>
+            </Link>
+          </div>
+        </div>
 
         {/* Bottom Handoff Anchor for Scene 10 (Systems) */}
         <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-[10px] sm:text-xs text-avorria-quiet uppercase tracking-widest z-30">

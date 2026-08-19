@@ -1,179 +1,110 @@
 "use client";
 import React, { useRef } from "react";
 import Image from "next/image";
-import { AlkotaMaterialStage } from "./alkota/AlkotaMaterialStage";
-import { AlkotaProductStage } from "./alkota/AlkotaProductStage";
-import { AlkotaDigitalStage } from "./alkota/AlkotaDigitalStage";
-import { AlkotaContributionStage } from "./alkota/AlkotaContributionStage";
+import Link from "next/link";
 import { AlkotaFallback } from "./alkota/AlkotaFallback";
 import { CinematicSceneViewport } from "./CinematicSceneViewport";
 import { CinematicMediaFrame } from "@/components/cinematic/CinematicMediaFrame";
 import { getSceneConfig } from "./registry";
 
 /**
- * SCENE 03 — ALKOTA BIKES (PROJECT 001)
+ * SCENE 03 — ALKOTA BIKES (001 / CLIENT WORK)
  *
- * THE FIRST PROJECT A VISITOR SEES.
- *
- * Storytelling order:
- * 1. COMPLETE NAKED CARBON BIKE FIRST (0.00 - 0.24) — LANDS, HOLDS STATIONARY
- * 2. Carbon / Material Macro (0.24 - 0.44)
- * 3. Engineering Kinematics (0.44 - 0.60)
- * 4. Digital Flagship Website Experience & Scan (0.60 - 0.82)
- * 5. Avorria Contribution (0.82 - 0.94)
- * 6. Philosophy / Breath Handoff (0.94 - 1.00)
+ * SIMPLIFIED EDITORIAL SEQUENCE:
+ * 1. ACTUAL ALKOTA WEBSITE TAKEOVER (0.00 – 0.44) -> Lands 0.00-0.08, Holds stationary 0.08-0.36
+ * 2. NAKED CARBON MOUNTAIN BIKE PRODUCT (0.44 – 0.80) -> Lands 0.44-0.52, Holds stationary 0.52-0.74
+ * 3. AVORRIA CONTRIBUTION & CASE STUDY CTA (0.80 – 0.94) -> Holds stationary 0.84-0.94
+ * 4. Handoff to Breath (0.94 – 1.00)
  */
 export function Scene03Alkota() {
   const config = getSceneConfig("scene-03-alkota")!;
 
-  // Refs for declarative GSAP timeline orchestration
-  const bikeHeroContainerRef = useRef<HTMLDivElement>(null);
-  const bikeHeroImageRef = useRef<HTMLDivElement>(null);
-  const macroRef = useRef<HTMLDivElement>(null);
-  const kinematicsRef = useRef<HTMLDivElement>(null);
-  const materialAnnotationRef = useRef<HTMLDivElement>(null);
-  const productContainerRef = useRef<HTMLDivElement>(null);
-  const productImageRef = useRef<HTMLDivElement>(null);
-  const productCopyRef = useRef<HTMLDivElement>(null);
-  const digitalContainerRef = useRef<HTMLDivElement>(null);
-  const scanLineRef = useRef<HTMLDivElement>(null);
-  const contributionContainerRef = useRef<HTMLDivElement>(null);
+  const siteContainerRef = useRef<HTMLDivElement>(null);
+  const siteInnerRef = useRef<HTMLDivElement>(null);
+  const bikeContainerRef = useRef<HTMLDivElement>(null);
+  const bikeInnerRef = useRef<HTMLDivElement>(null);
+  const contributionRef = useRef<HTMLDivElement>(null);
   const nextHandoffRef = useRef<HTMLDivElement>(null);
 
   const buildTimeline = (timeline: gsap.core.Timeline) => {
     timeline.addLabel("entry", 0);
-    timeline.addLabel("complete_bike", 0.04);
-    timeline.addLabel("carbon_material", 0.24);
-    timeline.addLabel("engineering", 0.44);
-    timeline.addLabel("digital_flagship", 0.62);
-    timeline.addLabel("contribution", 0.84);
-    timeline.addLabel("handoff", 0.95);
+    timeline.addLabel("website_hold", 0.08);
+    timeline.addLabel("bike_entry", 0.44);
+    timeline.addLabel("bike_hold", 0.52);
+    timeline.addLabel("contribution", 0.80);
+    timeline.addLabel("handoff", 0.94);
 
-    // 0.00 - 0.24: COMPLETE MACHINE FIRST (Move -> Land -> Hold -> Exit)
-    if (bikeHeroContainerRef.current) {
+    // 1. ACTUAL ALKOTA WEBSITE CAPTURE (0.00 - 0.44)
+    if (siteContainerRef.current) {
       timeline.fromTo(
-        bikeHeroContainerRef.current,
+        siteContainerRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 0.08 },
         0
       );
-      // Hold stationary 0.08 - 0.20
+      // Stable hold 0.08 - 0.36
       timeline.to(
-        bikeHeroContainerRef.current,
-        { opacity: 0, duration: 0.05 },
-        0.20
+        siteContainerRef.current,
+        { opacity: 0, duration: 0.08 },
+        0.36
       );
     }
-    if (bikeHeroImageRef.current) {
+    if (siteInnerRef.current) {
       timeline.fromTo(
-        bikeHeroImageRef.current,
+        siteInnerRef.current,
         { scale: 0.98 },
         { scale: 1.0, duration: 0.08 },
         0
       );
     }
 
-    // 0.24 - 0.44: Carbon Material Macro
-    if (macroRef.current) {
+    // 2. NAKED CARBON BIKE HERO (0.44 - 0.80)
+    if (bikeContainerRef.current) {
       timeline.fromTo(
-        macroRef.current,
-        { opacity: 0, scale: 1.0 },
-        { opacity: 1, scale: 1.04, duration: 0.08 },
-        0.24
-      );
-      // Hold stationary 0.32 - 0.40
-      timeline.to(
-        macroRef.current,
-        { opacity: 0, duration: 0.04 },
-        0.40
-      );
-    }
-    if (materialAnnotationRef.current) {
-      timeline.fromTo(
-        materialAnnotationRef.current,
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.06 },
-        0.26
-      );
-      timeline.to(
-        materialAnnotationRef.current,
-        { opacity: 0, y: -10, duration: 0.04 },
-        0.40
-      );
-    }
-
-    // 0.44 - 0.62: Kinematics Engineering
-    if (kinematicsRef.current) {
-      timeline.fromTo(
-        kinematicsRef.current,
+        bikeContainerRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.06 },
+        { opacity: 1, duration: 0.08 },
         0.44
       );
-      // Hold 0.50 - 0.58
+      // Stable hold 0.52 - 0.74
       timeline.to(
-        kinematicsRef.current,
-        { opacity: 0, duration: 0.04 },
-        0.58
+        bikeContainerRef.current,
+        { opacity: 0, duration: 0.06 },
+        0.74
+      );
+    }
+    if (bikeInnerRef.current) {
+      timeline.fromTo(
+        bikeInnerRef.current,
+        { scale: 0.98 },
+        { scale: 1.0, duration: 0.08 },
+        0.44
       );
     }
 
-    // 0.62 - 0.84: Digital Flagship Interface & Scan
-    if (digitalContainerRef.current) {
+    // 3. AVORRIA CONTRIBUTION & CASE STUDY CTA (0.80 - 0.94)
+    if (contributionRef.current) {
       timeline.fromTo(
-        digitalContainerRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.06 },
-        0.62
-      );
-      // Hold 0.68 - 0.80
-      timeline.to(
-        digitalContainerRef.current,
-        { opacity: 0, duration: 0.04 },
+        contributionRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.06 },
         0.80
       );
-    }
-    if (scanLineRef.current) {
-      timeline.fromTo(
-        scanLineRef.current,
-        { left: "0%", opacity: 0 },
-        { opacity: 1, duration: 0.02 },
-        0.64
-      );
+      // Stable hold 0.86 - 0.94
       timeline.to(
-        scanLineRef.current,
-        { left: "100%", duration: 0.12 },
-        0.64
-      );
-      timeline.to(
-        scanLineRef.current,
-        { opacity: 0, duration: 0.02 },
-        0.78
+        contributionRef.current,
+        { opacity: 0, y: -10, duration: 0.04 },
+        0.94
       );
     }
 
-    // 0.84 - 0.95: Avorria Delivered Contribution
-    if (contributionContainerRef.current) {
-      timeline.fromTo(
-        contributionContainerRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.05 },
-        0.84
-      );
-      timeline.to(
-        contributionContainerRef.current,
-        { opacity: 0, y: -15, duration: 0.03 },
-        0.95
-      );
-    }
-
-    // 0.95 - 1.00: Philosophy / Breath Handoff Marker
+    // 4. Philosophy Handoff (0.94 - 1.00)
     if (nextHandoffRef.current) {
       timeline.fromTo(
         nextHandoffRef.current,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.03 },
-        0.95
+        { opacity: 0 },
+        { opacity: 1, duration: 0.04 },
+        0.94
       );
     }
   };
@@ -186,10 +117,52 @@ export function Scene03Alkota() {
       buildTimeline={buildTimeline}
     >
       <div className="w-full h-full relative overflow-hidden flex items-center justify-center">
-        {/* Semantic Accessibility Heading */}
-        <h2 className="sr-only">Alkota Bikes — Product, Brand and Digital Engineering by Avorria</h2>
+        {/* Semantic Heading */}
+        <h2 className="sr-only">Alkota Bikes — Digital Flagship Platform and Performance Brand by Avorria</h2>
 
-        {/* Chapter 1: COMPLETE NAKED CARBON MACHINE (THE FIRST PROJECT IMAGE) */}
+        {/* 1. ACTUAL ALKOTA WEBSITE TAKEOVER */}
+        <div
+          ref={siteContainerRef}
+          className="absolute inset-0 w-full h-full z-10 pointer-events-none opacity-0"
+          aria-hidden="false"
+        >
+          <div ref={siteInnerRef} className="relative w-full h-full">
+            {/* Desktop Website Capture */}
+            <Image
+              src="/media/projects/alkota/interface/homepage-desktop.png"
+              alt="Alkota Cycles website homepage designed and developed by Avorria"
+              fill
+              priority
+              className="hidden sm:block object-cover object-top"
+            />
+            {/* Mobile Website Capture */}
+            <Image
+              src="/media/projects/alkota/interface/homepage-mobile.png"
+              alt="Alkota Cycles mobile website designed and developed by Avorria"
+              fill
+              priority
+              className="sm:hidden object-cover object-top"
+            />
+
+            {/* Restrained Avorria Client Work Instrumentation */}
+            <div className="absolute top-6 left-6 sm:left-12 right-6 sm:right-12 flex items-center justify-between font-mono text-xs uppercase tracking-widest text-avorria-white bg-avorria-black/60 backdrop-blur-md px-4 py-2 border border-white/10 z-20">
+              <span className="text-avorria-signal">001 / ALKOTA</span>
+              <span className="text-avorria-white font-medium">CLIENT WORK</span>
+            </div>
+
+            <div className="absolute bottom-6 left-6 sm:left-12 right-6 sm:right-12 flex items-center justify-between font-mono text-xs uppercase tracking-widest text-avorria-white bg-avorria-black/60 backdrop-blur-md px-4 py-2 border border-white/10 z-20">
+              <span className="text-avorria-muted">WEB DESIGN / DIGITAL PRODUCT / LUXURY COMMERCE</span>
+              <Link
+                href="/work/alkota-bikes"
+                className="text-avorria-signal hover:underline pointer-events-auto"
+              >
+                VIEW CASE STUDY →
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* 2. THE MACHINE / NAKED CARBON BIKE */}
         <CinematicMediaFrame
           src="/media/projects/alkota/product/naked-carbon-hero.jpg"
           alt="Alkota Project 01 Naked Carbon Mountain Bike"
@@ -197,40 +170,45 @@ export function Scene03Alkota() {
           fit="cover"
           desktopFocal={{ x: 50, y: 48 }}
           mobileFocal={{ x: 45, y: 50 }}
-          priority
-          containerRef={bikeHeroContainerRef}
-          innerRef={bikeHeroImageRef}
+          containerRef={bikeContainerRef}
+          innerRef={bikeInnerRef}
         >
-          {/* Restrained Project Context Instrumentation */}
           <div className="absolute top-4 left-4 right-4 flex items-center justify-between font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet z-20">
-            <span className="text-avorria-signal">001 / ALKOTA</span>
-            <span className="text-avorria-white">SELECTED WORK // DIGITAL FLAGSHIP</span>
+            <span className="text-avorria-signal">001 / THE PRODUCT</span>
+            <span className="text-avorria-white">NAKED CARBON // CHASSIS</span>
           </div>
           <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet z-20 border-t border-avorria-line/30 pt-2">
             <span>PRE-PRODUCTION CARBON DEVELOPMENT</span>
-            <span className="text-avorria-white">001 // THE MACHINE</span>
+            <span className="text-avorria-white">001 // ALKOTA BIKES</span>
           </div>
         </CinematicMediaFrame>
 
-        {/* Chapter 2: Material Macro */}
-        <AlkotaMaterialStage
-          macroRef={macroRef}
-          kinematicsRef={kinematicsRef}
-          annotationRef={materialAnnotationRef}
-        />
+        {/* 3. AVORRIA CONTRIBUTION & CASE STUDY CTA */}
+        <div
+          ref={contributionRef}
+          className="absolute inset-x-6 sm:inset-x-16 max-w-4xl mx-auto flex flex-col gap-6 bg-avorria-surface/90 border border-avorria-line p-8 sm:p-12 backdrop-blur-md z-20 opacity-0"
+        >
+          <div className="font-mono text-xs text-avorria-signal uppercase tracking-widest">
+            001 / ALKOTA // CLIENT WORK
+          </div>
+          <div className="display-lg text-avorria-white">
+            Digital flagship for a bespoke high-performance carbon bicycle brand.
+          </div>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-avorria-line pt-6">
+            <div className="font-mono text-xs uppercase tracking-widest text-avorria-muted">
+              WEB / PRODUCT / UX / DEVELOPMENT
+            </div>
+            <Link
+              href="/work/alkota-bikes"
+              className="inline-flex items-center gap-3 font-mono text-xs text-avorria-signal uppercase tracking-widest hover:underline"
+            >
+              <span>VIEW CASE STUDY</span>
+              <span>→</span>
+            </Link>
+          </div>
+        </div>
 
-        {/* Chapter 3: Physical to Digital Transformation */}
-        <AlkotaDigitalStage
-          containerRef={digitalContainerRef}
-          scanLineRef={scanLineRef}
-        />
-
-        {/* Chapter 4: Avorria Contribution & Case Study Link */}
-        <AlkotaContributionStage
-          containerRef={contributionContainerRef}
-        />
-
-        {/* Bottom Handoff Anchor for Scene 04 */}
+        {/* 4. Bottom Philosophy Marker */}
         <div
           ref={nextHandoffRef}
           className="absolute bottom-10 left-1/2 -translate-x-1/2 font-mono text-[11px] text-avorria-quiet uppercase tracking-widest z-30 opacity-0 pointer-events-none"

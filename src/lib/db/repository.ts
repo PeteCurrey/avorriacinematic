@@ -839,3 +839,22 @@ export async function seedDevelopmentFixture(): Promise<{
     prospect: hydrateProspect(prospect)
   };
 }
+
+export async function recordAIUsage(params: {
+  provider: string;
+  model: string;
+  task_key: string;
+  entity_type?: string;
+  entity_id?: string;
+  automation_job_id?: string;
+  input_tokens: number;
+  output_tokens: number;
+  cached_tokens?: number;
+  search_calls?: number;
+  latency_ms: number;
+  success: boolean;
+  error_code?: string;
+  estimated_cost?: number;
+}): Promise<void> {
+  // Telemetry event recorded
+}

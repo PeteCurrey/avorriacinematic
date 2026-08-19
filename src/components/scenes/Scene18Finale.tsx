@@ -1,13 +1,22 @@
 "use client";
 import React, { useRef } from "react";
-import { getSceneConfig } from "./registry";
 import { FinaleSignal } from "./finale/FinaleSignal";
 import { FinaleQuestion } from "./finale/FinaleQuestion";
 import { FinaleProposition } from "./finale/FinaleProposition";
 import { FinaleActions } from "./finale/FinaleActions";
 import { FinaleFallback } from "./finale/FinaleFallback";
 import { CinematicSceneViewport } from "./CinematicSceneViewport";
+import { SceneSafeFrame } from "./SceneSafeFrame";
+import { getSceneConfig } from "./registry";
 
+/**
+ * SCENE 18 — FINALE
+ *
+ * READABILITY & INTERACTION TIMING:
+ * - 0.00 – 0.15: Signal & Question reveal
+ * - 0.15 – 0.35: Proposition resolves
+ * - 0.35 – 0.95: SUBSTANTIAL STABLE INTERACTION HOLD (60% stable hold for CTAs and email)
+ */
 export function Scene18Finale() {
   const config = getSceneConfig("scene-18-finale")!;
 
@@ -18,49 +27,46 @@ export function Scene18Finale() {
 
   const buildTimeline = (timeline: gsap.core.Timeline) => {
     timeline.addLabel("entry", 0);
-    timeline.addLabel("signal", 0.08);
-    timeline.addLabel("question", 0.28);
-    timeline.addLabel("proposition", 0.50);
-    timeline.addLabel("actions", 0.74);
-    timeline.addLabel("hold", 0.88);
+    timeline.addLabel("signal", 0.04);
+    timeline.addLabel("question", 0.12);
+    timeline.addLabel("proposition", 0.22);
+    timeline.addLabel("actions", 0.32);
+    timeline.addLabel("hold", 0.35);
 
-    // 0.08 - 0.28: Signal Line draws right to left
     if (signalLineRef.current) {
       timeline.fromTo(
         signalLineRef.current,
-        { width: "0%" },
-        { width: "100%", duration: 0.20 },
-        0.08
+        { width: "0%", opacity: 0 },
+        { width: "100%", opacity: 1, duration: 0.08 },
+        0.04
       );
     }
 
-    // 0.28 - 0.50: Conversational Question (Triggered feel, Lands & Holds)
     if (questionRef.current) {
       timeline.fromTo(
         questionRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.10 },
-        0.28
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.08 },
+        0.12
       );
     }
 
-    // 0.50 - 0.74: Monumental Proposition (BUILD SOMETHING REMARKABLE)
     if (propositionRef.current) {
       timeline.fromTo(
         propositionRef.current,
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.12 },
-        0.50
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.08 },
+        0.22
       );
     }
 
-    // 0.74 - 1.00: Primary Action & Contact (Remains stationary and fully clickable)
+    // Actions CTA arrives early at 0.32 and holds stable through 1.00
     if (actionsRef.current) {
       timeline.fromTo(
         actionsRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.10 },
-        0.74
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.08 },
+        0.32
       );
     }
   };
@@ -72,24 +78,30 @@ export function Scene18Finale() {
       fallback={<FinaleFallback />}
       buildTimeline={buildTimeline}
     >
-      <div className="w-full h-full relative bg-avorria-black select-none overflow-hidden border-t border-avorria-line">
+      <SceneSafeFrame>
         {/* Semantic Accessibility Heading */}
         <h2 className="sr-only">
-          Finale — Start a Project with Avorria
+          Start a Project — Connect with Avorria Engineering Studio
         </h2>
 
-        {/* 01. Signal Callback Line */}
+        {/* Top Minimal Scene Marker */}
+        <div className="flex items-center justify-between font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet z-30">
+          <span className="text-avorria-signal">18 / FINALE</span>
+          <span className="text-avorria-white">ENGAGEMENT</span>
+        </div>
+
+        {/* Phase A: Signal Point */}
         <FinaleSignal lineRef={signalLineRef} />
 
-        {/* 02. Conversational Question */}
-        <FinaleQuestion containerRef={questionRef} />
+        {/* Phase B: Question & Proposition */}
+        <div className="flex flex-col gap-6 my-auto max-w-4xl">
+          <FinaleQuestion containerRef={questionRef} />
+          <FinaleProposition containerRef={propositionRef} />
+        </div>
 
-        {/* 03. Monumental Proposition */}
-        <FinaleProposition containerRef={propositionRef} />
-
-        {/* 04. Primary Action & Contact */}
+        {/* Phase C: Interaction CTA & Direct Contact */}
         <FinaleActions containerRef={actionsRef} />
-      </div>
+      </SceneSafeFrame>
     </CinematicSceneViewport>
   );
 }
