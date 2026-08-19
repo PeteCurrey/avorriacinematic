@@ -3,8 +3,9 @@ import { Metadata } from "next";
 export const SITE_NAME = "Avorria";
 export const SITE_TAGLINE = "Precision as Power";
 export const SITE_DESCRIPTION =
-  "Avorria is an international digital design, engineering, search architecture and AI systems studio.";
+  "Avorria builds digital products that create commercial advantage — web engineering, technical search architecture, AI systems, and operational automation for ambitious organisations.";
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://avorria.com";
+export const OG_IMAGE_URL = `${SITE_URL}/og/avorria-og.jpg`;
 
 export function generatePageMetadata({
   title,
@@ -22,6 +23,7 @@ export function generatePageMetadata({
   const canonical = `${SITE_URL}${path}`;
 
   return {
+    metadataBase: new URL(SITE_URL),
     title: fullTitle,
     description: metaDescription,
     alternates: {
@@ -44,12 +46,21 @@ export function generatePageMetadata({
       url: canonical,
       siteName: SITE_NAME,
       locale: "en_GB",
-      type: "website"
+      type: "website",
+      images: [
+        {
+          url: OG_IMAGE_URL,
+          width: 1200,
+          height: 630,
+          alt: "Avorria — Precision as Power. Digital Engineering, Search & AI Systems Studio."
+        }
+      ]
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
-      description: metaDescription
+      description: metaDescription,
+      images: [OG_IMAGE_URL]
     }
   };
 }
@@ -78,3 +89,5 @@ export function getWebSiteSchema() {
     url: SITE_URL
   };
 }
+
+

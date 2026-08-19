@@ -7,9 +7,14 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/dev/"]
+        disallow: [
+          "/dev/",       // Internal tooling — never index
+          "/api/",       // API routes — not crawlable content
+          "/studio/",    // Placeholder stub route
+        ]
       }
     ],
     sitemap: `${SITE_URL}/sitemap.xml`
   };
 }
+

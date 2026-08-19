@@ -222,7 +222,121 @@ export default function DevTimelinePage() {
             </table>
           </div>
         </div>
+
+        {/* Phase 22: Production Readiness & Hardening Matrix */}
+        <div className="space-y-4">
+          <div className="flex justify-between items-center border-b border-avorria-line pb-3">
+            <span className="font-bold text-avorria-signal uppercase tracking-wider">
+              05 // PHASE 22: PRODUCTION READINESS &amp; HARDENING GATES
+            </span>
+            <span className="text-avorria-quiet text-[11px]">WCAG 2.2 AA / SECURITY / SEO / CWV / TRUTH</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Accessibility Card */}
+            <div className="border border-avorria-line bg-avorria-surface p-5 space-y-3">
+              <div className="flex justify-between items-center border-b border-avorria-line/60 pb-2">
+                <span className="text-avorria-white font-bold text-[11px] uppercase tracking-wider">ACCESSIBILITY (WCAG 2.2 AA)</span>
+                <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-500/40">PASS</span>
+              </div>
+              <ul className="space-y-1.5 text-avorria-muted text-[11px]">
+                <li><span className="text-avorria-signal font-bold">✓</span> Skip to content link targeting #main-content</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Single H1: Precision As Power (sr-only)</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Semantic H2 landmarks across all 19 scenes</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Chartreuse focus-visible ring (2px solid)</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Mobile navigation focus trap &amp; return</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> prefers-reduced-motion fallbacks on all scenes</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Zero pure-color status communication</li>
+              </ul>
+            </div>
+
+            {/* SEO & Meta Card */}
+            <div className="border border-avorria-line bg-avorria-surface p-5 space-y-3">
+              <div className="flex justify-between items-center border-b border-avorria-line/60 pb-2">
+                <span className="text-avorria-white font-bold text-[11px] uppercase tracking-wider">SEO &amp; STRUCTURED DATA</span>
+                <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-500/40">PASS</span>
+              </div>
+              <ul className="space-y-1.5 text-avorria-muted text-[11px]">
+                <li><span className="text-avorria-signal font-bold">✓</span> Canonical URL resolving to https://avorria.com</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Branded 1200x630 OG image in /public/og/</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Organization &amp; WebSite JSON-LD schemas</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> robots.ts disallows /dev/, /api/, /studio/</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> sitemap.ts excludes unready case studies</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> /dev routes wrapped in noindex layout</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Public footer stripped of internal dev links</li>
+              </ul>
+            </div>
+
+            {/* Security & Headers Card */}
+            <div className="border border-avorria-line bg-avorria-surface p-5 space-y-3">
+              <div className="flex justify-between items-center border-b border-avorria-line/60 pb-2">
+                <span className="text-avorria-white font-bold text-[11px] uppercase tracking-wider">SECURITY &amp; HEADERS</span>
+                <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-500/40">PASS</span>
+              </div>
+              <ul className="space-y-1.5 text-avorria-muted text-[11px]">
+                <li><span className="text-avorria-signal font-bold">✓</span> Content-Security-Policy (CSP) configured</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> X-Content-Type-Options: nosniff</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> X-Frame-Options: SAMEORIGIN</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Referrer-Policy: strict-origin-when-cross-origin</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Permissions-Policy restricts mic to self</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> HSTS: max-age=63072000; includeSubDomains</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> API rate-limiting (10 req/min/IP) in demo route</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Zero client-exposed secret keys</li>
+              </ul>
+            </div>
+
+            {/* Performance & CWV Card */}
+            <div className="border border-avorria-line bg-avorria-surface p-5 space-y-3">
+              <div className="flex justify-between items-center border-b border-avorria-line/60 pb-2">
+                <span className="text-avorria-white font-bold text-[11px] uppercase tracking-wider">PERFORMANCE &amp; CWV</span>
+                <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-500/40">PASS</span>
+              </div>
+              <ul className="space-y-1.5 text-avorria-muted text-[11px]">
+                <li><span className="text-avorria-signal font-bold">✓</span> LCP Target: &le;2.5s (Minimal opening scene)</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> CLS Target: &le;0.1 (Fixed geometry containers)</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> INP Target: &le;200ms (Debounced handlers)</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> AVIF/WebP next/image optimizations enabled</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> WebGL DPR capped at 1.5x mobile / 2.0x desktop</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Scene 18 Finale: 0 active WebGL / 0 active video</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Local Google Fonts with display: swap</li>
+              </ul>
+            </div>
+
+            {/* Resilience & Error Boundaries Card */}
+            <div className="border border-avorria-line bg-avorria-surface p-5 space-y-3">
+              <div className="flex justify-between items-center border-b border-avorria-line/60 pb-2">
+                <span className="text-avorria-white font-bold text-[11px] uppercase tracking-wider">RESILIENCE &amp; FALLBACKS</span>
+                <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-500/40">PASS</span>
+              </div>
+              <ul className="space-y-1.5 text-avorria-muted text-[11px]">
+                <li><span className="text-avorria-signal font-bold">✓</span> SceneErrorBoundary on all 19 scenes</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> WebGL failure: Static DOM fallback</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Map failure: Static contextual cards</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Voice denial: Immediate text input fallback</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> AI demo failure: Deterministic synthesis fallback</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Video failure: Static poster + semantic copy</li>
+              </ul>
+            </div>
+
+            {/* Claims & Truth Audit Card */}
+            <div className="border border-avorria-line bg-avorria-surface p-5 space-y-3">
+              <div className="flex justify-between items-center border-b border-avorria-line/60 pb-2">
+                <span className="text-avorria-white font-bold text-[11px] uppercase tracking-wider">CLAIMS &amp; CONTENT TRUTH</span>
+                <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-500/40">PASS</span>
+              </div>
+              <ul className="space-y-1.5 text-avorria-muted text-[11px]">
+                <li><span className="text-avorria-signal font-bold">✓</span> 0 fabricated revenue metrics or % growth</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> 0 unearned awards or certifications</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> 0 fake client testimonials</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Canonical numbering: 001 Alkota &rarr; 006 OGN</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> Scene indexing (00-18) strictly decoupled</li>
+                <li><span className="text-avorria-signal font-bold">✓</span> AI demos explicitly labelled as illustrative</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
+

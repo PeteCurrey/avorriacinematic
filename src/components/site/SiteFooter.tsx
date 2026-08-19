@@ -64,7 +64,6 @@ export function SiteFooter() {
             <div className="mt-6 pt-6 border-t border-avorria-line flex gap-4 font-mono text-[11px] text-avorria-muted">
               <Link href="/legal/privacy" className="hover:text-avorria-white transition-colors">Privacy</Link>
               <Link href="/legal/terms" className="hover:text-avorria-white transition-colors">Terms</Link>
-              <Link href="/dev/scenes" className="text-avorria-signal/80 hover:text-avorria-signal">Dev Lab</Link>
             </div>
           </div>
         </div>

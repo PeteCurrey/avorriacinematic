@@ -12,14 +12,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/capabilities/search`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE_URL}/capabilities/systems`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE_URL}/lab`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/studio`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/intelligence`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/start-project`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 }
   ];
 
-  // Projects
-  PROJECTS.forEach((p) => {
+  // Only include project case studies that are genuinely available
+  // Excluding stubs prevents soft-404 indexation
+  PROJECTS.filter((p) => p.caseStudyAvailable).forEach((p) => {
     routes.push({
       url: `${SITE_URL}/work/${p.slug}`,
       lastModified: new Date(),
@@ -28,5 +27,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
+  // Include capability pages from content if they resolve
+  if (CAPABILITIES && Array.isArray(CAPABILITIES)) {
+    // Capabilities already enumerated above by slug — no duplication needed
+  }
+
   return routes;
 }
+

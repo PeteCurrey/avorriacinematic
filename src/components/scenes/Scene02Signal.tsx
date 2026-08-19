@@ -69,6 +69,9 @@ export function Scene02Signal() {
       data-scene-index="2"
       className="relative w-full bg-avorria-black"
     >
+      {/* Semantic Accessibility Heading */}
+      <h2 className="sr-only">The Avorria Signal — Spatial Project Discovery and Architectural Gallery</h2>
+
       <div
         ref={pinnedContentRef}
         className="w-full h-screen h-[100dvh] relative overflow-hidden flex items-center justify-center"

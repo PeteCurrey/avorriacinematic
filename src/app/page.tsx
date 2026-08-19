@@ -1,3 +1,4 @@
+import { SceneErrorBoundary } from "@/components/cinematic/SceneErrorBoundary";
 import { Scene00Void } from "@/components/scenes/Scene00Void";
 import { Scene01Precision } from "@/components/scenes/Scene01Precision";
 import { Scene02Signal } from "@/components/scenes/Scene02Signal";
@@ -21,26 +22,83 @@ import { Scene18Finale } from "@/components/scenes/Scene18Finale";
 export default function HomePage() {
   return (
     <div className="w-full flex flex-col">
-      {/* 19 Typed Homepage Scenes in Exact Sequence */}
-      <Scene00Void />
-      <Scene01Precision />
-      <Scene02Signal />
-      <Scene03Alkota />
-      <Scene04Breath />
-      <Scene05CareerOS />
-      <Scene06Build />
-      <Scene07NestIQ />
-      <Scene08Search />
-      <Scene09Drawdown />
-      <Scene10Systems />
-      <Scene11EntireFM />
-      <Scene12Work />
-      <Scene13OGN />
-      <Scene14Lab />
-      <Scene15Manifesto />
-      <Scene16Proof />
-      <Scene17Intelligence />
-      <Scene18Finale />
+      {/* 19 Typed Homepage Scenes with Independent Error Boundaries */}
+      <SceneErrorBoundary sceneId="scene-00-void" sceneLabel="The Void">
+        <Scene00Void />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-01-precision" sceneLabel="Precision As Power">
+        <Scene01Precision />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-02-signal" sceneLabel="The Avorria Signal">
+        <Scene02Signal />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-03-alkota" sceneLabel="Alkota Bikes">
+        <Scene03Alkota />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-04-breath" sceneLabel="The First Breath">
+        <Scene04Breath />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-05-careeros" sceneLabel="CareerOS">
+        <Scene05CareerOS />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-06-build" sceneLabel="BUILD Capability">
+        <Scene06Build />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-07-nestiq" sceneLabel="NestIQ">
+        <Scene07NestIQ />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-08-search" sceneLabel="SEARCH Capability">
+        <Scene08Search />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-09-drawdown" sceneLabel="Drawdown.Trading">
+        <Scene09Drawdown />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-10-systems" sceneLabel="SYSTEMS Capability">
+        <Scene10Systems />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-11-entirefm" sceneLabel="EntireFM">
+        <Scene11EntireFM />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-12-work" sceneLabel="Selected Work">
+        <Scene12Work />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-13-ogn" sceneLabel="One Great Northern">
+        <Scene13OGN />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-14-lab" sceneLabel="Avorria Lab">
+        <Scene14Lab />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-15-manifesto" sceneLabel="Manifesto">
+        <Scene15Manifesto />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-16-proof" sceneLabel="Proof">
+        <Scene16Proof />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-17-intelligence" sceneLabel="Intelligence">
+        <Scene17Intelligence />
+      </SceneErrorBoundary>
+
+      <SceneErrorBoundary sceneId="scene-18-finale" sceneLabel="Finale">
+        <Scene18Finale />
+      </SceneErrorBoundary>
     </div>
   );
 }
+
