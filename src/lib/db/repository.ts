@@ -1627,3 +1627,396 @@ export async function getDailyCEOBrief(): Promise<DailyCEOBrief> {
   const p7 = getP7();
   return p7.dailyBriefs[0] ?? seedInitialBrief();
 }
+
+
+
+// ============================================================================
+// PHASE 8: OPERATIONAL SYSTEMS & CMS STORE
+// ============================================================================
+
+import type {
+  CMSPage,
+  CMSPageVersion,
+  CMSGlobal,
+  CMSNavigationItem,
+  MediaAsset,
+  CaseStudy,
+  Insight,
+  SEOAuditRun,
+  SEOIssue,
+  SEORedirect,
+  InboundLead,
+  AdminTeamMember,
+  AdminNotification,
+} from "@/types/admin";
+
+interface Phase8State {
+  cmsPages: CMSPage[];
+  cmsVersions: CMSPageVersion[];
+  cmsGlobals: CMSGlobal[];
+  cmsNavItems: CMSNavigationItem[];
+  mediaAssets: MediaAsset[];
+  caseStudies: CaseStudy[];
+  insights: Insight[];
+  seoAuditRuns: SEOAuditRun[];
+  seoIssues: SEOIssue[];
+  seoRedirects: SEORedirect[];
+  inboundLeads: InboundLead[];
+  teamMembers: AdminTeamMember[];
+  notifications: AdminNotification[];
+}
+
+let _p8: Phase8State | null = null;
+function getP8(): Phase8State {
+  if (!_p8) {
+    _p8 = {
+      cmsPages: seedCMSPages(),
+      cmsVersions: [],
+      cmsGlobals: seedCMSGlobals(),
+      cmsNavItems: seedCMSNav(),
+      mediaAssets: seedMediaAssets(),
+      caseStudies: seedCaseStudies(),
+      insights: seedInsights(),
+      seoAuditRuns: [seedSEOAudit()],
+      seoIssues: seedSEOIssues(),
+      seoRedirects: seedSEORedirects(),
+      inboundLeads: seedInboundLeads(),
+      teamMembers: seedTeamMembers(),
+      notifications: seedNotifications(),
+    };
+  }
+  return _p8;
+}
+
+function seedCMSPages(): CMSPage[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "page-1",
+      slug: "/",
+      title: "Avorria Homepage",
+      status: "published",
+      page_type: "homepage",
+      template: "cinematic_home",
+      seo_title: "Avorria — Next-Generation Digital Products & Web Infrastructure",
+      seo_description: "We engineer bespoke websites, digital products, and autonomous AI systems for ambitious businesses.",
+      noindex: false,
+      created_at: now,
+      updated_at: now,
+    },
+    {
+      id: "page-2",
+      slug: "/capabilities",
+      title: "Capabilities & Systems",
+      status: "published",
+      page_type: "standard",
+      template: "editorial",
+      seo_title: "Capabilities — Avorria",
+      seo_description: "Explore our architecture, engineering, and digital product capabilities.",
+      noindex: false,
+      created_at: now,
+      updated_at: now,
+    },
+    {
+      id: "page-3",
+      slug: "/work",
+      title: "Selected Work & Case Studies",
+      status: "published",
+      page_type: "portfolio",
+      template: "gallery",
+      seo_title: "Work — Avorria",
+      seo_description: "Commercial proof and case studies across specialist sectors.",
+      noindex: false,
+      created_at: now,
+      updated_at: now,
+    },
+  ];
+}
+
+function seedCMSGlobals(): CMSGlobal[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "glob-1",
+      key: "business_info",
+      value: {
+        legal_name: "Avorria Ltd",
+        trading_name: "Avorria",
+        contact_email: "hello@avorria.com",
+        location: "Sheffield & Chesterfield, UK",
+        primary_phone: "+44 (0) 114 000 0000",
+      },
+      updated_by: "system",
+      updated_at: now,
+    },
+  ];
+}
+
+function seedCMSNav(): CMSNavigationItem[] {
+  const now = new Date().toISOString();
+  return [
+    { id: "nav-1", menu_location: "primary", label: "Work", destination: "/work", is_external: false, sort_order: 1, visibility: true, created_at: now },
+    { id: "nav-2", menu_location: "primary", label: "Capabilities", destination: "/capabilities", is_external: false, sort_order: 2, visibility: true, created_at: now },
+    { id: "nav-3", menu_location: "primary", label: "Intelligence", destination: "/intelligence", is_external: false, sort_order: 3, visibility: true, created_at: now },
+    { id: "nav-4", menu_location: "primary", label: "Start Project", destination: "/start-project", is_external: false, sort_order: 4, visibility: true, created_at: now },
+  ];
+}
+
+function seedMediaAssets(): MediaAsset[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "med-1",
+      filename: "avorria_hero_render_v2.webp",
+      original_filename: "hero_render_dark.webp",
+      media_type: "image",
+      mime_type: "image/webp",
+      storage_path: "/uploads/avorria_hero_render_v2.webp",
+      width: 2560,
+      height: 1440,
+      file_size: 420000,
+      alt_text: "Avorria dark cinematic digital product canvas",
+      focal_point_x: 0.50,
+      focal_point_y: 0.45,
+      created_by: "Pete",
+      created_at: now,
+    },
+  ];
+}
+
+function seedCaseStudies(): CaseStudy[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "cs-1",
+      slug: "alkota-bikes",
+      client_name: "Alkota Bikes",
+      project_name: "Custom Frame Builder Digital Commerce",
+      status: "published",
+      sector: "Specialist Manufacturing & Retail",
+      location: "Derbyshire, UK",
+      short_summary: "Transforming bespoke bicycle builder from manual enquiry book into interactive digital configuration studio.",
+      challenge: "High-ticket custom frame orders suffered from long consultation cycles and zero interactive visual preview.",
+      strategy: "Architect an immersive WebGL / Three.js 3D frame customiser paired with clean editorial narrative.",
+      solution: "Next.js cinematic canvas with live geometry rendering, spec calculator, and deposit payment gateway.",
+      outcome: "+180% qualified custom consultation bookings and £42k in first-month deposit conversions.",
+      featured: true,
+      sort_order: 1,
+      seo_title: "Alkota Bikes Case Study — Avorria",
+      seo_description: "How Avorria engineered a custom frame configuration studio.",
+      metrics: [
+        { metric: "Consultation Bookings", value: "+180%", verified: true, source: "GA4 / Inbound form" },
+        { metric: "First-Month Deposits", value: "£42,000", verified: true, source: "Stripe checkout" },
+      ],
+      published_at: now,
+      created_at: now,
+      updated_at: now,
+    },
+  ];
+}
+
+function seedInsights(): Insight[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "ins-1",
+      slug: "why-most-website-redesigns-destroy-search-value",
+      title: "Why Most Website Redesigns Destroy Search Value",
+      excerpt: "The hidden technical failures that cause legacy organic rankings to plummet during careless website rebuilds.",
+      content: "When businesses redesign their website, agency teams routinely neglect URL crawl depth, canonical mapping, and 301 preservation...",
+      content_type: "article",
+      status: "published",
+      author_id: "Pete Currey",
+      topics: ["SEO", "Architecture", "Engineering"],
+      seo_title: "Why Website Redesigns Lose SEO Value — Avorria",
+      seo_description: "Protecting organic rankings during major website migrations.",
+      published_at: now,
+      created_at: now,
+      updated_at: now,
+    },
+  ];
+}
+
+function seedSEOAudit(): SEOAuditRun {
+  const now = new Date().toISOString();
+  return {
+    id: "seo-audit-1",
+    started_at: now,
+    completed_at: now,
+    pages_crawled: 18,
+    critical_issues: 0,
+    warnings: 2,
+    status: "completed",
+  };
+}
+
+function seedSEOIssues(): SEOIssue[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "iss-1",
+      url: "/legal/privacy",
+      issue_type: "missing_meta_description",
+      severity: "LOW",
+      message: "Meta description tag is absent or under 50 characters",
+      status: "open",
+      created_at: now,
+    },
+  ];
+}
+
+function seedSEORedirects(): SEORedirect[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "red-1",
+      source: "/about-us",
+      destination: "/capabilities",
+      status_code: 301,
+      active: true,
+      reason: "Legacy page migration to unified capabilities overview",
+      created_at: now,
+    },
+  ];
+}
+
+function seedInboundLeads(): InboundLead[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "lead-1",
+      business_name: "Apex Precision Engineering",
+      contact_name: "Marcus Vance",
+      email: "m.vance@apexprecision.co.uk",
+      phone: "+44 7700 900123",
+      website: "https://apexprecision.co.uk",
+      service_interest: "High-Performance Website & Client Portal",
+      budget_range: "£3,000 – £5,000",
+      message: "We need a complete redesign of our engineering consultancy site and a private portal for client CAD drawings.",
+      source: "start_project_form",
+      landing_page: "/start-project",
+      utm_source: "linkedin",
+      utm_medium: "direct_post",
+      status: "new",
+      lead_score: 85,
+      created_at: now,
+      updated_at: now,
+    },
+  ];
+}
+
+function seedTeamMembers(): AdminTeamMember[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "team-1",
+      name: "Pete Currey",
+      email: "pete@avorria.com",
+      role: "super_admin",
+      status: "active",
+      last_active_at: now,
+      created_at: now,
+    },
+  ];
+}
+
+function seedNotifications(): AdminNotification[] {
+  const now = new Date().toISOString();
+  return [
+    {
+      id: "notif-1",
+      type: "inbound_lead",
+      severity: "HIGH",
+      title: "New High-Value Inbound Lead",
+      summary: "Marcus Vance from Apex Precision Engineering submitted a £3,000–£5,000 project enquiry.",
+      entity_type: "inbound_lead",
+      entity_id: "lead-1",
+      read_at: null,
+      dismissed_at: null,
+      created_at: now,
+    },
+    {
+      id: "notif-2",
+      type: "proposal_accepted",
+      severity: "CRITICAL",
+      title: "Proposal Accepted: Apex Autocare Ltd",
+      summary: "Commercial proposal (£1,850) was accepted online. Ready for onboarding.",
+      entity_type: "proposal",
+      entity_id: "prop-1",
+      read_at: null,
+      dismissed_at: null,
+      created_at: now,
+    },
+  ];
+}
+
+// ── REPOSITORY CMS & OPERATIONAL EXPORTS ──────────────────────────────────────
+
+export async function getCMSPages(): Promise<CMSPage[]> {
+  return [...getP8().cmsPages];
+}
+export async function getCMSPage(id: string): Promise<CMSPage | null> {
+  return getP8().cmsPages.find(p => p.id === id) ?? null;
+}
+export async function updateCMSPage(id: string, updates: Partial<CMSPage>): Promise<CMSPage> {
+  const p8 = getP8();
+  const idx = p8.cmsPages.findIndex(p => p.id === id);
+  if (idx === -1) throw new Error(`CMSPage ${id} not found`);
+  p8.cmsPages[idx] = { ...p8.cmsPages[idx], ...updates, updated_at: new Date().toISOString() };
+  return p8.cmsPages[idx];
+}
+
+export async function getCMSNavItems(): Promise<CMSNavigationItem[]> {
+  return [...getP8().cmsNavItems].sort((a, b) => a.sort_order - b.sort_order);
+}
+
+export async function getMediaAssets(): Promise<MediaAsset[]> {
+  return [...getP8().mediaAssets].sort((a, b) => b.created_at.localeCompare(a.created_at));
+}
+
+export async function getCaseStudies(): Promise<CaseStudy[]> {
+  return [...getP8().caseStudies].sort((a, b) => a.sort_order - b.sort_order);
+}
+export async function getCaseStudy(id: string): Promise<CaseStudy | null> {
+  return getP8().caseStudies.find(c => c.id === id || c.slug === id) ?? null;
+}
+
+export async function getInsights(): Promise<Insight[]> {
+  return [...getP8().insights].sort((a, b) => b.created_at.localeCompare(a.created_at));
+}
+
+export async function getSEOIssues(): Promise<SEOIssue[]> {
+  return [...getP8().seoIssues];
+}
+export async function getSEORedirects(): Promise<SEORedirect[]> {
+  return [...getP8().seoRedirects];
+}
+
+export async function getInboundLeads(): Promise<InboundLead[]> {
+  return [...getP8().inboundLeads].sort((a, b) => b.created_at.localeCompare(a.created_at));
+}
+export async function getInboundLead(id: string): Promise<InboundLead | null> {
+  return getP8().inboundLeads.find(l => l.id === id) ?? null;
+}
+export async function updateInboundLead(id: string, updates: Partial<InboundLead>): Promise<InboundLead> {
+  const p8 = getP8();
+  const idx = p8.inboundLeads.findIndex(l => l.id === id);
+  if (idx === -1) throw new Error(`InboundLead ${id} not found`);
+  p8.inboundLeads[idx] = { ...p8.inboundLeads[idx], ...updates, updated_at: new Date().toISOString() };
+  return p8.inboundLeads[idx];
+}
+
+export async function getAdminTeamMembers(): Promise<AdminTeamMember[]> {
+  return [...getP8().teamMembers];
+}
+
+export async function getAdminNotifications(): Promise<AdminNotification[]> {
+  return [...getP8().notifications].sort((a, b) => b.created_at.localeCompare(a.created_at));
+}
+export async function dismissNotification(id: string): Promise<void> {
+  const p8 = getP8();
+  const idx = p8.notifications.findIndex(n => n.id === id);
+  if (idx !== -1) {
+    p8.notifications[idx] = { ...p8.notifications[idx], dismissed_at: new Date().toISOString() };
+  }
+}

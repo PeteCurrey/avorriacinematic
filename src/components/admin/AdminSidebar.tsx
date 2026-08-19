@@ -41,35 +41,51 @@ interface NavItem {
 
 const PRIMARY_NAVIGATION: { section: string; items: NavItem[] }[] = [
   {
-    section: "CORE OPERATIONS",
+    section: "COMMAND",
     items: [
       { label: "Command", href: "/admin", icon: LayoutDashboard },
-      { label: "AI Auto", href: "/admin/ai-auto", icon: Sparkles, highlight: true },
-      { label: "Optimisation", href: "/admin/optimisation", icon: TrendingUp },
-      { label: "Review Queue", href: "/admin/ai-auto/review", icon: CheckSquare, badge: "DAILY" },
-      { label: "Prospects", href: "/admin/prospects", icon: Users },
-      { label: "Automations", href: "/admin/automations", icon: Cpu },
-      { label: "AI Auto Config", href: "/admin/ai-auto/settings", icon: Sliders },
     ]
   },
   {
-    section: "ACQUISITION & CLIENTS",
+    section: "GROWTH",
     items: [
-      { label: "Pipeline", href: "/admin/pipeline", icon: TrendingUp },
+      { label: "AI Auto", href: "/admin/ai-auto", icon: Sparkles, highlight: true },
+      { label: "Review Queue", href: "/admin/ai-auto/review", icon: CheckSquare, badge: "DAILY" },
+      { label: "Prospects", href: "/admin/prospects", icon: Users },
+      { label: "Studio", href: "/admin/studio", icon: Layers },
       { label: "Outreach", href: "/admin/outreach", icon: Send },
+      { label: "Pipeline", href: "/admin/pipeline", icon: TrendingUp },
       { label: "Inbound Leads", href: "/admin/leads", icon: Inbox },
+    ]
+  },
+  {
+    section: "CLIENTS",
+    items: [
+      { label: "Clients", href: "/admin/clients", icon: Users },
       { label: "Client Projects", href: "/admin/projects", icon: FolderKanban },
     ]
   },
   {
-    section: "PLATFORM & STUDIO",
+    section: "WEBSITE",
     items: [
-      { label: "Studio Engine", href: "/admin/studio", icon: Layers },
-      { label: "CMS & Media", href: "/admin/cms", icon: FileText },
-      { label: "Technical SEO", href: "/admin/seo", icon: Search },
-      { label: "Analytics", href: "/admin/analytics", icon: BarChart3 },
+      { label: "CMS & Pages", href: "/admin/cms", icon: FileText },
+      { label: "Case Studies", href: "/admin/case-studies", icon: FolderKanban },
+      { label: "Insights Hub", href: "/admin/insights", icon: FileText },
+      { label: "Media Library", href: "/admin/media", icon: Layers },
+      { label: "SEO Command", href: "/admin/seo", icon: Search },
+      { label: "Web Analytics", href: "/admin/analytics", icon: BarChart3 },
+    ]
+  },
+  {
+    section: "SYSTEM",
+    items: [
+      { label: "Automations", href: "/admin/automations", icon: Cpu },
+      { label: "Optimisation", href: "/admin/optimisation", icon: TrendingUp },
       { label: "Integrations", href: "/admin/integrations", icon: Settings },
-      { label: "System Settings", href: "/admin/settings", icon: Shield },
+      { label: "Team / Roles", href: "/admin/team", icon: Shield },
+      { label: "System Health", href: "/admin/system", icon: Radio },
+      { label: "Notifications", href: "/admin/notifications", icon: Inbox },
+      { label: "Settings", href: "/admin/settings", icon: Sliders },
     ]
   }
 ];

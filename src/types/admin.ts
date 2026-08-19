@@ -789,3 +789,214 @@ export interface DailyCEOBrief {
     top_converting_sector: string;
   };
 }
+
+
+// ============================================================================
+// PHASE 8: OPERATIONAL SYSTEMS & CMS TYPES
+// ============================================================================
+
+export type CMSPageStatus = "draft" | "review" | "scheduled" | "published" | "archived";
+
+export interface CMSPage {
+  id: string;
+  slug: string;
+  title: string;
+  status: CMSPageStatus;
+  page_type: string;
+  template: string;
+  seo_title?: string | null;
+  seo_description?: string | null;
+  canonical_url?: string | null;
+  social_title?: string | null;
+  social_description?: string | null;
+  social_image_id?: string | null;
+  noindex: boolean;
+  published_version_id?: string | null;
+  created_at: string;
+  updated_at: string;
+  current_version?: CMSPageVersion;
+}
+
+export interface CMSPageVersion {
+  id: string;
+  page_id: string;
+  version: number;
+  content: Record<string, unknown>;
+  created_by: string;
+  created_at: string;
+  publication_status: string;
+  notes?: string | null;
+}
+
+export interface CMSGlobal {
+  id: string;
+  key: string;
+  value: Record<string, unknown>;
+  updated_by: string;
+  updated_at: string;
+}
+
+export interface CMSNavigationItem {
+  id: string;
+  menu_location: "primary" | "footer" | "mobile";
+  label: string;
+  destination: string;
+  is_external: boolean;
+  sort_order: number;
+  parent_id?: string | null;
+  visibility: boolean;
+  created_at: string;
+}
+
+export interface MediaAsset {
+  id: string;
+  filename: string;
+  original_filename: string;
+  media_type: "image" | "video" | "document";
+  mime_type: string;
+  storage_path: string;
+  width?: number | null;
+  height?: number | null;
+  file_size: number;
+  alt_text?: string | null;
+  caption?: string | null;
+  source?: string | null;
+  rights?: string | null;
+  photographer_creator?: string | null;
+  usage_notes?: string | null;
+  focal_point_x: number;
+  focal_point_y: number;
+  created_by: string;
+  created_at: string;
+}
+
+export interface CaseStudyMetric {
+  metric: string;
+  value: string;
+  source?: string;
+  verified: boolean;
+}
+
+export interface CaseStudy {
+  id: string;
+  slug: string;
+  client_name: string;
+  project_name: string;
+  status: "draft" | "review" | "published" | "archived";
+  sector: string;
+  location?: string | null;
+  short_summary: string;
+  challenge: string;
+  strategy: string;
+  solution: string;
+  outcome: string;
+  hero_media_id?: string | null;
+  featured: boolean;
+  sort_order: number;
+  seo_title?: string | null;
+  seo_description?: string | null;
+  metrics: CaseStudyMetric[];
+  published_at?: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Insight {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  content_type: "article" | "guide" | "opinion" | "project_note" | "news" | "research";
+  status: "draft" | "review" | "scheduled" | "published" | "archived";
+  author_id: string;
+  hero_media_id?: string | null;
+  topics: string[];
+  seo_title?: string | null;
+  seo_description?: string | null;
+  canonical_url?: string | null;
+  social_image_id?: string | null;
+  published_at?: string | null;
+  scheduled_at?: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface SEOAuditRun {
+  id: string;
+  started_at: string;
+  completed_at?: string | null;
+  pages_crawled: number;
+  critical_issues: number;
+  warnings: number;
+  status: "running" | "completed" | "failed";
+}
+
+export interface SEOIssue {
+  id: string;
+  audit_run_id?: string | null;
+  url: string;
+  issue_type: string;
+  severity: "CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFO";
+  message: string;
+  status: "open" | "resolved" | "ignored";
+  created_at: string;
+}
+
+export interface SEORedirect {
+  id: string;
+  source: string;
+  destination: string;
+  status_code: number;
+  active: boolean;
+  reason?: string | null;
+  created_at: string;
+}
+
+export interface InboundLead {
+  id: string;
+  business_name: string;
+  contact_name: string;
+  email: string;
+  phone?: string | null;
+  website?: string | null;
+  service_interest?: string | null;
+  budget_range?: string | null;
+  message: string;
+  source: string;
+  landing_page?: string | null;
+  utm_source?: string | null;
+  utm_medium?: string | null;
+  utm_campaign?: string | null;
+  status: "new" | "reviewed" | "qualified" | "contacted" | "converted_to_opportunity" | "not_qualified" | "spam" | "archived";
+  lead_score: number;
+  assigned_to?: string | null;
+  sales_opportunity_id?: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AdminTeamMember {
+  id: string;
+  name: string;
+  email: string;
+  role: "super_admin" | "admin" | "sales" | "designer" | "developer" | "content_editor";
+  status: "active" | "invited" | "disabled";
+  invited_at?: string | null;
+  last_active_at?: string | null;
+  created_at: string;
+}
+
+export interface AdminNotification {
+  id: string;
+  user_id?: string | null;
+  type: string;
+  severity: "CRITICAL" | "HIGH" | "NORMAL" | "LOW";
+  title: string;
+  summary: string;
+  entity_type?: string | null;
+  entity_id?: string | null;
+  read_at?: string | null;
+  dismissed_at?: string | null;
+  created_at: string;
+}
