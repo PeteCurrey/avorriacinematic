@@ -1,27 +1,21 @@
 import React from "react";
 import { BREATH_CONFIG } from "@/lib/scenes/breath-scene-config";
+import { Z } from "@/lib/scene-z";
 
 interface BreathConclusionProps {
-  progress: number; // 0.0 to 1.0
+  containerRef?: React.RefObject<HTMLDivElement | null>;
+  supportRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function BreathConclusion({ progress }: BreathConclusionProps) {
-  // Active between 0.56 and 0.96
-  if (progress < 0.54) return null;
-
-  // Entry reveal (0.58 -> 0.74)
-  const enterT = Math.min(1, Math.max(0, (progress - 0.58) / 0.16));
-  const exitT = progress > 0.88 ? Math.min(1, (progress - 0.88) / 0.10) : 0;
-  const opacity = exitT > 0 ? (1 - exitT) : enterT;
-  const yTranslate = enterT < 1 ? (1 - enterT) * 44 : exitT > 0 ? -exitT * 36 : 0;
-
-  // Support copy opacity (fades in at 0.72 -> 0.82)
-  const supportOpacity = progress < 0.72 ? 0 : progress < 0.82 ? (progress - 0.72) / 0.10 : exitT > 0 ? (1 - exitT * 1.5) : 1.0;
-
+export function BreathConclusion({
+  containerRef,
+  supportRef,
+}: BreathConclusionProps) {
   return (
     <div
-      className="absolute inset-0 w-full h-full flex flex-col justify-center max-w-[1760px] mx-auto px-6 sm:px-12 lg:px-16 pointer-events-none z-20"
-      style={{ opacity, transform: `translateY(${yTranslate}px)` }}
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full flex flex-col justify-center max-w-[1760px] mx-auto px-6 sm:px-12 lg:px-16 pointer-events-none opacity-0"
+      style={{ zIndex: Z.copy }}
       aria-hidden="true"
     >
       <div className="max-w-6xl pl-4 sm:pl-20 lg:pl-48 flex flex-col gap-1 sm:gap-3">
@@ -38,8 +32,8 @@ export function BreathConclusion({ progress }: BreathConclusionProps) {
 
         {/* Subordinate Supporting Line */}
         <div
-          className="pt-6 sm:pt-10 max-w-lg transition-opacity duration-300"
-          style={{ opacity: Math.max(0, supportOpacity) }}
+          ref={supportRef}
+          className="pt-6 sm:pt-10 max-w-lg opacity-0"
         >
           <p className="font-body text-sm sm:text-base text-avorria-muted leading-relaxed select-none">
             {BREATH_CONFIG.supportingCopy}

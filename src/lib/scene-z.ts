@@ -19,6 +19,9 @@ export const Z = {
   /** Instrumentation — scene markers, chapter labels, progress indicators */
   instrumentation: 30,
 
+  /** Interactive controls — CTAs, buttons, form inputs above copy */
+  interactive: 35,
+
   /** Temporary overlay — transition layers, scan lines, handoff layers */
   overlay: 40,
 } as const;

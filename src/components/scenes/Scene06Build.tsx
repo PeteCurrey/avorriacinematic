@@ -4,32 +4,68 @@ import { BuildCapabilityReveal } from "./build/BuildCapabilityReveal";
 import { BuildAssemblyStage } from "./build/BuildAssemblyStage";
 import { BuildFallback } from "./build/BuildFallback";
 import { CinematicSceneViewport } from "./CinematicSceneViewport";
+import { BUILD_FRAGMENTS } from "@/lib/scenes/build-scene-config";
 import { getSceneConfig } from "./registry";
 
 export function Scene06Build() {
   const config = getSceneConfig("scene-06-build")!;
 
   const assemblyContainerRef = useRef<HTMLDivElement>(null);
+  const fragmentRefs = useRef<{ [id: string]: HTMLDivElement | null }>({});
   const revealContainerRef = useRef<HTMLDivElement>(null);
 
   const buildTimeline = (timeline: gsap.core.Timeline) => {
     timeline.addLabel("entry", 0);
-    timeline.addLabel("assembly", 0.15);
-    timeline.addLabel("assemble_peak", 0.50);
+    timeline.addLabel("assemble_start", 0.08);
+    timeline.addLabel("assemble_land", 0.35);
+    timeline.addLabel("assemble_hold", 0.60);
     timeline.addLabel("capability_reveal", 0.74);
     timeline.addLabel("handoff", 0.94);
 
-    // 0.00 - 0.72: Fragment Assembly
+    // 0.00 - 0.72: Fragment Assembly Container
     if (assemblyContainerRef.current) {
       timeline.fromTo(
         assemblyContainerRef.current,
-        { opacity: 1 },
+        { opacity: 0 },
+        { opacity: 1, duration: 0.08 },
+        0
+      );
+      // Fade out after hold
+      timeline.to(
+        assemblyContainerRef.current,
         { opacity: 0, duration: 0.08 },
         0.66
       );
     }
 
-    // 0.74 - 0.98: BUILD Capability Reveal
+    // Fragment assembly from initial spatial offsets to 0,0 (Triggered & Scrubbed precision)
+    BUILD_FRAGMENTS.forEach((frag) => {
+      const el = fragmentRefs.current[frag.id];
+      if (el) {
+        const xOffset = (frag.initialX - frag.assembledX) * 10;
+        const yOffset = (frag.initialY - frag.assembledY) * 10;
+
+        timeline.fromTo(
+          el,
+          {
+            x: xOffset,
+            y: yOffset,
+            scale: 0.85,
+            opacity: 0.4,
+          },
+          {
+            x: 0,
+            y: 0,
+            scale: 1,
+            opacity: 1,
+            duration: 0.28,
+          },
+          0.08
+        );
+      }
+    });
+
+    // 0.74 - 0.98: BUILD Capability Reveal (Move -> Land -> Hold -> Exit)
     if (revealContainerRef.current) {
       timeline.fromTo(
         revealContainerRef.current,
@@ -68,9 +104,10 @@ export function Scene06Build() {
         <BuildCapabilityReveal containerRef={revealContainerRef} />
 
         {/* Chapters 3, 4, 5: Interactive Fragment Assembly Grid */}
-        <div ref={assemblyContainerRef} className="absolute inset-0 w-full h-full">
-          <BuildAssemblyStage progress={0.5} />
-        </div>
+        <BuildAssemblyStage
+          containerRef={assemblyContainerRef}
+          fragmentRefs={fragmentRefs}
+        />
 
         {/* Bottom Handoff Anchor for Scene 07 (NestIQ) */}
         <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-[10px] sm:text-xs text-avorria-quiet uppercase tracking-widest z-30">

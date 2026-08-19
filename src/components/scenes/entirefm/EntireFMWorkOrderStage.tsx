@@ -1,28 +1,27 @@
 import React from "react";
 import Image from "next/image";
+import { Z } from "@/lib/scene-z";
 
 interface EntireFMWorkOrderStageProps {
-  progress: number; // 0.0 to 1.0
+  containerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function EntireFMWorkOrderStage({ progress }: EntireFMWorkOrderStageProps) {
-  // Active between 0.26 and 0.62
-  if (progress < 0.24 || progress > 0.64) return null;
-
-  const opacity = progress < 0.32 ? (progress - 0.24) / 0.08 : progress < 0.54 ? 1.0 : Math.max(0, 1.0 - (progress - 0.54) / 0.08);
-
+export function EntireFMWorkOrderStage({
+  containerRef,
+}: EntireFMWorkOrderStageProps) {
   return (
     <div
-      className="absolute inset-0 w-full h-full flex items-center justify-center p-4 sm:p-10 z-20 pointer-events-none"
-      style={{ opacity }}
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full flex items-center justify-center p-6 sm:p-16 opacity-0"
+      style={{ zIndex: Z.media }}
       aria-hidden="true"
     >
-      <div className="w-full max-w-[1300px] h-[75vh] relative border border-avorria-line bg-avorria-surface shadow-2xl overflow-hidden">
+      <div className="relative w-full h-[65vh] max-w-5xl overflow-hidden">
         <Image
           src="/media/projects/entirefm/entirefm-operational.svg"
-          alt="EntireFM Facilities Operations System"
+          alt="EntireFM Work Order Interface & Technician Routing"
           fill
-          className="object-cover"
+          className="object-contain object-center scale-105"
         />
       </div>
     </div>

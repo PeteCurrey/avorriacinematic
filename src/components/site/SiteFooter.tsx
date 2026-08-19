@@ -1,8 +1,14 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { STUDIO_INFO } from "@/content/studio";
 
 export function SiteFooter() {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/admin")) return null;
+
   const currentYear = new Date().getFullYear();
 
   return (

@@ -1,21 +1,17 @@
 import React from "react";
 import { FINALE_CONFIG } from "@/lib/scenes/finale-config";
+import { Z } from "@/lib/scene-z";
 
 interface FinaleQuestionProps {
-  progress: number;
+  containerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function FinaleQuestion({ progress }: FinaleQuestionProps) {
-  // Visible 0.28 -> 0.46, stays subtle at top
-  if (progress < 0.25) return null;
-
-  const opacity = progress < 0.28 ? (progress - 0.25) / 0.03 : progress > 0.65 ? Math.max(1 - (progress - 0.65) / 0.1, 0.2) : 1;
-  const translateY = progress < 0.35 ? 30 * (1 - (progress - 0.28) / 0.07) : 0;
-
+export function FinaleQuestion({ containerRef }: FinaleQuestionProps) {
   return (
     <div
-      className="absolute top-24 sm:top-28 left-6 sm:left-16 select-none pointer-events-none transition-all duration-300 z-10"
-      style={{ opacity, transform: `translateY(${Math.max(translateY, 0)}px)` }}
+      ref={containerRef}
+      className="absolute top-24 sm:top-28 left-6 sm:left-16 select-none pointer-events-none opacity-0"
+      style={{ zIndex: Z.copy }}
     >
       <span className="font-mono text-xs text-avorria-signal uppercase tracking-widest block mb-2">
         18 / FINALE <span>{"//"}</span> ACTION

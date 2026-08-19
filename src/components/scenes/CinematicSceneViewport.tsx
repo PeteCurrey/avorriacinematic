@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useGsapContext } from "@/lib/motion/hooks";
 import { useReducedMotion } from "@/providers/ReducedMotionProvider";
 import { gsap, ScrollTrigger } from "@/lib/motion/gsap-config";
@@ -11,7 +11,7 @@ interface CinematicSceneViewportProps {
   sceneIndex: number;
   children: React.ReactNode | ((progress: number) => React.ReactNode);
   fallback?: React.ReactNode;
-  /** Timeline builder called when GSAP context is ready */
+  /** Declarative GSAP timeline builder */
   buildTimeline?: (timeline: gsap.core.Timeline, refs: { outer: HTMLElement; sticky: HTMLDivElement }) => void;
   className?: string;
 }
@@ -21,11 +21,12 @@ interface CinematicSceneViewportProps {
  *
  * The canonical architecture for all sticky cinematic scenes.
  *
- * OUTER SECTION  — owns scroll distance via `style={{ height: config.minHeight }}`
+ * OUTER SECTION  — owns scroll distance via `style={{ height: heightValue }}` (desktop/mobile aware)
  * INNER DIV      — sticky to viewport, `h-[100dvh] overflow-hidden`
  * ScrollTrigger  — observes outer section geometry with `scrub: true` attached to a single GSAP Timeline
  *
- * Supports both declarative GSAP timeline orchestration and functional components.
+ * GSAP owns the animation directly via declarative timelines.
+ * React does NOT store scroll progress or act as a frame-by-frame scroll render engine.
  */
 export function CinematicSceneViewport({
   config,
@@ -37,8 +38,13 @@ export function CinematicSceneViewport({
 }: CinematicSceneViewportProps) {
   const outerRef = useRef<HTMLElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = React.useState(0);
   const { effectiveReducedMotion } = useReducedMotion();
+
+  // Stabilise buildTimeline in a ref so external re-renders do NOT trigger timeline recreation
+  const builderRef = useRef(buildTimeline);
+  useEffect(() => {
+    builderRef.current = buildTimeline;
+  });
 
   useGsapContext(
     (ctx) => {
@@ -55,25 +61,34 @@ export function CinematicSceneViewport({
           },
         });
 
-        if (buildTimeline && outerRef.current && stickyRef.current) {
-          buildTimeline(timeline, { outer: outerRef.current, sticky: stickyRef.current });
+        if (builderRef.current && outerRef.current && stickyRef.current) {
+          builderRef.current(timeline, { outer: outerRef.current, sticky: stickyRef.current });
         }
+
+        // Add non-visual sentinel at 1.000 to guarantee exact normalised duration
+        const clock = { value: 0 };
+        timeline.to(
+          clock,
+          {
+            value: 1,
+            duration: 0.001,
+            ease: "none",
+          },
+          0.999
+        );
 
         ScrollTrigger.create({
           trigger: outerRef.current,
           start: "top top",
           end: "bottom bottom",
-          animation: buildTimeline ? timeline : undefined,
+          animation: timeline,
           scrub: true,
           invalidateOnRefresh: true,
-          onUpdate: typeof children === "function" ? (self) => {
-            setScrollProgress(self.progress);
-          } : undefined,
         });
       });
     },
     outerRef,
-    [effectiveReducedMotion, buildTimeline]
+    [config.id, effectiveReducedMotion]
   );
 
   if (effectiveReducedMotion && fallback) {
@@ -98,11 +113,15 @@ export function CinematicSceneViewport({
       data-layout-role="scene"
       data-registry-height={config.minHeight}
       className={`relative w-full bg-avorria-black select-none ${className}`}
-      style={{ height: config.minHeight }}
+      style={{
+        height: typeof window !== "undefined" && window.innerWidth < 768 && config.mobileHeight
+          ? config.mobileHeight
+          : config.minHeight,
+      }}
     >
       {/* Sticky viewport — 100dvh, clips all sub-stage content */}
       <div ref={stickyRef} className="sticky top-0 h-[100dvh] overflow-hidden">
-        {typeof children === "function" ? children(scrollProgress) : children}
+        {typeof children === "function" ? (children as (progress: number) => React.ReactNode)(0) : children}
       </div>
     </section>
   );

@@ -91,11 +91,12 @@ export class SignalSpatialWorld {
   private render() {
     if (this.isDisposed) return;
 
-    this.currentPointerX += (this.targetPointerX - this.currentPointerX) * 0.05;
-    this.currentPointerY += (this.targetPointerY - this.currentPointerY) * 0.05;
+    // Subdued pointer response to protect focal anchor
+    this.currentPointerX += (this.targetPointerX - this.currentPointerX) * 0.04;
+    this.currentPointerY += (this.targetPointerY - this.currentPointerY) * 0.04;
 
-    this.camera.position.x = this.currentPointerX * 0.4;
-    this.camera.position.y = this.currentPointerY * 0.3;
+    this.camera.position.x = this.currentPointerX * 0.25;
+    this.camera.position.y = this.currentPointerY * 0.18;
     this.camera.lookAt(0, 0, -30);
 
     const p = this.currentProgress;
@@ -103,20 +104,32 @@ export class SignalSpatialWorld {
     this.projectMeshes.forEach(({ mesh, config }) => {
       const { startProgress, heroProgress, exitProgress, baseX, baseY, baseZ, heroZ, exitZ, rotationY } = config;
 
+      // Define clear Move -> Land -> Hold -> Exit stage windows per project
+      const landAt = startProgress + (heroProgress - startProgress) * 0.65;
+      const holdUntil = heroProgress + (exitProgress - heroProgress) * 0.45;
+
       if (p < startProgress) {
         mesh.position.set(baseX, baseY, baseZ);
         (mesh.material as THREE.MeshBasicMaterial).opacity = 0;
         mesh.visible = false;
-      } else if (p >= startProgress && p < heroProgress) {
+      } else if (p >= startProgress && p < landAt) {
+        // ENTER -> MOVE
         mesh.visible = true;
-        const localT = (p - startProgress) / (heroProgress - startProgress);
+        const localT = (p - startProgress) / (landAt - startProgress);
         const z = THREE.MathUtils.lerp(baseZ, heroZ, localT);
         mesh.position.set(baseX, baseY, z);
         (mesh.material as THREE.MeshBasicMaterial).opacity = THREE.MathUtils.lerp(0.1, 1.0, localT);
         mesh.rotation.y = THREE.MathUtils.lerp(rotationY, 0, localT);
-      } else if (p >= heroProgress && p <= exitProgress) {
+      } else if (p >= landAt && p < holdUntil) {
+        // LAND -> HOLD: Stationary hero position
         mesh.visible = true;
-        const localT = (p - heroProgress) / (exitProgress - heroProgress);
+        mesh.position.set(baseX, baseY, heroZ);
+        (mesh.material as THREE.MeshBasicMaterial).opacity = 1.0;
+        mesh.rotation.y = 0;
+      } else if (p >= holdUntil && p <= exitProgress) {
+        // EXIT
+        mesh.visible = true;
+        const localT = (p - holdUntil) / (exitProgress - holdUntil);
         const z = THREE.MathUtils.lerp(heroZ, exitZ, localT);
         
         if (config.slug === "alkota-bikes") {

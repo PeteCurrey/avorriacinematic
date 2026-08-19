@@ -10,13 +10,13 @@ export function AlkotaHandoffLayer({ opacity }: AlkotaHandoffLayerProps) {
 
   return (
     <div
-      className="absolute inset-0 w-full h-full z-30 pointer-events-none transition-opacity duration-150"
+      className="absolute inset-0 w-full h-full z-30 pointer-events-none"
       style={{ opacity }}
       aria-hidden="true"
     >
       <Image
         src="/media/projects/alkota/product/naked-carbon-hero.jpg"
-        alt="Alkota Bikes Titanium Platform"
+        alt="Alkota Bikes Naked Carbon Platform"
         fill
         priority
         className="object-cover"

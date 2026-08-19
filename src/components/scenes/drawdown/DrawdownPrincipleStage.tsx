@@ -2,27 +2,26 @@ import React from "react";
 import Link from "next/link";
 import { DRAWDOWN_PRINCIPLE, DRAWDOWN_DELIVERABLES } from "@/lib/scenes/drawdown-scene-config";
 import { CursorTrigger } from "@/providers/CursorContext";
+import { Z } from "@/lib/scene-z";
 
 interface DrawdownPrincipleStageProps {
-  progress: number; // 0.0 to 1.0
+  containerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function DrawdownPrincipleStage({ progress }: DrawdownPrincipleStageProps) {
-  // Active between 0.85 and 0.98
-  if (progress < 0.84 || progress > 0.98) return null;
-
-  const opacity = progress < 0.90 ? (progress - 0.84) / 0.06 : progress < 0.95 ? 1.0 : Math.max(0, 1.0 - (progress - 0.95) / 0.03);
-
+export function DrawdownPrincipleStage({
+  containerRef,
+}: DrawdownPrincipleStageProps) {
   return (
     <div
-      className="absolute inset-0 w-full h-full flex items-center justify-center p-6 sm:p-16 z-30"
-      style={{ opacity }}
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full flex items-center justify-center p-6 sm:p-16 opacity-0"
+      style={{ zIndex: Z.copy }}
     >
       <div className="max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-start border-t border-b border-avorria-line py-12">
         {/* Left: Statement */}
         <div className="lg:col-span-6 flex flex-col gap-6">
           <div className="font-mono text-xs text-avorria-signal uppercase tracking-widest">
-            {DRAWDOWN_PRINCIPLE.label}
+            004 // DRAWDOWN.TRADING // FINANCIAL PLATFORM
           </div>
           <h3 className="font-display font-bold text-3xl sm:text-5xl uppercase tracking-tight text-avorria-white leading-tight whitespace-pre-line">
             {DRAWDOWN_PRINCIPLE.title}

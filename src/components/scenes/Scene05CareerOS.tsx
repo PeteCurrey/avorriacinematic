@@ -38,18 +38,18 @@ export function Scene05CareerOS() {
         { opacity: 1, duration: 0.08 },
         0
       );
-      // Hold 0.10 - 0.22
+      // Hold 0.10 - 0.23 (stationary)
       timeline.to(
         humanContainerRef.current,
-        { opacity: 0, duration: 0.06 },
-        0.24
+        { opacity: 0, duration: 0.05 },
+        0.23
       );
     }
     if (humanImageRef.current) {
       timeline.fromTo(
         humanImageRef.current,
         { scale: 0.98 },
-        { scale: 1.05, duration: 0.28 },
+        { scale: 1.02, duration: 0.08 },
         0
       );
     }

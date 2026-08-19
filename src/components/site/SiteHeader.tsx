@@ -9,18 +9,22 @@ import { useHeader } from "@/providers/HeaderContext";
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const isAdmin = pathname?.startsWith("/admin");
   const isHomepage = pathname === "/";
   const { headerState, wordmarkOpacity, navVisible } = useHeader();
   const [isHeaderHovered, setIsHeaderHovered] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
+    if (isAdmin) return;
     const handleScroll = () => {
       setHasScrolled(window.scrollY > 40);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isAdmin]);
+
+  if (isAdmin) return null;
 
   // Determine navigation visibility
   // On non-homepage routes: always visible. On homepage: controlled by navVisible context or header hover.

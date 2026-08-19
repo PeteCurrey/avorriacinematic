@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { useGsapContext } from "@/lib/motion/hooks";
 import { useReducedMotion } from "@/providers/ReducedMotionProvider";
 import { useHeader } from "@/providers/HeaderContext";
@@ -25,11 +25,12 @@ export function Scene00Void() {
 
     // 2. ScrollTrigger timeline: Scroll fades invitation & elongates dot to horizontal rule
     const tl = gsap.timeline({
+      defaults: { ease: "none" },
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top top",
         end: "bottom top",
-        scrub: 0.8,
+        scrub: true,
         onUpdate: (self) => {
           if (self.progress > 0.05) {
             setWordmarkOpacity(0.75);
@@ -41,7 +42,7 @@ export function Scene00Void() {
 
     // Fade scroll invitation quickly
     if (scrollInviteRef.current) {
-      tl.to(scrollInviteRef.current, { opacity: 0, y: 15, duration: 0.2, ease: "power2.out" }, 0);
+      tl.to(scrollInviteRef.current, { opacity: 0, y: 15, duration: 0.2 }, 0);
     }
 
     // Transform 4px dot into horizontal line across center
@@ -52,7 +53,7 @@ export function Scene00Void() {
         borderRadius: "0px",
         height: "1px",
         opacity: 1,
-        ease: "power2.out"
+        duration: 0.15
       },
       0.15
     );
@@ -70,7 +71,7 @@ export function Scene00Void() {
       <div className="relative flex items-center justify-center pointer-events-none">
         <div
           ref={signalDotRef}
-          className="w-1 h-1 bg-avorria-signal rounded-full transition-shadow duration-300"
+          className="w-1 h-1 bg-avorria-signal rounded-full"
           style={{ willChange: "width, transform, opacity" }}
           aria-hidden="true"
         />

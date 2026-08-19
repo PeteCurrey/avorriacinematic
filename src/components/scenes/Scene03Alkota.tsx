@@ -96,21 +96,21 @@ export function Scene03Alkota() {
       timeline.fromTo(
         productContainerRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.08 },
+        { opacity: 1, duration: 0.07 },
         0.52
       );
-      // Hold 0.60 - 0.68
+      // Hold 0.59 - 0.68 (stationary)
       timeline.to(
         productContainerRef.current,
-        { opacity: 0, duration: 0.06 },
+        { opacity: 0, duration: 0.05 },
         0.68
       );
     }
     if (productImageRef.current) {
       timeline.fromTo(
         productImageRef.current,
-        { scale: 0.95 },
-        { scale: 1.04, duration: 0.20 },
+        { scale: 0.96 },
+        { scale: 1.02, duration: 0.07 },
         0.52
       );
     }

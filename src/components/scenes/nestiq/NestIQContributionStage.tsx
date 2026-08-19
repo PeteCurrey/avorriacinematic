@@ -2,21 +2,20 @@ import React from "react";
 import Link from "next/link";
 import { NESTIQ_DELIVERABLES } from "@/lib/scenes/nestiq-scene-config";
 import { CursorTrigger } from "@/providers/CursorContext";
+import { Z } from "@/lib/scene-z";
 
 interface NestIQContributionStageProps {
-  progress: number; // 0.0 to 1.0
+  containerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function NestIQContributionStage({ progress }: NestIQContributionStageProps) {
-  // Active between 0.86 and 0.98
-  if (progress < 0.85 || progress > 0.98) return null;
-
-  const opacity = progress < 0.90 ? (progress - 0.85) / 0.05 : progress < 0.95 ? 1.0 : Math.max(0, 1.0 - (progress - 0.95) / 0.03);
-
+export function NestIQContributionStage({
+  containerRef,
+}: NestIQContributionStageProps) {
   return (
     <div
-      className="absolute inset-0 w-full h-full flex items-center justify-center p-6 sm:p-16 z-30"
-      style={{ opacity }}
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full flex items-center justify-center p-6 sm:p-16 opacity-0"
+      style={{ zIndex: Z.copy }}
     >
       <div className="max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-start border-t border-b border-avorria-line py-12">
         {/* Left: Statement */}

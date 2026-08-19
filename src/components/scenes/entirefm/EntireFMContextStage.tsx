@@ -1,33 +1,27 @@
 import React from "react";
 import Image from "next/image";
+import { Z } from "@/lib/scene-z";
 
 interface EntireFMContextStageProps {
-  progress: number; // 0.0 to 1.0
+  containerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function EntireFMContextStage({ progress }: EntireFMContextStageProps) {
-  // Active between 0.00 and 0.32
-  if (progress > 0.34) return null;
-
-  const opacity = progress < 0.08 ? progress / 0.08 : progress < 0.24 ? 1.0 : Math.max(0, 1.0 - (progress - 0.24) / 0.08);
-  const scale = 1.0 + (progress * 0.05);
-
+export function EntireFMContextStage({
+  containerRef,
+}: EntireFMContextStageProps) {
   return (
     <div
-      className="absolute inset-0 w-full h-full flex items-center justify-center p-4 sm:p-12 z-10 pointer-events-none transition-opacity duration-150"
-      style={{ opacity }}
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full flex items-center justify-center p-6 sm:p-16 opacity-0"
+      style={{ zIndex: Z.media }}
       aria-hidden="true"
     >
-      <div
-        className="relative w-full max-w-[1100px] h-[65vh] border border-avorria-line bg-avorria-surface shadow-2xl overflow-hidden"
-        style={{ transform: `scale(${scale})` }}
-      >
+      <div className="relative w-full h-[65vh] max-w-5xl overflow-hidden">
         <Image
           src="/media/projects/entirefm/entirefm-operational.svg"
-          alt="EntireFM Asset Hierarchy Context"
+          alt="EntireFM Operations Backbone Infrastructure"
           fill
-          priority
-          className="object-cover"
+          className="object-contain object-center"
         />
       </div>
     </div>

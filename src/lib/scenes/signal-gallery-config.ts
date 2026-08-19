@@ -48,7 +48,7 @@ export const SIGNAL_GALLERY_PROJECTS: SpatialProjectConfig[] = [
     sequenceNumber: "004",
     title: "DRAWDOWN.TRADING",
     category: "QUANTITATIVE RISK PLATFORM",
-    descriptor: "Low-latency trading analytics interface & sub-millisecond risk controls.",
+    descriptor: "Quantitative trading analytics interface & real-time risk controls.",
     mediaSrc: "/media/projects/drawdown/interface/dashboard.png",
     width: 13.6,
     height: 8.5,

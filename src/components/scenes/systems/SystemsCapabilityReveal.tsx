@@ -2,23 +2,21 @@ import React from "react";
 import Link from "next/link";
 import { SYSTEMS_PROPOSITION } from "@/lib/scenes/systems-scene-config";
 import { CursorTrigger } from "@/providers/CursorContext";
+import { Z } from "@/lib/scene-z";
 
 interface SystemsCapabilityRevealProps {
-  progress: number; // 0.0 to 1.0
+  containerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function SystemsCapabilityReveal({ progress }: SystemsCapabilityRevealProps) {
-  // Active between 0.80 and 1.00
-  if (progress < 0.78) return null;
-
-  const opacity = progress < 0.90 ? (progress - 0.78) / 0.12 : progress < 0.96 ? 1.0 : Math.max(0, 1.0 - (progress - 0.96) / 0.04);
-  const yTranslate = progress < 0.90 ? (1 - (progress - 0.78) / 0.12) * 36 : 0;
-
+export function SystemsCapabilityReveal({
+  containerRef,
+}: SystemsCapabilityRevealProps) {
   return (
     <div
-      className="absolute inset-0 w-full h-full flex items-center justify-center max-w-[1760px] mx-auto px-6 sm:px-12 lg:px-16 pointer-events-none z-20"
-      style={{ opacity, transform: `translateY(${yTranslate}px)` }}
-      aria-hidden={progress < 0.80 ? "true" : "false"}
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full flex items-center justify-center max-w-[1760px] mx-auto px-6 sm:px-12 lg:px-16 pointer-events-none opacity-0"
+      style={{ zIndex: Z.copy }}
+      aria-hidden="true"
     >
       <div className="max-w-4xl w-full flex flex-col gap-8 pointer-events-auto pl-2 sm:pl-8 border-l border-avorria-signal/40 py-6">
         {/* Capability Label */}

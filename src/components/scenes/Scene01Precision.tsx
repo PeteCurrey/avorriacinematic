@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { useReducedMotion } from "@/providers/ReducedMotionProvider";
-import { useHeader } from "@/providers/HeaderContext";
+import { useHeaderActions } from "@/providers/HeaderContext";
 import { CinematicSceneViewport } from "./CinematicSceneViewport";
 import { getSceneConfig } from "./registry";
 
@@ -15,8 +15,10 @@ export function Scene01Precision() {
   const metadataRef = useRef<HTMLDivElement | null>(null);
   const descriptorRef = useRef<HTMLDivElement | null>(null);
 
+  const lastHeaderStateRef = useRef<string>("void");
+
   const { effectiveReducedMotion } = useReducedMotion();
-  const { setNavVisible, setWordmarkOpacity, setHeaderState } = useHeader();
+  const { setNavVisible, setWordmarkOpacity, setHeaderState } = useHeaderActions();
   const config = getSceneConfig("scene-01-precision")!;
 
   const buildTimeline = (timeline: gsap.core.Timeline) => {
@@ -29,18 +31,24 @@ export function Scene01Precision() {
     timeline.addLabel("exit", 0.85);
     timeline.addLabel("handoff", 0.94);
 
-    // Callbacks for header state
-    timeline.call(() => {
-      setNavVisible(false);
-      setWordmarkOpacity(0.75);
-      setHeaderState("void");
-    }, undefined, 0);
+    // Direction-aware imperative header state evaluation attached to timeline update
+    timeline.eventCallback("onUpdate", () => {
+      const p = timeline.progress();
+      const desiredState = p < 0.62 ? "void" : "standard";
 
-    timeline.call(() => {
-      setNavVisible(true);
-      setWordmarkOpacity(1.0);
-      setHeaderState("standard");
-    }, undefined, 0.62);
+      if (desiredState !== lastHeaderStateRef.current) {
+        lastHeaderStateRef.current = desiredState;
+        if (desiredState === "void") {
+          setNavVisible(false);
+          setWordmarkOpacity(0.75);
+          setHeaderState("void");
+        } else {
+          setNavVisible(true);
+          setWordmarkOpacity(1.0);
+          setHeaderState("standard");
+        }
+      }
+    });
 
     // 1. Stage 0 - 15%: Line expands outward from center across the grid
     if (signalLineRef.current) {

@@ -1,22 +1,18 @@
 import React from "react";
 import Link from "next/link";
 import { FINALE_CONFIG } from "@/lib/scenes/finale-config";
+import { Z } from "@/lib/scene-z";
 
 interface FinaleActionsProps {
-  progress: number;
+  containerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function FinaleActions({ progress }: FinaleActionsProps) {
-  // Reveals at 0.69 -> 1.00
-  if (progress < 0.67) return null;
-
-  const opacity = Math.min((progress - 0.67) / 0.05, 1);
-  const translateY = Math.max(30 * (1 - (progress - 0.67) / 0.06), 0);
-
+export function FinaleActions({ containerRef }: FinaleActionsProps) {
   return (
     <div
-      className="absolute bottom-16 sm:bottom-20 left-6 sm:left-16 right-6 sm:right-16 z-20 transition-all duration-300"
-      style={{ opacity, transform: `translateY(${translateY}px)` }}
+      ref={containerRef}
+      className="absolute bottom-16 sm:bottom-20 left-6 sm:left-16 right-6 sm:right-16 opacity-0"
+      style={{ zIndex: Z.interactive }}
     >
       <div className="max-w-[1760px] mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6 border-t border-avorria-line pt-8">
         {/* Primary CTA */}

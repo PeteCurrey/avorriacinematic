@@ -2,22 +2,21 @@ import React from "react";
 import Link from "next/link";
 import { SIGNAL_GALLERY_PROJECTS } from "@/lib/scenes/signal-gallery-config";
 import { CursorTrigger } from "@/providers/CursorContext";
+import { Z } from "@/lib/scene-z";
 
 interface SignalMetadataOverlayProps {
+  containerRef?: React.RefObject<HTMLDivElement | null>;
   activeIndex: number;
-  progress: number;
 }
 
-export function SignalMetadataOverlay({ activeIndex, progress }: SignalMetadataOverlayProps) {
+export function SignalMetadataOverlay({ containerRef, activeIndex }: SignalMetadataOverlayProps) {
   const currentProject = SIGNAL_GALLERY_PROJECTS[activeIndex] || SIGNAL_GALLERY_PROJECTS[0];
-  const isApertureOpen = progress > 0.1;
-  const isAlkotaTakeover = progress > 0.94;
-
-  if (!isApertureOpen || isAlkotaTakeover) return null;
 
   return (
     <div
-      className="absolute bottom-8 sm:bottom-12 left-6 sm:left-12 lg:left-16 z-20 pointer-events-auto max-w-lg transition-opacity duration-300"
+      ref={containerRef}
+      className="absolute bottom-8 sm:bottom-12 left-6 sm:left-12 lg:left-16 pointer-events-auto max-w-lg opacity-0"
+      style={{ zIndex: Z.interactive }}
       role="region"
       aria-label="Active Featured Project"
     >

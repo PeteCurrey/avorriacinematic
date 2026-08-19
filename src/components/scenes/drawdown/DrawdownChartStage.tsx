@@ -1,21 +1,18 @@
-"use client";
 import React, { useState } from "react";
 import Image from "next/image";
 import { CursorTrigger } from "@/providers/CursorContext";
 import { Z } from "@/lib/scene-z";
 
 interface DrawdownChartStageProps {
-  progress: number; // 0.0 to 1.0
+  containerRef?: React.RefObject<HTMLDivElement | null>;
+  imageRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function DrawdownChartStage({ progress }: DrawdownChartStageProps) {
+export function DrawdownChartStage({
+  containerRef,
+  imageRef,
+}: DrawdownChartStageProps) {
   const [crosshairPos, setCrosshairPos] = useState({ x: 50, y: 50, active: false });
-
-  // Active between 0.00 and 0.35
-  if (progress > 0.36) return null;
-
-  const opacity = progress < 0.08 ? progress / 0.08 : progress < 0.28 ? 1.0 : Math.max(0, 1.0 - (progress - 0.28) / 0.08);
-  const scale = 1.0 + (progress * 0.06);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -26,16 +23,17 @@ export function DrawdownChartStage({ progress }: DrawdownChartStageProps) {
 
   return (
     <div
-      className="absolute inset-0 w-full h-full pointer-events-auto transition-opacity duration-150 overflow-hidden"
-      style={{ opacity, zIndex: Z.media }}
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full pointer-events-auto overflow-hidden opacity-0"
+      style={{ zIndex: Z.media }}
       aria-hidden="true"
     >
       <CursorTrigger state="try" label="INSPECT">
         <div
+          ref={imageRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={() => setCrosshairPos((p) => ({ ...p, active: false }))}
-          className="absolute inset-0 w-full h-full transition-transform duration-75"
-          style={{ transform: `scale(${scale})` }}
+          className="absolute inset-0 w-full h-full"
         >
           <Image
             src="/media/projects/drawdown/interface/dashboard.png"
