@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useRef } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import Lenis from "lenis";
 import { initGsap, ScrollTrigger } from "@/lib/motion/gsap-config";
 import { useReducedMotion } from "./ReducedMotionProvider";
@@ -13,21 +13,17 @@ const MotionContext = createContext<MotionContextValue>({ lenis: null });
 
 export function MotionProvider({ children }: { children: React.ReactNode }) {
   const { effectiveReducedMotion } = useReducedMotion();
-  const lenisRef = useRef<Lenis | null>(null);
+  const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
     initGsap();
 
     // If user prefers reduced motion, do not initialize smooth scrolling
     if (effectiveReducedMotion) {
-      if (lenisRef.current) {
-        lenisRef.current.destroy();
-        lenisRef.current = null;
-      }
       return;
     }
 
-    const lenis = new Lenis({
+    const instance = new Lenis({
       duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
@@ -38,13 +34,13 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
       infinite: false
     });
 
-    lenisRef.current = lenis;
+    setLenis(instance);
 
     // Sync Lenis with GSAP ScrollTrigger
-    lenis.on("scroll", ScrollTrigger.update);
+    instance.on("scroll", ScrollTrigger.update);
 
     const onRaf = (time: number) => {
-      lenis.raf(time * 1000);
+      instance.raf(time * 1000);
     };
 
     const gsapInstance = initGsap();
@@ -57,13 +53,13 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
       if (gsapInstance) {
         gsapInstance.ticker.remove(onRaf);
       }
-      lenis.destroy();
-      lenisRef.current = null;
+      instance.destroy();
+      setLenis(null);
     };
   }, [effectiveReducedMotion]);
 
   return (
-    <MotionContext.Provider value={{ lenis: lenisRef.current }}>
+    <MotionContext.Provider value={{ lenis }}>
       {children}
     </MotionContext.Provider>
   );

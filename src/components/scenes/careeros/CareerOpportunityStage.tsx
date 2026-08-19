@@ -1,30 +1,27 @@
 import React from "react";
 import Image from "next/image";
+import { Z } from "@/lib/scene-z";
 
 interface CareerOpportunityStageProps {
-  progress: number; // 0.0 to 1.0
+  containerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function CareerOpportunityStage({ progress }: CareerOpportunityStageProps) {
-  // Active between 0.48 and 0.70
-  if (progress < 0.47 || progress > 0.72) return null;
-
-  const opacity = progress < 0.54 ? (progress - 0.47) / 0.07 : progress < 0.65 ? 1.0 : Math.max(0, 1.0 - (progress - 0.65) / 0.06);
-
+export function CareerOpportunityStage({
+  containerRef,
+}: CareerOpportunityStageProps) {
   return (
     <div
-      className="absolute inset-0 w-full h-full flex flex-col justify-center items-center p-4 sm:p-12 z-20 pointer-events-none"
-      style={{ opacity }}
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full pointer-events-none opacity-0"
+      style={{ zIndex: Z.media }}
       aria-hidden="true"
     >
-      <div className="w-full max-w-[1560px] h-[80vh] relative border border-avorria-line bg-avorria-black/90 overflow-hidden">
-        <Image
-          src="/media/projects/careeros/hero/hero_career_world_desktop.jpg"
-          alt="CareerOS Opportunity Landscape"
-          fill
-          className="object-cover"
-        />
-      </div>
+      <Image
+        src="/media/projects/careeros/hero/hero_career_world_mobile.jpg"
+        alt="CareerOS Opportunity Architecture"
+        fill
+        className="object-cover"
+      />
     </div>
   );
 }

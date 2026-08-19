@@ -1,21 +1,19 @@
 import React from "react";
 import Image from "next/image";
-import { stageOpacity, stageMounted } from "@/lib/scene-stages";
 import { Z } from "@/lib/scene-z";
 
 interface CareerOSWorldStageProps {
-  progress: number;
+  containerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function CareerOSWorldStage({ progress }: CareerOSWorldStageProps) {
-  // Active 0.38–0.62
-  if (!stageMounted(progress, 0.38, 0.62)) return null;
-  const opacity = stageOpacity(progress, 0.38, 0.46, 0.54, 0.62);
-
+export function CareerOSWorldStage({
+  containerRef,
+}: CareerOSWorldStageProps) {
   return (
     <div
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ opacity, zIndex: Z.media }}
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full pointer-events-none opacity-0"
+      style={{ zIndex: Z.media }}
       aria-hidden="true"
     >
       <Image

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import { AlkotaMaterialStage } from "./alkota/AlkotaMaterialStage";
 import { AlkotaProductStage } from "./alkota/AlkotaProductStage";
@@ -12,62 +12,229 @@ import { getSceneConfig } from "./registry";
 export function Scene03Alkota() {
   const config = getSceneConfig("scene-03-alkota")!;
 
+  // Refs for declarative GSAP timeline orchestration
+  const handoffRef = useRef<HTMLDivElement>(null);
+  const macroRef = useRef<HTMLDivElement>(null);
+  const kinematicsRef = useRef<HTMLDivElement>(null);
+  const materialAnnotationRef = useRef<HTMLDivElement>(null);
+  const productContainerRef = useRef<HTMLDivElement>(null);
+  const productImageRef = useRef<HTMLDivElement>(null);
+  const productCopyRef = useRef<HTMLDivElement>(null);
+  const digitalContainerRef = useRef<HTMLDivElement>(null);
+  const scanLineRef = useRef<HTMLDivElement>(null);
+  const contributionContainerRef = useRef<HTMLDivElement>(null);
+  const nextHandoffRef = useRef<HTMLDivElement>(null);
+
+  const buildTimeline = (timeline: gsap.core.Timeline) => {
+    // Stage Timeline Labels & Non-Overlapping Orchestration
+    timeline.addLabel("entry", 0);
+    timeline.addLabel("carbon_material", 0.08);
+    timeline.addLabel("engineering", 0.30);
+    timeline.addLabel("product_hero", 0.52);
+    timeline.addLabel("digital_flagship", 0.73);
+    timeline.addLabel("contribution", 0.90);
+    timeline.addLabel("handoff", 0.96);
+
+    // 0.00 - 0.08: Handoff from Signal fades out cleanly
+    if (handoffRef.current) {
+      timeline.fromTo(
+        handoffRef.current,
+        { opacity: 1 },
+        { opacity: 0, duration: 0.08 },
+        0
+      );
+    }
+
+    // 0.08 - 0.30: Carbon Material Macro (Move -> Land -> Hold -> Exit)
+    if (macroRef.current) {
+      timeline.fromTo(
+        macroRef.current,
+        { opacity: 0, scale: 1.0 },
+        { opacity: 1, scale: 1.08, duration: 0.12 },
+        0.08
+      );
+      // Hold 0.20 - 0.28
+      timeline.to(
+        macroRef.current,
+        { opacity: 0, scale: 1.15, duration: 0.06 },
+        0.28
+      );
+    }
+
+    if (materialAnnotationRef.current) {
+      timeline.fromTo(
+        materialAnnotationRef.current,
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.08 },
+        0.12
+      );
+      timeline.to(
+        materialAnnotationRef.current,
+        { opacity: 0, y: -10, duration: 0.06 },
+        0.46
+      );
+    }
+
+    // 0.30 - 0.50: Kinematics Engineering (Move -> Land -> Hold -> Exit)
+    if (kinematicsRef.current) {
+      timeline.fromTo(
+        kinematicsRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.10 },
+        0.30
+      );
+      // Hold 0.40 - 0.46
+      timeline.to(
+        kinematicsRef.current,
+        { opacity: 0, duration: 0.06 },
+        0.48
+      );
+    }
+
+    // 0.52 - 0.72: Complete Product Hero (Move -> Land -> Hold -> Exit)
+    if (productContainerRef.current) {
+      timeline.fromTo(
+        productContainerRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.08 },
+        0.52
+      );
+      // Hold 0.60 - 0.68
+      timeline.to(
+        productContainerRef.current,
+        { opacity: 0, duration: 0.06 },
+        0.68
+      );
+    }
+    if (productImageRef.current) {
+      timeline.fromTo(
+        productImageRef.current,
+        { scale: 0.95 },
+        { scale: 1.04, duration: 0.20 },
+        0.52
+      );
+    }
+
+    // 0.73 - 0.89: Digital Flagship Interface & Scan
+    if (digitalContainerRef.current) {
+      timeline.fromTo(
+        digitalContainerRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.07 },
+        0.73
+      );
+      // Hold 0.80 - 0.86
+      timeline.to(
+        digitalContainerRef.current,
+        { opacity: 0, duration: 0.05 },
+        0.87
+      );
+    }
+    if (scanLineRef.current) {
+      timeline.fromTo(
+        scanLineRef.current,
+        { left: "0%", opacity: 0 },
+        { opacity: 1, duration: 0.02 },
+        0.75
+      );
+      timeline.to(
+        scanLineRef.current,
+        { left: "100%", duration: 0.10 },
+        0.75
+      );
+      timeline.to(
+        scanLineRef.current,
+        { opacity: 0, duration: 0.02 },
+        0.85
+      );
+    }
+
+    // 0.90 - 0.96: Avorria Delivered Contribution
+    if (contributionContainerRef.current) {
+      timeline.fromTo(
+        contributionContainerRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.05 },
+        0.90
+      );
+      timeline.to(
+        contributionContainerRef.current,
+        { opacity: 0, y: -15, duration: 0.03 },
+        0.96
+      );
+    }
+
+    // 0.96 - 1.00: Philosophy / Breath Handoff Marker
+    if (nextHandoffRef.current) {
+      timeline.fromTo(
+        nextHandoffRef.current,
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.03 },
+        0.96
+      );
+    }
+  };
+
   return (
     <CinematicSceneViewport
       config={config}
       sceneIndex={3}
       fallback={<AlkotaFallback />}
+      buildTimeline={buildTimeline}
     >
-      {(scrollProgress) => {
-        // Continuous Handoff Layer from Scene 02 (0.00 to 0.12)
-        const handoffOpacity = scrollProgress < 0.08 ? 1.0 : Math.max(0, 1.0 - (scrollProgress - 0.08) / 0.06);
+      <div className="w-full h-full relative overflow-hidden flex items-center justify-center">
+        {/* Semantic Accessibility Heading */}
+        <h2 className="sr-only">Alkota Bikes — Product, Brand and Digital Engineering by Avorria</h2>
 
-        return (
-          <div className="w-full h-full relative overflow-hidden flex items-center justify-center">
-            {/* Semantic Accessibility Heading */}
-            <h2 className="sr-only">Alkota Bikes — Product, Brand and Digital Engineering by Avorria</h2>
+        {/* Chapter 0: Continuous Handoff from Scene 02 */}
+        <div
+          ref={handoffRef}
+          className="absolute inset-0 w-full h-full z-0 pointer-events-none"
+          aria-hidden="true"
+        >
+          <Image
+            src="/media/projects/alkota/product/naked-carbon-hero.jpg"
+            alt="Alkota Naked Carbon Master Entry"
+            fill
+            priority
+            className="object-cover"
+          />
+        </div>
 
-            {/* Chapter 0: Continuous Handoff from Scene 02 */}
-            {handoffOpacity > 0 && (
-              <div
-                className="absolute inset-0 w-full h-full z-0 pointer-events-none"
-                style={{ opacity: handoffOpacity }}
-                aria-hidden="true"
-              >
-                <Image
-                  src="/media/projects/alkota/product/naked-carbon-hero.jpg"
-                  alt="Alkota Naked Carbon Master Entry"
-                  fill
-                  priority
-                  className="object-cover"
-                />
-              </div>
-            )}
+        {/* Chapter A & B: Material Macro & Engineering Kinematics */}
+        <AlkotaMaterialStage
+          macroRef={macroRef}
+          kinematicsRef={kinematicsRef}
+          annotationRef={materialAnnotationRef}
+        />
 
-            {/* Chapter A & B: Material Macro & Engineering Kinematics */}
-            <AlkotaMaterialStage progress={scrollProgress} />
+        {/* Chapter C: The Object / Product Hero */}
+        <AlkotaProductStage
+          containerRef={productContainerRef}
+          imageRef={productImageRef}
+          copyRef={productCopyRef}
+        />
 
-            {/* Chapter C: The Object / Product Hero */}
-            <AlkotaProductStage progress={scrollProgress} />
+        {/* Chapter D: Physical to Digital Transformation */}
+        <AlkotaDigitalStage
+          containerRef={digitalContainerRef}
+          scanLineRef={scanLineRef}
+        />
 
-            {/* Chapter D: Physical to Digital Transformation */}
-            <AlkotaDigitalStage progress={scrollProgress} />
+        {/* Chapter E: Avorria Contribution & Case Study Link */}
+        <AlkotaContributionStage
+          containerRef={contributionContainerRef}
+        />
 
-            {/* Chapter E: Avorria Contribution & Case Study Link */}
-            <AlkotaContributionStage progress={scrollProgress} />
-
-            {/* Bottom Handoff Anchor for Scene 04 (Active during 0.94 - 1.00) */}
-            {scrollProgress >= 0.94 && (
-              <div
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 font-mono text-[11px] text-avorria-quiet uppercase tracking-widest z-30 transition-opacity duration-300"
-                aria-hidden="true"
-              >
-                <span>PHILOSOPHY // 04</span>
-              </div>
-            )}
-          </div>
-        );
-      }}
+        {/* Bottom Handoff Anchor for Scene 04 */}
+        <div
+          ref={nextHandoffRef}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 font-mono text-[11px] text-avorria-quiet uppercase tracking-widest z-30 opacity-0 pointer-events-none"
+          aria-hidden="true"
+        >
+          <span>PHILOSOPHY // 04</span>
+        </div>
+      </div>
     </CinematicSceneViewport>
   );
 }

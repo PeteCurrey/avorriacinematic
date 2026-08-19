@@ -1,20 +1,18 @@
 import React from "react";
+import { Z } from "@/lib/scene-z";
 
 interface CareerOSConversationStageProps {
-  progress: number; // 0.0 to 1.0
+  containerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function CareerOSConversationStage({ progress }: CareerOSConversationStageProps) {
-  // Active between 0.10 and 0.36
-  if (progress < 0.09 || progress > 0.38) return null;
-
-  const opacity = progress < 0.16 ? (progress - 0.09) / 0.07 : progress < 0.28 ? 1.0 : Math.max(0, 1.0 - (progress - 0.28) / 0.08);
-  const yTranslate = progress < 0.16 ? (1 - (progress - 0.09) / 0.07) * 32 : 0;
-
+export function CareerOSConversationStage({
+  containerRef,
+}: CareerOSConversationStageProps) {
   return (
     <div
-      className="absolute inset-0 w-full h-full flex flex-col justify-center max-w-[1760px] mx-auto px-6 sm:px-12 lg:px-16 z-20 pointer-events-none"
-      style={{ opacity, transform: `translateY(${yTranslate}px)` }}
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full flex flex-col justify-center max-w-[1760px] mx-auto px-6 sm:px-12 lg:px-16 pointer-events-none opacity-0"
+      style={{ zIndex: Z.copy }}
       aria-hidden="true"
     >
       <div className="max-w-xl flex flex-col gap-6 bg-avorria-surface/80 backdrop-blur-md border border-avorria-line p-6 sm:p-8">
@@ -31,7 +29,7 @@ export function CareerOSConversationStage({ progress }: CareerOSConversationStag
 
         {/* Sample Context Input */}
         <div className="font-body text-sm sm:text-base text-avorria-muted border-l-2 border-avorria-signal pl-4 py-1 italic leading-relaxed">
-          &ldquo;I\x27ve finished college and I\x27m not sure what direction to take.&rdquo;
+          &ldquo;I&#39;ve finished college and I&#39;m not sure what direction to take.&rdquo;
         </div>
 
         {/* Semantic Context Nodes Forming */}

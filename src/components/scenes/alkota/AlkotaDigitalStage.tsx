@@ -4,23 +4,21 @@ import Image from "next/image";
 import { Z } from "@/lib/scene-z";
 
 interface AlkotaDigitalStageProps {
-  progress: number; // 0.0 to 1.0
+  containerRef?: React.RefObject<HTMLDivElement | null>;
+  scanLineRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function AlkotaDigitalStage({ progress }: AlkotaDigitalStageProps) {
+export function AlkotaDigitalStage({
+  containerRef,
+  scanLineRef,
+}: AlkotaDigitalStageProps) {
   const [selectedFinish, setSelectedFinish] = useState<"carbon" | "glacier">("carbon");
-
-  // Active between 0.62 and 0.85
-  if (progress < 0.62 || progress > 0.85) return null;
-
-  // Scan line progress crossing the screen (0.64 -> 0.72)
-  const scanT = Math.min(1, Math.max(0, (progress - 0.64) / 0.08));
-  const opacity = progress < 0.70 ? (progress - 0.62) / 0.08 : progress < 0.80 ? 1.0 : Math.max(0, 1.0 - (progress - 0.80) / 0.04);
 
   return (
     <div
-      className="absolute inset-0 w-full h-full"
-      style={{ opacity, zIndex: Z.media }}
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full opacity-0"
+      style={{ zIndex: Z.media }}
     >
       {/* Full-bleed right composition: image owns the field without box wrapper */}
       <div className="absolute inset-0 w-full h-full">
@@ -72,13 +70,12 @@ export function AlkotaDigitalStage({ progress }: AlkotaDigitalStageProps) {
       </div>
 
       {/* Scanning Engineering Line */}
-      {scanT > 0 && scanT < 1 && (
-        <div
-          className="absolute top-0 bottom-0 w-[2px] bg-avorria-signal shadow-[0_0_12px_#C8F135] pointer-events-none"
-          style={{ left: `${scanT * 100}%`, zIndex: Z.overlay }}
-          aria-hidden="true"
-        />
-      )}
+      <div
+        ref={scanLineRef}
+        className="absolute top-0 bottom-0 w-[2px] bg-avorria-signal shadow-[0_0_12px_#C8F135] pointer-events-none opacity-0"
+        style={{ left: "0%", zIndex: Z.overlay }}
+        aria-hidden="true"
+      />
     </div>
   );
 }

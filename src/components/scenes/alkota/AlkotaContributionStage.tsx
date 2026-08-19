@@ -2,21 +2,20 @@ import React from "react";
 import Link from "next/link";
 import { ALKOTA_WORK_COMPONENTS } from "@/lib/scenes/alkota-scene-config";
 import { CursorTrigger } from "@/providers/CursorContext";
+import { Z } from "@/lib/scene-z";
 
 interface AlkotaContributionStageProps {
-  progress: number; // 0.0 to 1.0
+  containerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function AlkotaContributionStage({ progress }: AlkotaContributionStageProps) {
-  // Active between 0.80 and 0.94
-  if (progress < 0.78 || progress > 0.95) return null;
-
-  const opacity = progress < 0.84 ? (progress - 0.78) / 0.06 : progress < 0.90 ? 1.0 : Math.max(0, 1.0 - (progress - 0.90) / 0.04);
-
+export function AlkotaContributionStage({
+  containerRef,
+}: AlkotaContributionStageProps) {
   return (
     <div
-      className="absolute inset-0 w-full h-full flex items-center justify-center p-6 sm:p-16 z-30"
-      style={{ opacity }}
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full flex items-center justify-center p-6 sm:p-12 lg:p-16 opacity-0"
+      style={{ zIndex: Z.copy }}
     >
       <div className="max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-start border-t border-b border-avorria-line py-12">
         {/* Left Column: Avorria Role & Summary */}

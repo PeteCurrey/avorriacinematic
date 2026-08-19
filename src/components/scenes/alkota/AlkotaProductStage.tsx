@@ -1,28 +1,29 @@
 import React from "react";
 import Image from "next/image";
+import { Z } from "@/lib/scene-z";
 
 interface AlkotaProductStageProps {
-  progress: number; // 0.0 to 1.0
+  containerRef?: React.RefObject<HTMLDivElement | null>;
+  imageRef?: React.RefObject<HTMLDivElement | null>;
+  copyRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function AlkotaProductStage({ progress }: AlkotaProductStageProps) {
-  // Active between 0.44 and 0.70
-  if (progress < 0.42 || progress > 0.72) return null;
-
-  // Reveal opacity (0.44 -> 0.52 -> 0.64 -> 0.70)
-  const opacity = progress < 0.52 ? (progress - 0.42) / 0.10 : progress < 0.64 ? 1.0 : Math.max(0, 1.0 - (progress - 0.64) / 0.06);
-  const scale = 0.96 + (progress - 0.44) * 0.1;
-
+export function AlkotaProductStage({
+  containerRef,
+  imageRef,
+  copyRef,
+}: AlkotaProductStageProps) {
   return (
     <div
-      className="absolute inset-0 w-full h-full flex flex-col justify-between p-6 sm:p-16 pointer-events-none z-10"
-      style={{ opacity }}
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full flex flex-col justify-between p-6 sm:p-12 lg:p-16 pointer-events-none opacity-0"
+      style={{ zIndex: Z.media }}
       aria-hidden="true"
     >
       {/* Full Product Hero Image */}
       <div
-        className="absolute inset-0 w-full h-full transition-transform duration-100 ease-out"
-        style={{ transform: `scale(${scale})` }}
+        ref={imageRef}
+        className="absolute inset-0 w-full h-full"
       >
         <Image
           src="/media/projects/alkota/product/naked-carbon-hero.jpg"
@@ -33,13 +34,20 @@ export function AlkotaProductStage({ progress }: AlkotaProductStageProps) {
       </div>
 
       {/* Top Header */}
-      <div className="flex items-center justify-between font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet z-20">
+      <div
+        className="flex items-center justify-between font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet"
+        style={{ zIndex: Z.instrumentation }}
+      >
         <span className="text-avorria-signal">001 / THE OBJECT</span>
         <span className="text-avorria-white">NAKED CARBON // CHASSIS</span>
       </div>
 
       {/* Monumental Editorial Brand Statement */}
-      <div className="max-w-3xl z-20 my-auto pl-2 sm:pl-8">
+      <div
+        ref={copyRef}
+        className="max-w-3xl my-auto pl-2 sm:pl-8"
+        style={{ zIndex: Z.copy }}
+      >
         <div className="display-xl text-avorria-white mb-3">
           A product deserves a digital world built with the same intent.
         </div>
@@ -49,9 +57,12 @@ export function AlkotaProductStage({ progress }: AlkotaProductStageProps) {
       </div>
 
       {/* Bottom Specs Marker */}
-      <div className="flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet z-20">
+      <div
+        className="flex items-center justify-between border-t border-avorria-line/40 pt-4 font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet"
+        style={{ zIndex: Z.instrumentation }}
+      >
         <span>PRE-PRODUCTION CARBON DEVELOPMENT</span>
-        <span className="text-avorria-white">03 / 18 // ALKOTA BIKES</span>
+        <span className="text-avorria-white">001 // ALKOTA BIKES</span>
       </div>
     </div>
   );

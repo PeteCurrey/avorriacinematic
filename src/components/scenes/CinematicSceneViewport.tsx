@@ -9,10 +9,10 @@ import { SceneConfig } from "@/types/scene";
 interface CinematicSceneViewportProps {
   config: SceneConfig;
   sceneIndex: number;
-  children: (progress: number) => React.ReactNode;
+  children: React.ReactNode | ((progress: number) => React.ReactNode);
   fallback?: React.ReactNode;
-  /** Called on every scroll update with normalised 0–1 progress */
-  onProgress?: (p: number) => void;
+  /** Timeline builder called when GSAP context is ready */
+  buildTimeline?: (timeline: gsap.core.Timeline, refs: { outer: HTMLElement; sticky: HTMLDivElement }) => void;
   className?: string;
 }
 
@@ -23,51 +23,57 @@ interface CinematicSceneViewportProps {
  *
  * OUTER SECTION  — owns scroll distance via `style={{ height: config.minHeight }}`
  * INNER DIV      — sticky to viewport, `h-[100dvh] overflow-hidden`
- * ScrollTrigger  — observes outer section geometry (start/end = section bounds)
+ * ScrollTrigger  — observes outer section geometry with `scrub: true` attached to a single GSAP Timeline
  *
- * This eliminates:
- *   - pinSpacing: true (no GSAP spacer divs)
- *   - end: "+=N%" (no hardcoded scroll distances)
- *   - pin: element (no GSAP-manufactured page length)
- *
- * The registry is the single source of scroll distance.
+ * Supports both declarative GSAP timeline orchestration and functional components.
  */
 export function CinematicSceneViewport({
   config,
   sceneIndex,
   children,
   fallback,
-  onProgress,
+  buildTimeline,
   className = "",
 }: CinematicSceneViewportProps) {
   const outerRef = useRef<HTMLElement>(null);
-  const [progress, setProgress] = React.useState(0);
+  const stickyRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = React.useState(0);
   const { effectiveReducedMotion } = useReducedMotion();
 
   useGsapContext(
     (ctx) => {
-      if (effectiveReducedMotion || !outerRef.current) return;
+      if (effectiveReducedMotion || !outerRef.current || !stickyRef.current) return;
 
       ctx.add(() => {
         if (typeof window !== "undefined") {
           gsap.registerPlugin(ScrollTrigger);
         }
 
+        const timeline = gsap.timeline({
+          defaults: {
+            ease: "none",
+          },
+        });
+
+        if (buildTimeline && outerRef.current && stickyRef.current) {
+          buildTimeline(timeline, { outer: outerRef.current, sticky: stickyRef.current });
+        }
+
         ScrollTrigger.create({
           trigger: outerRef.current,
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.8,
-          onUpdate: (self) => {
-            const p = self.progress;
-            setProgress(p);
-            onProgress?.(p);
-          },
+          animation: buildTimeline ? timeline : undefined,
+          scrub: true,
+          invalidateOnRefresh: true,
+          onUpdate: typeof children === "function" ? (self) => {
+            setScrollProgress(self.progress);
+          } : undefined,
         });
       });
     },
     outerRef,
-    [effectiveReducedMotion]
+    [effectiveReducedMotion, buildTimeline]
   );
 
   if (effectiveReducedMotion && fallback) {
@@ -95,8 +101,8 @@ export function CinematicSceneViewport({
       style={{ height: config.minHeight }}
     >
       {/* Sticky viewport — 100dvh, clips all sub-stage content */}
-      <div className="sticky top-0 h-[100dvh] overflow-hidden">
-        {children(progress)}
+      <div ref={stickyRef} className="sticky top-0 h-[100dvh] overflow-hidden">
+        {typeof children === "function" ? children(scrollProgress) : children}
       </div>
     </section>
   );

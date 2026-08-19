@@ -2,30 +2,29 @@ import React from "react";
 import Link from "next/link";
 import { CAREEROS_DELIVERABLES } from "@/lib/scenes/careeros-scene-config";
 import { CursorTrigger } from "@/providers/CursorContext";
+import { Z } from "@/lib/scene-z";
 
 interface CareerOSContributionStageProps {
-  progress: number; // 0.0 to 1.0
+  containerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function CareerOSContributionStage({ progress }: CareerOSContributionStageProps) {
-  // Active between 0.82 and 0.95
-  if (progress < 0.80 || progress > 0.96) return null;
-
-  const opacity = progress < 0.86 ? (progress - 0.80) / 0.06 : progress < 0.92 ? 1.0 : Math.max(0, 1.0 - (progress - 0.92) / 0.04);
-
+export function CareerOSContributionStage({
+  containerRef,
+}: CareerOSContributionStageProps) {
   return (
     <div
-      className="absolute inset-0 w-full h-full flex items-center justify-center p-6 sm:p-16 z-30"
-      style={{ opacity }}
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full flex items-center justify-center p-6 sm:p-12 lg:p-16 opacity-0"
+      style={{ zIndex: Z.copy }}
     >
       <div className="max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-start border-t border-b border-avorria-line py-12">
         {/* Left: Statement & Narrative */}
         <div className="lg:col-span-6 flex flex-col gap-6">
           <div className="font-mono text-xs text-avorria-signal uppercase tracking-widest">
-            005 // CAREEROS // AI PLATFORM
+            002 // CAREEROS // AI PLATFORM
           </div>
           <h3 className="font-display font-bold text-3xl sm:text-5xl uppercase tracking-tight text-avorria-white">
-            AI isn\x27t the product.<br />What it enables is.
+            AI isn&#39;t the product.<br />What it enables is.
           </h3>
           <p className="font-body text-base text-avorria-muted leading-relaxed max-w-lg">
             We designed CareerOS as an ecosystem of human intelligence and adaptive recommendation engines. Rather than wrapping an LLM in a chatbot, we engineered structured context models that turn conversations into lifetime career leverage.
