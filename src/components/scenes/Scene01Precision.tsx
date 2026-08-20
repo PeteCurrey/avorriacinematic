@@ -27,6 +27,17 @@ import { getSceneConfig } from "./registry";
  *      scroll distance, then parts vertically and hands off to the
  *      Selected Work reel.
  */
+/**
+ * Hero display size.
+ *
+ * Calibrated for Syne Extrabold, which is far wider than the body face —
+ * roughly 1.02em per character for this string at weight 800, against ~0.62em
+ * for DM Sans. The longest line, "AS POWER.", is 9 characters, so the size has
+ * to clear 9 x 1.02 x fontSize inside the safe frame's inner width at every
+ * breakpoint. The lower bound is what mobile can hold, not what looks big.
+ */
+const HERO_TYPE_SIZE = "clamp(2.15rem, 8.2vw, 9.5rem)";
+
 export function Scene01Precision() {
   const signalDotRef = useRef<HTMLDivElement | null>(null);
   const signalLineRef = useRef<HTMLDivElement | null>(null);
@@ -262,8 +273,8 @@ export function Scene01Precision() {
             <div className="overflow-hidden pb-1 sm:pb-2">
               <div
                 ref={precisionRef}
-                className="select-none tracking-tight leading-none text-avorria-white opacity-0"
-                style={{ fontSize: "clamp(3rem, 9.5vw, 10.75rem)" }}
+                className="font-display font-extrabold select-none tracking-tight leading-none text-avorria-white opacity-0"
+                style={{ fontSize: HERO_TYPE_SIZE }}
               >
                 PRECISION
               </div>
@@ -295,8 +306,8 @@ export function Scene01Precision() {
             <div className="overflow-hidden pt-1 sm:pt-2">
               <div
                 ref={powerRef}
-                className="select-none tracking-tight leading-none text-avorria-signal opacity-0 whitespace-nowrap"
-                style={{ fontSize: "clamp(3rem, 9.5vw, 10.75rem)" }}
+                className="font-display font-extrabold select-none tracking-tight leading-none text-avorria-signal opacity-0 whitespace-nowrap"
+                style={{ fontSize: HERO_TYPE_SIZE }}
               >
                 AS POWER<span className="text-avorria-signal">.</span>
               </div>
