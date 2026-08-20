@@ -1,4 +1,4 @@
-import { CaseStudyConfig } from "@/types/case-study";
+import type { CaseStudyConfig } from "@/types/case-study";
 import { DEFAULT_AVORRIA_THEME } from "./theme-engine";
 
 /**

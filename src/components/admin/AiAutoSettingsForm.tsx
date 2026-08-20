@@ -2,7 +2,7 @@
 
 import React, { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { AiAutoSettings } from "@/types/admin";
+import type { AiAutoSettings } from "@/types/admin";
 import { updateSettingsAction } from "@/app/admin/actions";
 import { 
   Sliders, 

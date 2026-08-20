@@ -1,4 +1,4 @@
-import { WebGLCapabilities } from "@/types/webgl";
+import type { WebGLCapabilities } from "@/types/webgl";
 
 export function detectWebGLCapabilities(): WebGLCapabilities {
   if (typeof window === "undefined") {

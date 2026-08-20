@@ -1,4 +1,4 @@
-import { ManifestoStatementData } from "@/types/manifesto";
+import type { ManifestoStatementData } from "@/types/manifesto";
 
 export const MANIFESTO_STATEMENTS: ManifestoStatementData[] = [
   {

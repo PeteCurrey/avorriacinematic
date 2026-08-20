@@ -1,5 +1,5 @@
 import React from "react";
-import { CaseStudyChapter } from "@/types/case-study";
+import type { CaseStudyChapter } from "@/types/case-study";
 import { StatementChapter } from "./chapters/StatementChapter";
 import { MediaChapter } from "./chapters/MediaChapter";
 import { SplitChapter } from "./chapters/SplitChapter";

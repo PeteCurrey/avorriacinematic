@@ -1,4 +1,4 @@
-import { SearchNode, SearchEdge, SearchQueryItem } from "@/types/search-scene";
+import type { SearchNode, SearchEdge, SearchQueryItem } from "@/types/search-scene";
 
 export const SEARCH_NODES: SearchNode[] = [
   // Hubs

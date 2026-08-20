@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { ServiceDefinition } from "@/types/content";
+import type { ServiceDefinition } from "@/types/content";
 
 interface ServicePageHeroProps {
   service: ServiceDefinition;

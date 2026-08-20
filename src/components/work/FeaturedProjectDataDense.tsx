@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { WorkProject } from "@/types/work";
+import type { WorkProject } from "@/types/work";
 
 interface FeaturedProjectProps {
   project: WorkProject;

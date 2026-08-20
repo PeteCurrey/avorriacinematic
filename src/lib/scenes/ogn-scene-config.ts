@@ -1,4 +1,4 @@
-import { OGNAnalysisTag, OGNPrincipleData } from "@/types/ogn-scene";
+import type { OGNAnalysisTag, OGNPrincipleData } from "@/types/ogn-scene";
 
 export const OGN_ANALYSIS_TAGS: OGNAnalysisTag[] = [
   {

@@ -4,7 +4,7 @@ import React, { useRef, useEffect } from "react";
 import { useGsapContext } from "@/lib/motion/hooks";
 import { useReducedMotion } from "@/providers/ReducedMotionProvider";
 import { gsap, ScrollTrigger } from "@/lib/motion/gsap-config";
-import { SceneConfig } from "@/types/scene";
+import type { SceneConfig } from "@/types/scene";
 
 interface CinematicSceneViewportProps {
   config: SceneConfig;

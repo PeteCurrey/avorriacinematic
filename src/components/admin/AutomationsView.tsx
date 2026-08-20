@@ -2,7 +2,7 @@
 
 import React, { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { AutomationJob, JobStatus, JobType } from "@/types/admin";
+import type { AutomationJob, JobStatus, JobType } from "@/types/admin";
 import { retryJobAction, cancelJobAction } from "@/app/admin/actions";
 import { 
   Cpu, 

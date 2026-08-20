@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { WorkWallProject } from "@/types/work-wall";
+import type { WorkWallProject } from "@/types/work-wall";
 import { CursorTrigger } from "@/providers/CursorContext";
 
 interface WorkWallItemProps {

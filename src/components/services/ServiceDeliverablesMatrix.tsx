@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ServiceOfferingItem } from "@/types/content";
+import type { ServiceOfferingItem } from "@/types/content";
 
 interface ServiceDeliverablesMatrixProps {
   sectionEyebrow?: string;

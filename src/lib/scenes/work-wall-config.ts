@@ -1,4 +1,4 @@
-import { WorkWallProject } from "@/types/work-wall";
+import type { WorkWallProject } from "@/types/work-wall";
 
 export const CLIENT_WORK_PROJECTS: WorkWallProject[] = [
   {

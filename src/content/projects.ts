@@ -1,4 +1,4 @@
-import { Project } from "@/types/content";
+import type { Project } from "@/types/content";
 
 /**
  * AVORRIA PROJECT INVENTORY

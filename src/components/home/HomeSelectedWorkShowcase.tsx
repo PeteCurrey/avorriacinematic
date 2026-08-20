@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import { HOMEPAGE_FEATURED_PROJECTS } from "@/lib/home/homepage-projects";
 import { HomepageProjectFeature } from "./HomepageProjectFeature";
 import { CinematicSceneViewport } from "@/components/scenes/CinematicSceneViewport";
-import { SceneConfig } from "@/types/scene";
+import type { SceneConfig } from "@/types/scene";
 
 const SHOWCASE_CONFIG: SceneConfig = {
   id: "scene-selected-work-showcase" as any,

@@ -1,4 +1,4 @@
-import { AnalyticsEventName, AnalyticsPayload } from "@/types/analytics";
+import type { AnalyticsEventName, AnalyticsPayload } from "@/types/analytics";
 
 export function logAnalyticsEvent(eventName: AnalyticsEventName, payload: AnalyticsPayload = {}) {
   if (process.env.NODE_ENV === "development") {

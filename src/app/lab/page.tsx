@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { LAB_EXPERIMENTS } from "@/lib/scenes/lab-config";
-import { LabExperiment } from "@/types/lab";
+import type { LabExperiment } from "@/types/lab";
 
 export const metadata = generatePageMetadata({
   title: "Avorria Lab — Interactive R&D & Emerging Interface Experiments",

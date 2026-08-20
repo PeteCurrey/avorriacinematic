@@ -1,5 +1,5 @@
 import React from "react";
-import { CaseStudyChapter } from "@/types/case-study";
+import type { CaseStudyChapter } from "@/types/case-study";
 
 export function ProofChapter({ chapter }: { chapter: CaseStudyChapter }) {
   const verifiedEvidence = chapter.evidence?.filter((e) => e.verified) || [];

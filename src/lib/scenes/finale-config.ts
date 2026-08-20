@@ -1,4 +1,4 @@
-import { FinaleConfig } from "@/types/finale";
+import type { FinaleConfig } from "@/types/finale";
 
 export const FINALE_CONFIG: FinaleConfig = {
   questionText: "HAVE SOMETHING\nAMBITIOUS IN MIND?",

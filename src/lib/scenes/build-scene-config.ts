@@ -1,4 +1,4 @@
-import { BuildFragmentConfig } from "@/types/build-scene";
+import type { BuildFragmentConfig } from "@/types/build-scene";
 
 export const BUILD_FRAGMENTS: BuildFragmentConfig[] = [
   {

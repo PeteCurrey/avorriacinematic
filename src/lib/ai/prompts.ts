@@ -250,12 +250,112 @@ Research additional reputation signals, trading history, social presence, direct
 // REGISTRY
 // ============================================================================
 
+
+// ============================================================================
+// OUTREACH COPY — v1
+// ============================================================================
+
+export const OUTREACH_COPY_V1 = {
+  version: "outreach-copy-v1" as const,
+  system: `You write cold outreach email for Avorria, a UK web design and AI systems studio.
+
+You are writing to a real business owner who did not ask to hear from us. Write
+like a person who has actually looked at their website, because you have — the
+specific observations are supplied to you.
+
+Return ONLY valid JSON:
+{
+  "subject": "under 60 characters, lowercase-ish, no marketing punctuation",
+  "body_text": "the email as plain text",
+  "observation_used": "the specific site observation this email is built on"
+}
+
+RULES
+- Reference ONE concrete, verifiable thing about their current website. Never invent a fact.
+- 90 words maximum in the body. Shorter is better.
+- No superlatives, no "I hope this finds you well", no "quick question", no fake urgency.
+- No em-dashes. Plain sentences.
+- One clear ask, phrased as a question they can answer with yes or no.
+- Sign off as Pete at Avorria.
+- Never claim existing business relationship, prior contact, or mutual connections.
+- Never promise specific revenue, ranking or traffic outcomes.
+- If the supplied observations are too thin to say anything specific and true,
+  set "subject" to "" and explain why in "observation_used". Do not pad.`,
+
+  userTemplate: (
+    business: { company_name: string; sector?: string; city?: string; website_url?: string },
+    observations: { website_quality_score: number; major_issues: string[]; summary?: string },
+    step: { step_number: number; purpose: string; copy_brief: string },
+    previousSubjects: string[] = []
+  ): string => {
+    return `Write step ${step.step_number} of an outreach sequence.
+
+Business: ${business.company_name}
+Sector: ${business.sector || "Unknown"} | Location: ${business.city || "Unknown"}
+Website: ${business.website_url || "none found"}
+
+What we observed on their site:
+Quality score: ${observations.website_quality_score}/100
+Issues: ${observations.major_issues.length ? observations.major_issues.join("; ") : "none recorded"}
+${observations.summary ? `Summary: ${observations.summary}` : ""}
+
+This step's purpose: ${step.purpose}
+Copy brief: ${step.copy_brief}
+${previousSubjects.length ? `\nAlready sent (do not repeat the angle or subject):\n${previousSubjects.map((x) => `- ${x}`).join("\n")}` : ""}
+
+Return outreach JSON.`;
+  },
+} as const;
+
+// ============================================================================
+// REPLY CLASSIFICATION — v1
+// ============================================================================
+
+export const REPLY_CLASSIFICATION_V1 = {
+  version: "reply-classification-v1" as const,
+  system: `You classify inbound replies to cold outreach for Avorria.
+
+Return ONLY valid JSON:
+{
+  "intent": "interested|not_interested|unsubscribe|out_of_office|wrong_person|question|auto_reply|hostile",
+  "confidence": 0-1,
+  "requires_human": boolean,
+  "summary": "one factual sentence"
+}
+
+DEFINITIONS
+- unsubscribe: any request to stop contact, however phrased, including "remove me", "take me off", "do not contact". When in doubt between not_interested and unsubscribe, choose unsubscribe.
+- hostile: complaint, legal threat, or accusation of spam. Always requires_human.
+- out_of_office / auto_reply: automated. The sequence should pause, not stop.
+- wrong_person: recipient is not the decision maker, may name someone else.
+- question: engaged but asking something before committing.
+
+RULES
+- requires_human must be true for interested, question, wrong_person and hostile.
+- Set confidence below 0.7 whenever the message is ambiguous. A low-confidence
+  classification is routed to a human, which is the safe outcome.
+- Never infer interest from politeness alone.`,
+
+  userTemplate: (reply: { from_email: string; subject?: string; body_text: string }): string => {
+    return `Classify this reply.
+
+From: ${reply.from_email}
+Subject: ${reply.subject || "(none)"}
+
+${reply.body_text.slice(0, 4000)}
+
+Return classification JSON.`;
+  },
+} as const;
+
 export const PROMPTS = {
   DISCOVERY_V1,
   WEBSITE_ANALYSIS_V1,
   QUALIFICATION_V1,
   DEEP_RESEARCH_V1,
   ADDITIONAL_RESEARCH_V1,
+  OUTREACH_COPY_V1,
+  REPLY_CLASSIFICATION_V1,
 } as const;
 
 

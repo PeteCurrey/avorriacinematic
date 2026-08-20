@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ServiceMethodologyStep } from "@/types/content";
+import type { ServiceMethodologyStep } from "@/types/content";
 
 interface ServiceMethodologyProps {
   sectionEyebrow?: string;

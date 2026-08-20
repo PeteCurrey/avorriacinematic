@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { ProjectMedia } from "@/types/content";
+import type { ProjectMedia } from "@/types/content";
 
 interface ResponsiveMediaProps {
   media?: ProjectMedia;

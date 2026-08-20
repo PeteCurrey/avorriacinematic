@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { SceneConfig } from "@/types/scene";
+import type { SceneConfig } from "@/types/scene";
 import { SceneErrorBoundary } from "../media/SceneErrorBoundary";
 import { ScenePlaceholder } from "./ScenePlaceholder";
 

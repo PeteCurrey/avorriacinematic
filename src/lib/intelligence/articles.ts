@@ -1,4 +1,4 @@
-import { IntelligenceArticle } from "@/types/intelligence";
+import type { IntelligenceArticle } from "@/types/intelligence";
 
 export const INTELLIGENCE_ARTICLES: IntelligenceArticle[] = [
   {

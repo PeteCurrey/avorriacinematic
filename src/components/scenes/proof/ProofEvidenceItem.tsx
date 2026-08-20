@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ProofItem } from "@/types/proof";
+import type { ProofItem } from "@/types/proof";
 import { CursorTrigger } from "@/providers/CursorContext";
 
 interface ProofEvidenceItemProps {

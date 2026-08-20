@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import { CinematicSceneViewport } from "@/components/scenes/CinematicSceneViewport";
 import { SceneSafeFrame } from "@/components/scenes/SceneSafeFrame";
 import { useReducedMotion } from "@/providers/ReducedMotionProvider";
-import { SceneConfig } from "@/types/scene";
+import type { SceneConfig } from "@/types/scene";
 import { CAPABILITY_ITEMS } from "@/lib/home/home-capabilities";
 import {
   HomeCapabilityChapter,

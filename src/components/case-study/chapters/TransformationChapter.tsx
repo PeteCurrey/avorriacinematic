@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { CaseStudyChapter } from "@/types/case-study";
+import type { CaseStudyChapter } from "@/types/case-study";
 
 export function TransformationChapter({ chapter }: { chapter: CaseStudyChapter }) {
   const beforeAfter = chapter.beforeAfter;

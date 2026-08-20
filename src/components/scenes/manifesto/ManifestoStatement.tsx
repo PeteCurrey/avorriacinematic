@@ -1,5 +1,5 @@
 import React from "react";
-import { ManifestoStatementData } from "@/types/manifesto";
+import type { ManifestoStatementData } from "@/types/manifesto";
 import { Z } from "@/lib/scene-z";
 
 interface ManifestoStatementProps {

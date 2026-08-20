@@ -26,7 +26,7 @@ import {
   Radio
 } from "lucide-react";
 import { signOutAdminAction } from "@/app/admin/actions";
-import { AdminUser } from "@/types/admin";
+import type { AdminUser } from "@/types/admin";
 
 interface AdminSidebarProps {
   user: AdminUser;

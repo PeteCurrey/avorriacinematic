@@ -1,4 +1,4 @@
-import { WorkProject } from "@/types/work";
+import type { WorkProject } from "@/types/work";
 
 /**
  * AVORRIA CANONICAL WORK REGISTRY

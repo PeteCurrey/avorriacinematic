@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import Link from "next/link";
-import { CaseStudyConfig } from "@/types/case-study";
+import type { CaseStudyConfig } from "@/types/case-study";
 import { generateThemeStyles } from "@/lib/case-studies/theme-engine";
 import { SceneErrorBoundary } from "@/components/cinematic/SceneErrorBoundary";
 

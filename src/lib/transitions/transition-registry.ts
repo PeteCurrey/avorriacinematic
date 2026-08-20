@@ -1,4 +1,4 @@
-import { SceneTransitionEntry } from "@/types/transitions";
+import type { SceneTransitionEntry } from "@/types/transitions";
 
 export const HOMEPAGE_TRANSITIONS: SceneTransitionEntry[] = [
   {

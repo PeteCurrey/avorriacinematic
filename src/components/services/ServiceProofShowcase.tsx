@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ServiceProofItem } from "@/types/content";
+import type { ServiceProofItem } from "@/types/content";
 
 interface ServiceProofShowcaseProps {
   sectionEyebrow?: string;

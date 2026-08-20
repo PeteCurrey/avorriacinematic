@@ -1,4 +1,4 @@
-import { EntireFMWorkOrderFixture, EntireFMDeliverable } from "@/types/entirefm-scene";
+import type { EntireFMWorkOrderFixture, EntireFMDeliverable } from "@/types/entirefm-scene";
 
 export const ENTIREFM_FIXTURE: EntireFMWorkOrderFixture = {
   id: "WO-1042",

@@ -1,4 +1,4 @@
-import { ServiceDefinition, ServiceSlug } from "@/types/content";
+import type { ServiceDefinition, ServiceSlug } from "@/types/content";
 
 export const SERVICES: ServiceDefinition[] = [
   // ============================================================

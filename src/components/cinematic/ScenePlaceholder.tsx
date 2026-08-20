@@ -1,5 +1,5 @@
 import React from "react";
-import { SceneConfig } from "@/types/scene";
+import type { SceneConfig } from "@/types/scene";
 
 interface ScenePlaceholderProps {
   config: SceneConfig;

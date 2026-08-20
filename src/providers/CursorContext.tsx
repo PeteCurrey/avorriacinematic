@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useCallback } from "react";
-import { CursorState } from "@/types/theme";
+import type { CursorState } from "@/types/theme";
 
 interface CursorContextValue {
   cursorState: CursorState;

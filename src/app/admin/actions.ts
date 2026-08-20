@@ -21,7 +21,7 @@ import {
   updateAiAutoSettings, 
   seedDevelopmentFixture 
 } from "@/lib/db/repository";
-import { RejectionReason, AutopilotMode, AdminUser } from "@/types/admin";
+import type { RejectionReason, AutopilotMode, AdminUser } from "@/types/admin";
 
 /**
  * Server action: Sign in with operator credentials

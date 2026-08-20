@@ -1,4 +1,4 @@
-import { DrawdownModuleConfig } from "@/types/drawdown-scene";
+import type { DrawdownModuleConfig } from "@/types/drawdown-scene";
 
 export const DRAWDOWN_MODULES: DrawdownModuleConfig[] = [
   {

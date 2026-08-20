@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { AdminRole, AdminUser } from "@/types/admin";
+import type { AdminRole, AdminUser } from "@/types/admin";
 import { ADMIN_COOKIE_NAME, resolveSessionSecret } from "./session-constants";
 import crypto from "crypto";
 

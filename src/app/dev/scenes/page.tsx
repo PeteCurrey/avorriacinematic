@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { HOMEPAGE_SCENES } from "@/components/scenes/registry";
-import { SceneId } from "@/types/scene";
+import type { SceneId } from "@/types/scene";
 import { CinematicScene } from "@/components/cinematic/CinematicScene";
 import { Scene00Void } from "@/components/scenes/Scene00Void";
 import { Scene01Precision } from "@/components/scenes/Scene01Precision";

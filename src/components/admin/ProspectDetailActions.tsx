@@ -2,7 +2,7 @@
 
 import React, { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { Prospect, RejectionReason } from "@/types/admin";
+import type { Prospect, RejectionReason } from "@/types/admin";
 import { 
   approveProspectAction, 
   rejectProspectAction, 

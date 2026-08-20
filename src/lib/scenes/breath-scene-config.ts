@@ -1,4 +1,4 @@
-import { BreathManifestoConfig } from "@/types/breath-scene";
+import type { BreathManifestoConfig } from "@/types/breath-scene";
 
 export const BREATH_CONFIG: BreathManifestoConfig = {
   premiseLine1: "WE DON'T DECORATE",

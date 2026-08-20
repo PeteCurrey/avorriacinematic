@@ -1,4 +1,4 @@
-import { ProofItem } from "@/types/proof";
+import type { ProofItem } from "@/types/proof";
 
 export const PROOF_ITEMS: ProofItem[] = [
   {

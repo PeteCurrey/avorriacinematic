@@ -155,6 +155,30 @@ export interface ProspectQualificationResult {
   confidence: number;
 }
 
+
+export interface OutreachCopyResult {
+  subject: string;
+  body_text: string;
+  observation_used: string;
+}
+
+export type ReplyIntent =
+  | "interested"
+  | "not_interested"
+  | "unsubscribe"
+  | "out_of_office"
+  | "wrong_person"
+  | "question"
+  | "auto_reply"
+  | "hostile";
+
+export interface ReplyClassificationResult {
+  intent: ReplyIntent;
+  confidence: number;
+  requires_human: boolean;
+  summary: string;
+}
+
 export interface DeepResearchResult {
   company_summary: string;
   positioning: string;
@@ -263,5 +287,75 @@ export function validateDiscoveryResult(raw: unknown): BusinessDiscoveryResult {
     search_queries_used: Array.isArray(r.search_queries_used)
       ? (r.search_queries_used as unknown[]).map(String)
       : undefined,
+  };
+}
+
+/**
+ * Outreach copy is sent to a real business, so a malformed model response must
+ * fail loudly rather than produce an empty or truncated email.
+ */
+export function validateOutreachCopy(raw: unknown): OutreachCopyResult {
+  if (!raw || typeof raw !== "object") throw new Error("Outreach copy result is not an object");
+  const r = raw as Record<string, unknown>;
+
+  const subject = typeof r.subject === "string" ? r.subject.trim() : "";
+  const body = typeof r.body_text === "string" ? r.body_text.trim() : "";
+  const observation =
+    typeof r.observation_used === "string" ? r.observation_used.trim() : "";
+
+  // The prompt instructs the model to return an empty subject when the
+  // observations are too thin to say anything true. Treat that as a refusal to
+  // send, not as a malformed response.
+  if (!subject) {
+    throw new Error(
+      `Outreach copy declined: ${observation || "model returned no subject"}`
+    );
+  }
+  if (!body) throw new Error("Outreach copy has no body");
+  if (subject.length > 120) throw new Error(`Outreach subject too long (${subject.length} chars)`);
+
+  return { subject, body_text: body, observation_used: observation };
+}
+
+const REPLY_INTENTS: ReplyIntent[] = [
+  "interested",
+  "not_interested",
+  "unsubscribe",
+  "out_of_office",
+  "wrong_person",
+  "question",
+  "auto_reply",
+  "hostile",
+];
+
+/**
+ * An unrecognised or low-confidence classification is routed to a human rather
+ * than guessed at — the cost of a wrong "not_interested" is continuing to email
+ * someone who asked you to stop.
+ */
+export function validateReplyClassification(raw: unknown): ReplyClassificationResult {
+  if (!raw || typeof raw !== "object") throw new Error("Reply classification is not an object");
+  const r = raw as Record<string, unknown>;
+
+  const intent = REPLY_INTENTS.includes(r.intent as ReplyIntent)
+    ? (r.intent as ReplyIntent)
+    : null;
+  if (!intent) throw new Error(`Unrecognised reply intent: ${String(r.intent)}`);
+
+  const confidence =
+    typeof r.confidence === "number" && r.confidence >= 0 && r.confidence <= 1
+      ? r.confidence
+      : 0;
+
+  // These intents always need a person, regardless of what the model returned.
+  const alwaysHuman: ReplyIntent[] = ["interested", "question", "wrong_person", "hostile"];
+  const requiresHuman =
+    alwaysHuman.includes(intent) || r.requires_human === true || confidence < 0.7;
+
+  return {
+    intent,
+    confidence,
+    requires_human: requiresHuman,
+    summary: typeof r.summary === "string" ? r.summary : "",
   };
 }

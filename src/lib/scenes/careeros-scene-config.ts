@@ -1,4 +1,4 @@
-import { CareerOSChapterConfig, CareerTwinNode } from "@/types/careeros-scene";
+import type { CareerOSChapterConfig, CareerTwinNode } from "@/types/careeros-scene";
 
 export const CAREEROS_CHAPTERS: CareerOSChapterConfig[] = [
   { id: "human", label: "HUMAN ARRIVAL", startProgress: 0.0, endProgress: 0.12 },

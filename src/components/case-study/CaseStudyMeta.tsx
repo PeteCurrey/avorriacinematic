@@ -1,5 +1,5 @@
 import React from "react";
-import { CaseStudyConfig } from "@/types/case-study";
+import type { CaseStudyConfig } from "@/types/case-study";
 
 interface CaseStudyMetaProps {
   config: CaseStudyConfig;

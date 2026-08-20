@@ -1,5 +1,5 @@
 import React from "react";
-import { CaseStudyChapter } from "@/types/case-study";
+import type { CaseStudyChapter } from "@/types/case-study";
 
 export function QuoteChapter({ chapter }: { chapter: CaseStudyChapter }) {
   const quote = chapter.quote;

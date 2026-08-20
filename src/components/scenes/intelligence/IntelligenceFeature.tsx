@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { IntelligenceArticle } from "@/types/intelligence";
+import type { IntelligenceArticle } from "@/types/intelligence";
 import { CursorTrigger } from "@/providers/CursorContext";
 
 interface IntelligenceFeatureProps {

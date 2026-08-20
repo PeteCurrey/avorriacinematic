@@ -1,4 +1,4 @@
-import { SystemLeadRecord, SystemsDeliverable } from "@/types/systems-scene";
+import type { SystemLeadRecord, SystemsDeliverable } from "@/types/systems-scene";
 
 export const SYSTEMS_LEADS: SystemLeadRecord[] = [
   {

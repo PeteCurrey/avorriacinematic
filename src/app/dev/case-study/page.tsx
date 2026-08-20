@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { HeroMode, CaseStudyConfig } from "@/types/case-study";
+import type { HeroMode, CaseStudyConfig } from "@/types/case-study";
 import { DEV_SYNTHETIC_FIXTURE } from "@/lib/case-studies/fixture";
 import { CASE_STUDIES } from "@/lib/case-studies/registry";
 import { CaseStudyShell } from "@/components/case-study/CaseStudyShell";

@@ -1,4 +1,4 @@
-import { CaseStudyTheme } from "@/types/case-study";
+import type { CaseStudyTheme } from "@/types/case-study";
 
 /**
  * Maps a CaseStudyTheme into bounded CSS variables.

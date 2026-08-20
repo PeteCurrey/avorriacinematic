@@ -1,4 +1,4 @@
-import { SpatialProjectConfig } from "@/types/signal-gallery";
+import type { SpatialProjectConfig } from "@/types/signal-gallery";
 
 export const SIGNAL_GALLERY_PROJECTS: SpatialProjectConfig[] = [
   {

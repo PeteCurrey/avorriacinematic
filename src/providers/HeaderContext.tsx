@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useMemo, useCallback } from "react";
-import { HeaderState } from "@/types/theme";
+import type { HeaderState } from "@/types/theme";
 
 interface HeaderStateContextValue {
   headerState: HeaderState;

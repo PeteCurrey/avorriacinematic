@@ -1,4 +1,6 @@
-import { OpportunityBand, ProspectAssessment } from "@/types/admin";
+// Type-only: `import type` keeps this out of the emitted JS, which matters for
+// any runtime that strips types rather than bundling (and is correct anyway).
+import type { OpportunityBand, ProspectAssessment } from "@/types/admin";
 
 export interface ScoringWeights {
   websiteQualityGapWeight: number; // 0.25 (Lower existing website quality = higher Avorria opportunity)

@@ -1,4 +1,4 @@
-import { SceneConfig, SceneId } from "@/types/scene";
+import type { SceneConfig, SceneId } from "@/types/scene";
 
 export const HOMEPAGE_SCENES: SceneConfig[] = [
   {

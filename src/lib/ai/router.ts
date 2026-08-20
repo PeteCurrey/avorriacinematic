@@ -48,7 +48,7 @@ const DEFAULT_TASK_CONFIGS: Record<TaskKey, TaskDefaults> = {
   design_generation:      { provider: "anthropic", model: "claude-sonnet-5", webSearch: false, responseFormat: "text",        temperature: 0.7, maxTokens: 8192, timeoutSeconds: 120, maxRetries: 1 },
   visual_qa:              { provider: "anthropic", model: "claude-sonnet-5", webSearch: false, responseFormat: "json_object", temperature: 0.3, maxTokens: 4096, timeoutSeconds: 90,  maxRetries: 2 },
   // Phase 4 — Outreach
-  outreach_copy:          { provider: "openai", model: "gpt-4o",      webSearch: false, responseFormat: "text",        temperature: 0.5, maxTokens: 2000, timeoutSeconds: 45, maxRetries: 2 },
+  outreach_copy:          { provider: "openai", model: "gpt-4o",      webSearch: false, responseFormat: "json_object", temperature: 0.5, maxTokens: 2000, timeoutSeconds: 45, maxRetries: 2 },
   reply_classification:   { provider: "openai", model: "gpt-4o-mini", webSearch: false, responseFormat: "json_object", temperature: 0.1, maxTokens: 500,  timeoutSeconds: 20, maxRetries: 3 },
 };
 
@@ -260,6 +260,35 @@ function buildOpenAIMessages(task: TaskKey, payload: unknown): OpenAIMessage[] {
       return [
         { role: "system", content: PROMPTS.ADDITIONAL_RESEARCH_V1.system },
         { role: "user", content: PROMPTS.ADDITIONAL_RESEARCH_V1.userTemplate(business, existingAssessment) },
+      ];
+    }
+
+    case "outreach_copy": {
+      const { business, observations, step, previousSubjects } = p as {
+        business: Parameters<typeof PROMPTS.OUTREACH_COPY_V1.userTemplate>[0];
+        observations: Parameters<typeof PROMPTS.OUTREACH_COPY_V1.userTemplate>[1];
+        step: Parameters<typeof PROMPTS.OUTREACH_COPY_V1.userTemplate>[2];
+        previousSubjects?: string[];
+      };
+      return [
+        { role: "system", content: PROMPTS.OUTREACH_COPY_V1.system },
+        {
+          role: "user",
+          content: PROMPTS.OUTREACH_COPY_V1.userTemplate(
+            business,
+            observations,
+            step,
+            previousSubjects || []
+          ),
+        },
+      ];
+    }
+
+    case "reply_classification": {
+      const reply = p as Parameters<typeof PROMPTS.REPLY_CLASSIFICATION_V1.userTemplate>[0];
+      return [
+        { role: "system", content: PROMPTS.REPLY_CLASSIFICATION_V1.system },
+        { role: "user", content: PROMPTS.REPLY_CLASSIFICATION_V1.userTemplate(reply) },
       ];
     }
 

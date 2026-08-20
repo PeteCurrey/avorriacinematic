@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { SERVICES } from "@/content/services";
-import { ServiceSlug } from "@/types/content";
+import type { ServiceSlug } from "@/types/content";
 
 export function VisualServiceIndex() {
   const [activeSlug, setActiveSlug] = useState<ServiceSlug>("websites");

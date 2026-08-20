@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { WebGLCapabilities } from "@/types/webgl";
+import type { WebGLCapabilities } from "@/types/webgl";
 import { detectWebGLCapabilities } from "@/lib/webgl/capabilities";
 
 interface WebGLContextValue {

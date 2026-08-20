@@ -1,4 +1,4 @@
-import { CinematicMediaMetadata } from "@/types/media";
+import type { CinematicMediaMetadata } from "@/types/media";
 
 export function getProjectMediaPath(projectSlug: string, assetType: string, filename: string): string {
   return `/media/projects/${projectSlug}/${assetType}/${filename}`;

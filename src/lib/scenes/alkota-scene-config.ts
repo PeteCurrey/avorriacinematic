@@ -1,4 +1,4 @@
-import { AlkotaChapterConfig } from "@/types/alkota-scene";
+import type { AlkotaChapterConfig } from "@/types/alkota-scene";
 
 export const ALKOTA_CHAPTERS: AlkotaChapterConfig[] = [
   { id: "handoff", label: "HANDOFF / ARRIVAL", startProgress: 0.0, endProgress: 0.08 },

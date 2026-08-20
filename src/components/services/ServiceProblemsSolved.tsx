@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ProblemSolutionItem } from "@/types/content";
+import type { ProblemSolutionItem } from "@/types/content";
 
 interface ServiceProblemsSolvedProps {
   sectionEyebrow?: string;

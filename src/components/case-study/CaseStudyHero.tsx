@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { CaseStudyConfig } from "@/types/case-study";
+import type { CaseStudyConfig } from "@/types/case-study";
 
 interface CaseStudyHeroProps {
   config: CaseStudyConfig;

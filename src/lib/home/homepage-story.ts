@@ -1,4 +1,4 @@
-import { HomeSectionStory } from "@/types/home-story";
+import type { HomeSectionStory } from "@/types/home-story";
 
 export const HOME_SECTIONS: HomeSectionStory[] = [
   {
