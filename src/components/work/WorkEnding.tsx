@@ -6,11 +6,11 @@ export function WorkEnding() {
     <section className="py-24 sm:py-36 bg-avorria-black text-avorria-white">
       <div className="max-w-[1760px] mx-auto px-6 sm:px-12 lg:px-16">
         <div className="border border-avorria-line bg-avorria-surface/30 p-8 sm:p-16 lg:p-20 flex flex-col lg:flex-row lg:items-end justify-between gap-12">
-          <div className="space-y-6">
+          <div className="space-y-6 min-w-0">
             <span className="font-mono text-xs text-avorria-signal uppercase tracking-widest block">
               ENGAGEMENT // 2025
             </span>
-            <h2 className="display-xl font-display font-black uppercase tracking-tight text-avorria-white leading-none">
+            <h2 className="display-column text-avorria-white">
               HAVE SOMETHING<br />
               <span className="text-avorria-signal">IN MIND?</span>
             </h2>

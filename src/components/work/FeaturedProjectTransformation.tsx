@@ -48,9 +48,9 @@ export function FeaturedProjectTransformation({ project }: FeaturedProjectProps)
           <div className="lg:col-span-8">
             <Link
               href={`/work/${project.slug}`}
-              className="inline-block group-hover:text-avorria-signal transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-avorria-signal"
+              className="block max-w-full group-hover:text-avorria-signal transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-avorria-signal"
             >
-              <h2 className="display-xl font-display font-black uppercase tracking-tight text-avorria-white group-hover:text-avorria-signal transition-colors">
+              <h2 className="display-column text-avorria-white group-hover:text-avorria-signal transition-colors">
                 {project.title}
               </h2>
             </Link>

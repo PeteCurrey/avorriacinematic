@@ -132,7 +132,7 @@ export default function IntelligencePage() {
                     <span>{article.readTime}</span>
                   </div>
 
-                  <h3 className="display-md font-display font-black uppercase tracking-tight text-avorria-white hover:text-avorria-signal transition-colors">
+                  <h3 className="heading-lg text-avorria-white hover:text-avorria-signal transition-colors">
                     <Link href={article.href}>
                       {article.title}
                     </Link>

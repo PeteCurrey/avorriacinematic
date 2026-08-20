@@ -166,10 +166,11 @@ function WebWorkingArtefact() {
             <span className="w-2.5 h-2.5 rounded-full bg-avorria-line-strong" />
             <span className="w-2.5 h-2.5 rounded-full bg-avorria-line-strong" />
           </div>
-          <div className="flex items-center gap-2 px-3 py-1 bg-avorria-black border border-avorria-line/60 rounded text-[11px] font-mono text-avorria-muted">
-            <span className="text-avorria-signal">https://</span>alkotabikes.com/configure
+          <div className="flex items-center gap-2 px-3 py-1 min-w-0 bg-avorria-black border border-avorria-line/60 rounded text-[11px] font-mono text-avorria-muted truncate">
+            <span className="text-avorria-signal shrink-0">https://</span>
+            <span className="truncate">alkotabikes.com/configure</span>
           </div>
-          <div className="font-mono text-[10px] text-avorria-signal uppercase">
+          <div className="hidden sm:block font-mono text-[10px] text-avorria-signal uppercase shrink-0">
             LCP: 0.68s [100%]
           </div>
         </div>
