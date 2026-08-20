@@ -3,11 +3,12 @@
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import crypto from "crypto";
 import { 
   requireAdmin, 
   ADMIN_COOKIE_NAME, 
   DEFAULT_SUPERADMIN_EMAIL, 
-  DEFAULT_SUPERADMIN_PASS, 
+  getSuperadminPassword, 
   createSessionToken 
 } from "@/lib/admin/auth";
 import { 
@@ -29,11 +30,20 @@ export async function signInAdminAction(formData: FormData): Promise<void> {
   const email = (formData.get("email") as string || "").trim().toLowerCase();
   const password = formData.get("password") as string || "";
 
-  // Super Admin validation (Pete Currey default super_admin)
-  if (
-    email === DEFAULT_SUPERADMIN_EMAIL.toLowerCase() && 
-    password === DEFAULT_SUPERADMIN_PASS
-  ) {
+  // Super Admin validation (Pete Currey default super_admin).
+  // A missing configured password must reject every attempt — never treat an
+  // absent secret as "anything matches".
+  const expectedPassword = getSuperadminPassword();
+  const emailMatches = email === DEFAULT_SUPERADMIN_EMAIL.toLowerCase();
+  const passwordMatches =
+    Boolean(expectedPassword) &&
+    password.length === expectedPassword!.length &&
+    crypto.timingSafeEqual(
+      Buffer.from(password, "utf8"),
+      Buffer.from(expectedPassword!, "utf8")
+    );
+
+  if (emailMatches && passwordMatches) {
     const user: AdminUser = {
       id: "usr_pete_superadmin",
       email: DEFAULT_SUPERADMIN_EMAIL,
@@ -50,7 +60,10 @@ export async function signInAdminAction(formData: FormData): Promise<void> {
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       maxAge: 60 * 60 * 24 * 7, // 7 days
-      path: "/admin"
+      // Must cover /api/admin as well as /admin — a cookie scoped to "/admin"
+      // is never sent to /api/admin routes, so every admin API call would be
+      // rejected by the edge guard.
+      path: "/"
     });
 
     redirect("/admin");
@@ -64,7 +77,7 @@ export async function signInAdminAction(formData: FormData): Promise<void> {
  */
 export async function signOutAdminAction(): Promise<void> {
   const cookieStore = await cookies();
-  cookieStore.delete(ADMIN_COOKIE_NAME);
+  cookieStore.delete({ name: ADMIN_COOKIE_NAME, path: "/" });
   redirect("/admin/login");
 }
 

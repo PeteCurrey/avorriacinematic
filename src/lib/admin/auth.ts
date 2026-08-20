@@ -1,12 +1,45 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { AdminRole, AdminUser } from "@/types/admin";
+import { ADMIN_COOKIE_NAME, resolveSessionSecret } from "./session-constants";
 import crypto from "crypto";
 
-export const ADMIN_COOKIE_NAME = "avorria_admin_session";
-const SESSION_SECRET = process.env.ADMIN_SESSION_SECRET || "avorria-admin-session-secret-2026-superkey-secure";
+export { ADMIN_COOKIE_NAME };
+
+const IS_PRODUCTION = process.env.NODE_ENV === "production";
+
+/**
+ * Session signing secret, shared with the Edge guard in middleware.ts so both
+ * accept exactly the same tokens.
+ */
+function getSessionSecret(): string {
+  const secret = resolveSessionSecret();
+  if (!secret) {
+    throw new Error(
+      "ADMIN_SESSION_SECRET is not set. Refusing to sign admin sessions with a " +
+        "default secret in production — anyone with access to the source could " +
+        "forge an admin session."
+    );
+  }
+  return secret;
+}
+
 export const DEFAULT_SUPERADMIN_EMAIL = process.env.ADMIN_SUPERADMIN_EMAIL || "pete@avorria.com";
-export const DEFAULT_SUPERADMIN_PASS = process.env.ADMIN_SUPERADMIN_PASSWORD || "avorria2026!";
+
+/**
+ * Development-only credentials. In production the password MUST come from the
+ * environment; there is no fallback, because a password committed to source
+ * is not a password.
+ */
+export function getSuperadminPassword(): string | null {
+  const configured = process.env.ADMIN_SUPERADMIN_PASSWORD;
+  if (configured) return configured;
+  // Unchanged local-development convenience. Production has no fallback.
+  return IS_PRODUCTION ? null : "avorria2026!";
+}
+
+/** @deprecated Use getSuperadminPassword() — this has no production fallback. */
+export const DEFAULT_SUPERADMIN_PASS = getSuperadminPassword() || "";
 
 export interface AdminSession {
   user: AdminUser;
@@ -14,7 +47,7 @@ export interface AdminSession {
 }
 
 export function signPayload(payloadStr: string): string {
-  const hmac = crypto.createHmac("sha256", SESSION_SECRET);
+  const hmac = crypto.createHmac("sha256", getSessionSecret());
   hmac.update(payloadStr);
   return hmac.digest("hex");
 }
@@ -33,8 +66,11 @@ export function verifySessionToken(token: string): AdminSession | null {
     const { payload, signature } = JSON.parse(raw);
     const expectedSig = signPayload(payload);
     
-    // Constant-time comparison to prevent timing attacks
-    if (!crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSig))) {
+    // Constant-time comparison to prevent timing attacks. Lengths must match
+    // first: timingSafeEqual throws on differing lengths.
+    const sigBuf = Buffer.from(String(signature), "utf8");
+    const expBuf = Buffer.from(expectedSig, "utf8");
+    if (sigBuf.length !== expBuf.length || !crypto.timingSafeEqual(sigBuf, expBuf)) {
       return null;
     }
 
