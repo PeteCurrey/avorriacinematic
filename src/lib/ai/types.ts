@@ -31,8 +31,9 @@ export const OPENAI_MODELS = {
 } as const;
 
 export const ANTHROPIC_MODELS = {
-  SONNET: "claude-sonnet-4-5",
-  OPUS:   "claude-opus-4-5",
+  SONNET: "claude-sonnet-5",
+  OPUS:   "claude-opus-5",
+  HAIKU:  "claude-haiku-4-5-20251001",
 } as const;
 
 export interface AITaskConfig {

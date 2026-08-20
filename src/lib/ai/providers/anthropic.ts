@@ -22,8 +22,8 @@ export interface AnthropicCallResult {
   estimatedCost: number;
 }
 
-const COST_INPUT: Record<string, number> = { "claude-sonnet-4-5": 0.000003, "claude-opus-4-5": 0.000015 };
-const COST_OUTPUT: Record<string, number> = { "claude-sonnet-4-5": 0.000015, "claude-opus-4-5": 0.000075 };
+const COST_INPUT: Record<string, number> = { "claude-sonnet-5": 0.000003, "claude-opus-5": 0.000015, "claude-haiku-4-5-20251001": 0.000001 };
+const COST_OUTPUT: Record<string, number> = { "claude-sonnet-5": 0.000015, "claude-opus-5": 0.000075, "claude-haiku-4-5-20251001": 0.000005 };
 
 export async function callAnthropic(params: AnthropicCallParams): Promise<AnthropicCallResult> {
   const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -78,8 +78,8 @@ export interface AnthropicConnectionStatus { connected: boolean; model?: string;
 export async function checkAnthropicConnection(): Promise<AnthropicConnectionStatus> {
   if (!process.env.ANTHROPIC_API_KEY) return { connected: false, error: "ANTHROPIC_API_KEY not configured" };
   try {
-    const r = await callAnthropic({ model: "claude-sonnet-4-5", messages: [{ role: "user", content: "Say ok" }], maxTokens: 10, timeoutMs: 15000 });
-    return r.content ? { connected: true, model: "claude-sonnet-4-5" } : { connected: false, error: "Empty response" };
+    const r = await callAnthropic({ model: "claude-sonnet-5", messages: [{ role: "user", content: "Say ok" }], maxTokens: 10, timeoutMs: 15000 });
+    return r.content ? { connected: true, model: "claude-sonnet-5" } : { connected: false, error: "Empty response" };
   } catch (err) {
     const msg = err instanceof Error ? err.message : "Unknown error";
     return { connected: false, error: msg.replace(/sk-ant-[a-zA-Z0-9\-_]+/g, "[REDACTED]") };

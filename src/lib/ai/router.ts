@@ -44,9 +44,9 @@ const DEFAULT_TASK_CONFIGS: Record<TaskKey, TaskDefaults> = {
   additional_research:    { provider: "openai", model: "gpt-4o",      webSearch: true,  responseFormat: "json_object", temperature: 0.3, maxTokens: 4096, timeoutSeconds: 90, maxRetries: 2 },
   deep_research:          { provider: "openai", model: "gpt-4o",      webSearch: true,  responseFormat: "json_object", temperature: 0.3, maxTokens: 6000, timeoutSeconds: 120, maxRetries: 1 },
   // Phase 3 — Anthropic Creative Intelligence (not active in Phase 2)
-  creative_direction:     { provider: "anthropic", model: "claude-sonnet-4-5", webSearch: false, responseFormat: "json_object", temperature: 0.7, maxTokens: 8192, timeoutSeconds: 120, maxRetries: 1 },
-  design_generation:      { provider: "anthropic", model: "claude-sonnet-4-5", webSearch: false, responseFormat: "text",        temperature: 0.7, maxTokens: 8192, timeoutSeconds: 120, maxRetries: 1 },
-  visual_qa:              { provider: "anthropic", model: "claude-sonnet-4-5", webSearch: false, responseFormat: "json_object", temperature: 0.3, maxTokens: 4096, timeoutSeconds: 90,  maxRetries: 2 },
+  creative_direction:     { provider: "anthropic", model: "claude-sonnet-5", webSearch: false, responseFormat: "json_object", temperature: 0.7, maxTokens: 8192, timeoutSeconds: 120, maxRetries: 1 },
+  design_generation:      { provider: "anthropic", model: "claude-sonnet-5", webSearch: false, responseFormat: "text",        temperature: 0.7, maxTokens: 8192, timeoutSeconds: 120, maxRetries: 1 },
+  visual_qa:              { provider: "anthropic", model: "claude-sonnet-5", webSearch: false, responseFormat: "json_object", temperature: 0.3, maxTokens: 4096, timeoutSeconds: 90,  maxRetries: 2 },
   // Phase 4 — Outreach
   outreach_copy:          { provider: "openai", model: "gpt-4o",      webSearch: false, responseFormat: "text",        temperature: 0.5, maxTokens: 2000, timeoutSeconds: 45, maxRetries: 2 },
   reply_classification:   { provider: "openai", model: "gpt-4o-mini", webSearch: false, responseFormat: "json_object", temperature: 0.1, maxTokens: 500,  timeoutSeconds: 20, maxRetries: 3 },
