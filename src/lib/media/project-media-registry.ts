@@ -11,7 +11,10 @@ export type MediaSourceStatus =
   | "APPROVED_SECONDARY"
   | "SOURCE_VERIFIED"
   | "CANDIDATE"
-  | "MISSING_SOURCE";
+  | "MISSING_SOURCE"
+  /** A file exists but does not depict the project (e.g. a capture run that
+   *  landed on a login wall). Never render these on a public surface. */
+  | "WITHHELD";
 
 export interface ProjectMediaAsset {
   id: string;
@@ -186,9 +189,9 @@ export const PROJECT_MEDIA_REGISTRY: ProjectMediaAsset[] = [
     sourcePath: "src/app/page.tsx",
     sourceRoute: "/",
     mediaType: "UI_CAPTURE",
-    sourceStatus: "SOURCE_VERIFIED",
-    productionApproved: true,
-    notes: "Authentic desktop homepage capture (1920x1080) of ForecourIQ dealer valuation platform."
+    sourceStatus: "WITHHELD",
+    productionApproved: false,
+    notes: "WITHHELD FROM PRODUCTION. The capture run hit Vercel deployment protection, so this file is the Vercel login screen, not ForecourIQ. Re-capture with preview protection disabled (or against a public URL) before restoring this project to the homepage reel and work wall."
   },
   {
     id: "forecour-iq-homepage-mobile",
@@ -198,9 +201,9 @@ export const PROJECT_MEDIA_REGISTRY: ProjectMediaAsset[] = [
     sourcePath: "src/app/page.tsx",
     sourceRoute: "/",
     mediaType: "UI_CAPTURE",
-    sourceStatus: "SOURCE_VERIFIED",
-    productionApproved: true,
-    notes: "Authentic mobile homepage capture (390x844) of ForecourIQ dealer valuation platform."
+    sourceStatus: "WITHHELD",
+    productionApproved: false,
+    notes: "WITHHELD FROM PRODUCTION. Same Vercel login screen as the desktop capture — see above."
   },
 
   // ── AMPLIOS (https://amplios.co.uk/) ────────────────────────────────

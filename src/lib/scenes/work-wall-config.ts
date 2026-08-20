@@ -27,18 +27,6 @@ export const CLIENT_WORK_PROJECTS: WorkWallProject[] = [
     mediaBackground: "#080808"
   },
   {
-    id: "forecour-iq",
-    slug: "forecour-iq",
-    number: "SELECTED",
-    title: "ForecourIQ",
-    sector: "AUTOMOTIVE VALUATION",
-    capability: "DEALER VALUATION ENGINE",
-    imagePath: "/media/projects/forecour-iq/interface/homepage-desktop.png",
-    caseStudyAvailable: false,
-    objectFit: "cover",
-    objectPosition: "center top"
-  },
-  {
     id: "aesuk",
     slug: "aesuk",
     number: "SELECTED",

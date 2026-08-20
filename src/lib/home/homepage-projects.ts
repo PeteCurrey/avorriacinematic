@@ -35,23 +35,7 @@ export const HOMEPAGE_FEATURED_PROJECTS: HomepageProjectFeatureDef[] = [
     }
   },
   {
-    projectIndex: "002 / FORECOURIQ",
-    slug: "forecour-iq",
-    relationship: "SELECTED WORK",
-    headline: "Automated appraisal and valuation intelligence for UK dealerships.",
-    capabilitiesLine: "AUTOMOTIVE VALUATION / APPRAISAL ENGINE / DEALER PLATFORM",
-    desktopMedia: "/media/projects/forecour-iq/interface/homepage-desktop.png",
-    mobileMedia: "/media/projects/forecour-iq/interface/homepage-mobile.png",
-    caseStudyAvailable: false,
-    fitConfig: {
-      fit: "cover",
-      desktopObjectPosition: "center top",
-      mobileObjectPosition: "center top",
-      background: "#080808"
-    }
-  },
-  {
-    projectIndex: "003 / AMPLIOS",
+    projectIndex: "002 / AMPLIOS",
     slug: "amplios",
     relationship: "AVORRIA VENTURE",
     headline: "The UK's definitive engineering platform for serious self-build conversions.",
@@ -67,7 +51,7 @@ export const HOMEPAGE_FEATURED_PROJECTS: HomepageProjectFeatureDef[] = [
     }
   },
   {
-    projectIndex: "004 / CAREEROS",
+    projectIndex: "003 / CAREEROS",
     slug: "careeros",
     relationship: "AVORRIA VENTURE",
     headline: "Human-centred career intelligence.",
@@ -83,7 +67,7 @@ export const HOMEPAGE_FEATURED_PROJECTS: HomepageProjectFeatureDef[] = [
     }
   },
   {
-    projectIndex: "005 / NESTIQ",
+    projectIndex: "004 / NESTIQ",
     slug: "nestiq",
     relationship: "AVORRIA VENTURE",
     headline: "Property intelligence built around better decisions.",
@@ -99,7 +83,7 @@ export const HOMEPAGE_FEATURED_PROJECTS: HomepageProjectFeatureDef[] = [
     }
   },
   {
-    projectIndex: "006 / ENTIREFM",
+    projectIndex: "005 / ENTIREFM",
     slug: "entirefm",
     relationship: "CLIENT WORK",
     headline: "Digital operations for facilities that never stop.",

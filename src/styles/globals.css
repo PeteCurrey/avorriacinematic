@@ -82,3 +82,13 @@ body.scroll-locked {
     height: var(--scene-h-mobile) !important;
   }
 }
+
+/* Hero scroll cue — a slow, restrained pull downward. */
+@keyframes avorria-cue {
+  0%, 100% { transform: scaleX(0.35); opacity: 0.45; }
+  50%      { transform: scaleX(1);    opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [style*="avorria-cue"] { animation: none !important; transform: scaleX(1) !important; }
+}

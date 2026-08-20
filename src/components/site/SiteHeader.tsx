@@ -43,6 +43,20 @@ export function SiteHeader() {
       } ${isImmersive ? "opacity-40 hover:opacity-100" : "opacity-100"}`}
       role="banner"
     >
+      {/*
+        Legibility scrim. The homepage header stays transparent to preserve the
+        cinematic frame, which meant the nav became unreadable whenever a bright
+        project screenshot scrolled beneath it. A soft top-down gradient keeps
+        the wordmark and nav legible over any media without reading as a
+        chrome bar. Suppressed once the solid inner-page treatment takes over.
+      */}
+      {!(hasScrolled && !isHomepage) && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 h-[160%] -z-10 bg-gradient-to-b from-avorria-black/85 via-avorria-black/45 to-transparent"
+        />
+      )}
+
       <div className="max-w-[1760px] mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between">
         {/* Wordmark */}
         <Link

@@ -34,6 +34,17 @@
   --space-5xl: 9rem;
   --space-cinematic: clamp(5rem, 12vh, 14rem);
 
+  /* Cinematic Safe Frame — the single source of truth for scene insets.
+     Used by SceneSafeFrame and by any absolutely-positioned scene overlay,
+     because `position:absolute; inset:0` resolves against the padding box
+     and would otherwise cancel the frame's padding. */
+  --safe-top: clamp(72px, 9vh, 104px);
+  --safe-bottom: clamp(48px, 7vh, 72px);
+  --safe-x: clamp(24px, 4vw, 72px);
+
+  /* Global fixed header height — sections must clear this. */
+  --header-h: clamp(64px, 8vh, 88px);
+
   /* Layout */
   --grid-margin: clamp(1.25rem, 5vw, 5.5rem);
   --grid-gutter: clamp(1rem, 2.5vw, 2.5rem);

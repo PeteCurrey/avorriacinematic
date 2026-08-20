@@ -10,6 +10,14 @@ interface HomepageProjectFeatureProps {
   containerRef?: React.RefObject<HTMLDivElement | null>;
   mediaInnerRef?: React.RefObject<HTMLDivElement | null>;
   isPrimaryPriority?: boolean;
+  /**
+   * Render this feature already visible rather than starting at opacity 0.
+   * The reel pins with `start: "top top"`, so the first project occupies a
+   * full-viewport frame at scene progress 0 — starting it transparent shows a
+   * black screen until the visitor scrolls, and leaves the frame blank
+   * entirely if JS has not run yet.
+   */
+  isInitiallyVisible?: boolean;
 }
 
 /**
@@ -26,11 +34,14 @@ export function HomepageProjectFeature({
   containerRef,
   mediaInnerRef,
   isPrimaryPriority = false,
+  isInitiallyVisible = false,
 }: HomepageProjectFeatureProps) {
   return (
     <article
       ref={containerRef}
-      className="absolute inset-0 w-full h-full pointer-events-none flex flex-col justify-between p-4 sm:p-8 lg:p-12 opacity-0"
+      className={`absolute inset-0 w-full h-full pointer-events-none flex flex-col justify-between p-4 sm:p-8 lg:p-12 ${
+        isInitiallyVisible ? "opacity-100" : "opacity-0"
+      }`}
       aria-label={`${project.projectIndex} — ${project.relationship}`}
     >
       {/* 1. Region A: Project Meta (Top) */}

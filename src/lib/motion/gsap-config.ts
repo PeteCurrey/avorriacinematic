@@ -17,9 +17,15 @@ export function initGsap() {
     nullTargetWarn: false
   });
 
+  // `resize` MUST stay in autoRefreshEvents. Every cinematic scene derives its
+  // scroll distance from viewport height (100dvh sticky inside a Nvh section);
+  // without a refresh on resize those measurements go stale and every pinned
+  // scene desynchronises from its trigger as soon as the window is resized.
+  // `ignoreMobileResize` still suppresses the mobile URL-bar show/hide, which
+  // is the resize we actually want to ignore.
   ScrollTrigger.config({
     ignoreMobileResize: true,
-    autoRefreshEvents: "visibilitychange,DOMContentLoaded,load"
+    autoRefreshEvents: "visibilitychange,DOMContentLoaded,load,resize"
   });
 
   isRegistered = true;

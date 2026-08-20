@@ -59,6 +59,10 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Allows a second Next process (e.g. a dev server used for visual QA) to run
+  // against its own build output without clobbering the .next directory that a
+  // running `next start` is serving from. Unset in normal use.
+  ...(process.env.NEXT_DIST_DIR ? { distDir: process.env.NEXT_DIST_DIR } : {}),
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: []

@@ -11,17 +11,21 @@ import { GlobalTransitionLayer } from "@/components/site/GlobalTransitionLayer";
 import { DebugGrid } from "@/components/cinematic/DebugGrid";
 import { generatePageMetadata, getOrganizationSchema, getWebSiteSchema } from "@/lib/seo/metadata";
 
+// Syne and DM Sans are variable fonts. Requesting discrete `weight` values
+// pulls static instances and any weight outside that set silently falls back
+// to a metrically different face — which is what made `font-black` (900)
+// render ~47% wider than Syne at 700. Loading the variable axis instead means
+// every weight in the family's range renders as the real typeface, and a
+// request above the axis maximum clamps to it rather than falling back.
 const fontDisplay = Syne({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["500", "600", "700", "800"],
   display: "swap"
 });
 
 const fontBody = DM_Sans({
   subsets: ["latin"],
   variable: "--font-body",
-  weight: ["400", "500", "600"],
   display: "swap"
 });
 

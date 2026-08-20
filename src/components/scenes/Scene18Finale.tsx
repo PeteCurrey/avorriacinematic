@@ -1,106 +1,164 @@
 "use client";
 import React, { useRef } from "react";
-import { FinaleSignal } from "./finale/FinaleSignal";
-import { FinaleQuestion } from "./finale/FinaleQuestion";
-import { FinaleProposition } from "./finale/FinaleProposition";
-import { FinaleActions } from "./finale/FinaleActions";
+import Link from "next/link";
+import { useSceneEntrance } from "@/lib/motion/hooks";
+import { gsap } from "@/lib/motion/gsap-config";
+import { useReducedMotion } from "@/providers/ReducedMotionProvider";
+import { FINALE_CONFIG } from "@/lib/scenes/finale-config";
 import { FinaleFallback } from "./finale/FinaleFallback";
 import { CinematicSceneViewport } from "./CinematicSceneViewport";
 import { SceneSafeFrame } from "./SceneSafeFrame";
 import { getSceneConfig } from "./registry";
 
 /**
- * SCENE 18 — FINALE
+ * SCENE 08 — FINALE
  *
- * READABILITY & INTERACTION TIMING:
- * - 0.00 – 0.15: Signal & Question reveal
- * - 0.15 – 0.35: Proposition resolves
- * - 0.35 – 0.95: SUBSTANTIAL STABLE INTERACTION HOLD (60% stable hold for CTAs and email)
+ * A single composition inside the SceneSafeFrame: marker row, centre block,
+ * action row. Every part is a flow child, so the frame's insets govern the
+ * whole scene and nothing can collide with the fixed header.
+ *
+ * Display sizing note: Syne gets substantially wider at its heavy weights
+ * (~1.14em per uppercase character at 800, against ~0.70em at 700). The
+ * proposition clamp is calibrated against the longest line, "SOMETHING" —
+ * 9 characters — so it always fits the safe frame's inner width.
+ *
+ * TIMING
+ * The entrance is on-enter (see useSceneEntrance), not scroll-scrubbed, so the
+ * finale is composed by the time it pins rather than fading up from a black
+ * frame. Once entered it holds stable for the scene's full scroll distance.
  */
 export function Scene18Finale() {
   const config = getSceneConfig("scene-18-finale")!;
 
+  const sceneRef = useRef<HTMLDivElement>(null);
   const signalLineRef = useRef<HTMLDivElement>(null);
   const questionRef = useRef<HTMLDivElement>(null);
   const propositionRef = useRef<HTMLDivElement>(null);
   const actionsRef = useRef<HTMLDivElement>(null);
 
-  const buildTimeline = (timeline: gsap.core.Timeline) => {
-    timeline.addLabel("entry", 0);
-    timeline.addLabel("signal", 0.04);
-    timeline.addLabel("question", 0.12);
-    timeline.addLabel("proposition", 0.22);
-    timeline.addLabel("actions", 0.32);
-    timeline.addLabel("hold", 0.35);
+  const { effectiveReducedMotion } = useReducedMotion();
 
-    if (signalLineRef.current) {
-      timeline.fromTo(
+  // Entrance fires as the finale comes into view, so the scene is composed
+  // rather than blank the moment it pins to the viewport.
+  useSceneEntrance(
+    (tl) => {
+      tl.fromTo(
         signalLineRef.current,
-        { width: "0%", opacity: 0 },
-        { width: "100%", opacity: 1, duration: 0.08 },
-        0.04
-      );
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.9, ease: "expo.out" },
+        0
+      )
+        .fromTo(
+          questionRef.current,
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+          0.15
+        )
+        .fromTo(
+          propositionRef.current,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.9, ease: "expo.out" },
+          0.3
+        )
+        .fromTo(
+          actionsRef.current,
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
+          0.6
+        );
+    },
+    sceneRef,
+    {
+      reducedMotion: effectiveReducedMotion,
+      start: "top 75%",
+      onReducedMotion: () => {
+        gsap.set(
+          [
+            signalLineRef.current,
+            questionRef.current,
+            propositionRef.current,
+            actionsRef.current,
+          ].filter(Boolean),
+          { opacity: 1, y: 0, scaleX: 1 }
+        );
+      },
     }
+  );
 
-    if (questionRef.current) {
-      timeline.fromTo(
-        questionRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.08 },
-        0.12
-      );
-    }
-
-    if (propositionRef.current) {
-      timeline.fromTo(
-        propositionRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.08 },
-        0.22
-      );
-    }
-
-    // Actions CTA arrives early at 0.32 and holds stable through 1.00
-    if (actionsRef.current) {
-      timeline.fromTo(
-        actionsRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.08 },
-        0.32
-      );
-    }
-  };
+  // Scrubbed timeline intentionally left empty: the finale is the last chapter
+  // and holds stable for its full scroll distance. Entrance is on-enter above.
+  const buildTimeline = (_timeline: gsap.core.Timeline) => {};
 
   return (
     <CinematicSceneViewport
       config={config}
-      sceneIndex={18}
+      sceneIndex={8}
       fallback={<FinaleFallback />}
       buildTimeline={buildTimeline}
     >
-      <SceneSafeFrame>
-        {/* Semantic Accessibility Heading */}
+      <SceneSafeFrame ref={sceneRef}>
         <h2 className="sr-only">
           Start a Project — Connect with Avorria Engineering Studio
         </h2>
 
-        {/* Top Minimal Scene Marker */}
-        <div className="flex items-center justify-between font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet z-30">
-          <span className="text-avorria-signal">18 / FINALE</span>
+        {/* Marker row */}
+        <div className="w-full flex items-center justify-between font-mono text-[10px] sm:text-xs uppercase tracking-widest">
+          <span className="text-avorria-signal">08 / FINALE</span>
           <span className="text-avorria-white">ENGAGEMENT</span>
         </div>
 
-        {/* Phase A: Signal Point */}
-        <FinaleSignal lineRef={signalLineRef} />
+        {/* Centre block — question, signal rule, proposition */}
+        <div className="w-full my-auto flex flex-col gap-6 sm:gap-8 py-6">
+          <div ref={questionRef} className="opacity-0">
+            <span className="block font-mono text-[10px] sm:text-xs text-avorria-signal uppercase tracking-widest mb-3">
+              {"// "}HAVE SOMETHING AMBITIOUS IN MIND?
+            </span>
+          </div>
 
-        {/* Phase B: Question & Proposition */}
-        <div className="flex flex-col gap-6 my-auto max-w-4xl">
-          <FinaleQuestion containerRef={questionRef} />
-          <FinaleProposition containerRef={propositionRef} />
+          {/* Signal rule — draws outward from the left */}
+          <div
+            ref={signalLineRef}
+            className="w-full h-[1px] bg-avorria-signal origin-left opacity-0 shadow-[0_0_8px_rgba(200,241,53,0.45)]"
+            style={{ willChange: "transform, opacity" }}
+            aria-hidden="true"
+          />
+
+          <div ref={propositionRef} className="opacity-0">
+            <p
+              className="font-display font-extrabold uppercase tracking-tight leading-[0.88] text-avorria-white"
+              style={{ fontSize: "clamp(2rem, 8.5vw, 9.5rem)" }}
+            >
+              BUILD<br />
+              SOMETHING<br />
+              <span className="text-avorria-signal">{FINALE_CONFIG.emphasisText}</span>
+            </p>
+          </div>
         </div>
 
-        {/* Phase C: Interaction CTA & Direct Contact */}
-        <FinaleActions containerRef={actionsRef} />
+        {/* Action row */}
+        <div ref={actionsRef} className="w-full opacity-0">
+          <div className="w-full flex flex-col md:flex-row md:items-end justify-between gap-6 border-t border-avorria-line pt-6 sm:pt-8">
+            <Link
+              href={FINALE_CONFIG.primaryCtaHref}
+              className="group inline-flex items-center gap-4 font-display font-extrabold uppercase tracking-tight text-avorria-white hover:text-avorria-signal transition-colors text-xl sm:text-3xl lg:text-4xl"
+            >
+              <span>{FINALE_CONFIG.primaryCtaText}</span>
+              <span className="inline-block transition-transform duration-300 group-hover:translate-x-3 text-avorria-signal">
+                →
+              </span>
+            </Link>
+
+            <div className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-muted flex flex-wrap items-center gap-x-3 gap-y-1">
+              <span>OR EMAIL DIRECTLY //</span>
+              <a
+                href={`mailto:${FINALE_CONFIG.contactEmail}`}
+                className="text-avorria-white hover:text-avorria-signal border-b border-avorria-line hover:border-avorria-signal pb-0.5 transition-colors normal-case"
+              >
+                {FINALE_CONFIG.contactEmail}
+              </a>
+            </div>
+          </div>
+        </div>
       </SceneSafeFrame>
     </CinematicSceneViewport>
   );

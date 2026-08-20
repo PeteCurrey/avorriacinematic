@@ -69,24 +69,31 @@ export function HomeCapabilitiesShowcase() {
       const container = refs[i]?.current;
       if (!container) return;
 
-      const enterStart = i === 0 ? 0 : i * windowSize;
-      const enterEnd = i === 0 ? 0.03 : i * windowSize + 0.03;
+      const enterStart = i * windowSize;
+      const enterEnd = i * windowSize + 0.03;
       const exitStart = i === count - 1 ? 0.97 : (i + 1) * windowSize - 0.03;
       const exitEnd = (i + 1) * windowSize;
 
-      // Entrance: autoAlpha 0 -> 1 and pointer-events activation
-      timeline.fromTo(
-        container,
-        { autoAlpha: 0, y: 15, pointerEvents: "none" },
-        {
-          autoAlpha: 1,
-          y: 0,
-          pointerEvents: "auto",
-          duration: enterEnd - enterStart,
-          ease: "power2.out"
-        },
-        enterStart
-      );
+      if (i === 0) {
+        // The first chapter must be fully composed at progress 0. The section
+        // pins with `start: "top top"`, so progress 0 is a full-viewport frame
+        // — fading chapter one IN from there renders a black screen at the
+        // exact moment the scene takes over the viewport.
+        timeline.set(container, { autoAlpha: 1, y: 0, pointerEvents: "auto" }, 0);
+      } else {
+        timeline.fromTo(
+          container,
+          { autoAlpha: 0, y: 15, pointerEvents: "none" },
+          {
+            autoAlpha: 1,
+            y: 0,
+            pointerEvents: "auto",
+            duration: enterEnd - enterStart,
+            ease: "power2.out"
+          },
+          enterStart
+        );
+      }
 
       // Exit: autoAlpha 1 -> 0 and pointer-events deactivation
       timeline.to(
@@ -196,6 +203,7 @@ export function HomeCapabilitiesShowcase() {
             capability={capability}
             containerRef={refs[idx]}
             visual={visuals[idx]}
+            isInitiallyVisible={idx === 0}
           />
         ))}
       </SceneSafeFrame>

@@ -11,8 +11,8 @@ const SHOWCASE_CONFIG: SceneConfig = {
   index: 2,
   label: "SELECTED WORK SHOWCASE",
   chapter: "SHOWCASE",
-  minHeight: "700vh",
-  mobileHeight: "640svh",
+  minHeight: "580vh",
+  mobileHeight: "530svh",
   mobileSceneClass: "C",
   bgMode: "black",
   pinningEligibility: true,
@@ -26,15 +26,16 @@ const SHOWCASE_CONFIG: SceneConfig = {
 /**
  * HOME SELECTED WORK SHOWCASE
  *
- * 700vh Film-Reel Showcase (640svh mobile) with 6 equal windows:
- * - 01 / Alkota Bikes (0.00 – 0.17)
- * - 02 / ForecourIQ   (0.17 – 0.33)
- * - 03 / Amplios      (0.33 – 0.50)
- * - 04 / CareerOS     (0.50 – 0.67)
- * - 05 / NestIQ       (0.67 – 0.83)
- * - 06 / EntireFM     (0.83 – 1.00)
+ * 580vh Film-Reel Showcase (530svh mobile) with 5 equal windows:
+ * - 01 / Alkota Bikes (0.00 – 0.20)
+ * - 02 / Amplios      (0.20 – 0.40)
+ * - 03 / CareerOS     (0.40 – 0.60)
+ * - 04 / NestIQ       (0.60 – 0.80)
+ * - 05 / EntireFM     (0.80 – 1.00)
  *
- * Each project enjoys ~95vh of physical stable hold time inside the canonical aperture.
+ * Each project holds for ~95vh inside the canonical aperture. Windows are
+ * derived from the project count, so the reel restays balanced if the
+ * selection changes.
  */
 export function HomeSelectedWorkShowcase() {
   const p1Ref = useRef<HTMLDivElement>(null);
@@ -54,22 +55,28 @@ export function HomeSelectedWorkShowcase() {
       const container = refs[i]?.current;
       if (!container) return;
 
-      const enterStart = i === 0 ? 0 : i * windowSize - 0.015;
-      const enterEnd = i === 0 ? 0.02 : i * windowSize + 0.015;
+      const enterStart = i * windowSize - 0.015;
+      const enterEnd = i * windowSize + 0.015;
       const exitStart = i === count - 1 ? 0.98 : (i + 1) * windowSize - 0.015;
       const exitEnd = i === count - 1 ? 1.0 : (i + 1) * windowSize + 0.015;
 
-      // Entrance
-      timeline.fromTo(
-        container,
-        { opacity: 0 },
-        {
-          opacity: 1,
-          duration: enterEnd - enterStart,
-          ease: "power2.out"
-        },
-        enterStart
-      );
+      if (i === 0) {
+        // The reel pins with `start: "top top"`, so progress 0 is already a
+        // full-viewport frame. Fading the first project in from there shows a
+        // black screen at the moment the scene takes the viewport.
+        timeline.set(container, { opacity: 1 }, 0);
+      } else {
+        timeline.fromTo(
+          container,
+          { opacity: 0 },
+          {
+            opacity: 1,
+            duration: enterEnd - enterStart,
+            ease: "power2.out"
+          },
+          enterStart
+        );
+      }
 
       // Exit
       timeline.to(
@@ -102,6 +109,7 @@ export function HomeSelectedWorkShowcase() {
             project={project}
             containerRef={refs[idx]}
             isPrimaryPriority={idx === 0}
+            isInitiallyVisible={idx === 0}
           />
         ))}
       </div>

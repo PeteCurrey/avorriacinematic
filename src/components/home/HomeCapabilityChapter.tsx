@@ -8,6 +8,13 @@ interface HomeCapabilityChapterProps {
   capability: CapabilityDefinition;
   containerRef?: React.RefObject<HTMLDivElement | null>;
   visual?: React.ReactNode;
+  /**
+   * Render this chapter already visible rather than starting hidden. The
+   * showcase pins with `start: "top top"`, so chapter one occupies a
+   * full-viewport frame at scene progress 0 — starting it hidden shows a
+   * black screen until the visitor scrolls.
+   */
+  isInitiallyVisible?: boolean;
 }
 
 /**
@@ -95,7 +102,15 @@ export function SearchTopologyVisual() {
       {/* Center Graph Canvas */}
       <div className="relative flex-1 my-3 border border-white/10 bg-white/[0.02] p-4 flex items-center justify-center">
         {/* SVG Edges */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 400 200">
+        {/* preserveAspectRatio="none" so the edges stretch to the panel and
+            actually terminate at the corner nodes. With the default
+            (xMidYMid meet) the 400x200 viewBox letterboxes inside the panel
+            and the edges stop short of the labels they connect. */}
+        <svg
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          viewBox="0 0 400 200"
+          preserveAspectRatio="none"
+        >
           <line x1="200" y1="100" x2="100" y2="50" stroke="#C8F135" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.6" />
           <line x1="200" y1="100" x2="300" y2="50" stroke="#C8F135" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.6" />
           <line x1="200" y1="100" x2="100" y2="150" stroke="#38BDF8" strokeWidth="1.5" opacity="0.4" />
@@ -211,11 +226,16 @@ export function HomeCapabilityChapter({
   capability,
   containerRef,
   visual,
+  isInitiallyVisible = false,
 }: HomeCapabilityChapterProps) {
   return (
     <article
       ref={containerRef}
-      className="absolute inset-0 w-full h-full flex flex-col justify-between pointer-events-none select-none opacity-0 invisible"
+      className={`absolute inset-0 w-full h-full pt-[var(--safe-top)] pb-[var(--safe-bottom)] px-[var(--safe-x)] flex flex-col justify-between select-none ${
+        isInitiallyVisible
+          ? "opacity-100 visible pointer-events-auto"
+          : "opacity-0 invisible pointer-events-none"
+      }`}
       aria-label={`${capability.chapterNumber} — ${capability.title}`}
     >
       {/* 1. Header Row (Full Safe-Frame Width) */}
@@ -236,7 +256,7 @@ export function HomeCapabilityChapter({
           {/* Large Capability Title */}
           <h3
             className="tracking-tight leading-none text-avorria-white font-bold"
-            style={{ fontSize: "clamp(5rem, 11vw, 12rem)" }}
+            style={{ fontSize: "clamp(3.25rem, 9.5vw, 10rem)" }}
           >
             {capability.title}
             <span className="text-avorria-signal">.</span>

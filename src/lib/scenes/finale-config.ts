@@ -6,5 +6,5 @@ export const FINALE_CONFIG: FinaleConfig = {
   emphasisText: "UNFAIR.",
   primaryCtaText: "START A PROJECT",
   primaryCtaHref: "/start-project",
-  contactEmail: "hello@avorria.com"
+  contactEmail: "enquiries@avorria.com"
 };

@@ -73,7 +73,7 @@ export function Scene15Manifesto() {
 
         {/* Top Minimal Scene Marker */}
         <div className="flex items-center justify-between font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet z-30">
-          <span className="text-avorria-signal">15 / MANIFESTO</span>
+          <span className="text-avorria-signal">06 / MANIFESTO</span>
           <span className="text-avorria-white">FIRST PRINCIPLES</span>
         </div>
 
@@ -106,7 +106,7 @@ export function Scene15Manifesto() {
             EVIDENCE // PROOF
           </div>
           <div className="text-avorria-signal">
-            15 / 18
+            06 / 08
           </div>
         </div>
       </SceneSafeFrame>
