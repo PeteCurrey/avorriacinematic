@@ -21,7 +21,7 @@ export const CAPABILITY_ITEMS: CapabilityDefinition[] = [
     description: "Digital flagships, custom web applications, and high-conversion commerce infrastructure.",
     services: ["WEB DESIGN", "DEVELOPMENT", "PRODUCT DESIGN", "COMMERCE"],
     footerStatement: "WE DON'T DECORATE. WE ENGINEER ADVANTAGE.",
-    href: "/capabilities/build",
+    href: "/services/websites",
     ctaLabel: "EXPLORE BUILD"
   },
   {
@@ -33,7 +33,7 @@ export const CAPABILITY_ITEMS: CapabilityDefinition[] = [
     description: "Visibility is engineered. Technical SEO architecture, entity graphs, and algorithmic discovery systems.",
     services: ["TECHNICAL SEO", "CONTENT ARCHITECTURE", "MIGRATIONS", "DISCOVERY"],
     footerStatement: "SEARCH ADVANTAGE THROUGH ARCHITECTURE",
-    href: "/capabilities/search",
+    href: "/services/seo",
     ctaLabel: "EXPLORE SEARCH"
   },
   {
@@ -45,7 +45,7 @@ export const CAPABILITY_ITEMS: CapabilityDefinition[] = [
     description: "Make it think. Autonomous workflows, custom AI integrations, internal tools, and closed-loop pipelines.",
     services: ["AI SYSTEMS", "AUTOMATION", "INTERNAL TOOLS", "WORKFLOW ENGINES"],
     footerStatement: "CLOSED-LOOP AUTONOMOUS PIPELINES",
-    href: "/capabilities/systems",
+    href: "/services/ai-automation",
     ctaLabel: "EXPLORE SYSTEMS"
   }
 ];
