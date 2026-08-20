@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "capture:showcase": "node scripts/capture-homepage-showcase.mjs"
+    "capture:showcase": "node scripts/capture-homepage-showcase.mjs",
+    "test:deposit": "node --experimental-strip-types scripts/test-deposit-flow.mjs"
   },
   "dependencies": {
     "gsap": "^3.12.7",
