@@ -12,6 +12,13 @@ import { runAITask } from "@/lib/ai/router";
 import { inspectWebsite } from "@/lib/scout/website-inspector";
 import { captureScreenshot } from "@/lib/scout/screenshot-provider";
 import { isDuplicate, checkSuppression, normalizeDomain } from "@/lib/scout/deduplication";
+import { calculateOpportunityScore } from "@/lib/ai-auto/scoring";
+import {
+  getKnownBusinesses,
+  getSuppressions,
+  persistQualifiedProspect,
+  recordScoutRun,
+} from "@/lib/db/scout-store";
 import { verifyBusiness } from "@/lib/scout/verification";
 import {
   validateDiscoveryResult,
@@ -42,6 +49,10 @@ export interface ScoutRunResult {
   aiCostEstimate: number;
   errorCount: number;
   errors: string[];
+  /** Qualified prospects that were successfully written to durable storage. */
+  prospectsPersisted: number;
+  /** Where the run's writes actually landed. */
+  storageBackend: "supabase" | "memory";
 }
 
 // ============================================================================
@@ -69,9 +80,19 @@ export async function runScout(
     aiCostEstimate: 0,
     errorCount: 0,
     errors: [],
+    prospectsPersisted: 0,
+    storageBackend: "memory",
   };
 
   try {
+    // ── STEP 0: LOAD DURABLE STATE ────────────────────────────────────────
+    // Deduplication and suppression are only meaningful against what previous
+    // runs recorded. These reads throw on backend failure rather than yielding
+    // an empty list — an empty suppression list reads as "nobody opted out",
+    // which is how a sending domain gets blacklisted.
+    const knownBusinesses = await getKnownBusinesses();
+    const suppressions = await getSuppressions();
+
     // ── STEP 1: DISCOVER ──────────────────────────────────────────────────
     const discoveryOutput = await runAITask({
       task: "business_discovery",
@@ -109,14 +130,17 @@ export async function runScout(
     for (const candidate of candidates) {
       try {
         // ── 2. SUPPRESSION CHECK ──────────────────────────────────────────
-        if (candidate.website && checkSuppression(candidate.website, candidate.company_name, [])) {
+        if (candidate.website && checkSuppression(candidate.website, candidate.company_name, suppressions)) {
           result.businessesDuplicate++;
           continue;
         }
 
         // ── 3. DEDUPLICATION ─────────────────────────────────────────────
         const domain = candidate.website ? normalizeDomain(candidate.website) : "";
-        const dupCheck = isDuplicate({ domain, phone: candidate.phone, companyName: candidate.company_name, city: candidate.city }, []);
+        const dupCheck = isDuplicate(
+          { domain, phone: candidate.phone, companyName: candidate.company_name, city: candidate.city },
+          knownBusinesses
+        );
         if (dupCheck.isDuplicate) {
           result.businessesDuplicate++;
           continue;
@@ -202,7 +226,77 @@ export async function runScout(
             const qual = validateQualificationResult(qualOutput.result);
             if (qual.qualifies) {
               result.prospectsQualified++;
-              // In production: call repository.createProspect()
+
+              // Every input here comes from the inspector's real signals. A
+              // candidate with no reachable website scores as a maximal gap
+              // rather than a neutral default — no site IS the opportunity.
+              const currentYear = new Date().getFullYear();
+              const scoring = calculateOpportunityScore({
+                websiteQualityScore: websiteScore,
+                // A viewport meta tag is the mobile-readiness signal available
+                // from HTML inspection alone; a real mobile score needs a
+                // rendered capture, which the screenshot provider supplies
+                // when configured.
+                mobileScore: websiteSignals?.hasViewportMeta ? 75 : 25,
+                hasOnlineBooking: Boolean(websiteSignals?.hasOnlineBooking),
+                hasContactForm: Boolean(websiteSignals?.hasContactForm),
+                hasClearCta: Boolean(websiteSignals?.hasClearCta),
+                hasLiveChat: Boolean(websiteSignals?.hasLiveChat),
+                hasSsl: Boolean(websiteSignals?.hasSSL),
+                hasStructuredData: Boolean(websiteSignals?.hasStructuredData),
+                hasRecentContent:
+                  typeof websiteSignals?.copyrightYear === "number"
+                    ? websiteSignals.copyrightYear >= currentYear - 2
+                    : false,
+                googleRating: candidate.google_rating,
+                googleReviewCount: candidate.google_review_count,
+                sector: candidate.sector || "Unknown",
+              });
+
+              const persisted = await persistQualifiedProspect({
+                business: {
+                  company_name: candidate.company_name,
+                  website_url: candidate.website,
+                  domain,
+                  phone: candidate.phone,
+                  city: candidate.city,
+                  sector: candidate.sector || "Unknown",
+                  source: "ai_scout",
+                },
+                assessment: {
+                  // The qualification task returns a recommendation and a
+                  // confidence, not a number — the opportunity score comes from
+                  // the deterministic scoring engine so it stays comparable
+                  // across runs and reproducible from stored signals.
+                  opportunity_score: scoring.opportunityScore,
+                  opportunity_band: scoring.opportunityBand,
+                  website_quality_score: websiteScore,
+                  reasoning: qual.reasoning,
+                },
+                scout_run_id: result.scoutRunId,
+              });
+
+              result.storageBackend = persisted.backend;
+
+              if (persisted.ok) {
+                result.prospectsPersisted++;
+                // Keep in-run state current so a later candidate in the same
+                // batch is deduplicated against this one.
+                knownBusinesses.push({
+                  id: persisted.businessId || "",
+                  company_name: candidate.company_name,
+                  domain,
+                  phone: candidate.phone,
+                  city: candidate.city,
+                });
+              } else {
+                // Losing one prospect must not abort a run that has already
+                // spent budget on the rest of the batch.
+                errors.push(
+                  `Qualified but not persisted: ${candidate.company_name} — ${persisted.error}`
+                );
+                result.errorCount++;
+              }
             } else {
               result.prospectsRejected++;
             }
@@ -234,5 +328,22 @@ export async function runScout(
 
   result.aiCostEstimate = totalCost;
   result.errors = errors;
+
+  // Attribute cost and yield to the run. A failure here is logged, not thrown —
+  // the run's own results are already computed and must still be returned.
+  const runRecord = await recordScoutRun({
+    id: result.scoutRunId,
+    triggered_by: triggeredBy,
+    businesses_found: result.businessesFound,
+    businesses_new: result.businessesNew,
+    prospects_qualified: result.prospectsQualified,
+    ai_cost_estimate: result.aiCostEstimate,
+    error_count: result.errorCount,
+  });
+  if (!runRecord.ok) {
+    result.errors.push(`Scout run summary not recorded: ${runRecord.error}`);
+  }
+  result.storageBackend = runRecord.backend;
+
   return result;
 }
