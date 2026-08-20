@@ -12,7 +12,7 @@ export function ProcessChapter({ chapter }: { chapter: CaseStudyChapter }) {
             </span>
           )}
           {chapter.title && (
-            <h2 className="display-lg font-display font-black uppercase tracking-tight text-avorria-white">
+            <h2 className="display-column font-display font-black uppercase tracking-tight text-avorria-white">
               {chapter.title}
             </h2>
           )}

@@ -1,4 +1,5 @@
 import React from "react";
+import { PrecisionField } from "@/components/cinematic/PrecisionField";
 import Link from "next/link";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { INTELLIGENCE_ARTICLES } from "@/lib/intelligence/articles";
@@ -16,8 +17,19 @@ export default function IntelligencePage() {
   return (
     <main className="w-full min-h-screen bg-avorria-black text-avorria-white pt-24 sm:pt-32 pb-24">
       {/* ── Hero ─────────────────────────────────────────── */}
-      <section aria-label="Intelligence Publication Overview" className="border-b border-avorria-line pb-16 sm:pb-24">
-        <div className="max-w-[1760px] mx-auto px-6 sm:px-12 lg:px-16 space-y-12">
+      <section aria-label="Intelligence Publication Overview" className="relative overflow-hidden border-b border-avorria-line pb-16 sm:pb-24">
+        {/* Ambient depth, matching the homepage hero. Pointer-transparent and
+            self-pausing when off-screen. */}
+        <PrecisionField intensity={0.75} />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 70% 70% at 30% 45%, rgba(8,8,8,0.92) 0%, rgba(8,8,8,0.6) 50%, rgba(8,8,8,0) 100%)",
+          }}
+        />
+        <div className="relative z-10 max-w-[1760px] mx-auto px-6 sm:px-12 lg:px-16 space-y-12">
           {/* Breadcrumb */}
           <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-avorria-quiet border-b border-avorria-line/40 pb-4">
             <span className="text-avorria-signal font-bold">04</span>
@@ -27,13 +39,13 @@ export default function IntelligencePage() {
             <span className="text-avorria-muted">TECHNICAL ESSAYS & STRATEGY</span>
           </div>
 
-          <div className="max-w-5xl space-y-6">
+          <div className="space-y-6">
             <div className="inline-flex items-center gap-3 bg-avorria-surface border border-avorria-signal/30 px-3.5 py-1.5 font-mono text-xs uppercase tracking-widest text-avorria-signal">
               <span className="w-2 h-2 rounded-full bg-avorria-signal" aria-hidden="true" />
               <span>EDITORIAL PUBLICATION // 3 TERRITORIES</span>
             </div>
 
-            <h1 className="display-xxl font-display font-black uppercase tracking-tight text-avorria-white leading-none">
+            <h1 className="display-xxl display-xxl-long font-display font-black uppercase tracking-tight text-avorria-white leading-none">
               INTELLIGENCE
             </h1>
 

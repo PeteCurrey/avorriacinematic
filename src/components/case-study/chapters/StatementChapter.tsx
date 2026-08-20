@@ -11,7 +11,7 @@ export function StatementChapter({ chapter }: { chapter: CaseStudyChapter }) {
           </span>
         )}
         {chapter.title && (
-          <h2 className="display-lg font-display font-black uppercase tracking-tight text-avorria-white max-w-4xl leading-tight">
+          <h2 className="display-column font-display font-black uppercase tracking-tight text-avorria-white max-w-4xl leading-tight">
             {chapter.title}
           </h2>
         )}

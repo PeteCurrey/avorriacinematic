@@ -5,6 +5,8 @@ import { useReducedMotion } from "@/providers/ReducedMotionProvider";
 import { useHeaderActions } from "@/providers/HeaderContext";
 import { useGsapContext } from "@/lib/motion/hooks";
 import { gsap } from "@/lib/motion/gsap-config";
+import Link from "next/link";
+import { PrecisionField } from "@/components/cinematic/PrecisionField";
 import { CinematicSceneViewport } from "./CinematicSceneViewport";
 import { SceneSafeFrame } from "./SceneSafeFrame";
 import { getSceneConfig } from "./registry";
@@ -38,6 +40,19 @@ import { getSceneConfig } from "./registry";
  */
 const HERO_TYPE_SIZE = "clamp(2.15rem, 8.2vw, 9.5rem)";
 
+/**
+ * The three disciplines, stated in the first viewport.
+ *
+ * A visitor should not have to scroll three chapters to learn what the studio
+ * actually does. The headline sells the posture; this row answers the
+ * question underneath it, and links straight into the service pages.
+ */
+const HERO_CAPABILITIES = [
+  { id: "build", label: "BUILD", line: "Websites, digital flagships & commerce", href: "/services/websites" },
+  { id: "search", label: "SEARCH", line: "Technical SEO & entity architecture", href: "/services/seo" },
+  { id: "systems", label: "SYSTEMS", line: "AI systems, automation & internal tools", href: "/services/ai-automation" },
+] as const;
+
 export function Scene01Precision() {
   const signalDotRef = useRef<HTMLDivElement | null>(null);
   const signalLineRef = useRef<HTMLDivElement | null>(null);
@@ -49,6 +64,7 @@ export function Scene01Precision() {
   const desktopServiceLineRef = useRef<HTMLDivElement | null>(null);
   const mobileServiceLineRef = useRef<HTMLDivElement | null>(null);
   const scrollCueRef = useRef<HTMLDivElement | null>(null);
+  const capabilitiesRef = useRef<HTMLDivElement | null>(null);
   const compositionRef = useRef<HTMLDivElement | null>(null);
   const introScopeRef = useRef<HTMLDivElement | null>(null);
 
@@ -73,6 +89,7 @@ export function Scene01Precision() {
         powerRef.current,
         bodyRef.current,
         scrollCueRef.current,
+        capabilitiesRef.current,
         signalLineRef.current,
       ].filter(Boolean);
 
@@ -143,12 +160,20 @@ export function Scene01Precision() {
         1.05
       );
 
-      // 6. Scroll cue — last in, invites the scroll that starts the film
+      // 6. Capability strip — the answer to "what do you actually do"
+      tl.fromTo(
+        capabilitiesRef.current,
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.8 },
+        1.15
+      );
+
+      // 7. Scroll cue — last in, invites the scroll that starts the film
       tl.fromTo(
         scrollCueRef.current,
         { opacity: 0, y: -6 },
         { opacity: 1, y: 0, duration: 0.6 },
-        1.3
+        1.45
       );
     },
     introScopeRef,
@@ -196,6 +221,9 @@ export function Scene01Precision() {
     if (mobileServiceLineRef.current) {
       timeline.to(mobileServiceLineRef.current, { opacity: 0, duration: 0.16 }, 0.55);
     }
+    if (capabilitiesRef.current) {
+      timeline.to(capabilitiesRef.current, { opacity: 0, y: 12, duration: 0.16 }, 0.5);
+    }
 
     // The type parts vertically around the rule
     if (precisionRef.current) {
@@ -239,6 +267,21 @@ export function Scene01Precision() {
       sceneIndex={1}
       buildTimeline={buildTimeline}
     >
+      {/* Ambient depth. Sits behind the safe frame, never intercepts pointer
+          events, and pauses itself when off-screen or the tab is hidden. */}
+      <PrecisionField intensity={1} />
+
+      {/* Vignette keeps the field from competing with the headline at the
+          optical centre while leaving the edges alive. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 78% 62% at 42% 52%, rgba(8,8,8,0.94) 0%, rgba(8,8,8,0.72) 45%, rgba(8,8,8,0) 100%)",
+        }}
+      />
+
       <SceneSafeFrame>
         <div ref={introScopeRef} className="contents">
           {/* Semantic H1 */}
@@ -324,14 +367,40 @@ export function Scene01Precision() {
             </div>
           </div>
 
-          {/* Bottom row: mobile service line + scroll cue */}
-          <div className="flex items-end justify-between w-full gap-6">
+          {/* Bottom row: the three disciplines, stated in the first viewport */}
+          <div className="w-full flex flex-col gap-5">
             <div
-              className="sm:hidden font-mono text-[10px] uppercase tracking-widest text-avorria-muted opacity-0"
               ref={mobileServiceLineRef}
+              className="sr-only"
               aria-hidden="true"
             >
               WEB DESIGN / DEVELOPMENT / SEO / AI SYSTEMS
+            </div>
+
+            <div
+              ref={capabilitiesRef}
+              className="w-full grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-4 border-t border-avorria-line pt-5 opacity-0"
+            >
+              {HERO_CAPABILITIES.map((cap) => (
+                <Link
+                  key={cap.id}
+                  href={cap.href}
+                  className="group flex flex-col gap-1.5 outline-none focus-visible:ring-1 focus-visible:ring-avorria-signal"
+                >
+                  <span className="flex items-center gap-2.5">
+                    <span
+                      className="h-1.5 w-1.5 rounded-full bg-avorria-signal opacity-70 transition-opacity duration-300 group-hover:opacity-100"
+                      aria-hidden="true"
+                    />
+                    <span className="font-display font-extrabold uppercase tracking-tight text-base sm:text-lg text-avorria-white transition-colors duration-300 group-hover:text-avorria-signal">
+                      {cap.label}
+                    </span>
+                  </span>
+                  <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-widest text-avorria-quiet transition-colors duration-300 group-hover:text-avorria-muted">
+                    {cap.line}
+                  </span>
+                </Link>
+              ))}
             </div>
 
             <div

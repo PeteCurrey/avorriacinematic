@@ -17,7 +17,7 @@ export function SystemsActionStage({
       aria-hidden="true"
     >
       <Image
-        src="/media/projects/systems/systems-architecture.svg"
+        src="/media/projects/systems/systems-architecture-hero.svg"
         alt="Systems Human Review and Action Dispatch"
         fill
         className="object-contain object-center scale-110"

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Avorria">
+  <rect width="64" height="64" fill="#080808"/>
+  <!-- Geometric A: two legs meeting at an apex, with a crossbar. Kept chunky
+       so it stays legible when the browser renders it at 16px. -->
+  <path d="M32 9 L55 55 H43.5 L32 31.5 L20.5 55 H9 Z" fill="#F3F3F0"/>
+  <rect x="21" y="40" width="22" height="7.5" fill="#F3F3F0"/>
+  <!-- Signal dot — the period from the AVORRIA. wordmark -->
+  <circle cx="52.5" cy="14.5" r="6" fill="#C8F135"/>
+</svg>

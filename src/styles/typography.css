@@ -1,40 +1,62 @@
+/* Display type uses `overflow-wrap: break-word`, NOT `anywhere`.
+   Both break a word that cannot fit a line on its own, but `anywhere` also
+   feeds those break points into min-content sizing, so the browser starts
+   preferring mid-word breaks even when a space is available — which rendered
+   "AVORRIA STUDIO" as "AVORRI / A STUDIO". `break-word` keeps the overflow
+   protection without hijacking normal wrapping. */
 .display-xxl {
   font-family: var(--font-display), sans-serif;
-  font-size: clamp(3.5rem, 11vw, 11.5rem);
+  /* Sized so the longest hero word in the site — "INTELLIGENCE", 12
+     characters at ~12.2px of line per px of font size — fits the full content
+     width. At 11vw it needed 1933px inside a 1024px column and broke mid-word
+     as "INTELLIGEN / CE". */
+  font-size: clamp(2.5rem, 7.2vw, 8rem);
   line-height: 0.88;
   letter-spacing: -0.045em;
   font-weight: 800;
   text-transform: uppercase;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Long single-word hero headings ("INTELLIGENCE", 12 characters) cannot hold
+   the .display-xxl mobile floor: at 40px the word needs 488px inside a 342px
+   column. This variant lowers the floor for those headings only, so the rest
+   of the site keeps its larger mobile hero size. */
+.display-xxl-long {
+  font-size: clamp(1.35rem, 6.4vw, 8rem);
 }
 
 .display-xl {
   font-family: var(--font-display), sans-serif;
-  font-size: clamp(2.75rem, 8vw, 8.5rem);
+  font-size: clamp(2.25rem, 5.8vw, 6.25rem);
   line-height: 0.92;
   letter-spacing: -0.04em;
   font-weight: 700;
   text-transform: uppercase;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .display-lg {
   font-family: var(--font-display), sans-serif;
-  font-size: clamp(2.25rem, 5.5vw, 5.5rem);
+  font-size: clamp(2rem, 4.3vw, 4.05rem);
   line-height: 0.98;
   letter-spacing: -0.035em;
   font-weight: 700;
   text-transform: uppercase;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .display-md {
   font-family: var(--font-display), sans-serif;
-  font-size: clamp(1.75rem, 3.5vw, 3.75rem);
+  font-size: clamp(1.5rem, 3vw, 2.55rem);
   line-height: 1.05;
   letter-spacing: -0.03em;
   font-weight: 600;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .heading-lg {
@@ -43,7 +65,8 @@
   line-height: 1.15;
   letter-spacing: -0.02em;
   font-weight: 600;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .heading-md {
@@ -126,10 +149,11 @@
    container regardless of length. */
 .display-column {
   font-family: var(--font-display), sans-serif;
-  font-size: clamp(1.9rem, 4.4vw, 4rem);
+  font-size: clamp(1.6rem, 3.4vw, 2.55rem);
   line-height: 0.96;
   letter-spacing: -0.035em;
   font-weight: 800;
   text-transform: uppercase;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }

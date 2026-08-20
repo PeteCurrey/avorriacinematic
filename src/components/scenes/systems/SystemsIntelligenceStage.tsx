@@ -17,7 +17,7 @@ export function SystemsIntelligenceStage({
       aria-hidden="true"
     >
       <Image
-        src="/media/projects/systems/systems-architecture.svg"
+        src="/media/projects/systems/systems-architecture-hero.svg"
         alt="Systems Rules and Context Diagram"
         fill
         className="object-contain object-center scale-105"

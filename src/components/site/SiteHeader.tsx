@@ -84,7 +84,7 @@ export function SiteHeader() {
 
         {/* Mobile Navigation Trigger */}
         <div
-          className={`md:hidden transition-all duration-500 ${
+          className={`lg:hidden transition-all duration-500 ${
             showNav ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
           }`}
         >

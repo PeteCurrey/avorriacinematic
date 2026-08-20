@@ -116,7 +116,7 @@ export default async function IntelligenceArticlePage({
             <span className="text-avorria-quiet">{article.readTime}</span>
           </div>
 
-          <h1 className="display-xl sm:display-xxl font-display font-black uppercase tracking-tight text-avorria-white leading-tight">
+          <h1 className="font-display font-extrabold tracking-tight text-avorria-white leading-[1.06] text-[clamp(1.9rem,4vw,3.6rem)]">
             {article.title}
           </h1>
 

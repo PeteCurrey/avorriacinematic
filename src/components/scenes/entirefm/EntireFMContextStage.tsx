@@ -10,7 +10,7 @@ export function EntireFMContextStage({
 }: EntireFMContextStageProps) {
   return (
     <CinematicMediaFrame
-      src="/media/projects/entirefm/entirefm-operational.svg"
+      src="/media/projects/entirefm/entirefm-asset-hierarchy.svg"
       alt="EntireFM Operations Backbone Infrastructure"
       mode="LANDSCAPE"
       fit="contain"

@@ -67,7 +67,7 @@ export function DesktopNavigation() {
   };
 
   return (
-    <nav className="hidden md:flex items-center gap-7 lg:gap-9 relative" aria-label="Primary Navigation">
+    <nav className="hidden lg:flex items-center gap-7 xl:gap-9 relative" aria-label="Primary Navigation">
       {NAV_ITEMS.map((item) => {
         const isActive =
           pathname === item.href ||

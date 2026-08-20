@@ -71,6 +71,16 @@ async function hasValidSession(token: string | undefined): Promise<boolean> {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Internal QA tooling. Present in the production bundle but must not be
+  // reachable on the public domain — robots.txt only asks crawlers not to
+  // look, it does not stop anyone with the URL.
+  if (pathname === "/dev" || pathname.startsWith("/dev/")) {
+    if (process.env.NODE_ENV === "production" && process.env.AVORRIA_ENABLE_DEV_TOOLS !== "true") {
+      return new NextResponse(null, { status: 404 });
+    }
+    return NextResponse.next();
+  }
+
   if (PUBLIC_ADMIN_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
     return NextResponse.next();
   }
@@ -92,5 +102,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/admin/:path*"],
+  matcher: ["/admin/:path*", "/api/admin/:path*", "/dev", "/dev/:path*"],
 };

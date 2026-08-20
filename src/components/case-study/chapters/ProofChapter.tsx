@@ -13,7 +13,7 @@ export function ProofChapter({ chapter }: { chapter: CaseStudyChapter }) {
           <span className="font-mono text-xs text-avorria-signal uppercase tracking-widest block">
             {chapter.eyebrow || "PROOF // EVIDENCE"}
           </span>
-          <h2 className="display-lg font-display font-black uppercase tracking-tight text-avorria-white">
+          <h2 className="display-column font-display font-black uppercase tracking-tight text-avorria-white">
             {chapter.title || "VERIFIED OUTCOMES"}
           </h2>
         </div>
@@ -30,7 +30,7 @@ export function ProofChapter({ chapter }: { chapter: CaseStudyChapter }) {
               <span className="font-mono text-[10px] text-avorria-signal uppercase tracking-widest block">
                 {item.type} {"//"} VERIFIED
               </span>
-              <div className="display-lg font-display font-black text-avorria-white">
+              <div className="display-column font-display font-black text-avorria-white">
                 {item.value} <span className="text-avorria-signal text-base">{item.unit}</span>
               </div>
               <p className="font-mono text-xs text-avorria-muted uppercase tracking-wider">

@@ -12,6 +12,7 @@
     "test:deposit": "node --experimental-strip-types scripts/test-deposit-flow.mjs",
     "test:scout": "node --experimental-strip-types --import ./scripts/ts-resolver-register.mjs scripts/test-scout-persistence.mjs",
     "test:outreach": "node --experimental-strip-types --import ./scripts/ts-resolver-register.mjs scripts/test-outreach.mjs",
+    "check:headlines": "node scripts/check-headline-fit.mjs",
     "test:e2e": "node --experimental-strip-types --import ./scripts/ts-resolver-register.mjs scripts/test-pipeline-e2e.mjs",
     "test": "npm run test:deposit && npm run test:scout && npm run test:outreach && npm run test:e2e"
   },

@@ -17,7 +17,7 @@ export function SystemsInputStage({
       aria-hidden="true"
     >
       <Image
-        src="/media/projects/systems/systems-architecture.svg"
+        src="/media/projects/systems/systems-architecture-hero.svg"
         alt="Systems 3-Zone Architecture Diagram"
         fill
         className="object-contain object-center"

@@ -81,7 +81,7 @@ const VISION_SAMPLES: VisionSample[] = [
     id: "sample-ogn",
     name: "One Great Northern Facade",
     category: "ARCHITECTURAL PROPORTION & LEASING UX",
-    imageSrc: "/media/projects/ogn/ogn-industrial.svg",
+    imageSrc: "/media/projects/ogn/ogn-wall-hero.svg",
     description: "Floorplate volume calculation, curtain-wall mullion spacing, and daylight penetration ratios.",
     metrics: {
       gridColumns: "Golden Ratio Cadence",

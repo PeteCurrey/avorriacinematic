@@ -16,7 +16,7 @@ export const DEV_SYNTHETIC_FIXTURE: CaseStudyConfig = {
   heroMedia: {
     id: "dev-hero-media",
     type: "IMAGE",
-    src: "/media/projects/alkota/alkota-hero-still.webp",
+    src: "/media/projects/alkota/alkota-product-hero.svg",
     alt: "Synthetic Development Fixture Showcase",
     aspectRatio: "16/10",
     status: "DEV_ONLY",
@@ -128,7 +128,7 @@ export const DEV_SYNTHETIC_FIXTURE: CaseStudyConfig = {
     title: "Alkota Bikes",
     projectIndex: "001 / ALKOTA",
     descriptor: "PERFORMANCE PRODUCT / DIGITAL EXPERIENCE",
-    heroMedia: "/media/projects/alkota/alkota-hero-still.webp",
+    heroMedia: "/media/projects/alkota/alkota-product-hero.svg",
     themeAccent: "#C8F135"
   },
   seo: {

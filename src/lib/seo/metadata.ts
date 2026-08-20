@@ -18,7 +18,17 @@ export function generatePageMetadata({
   path?: string;
   noIndex?: boolean;
 }): Metadata {
-  const fullTitle = title ? `${title} — ${SITE_NAME}` : `${SITE_NAME} — ${SITE_TAGLINE}`;
+  // Several pages already carry the brand in their own title (e.g.
+  // "Studio — ... | Avorria"). Appending it unconditionally produced
+  // "... | Avorria — Avorria" in tabs and search results.
+  const alreadyBranded = title
+    ? title.toLowerCase().includes(SITE_NAME.toLowerCase())
+    : false;
+  const fullTitle = title
+    ? alreadyBranded
+      ? title
+      : `${title} — ${SITE_NAME}`
+    : `${SITE_NAME} — ${SITE_TAGLINE}`;
   const metaDescription = description || SITE_DESCRIPTION;
   const canonical = `${SITE_URL}${path}`;
 
