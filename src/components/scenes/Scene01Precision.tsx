@@ -7,6 +7,7 @@ import { useGsapContext } from "@/lib/motion/hooks";
 import { gsap } from "@/lib/motion/gsap-config";
 import Link from "next/link";
 import { PrecisionField } from "@/components/cinematic/PrecisionField";
+import { ObjectStage } from "@/components/cinematic/ObjectStage";
 import { CinematicSceneViewport } from "./CinematicSceneViewport";
 import { SceneSafeFrame } from "./SceneSafeFrame";
 import { getSceneConfig } from "./registry";
@@ -74,6 +75,9 @@ export function Scene01Precision() {
   const capabilitiesRef = useRef<HTMLDivElement | null>(null);
   const fieldRef = useRef<HTMLDivElement | null>(null);
   const introScopeRef = useRef<HTMLDivElement | null>(null);
+  const stageWrapRef = useRef<HTMLDivElement | null>(null);
+  /** Scene progress, written on every scrub frame and read by the 3D loop. */
+  const stageProgressRef = useRef(0);
 
   const lastHeaderStateRef = useRef<string>("standard");
 
@@ -149,6 +153,10 @@ export function Scene01Precision() {
     setHeaderState("standard");
 
     timeline.eventCallback("onUpdate", () => {
+      // Written directly to a ref — a state update here would re-render the
+      // whole hero on every scroll frame.
+      stageProgressRef.current = timeline.progress();
+
       if (lastHeaderStateRef.current !== "standard") {
         lastHeaderStateRef.current = "standard";
         setNavVisible(true);
@@ -160,6 +168,18 @@ export function Scene01Precision() {
     // ── The cue steps aside the instant its job is done ──────────────────
     if (scrollCueRef.current) {
       timeline.to(scrollCueRef.current, { opacity: 0, y: 12, duration: 0.05 }, 0);
+    }
+
+    // The subject surfaces out of the dark with the rule, and stays behind
+    // the type for the rest of the chapter.
+    if (stageWrapRef.current) {
+      timeline.fromTo(
+        stageWrapRef.current,
+        { opacity: 0, scale: 0.94 },
+        { opacity: 1, scale: 1, duration: 0.22, ease: "power2.out" },
+        0.04
+      );
+      timeline.to(stageWrapRef.current, { opacity: 0, scale: 0.97, duration: 0.16 }, 0.74);
     }
 
     // ── 1. The rule draws outward from the centre ────────────────────────
@@ -256,12 +276,26 @@ export function Scene01Precision() {
         <PrecisionField intensity={1} />
       </div>
 
+      {/* The subject. Sits to the right of the type mass, behind it, so the
+          opening reads as type over an object rather than either competing. */}
+      <div
+        ref={stageWrapRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 right-0 w-full lg:w-[56%] opacity-0"
+      >
+        <ObjectStage
+          progressRef={stageProgressRef}
+          fallbackImage="/media/projects/alkota/product/naked-carbon-hero.jpg"
+          fallbackAlt="Alkota carbon frame"
+        />
+      </div>
+
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 78% 62% at 42% 52%, rgba(8,8,8,0.94) 0%, rgba(8,8,8,0.72) 45%, rgba(8,8,8,0) 100%)",
+            "radial-gradient(ellipse 62% 70% at 26% 52%, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.55) 42%, rgba(8,8,8,0) 78%)",
         }}
       />
 
