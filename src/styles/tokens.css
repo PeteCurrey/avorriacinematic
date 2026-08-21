@@ -17,9 +17,9 @@
   --avorria-quiet: #555552;
 
   /* Signal Color (Restrained 5-10% usage strictly for active states) */
-  --avorria-signal: #C8F135;
-  --avorria-signal-muted: rgba(200, 241, 53, 0.12);
-  --avorria-signal-glow: rgba(200, 241, 53, 0.25);
+  --avorria-signal: #4D9FFF;
+  --avorria-signal-muted: rgba(77, 159, 255, 0.12);
+  --avorria-signal-glow: rgba(77, 159, 255, 0.25);
 
   /* Spacing Scale */
   --space-2xs: 0.25rem;

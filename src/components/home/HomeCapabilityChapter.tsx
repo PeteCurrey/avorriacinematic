@@ -111,8 +111,8 @@ export function SearchTopologyVisual() {
           viewBox="0 0 400 200"
           preserveAspectRatio="none"
         >
-          <line x1="200" y1="100" x2="100" y2="50" stroke="#C8F135" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.6" />
-          <line x1="200" y1="100" x2="300" y2="50" stroke="#C8F135" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.6" />
+          <line x1="200" y1="100" x2="100" y2="50" stroke="#4D9FFF" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.6" />
+          <line x1="200" y1="100" x2="300" y2="50" stroke="#4D9FFF" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.6" />
           <line x1="200" y1="100" x2="100" y2="150" stroke="#38BDF8" strokeWidth="1.5" opacity="0.4" />
           <line x1="200" y1="100" x2="300" y2="150" stroke="#38BDF8" strokeWidth="1.5" opacity="0.4" />
           <line x1="100" y1="50" x2="100" y2="150" stroke="white" strokeWidth="1" opacity="0.15" />

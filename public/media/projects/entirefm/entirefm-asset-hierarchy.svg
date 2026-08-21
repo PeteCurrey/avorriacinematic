@@ -21,7 +21,7 @@
   <text x="110" y="234" font-family="sans-serif" font-size="12" fill="#F8FAFC">Space: Plant Room 02 // Level 03</text>
 
   <!-- Node 4 (Target) -->
-  <circle cx="60" cy="300" r="5" fill="#C8F135"/>
-  <line x1="60" y1="300" x2="100" y2="300" stroke="#C8F135"/>
-  <text x="110" y="304" font-family="sans-serif" font-size="13" font-weight="700" fill="#C8F135">Target Asset: AHU-03 (Air Handling Unit)</text>
+  <circle cx="60" cy="300" r="5" fill="#4D9FFF"/>
+  <line x1="60" y1="300" x2="100" y2="300" stroke="#4D9FFF"/>
+  <text x="110" y="304" font-family="sans-serif" font-size="13" font-weight="700" fill="#4D9FFF">Target Asset: AHU-03 (Air Handling Unit)</text>
 </svg>

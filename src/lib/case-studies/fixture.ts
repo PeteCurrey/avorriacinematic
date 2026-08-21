@@ -26,10 +26,10 @@ export const DEV_SYNTHETIC_FIXTURE: CaseStudyConfig = {
     background: "#080808",
     foreground: "#F3F3F0",
     muted: "#888884",
-    accent: "#C8F135",
+    accent: "#4D9FFF",
     surface: "#111111",
-    mediaBorder: "rgba(200, 241, 53, 0.16)",
-    signalColour: "#C8F135",
+    mediaBorder: "rgba(77, 159, 255, 0.16)",
+    signalColour: "#4D9FFF",
     headerMode: "PROJECT_DARK"
   },
   relationship: "INTERNAL",
@@ -129,7 +129,7 @@ export const DEV_SYNTHETIC_FIXTURE: CaseStudyConfig = {
     projectIndex: "001 / ALKOTA",
     descriptor: "PERFORMANCE PRODUCT / DIGITAL EXPERIENCE",
     heroMedia: "/media/projects/alkota/alkota-product-hero.svg",
-    themeAccent: "#C8F135"
+    themeAccent: "#4D9FFF"
   },
   seo: {
     metaTitle: "Synthetic Dev Fixture — Case Study Framework | Avorria",

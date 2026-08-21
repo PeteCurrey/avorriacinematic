@@ -307,12 +307,12 @@ export function Scene01Precision() {
             <div className="relative w-full my-2 sm:my-4 flex items-center justify-center">
               <div
                 ref={signalDotRef}
-                className="absolute w-1.5 h-1.5 rounded-full bg-avorria-signal opacity-0 z-10 shadow-[0_0_12px_rgba(200,241,53,0.9)]"
+                className="absolute w-1.5 h-1.5 rounded-full bg-avorria-signal opacity-0 z-10 shadow-[0_0_12px_rgba(77, 159, 255,0.9)]"
                 style={{ willChange: "transform, opacity" }}
               />
               <div
                 ref={signalLineRef}
-                className="w-full h-[1px] bg-avorria-signal origin-center opacity-0 shadow-[0_0_10px_rgba(200,241,53,0.5)]"
+                className="w-full h-[1px] bg-avorria-signal origin-center opacity-0 shadow-[0_0_10px_rgba(77, 159, 255,0.5)]"
                 style={{ willChange: "transform, opacity" }}
               />
               <div

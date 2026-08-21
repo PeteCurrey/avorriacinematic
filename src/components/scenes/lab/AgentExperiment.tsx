@@ -47,7 +47,7 @@ export function AgentExperiment() {
         {stages.map((st, i) => (
           <div
             key={st.name}
-            className={`p-5 bg-avorria-black border transition-all duration-300 ${step > i ? "border-avorria-signal shadow-[0_0_15px_rgba(200,241,53,0.15)]" : "border-avorria-line opacity-60"}`}
+            className={`p-5 bg-avorria-black border transition-all duration-300 ${step > i ? "border-avorria-signal shadow-[0_0_15px_rgba(77, 159, 255,0.15)]" : "border-avorria-line opacity-60"}`}
           >
             <div className="flex items-center justify-between font-mono text-xs mb-3">
               <span className={step > i ? "text-avorria-signal font-bold" : "text-avorria-quiet"}>{`0${i + 1}`}</span>

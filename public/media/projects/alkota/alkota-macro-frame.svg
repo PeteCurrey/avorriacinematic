@@ -23,8 +23,8 @@
   <line x1="1320" y1="880" x2="1260" y2="960" stroke="#E2E8F0" stroke-width="4" stroke-dasharray="6 4"/>
 
   <!-- Internal Cable Port Detail -->
-  <ellipse cx="940" cy="420" rx="36" ry="18" fill="#0F172A" stroke="#C8F135" stroke-width="2"/>
+  <ellipse cx="940" cy="420" rx="36" ry="18" fill="#0F172A" stroke="#4D9FFF" stroke-width="2"/>
 
   <!-- Laser Etched Serial Number -->
-  <text x="860" y="490" font-family="monospace" font-size="12" fill="#C8F135" letter-spacing="3">ALK-TI-001 // 3AL-2.5V</text>
+  <text x="860" y="490" font-family="monospace" font-size="12" fill="#4D9FFF" letter-spacing="3">ALK-TI-001 // 3AL-2.5V</text>
 </svg>

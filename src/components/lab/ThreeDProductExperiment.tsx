@@ -99,8 +99,8 @@ export function ThreeDProductExperiment() {
         ctx.stroke();
       };
 
-      const primaryColor = renderMode === "XRAY" ? "rgba(56, 189, 248, 0.8)" : "#C8F135";
-      const secondaryColor = renderMode === "SOLID" ? "rgba(255,255,255,0.7)" : "rgba(200, 241, 53, 0.4)";
+      const primaryColor = renderMode === "XRAY" ? "rgba(56, 189, 248, 0.8)" : "#4D9FFF";
+      const secondaryColor = renderMode === "SOLID" ? "rgba(255,255,255,0.7)" : "rgba(77, 159, 255, 0.4)";
       const ghostColor = "rgba(255, 255, 255, 0.15)";
 
       // Draw Main Triangle

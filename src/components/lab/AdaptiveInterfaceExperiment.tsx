@@ -199,7 +199,7 @@ export function AdaptiveInterfaceExperiment() {
                 key={block.id}
                 className={`p-6 sm:p-8 bg-avorria-surface border transition-all duration-300 flex flex-col justify-between space-y-6 ${
                   isTopRank
-                    ? "border-avorria-signal shadow-[0_0_20px_rgba(200,241,53,0.1)] bg-avorria-surface/90"
+                    ? "border-avorria-signal shadow-[0_0_20px_rgba(77, 159, 255,0.1)] bg-avorria-surface/90"
                     : "border-avorria-line hover:border-avorria-white/40"
                 }`}
               >

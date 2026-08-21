@@ -162,7 +162,7 @@ export default async function AiAutoMainPage() {
                 href={stage.href || "#"}
                 className={`p-5 border rounded-[2px] transition-all flex flex-col justify-between space-y-4 ${
                   stage.highlight
-                    ? "bg-[#111111] border-avorria-signal/50 shadow-[0_0_20px_rgba(200,241,53,0.06)] hover:border-avorria-signal"
+                    ? "bg-[#111111] border-avorria-signal/50 shadow-[0_0_20px_rgba(77, 159, 255,0.06)] hover:border-avorria-signal"
                     : stage.active
                       ? "bg-[#0D0D0D] border-white/15 hover:border-white/30"
                       : "bg-[#090909] border-white/5 opacity-60"

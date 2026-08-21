@@ -4,14 +4,14 @@
   <text x="24" y="42" font-family="sans-serif" font-size="14" font-weight="900" fill="#F8FAFC">ONE GREAT NORTHERN</text>
   
   <rect x="24" y="94" width="342" height="360" fill="#12151E" stroke="#1F2432"/>
-  <text x="44" y="140" font-family="monospace" font-size="10" fill="#C8F135">01 // LANDMARK</text>
+  <text x="44" y="140" font-family="monospace" font-size="10" fill="#4D9FFF">01 // LANDMARK</text>
   <text x="44" y="190" font-family="sans-serif" font-size="28" font-weight="900" fill="#F8FAFC">ARCHITECTURAL</text>
   <text x="44" y="225" font-family="sans-serif" font-size="28" font-weight="900" fill="#94A3B8">PRESTIGE.</text>
   
   <rect x="24" y="474" width="342" height="90" fill="#0D0F15" stroke="#1A1F2C"/>
-  <text x="44" y="505" font-family="monospace" font-size="10" fill="#C8F135">AVAILABLE SPACE</text>
+  <text x="44" y="505" font-family="monospace" font-size="10" fill="#4D9FFF">AVAILABLE SPACE</text>
   <text x="44" y="535" font-family="sans-serif" font-size="18" font-weight="800" fill="#F8FAFC">45,000 SQ FT</text>
   
-  <rect x="24" y="584" width="342" height="50" fill="#C8F135"/>
+  <rect x="24" y="584" width="342" height="50" fill="#4D9FFF"/>
   <text x="125" y="615" font-family="monospace" font-size="12" font-weight="800" fill="#0A0B0E">ENQUIRE NOW →</text>
 </svg>

@@ -72,7 +72,7 @@ export function AlkotaDigitalStage({
       {/* Scanning Engineering Line */}
       <div
         ref={scanLineRef}
-        className="absolute top-0 bottom-0 w-[2px] bg-avorria-signal shadow-[0_0_12px_#C8F135] pointer-events-none opacity-0"
+        className="absolute top-0 bottom-0 w-[2px] bg-avorria-signal shadow-[0_0_12px_#4D9FFF] pointer-events-none opacity-0"
         style={{ left: "0%", zIndex: Z.overlay }}
         aria-hidden="true"
       />

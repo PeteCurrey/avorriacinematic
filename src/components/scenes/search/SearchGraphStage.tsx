@@ -48,7 +48,7 @@ export function SearchGraphStage({ containerRef }: SearchGraphStageProps) {
               y1={`${fromNode.y}%`}
               x2={`${toNode.x}%`}
               y2={`${toNode.y}%`}
-              stroke={isHighlighted ? "#C8F135" : "#38BDF8"}
+              stroke={isHighlighted ? "#4D9FFF" : "#38BDF8"}
               strokeWidth={isHighlighted ? "2" : "1"}
               opacity={isHighlighted ? 1.0 : 0.8}
               className="transition-all duration-150"
@@ -76,7 +76,7 @@ export function SearchGraphStage({ containerRef }: SearchGraphStageProps) {
                   href={node.route}
                   className={`block px-3 py-2 border font-mono text-[10px] sm:text-xs uppercase tracking-wider transition-colors ${
                     isHovered
-                      ? "border-avorria-signal bg-avorria-signal/20 text-avorria-white shadow-[0_0_15px_#C8F135]"
+                      ? "border-avorria-signal bg-avorria-signal/20 text-avorria-white shadow-[0_0_15px_#4D9FFF]"
                       : isHub
                       ? "border-avorria-signal/60 bg-avorria-surface text-avorria-signal"
                       : "border-avorria-line bg-avorria-black text-avorria-muted hover:text-avorria-white"

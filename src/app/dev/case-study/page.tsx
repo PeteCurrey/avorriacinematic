@@ -23,7 +23,7 @@ const HERO_MODES: HeroMode[] = [
 ];
 
 const THEME_PRESETS = [
-  { label: "Avorria Dark", accent: "#C8F135", bg: "#080808", fg: "#F3F3F0" },
+  { label: "Avorria Dark", accent: "#4D9FFF", bg: "#080808", fg: "#F3F3F0" },
   { label: "CareerOS Blue", accent: "#38BDF8", bg: "#090D14", fg: "#F0F6FC" },
   { label: "NestIQ Emerald", accent: "#34D399", bg: "#081018", fg: "#F0FDF4" },
   { label: "Drawdown Amber", accent: "#F59E0B", bg: "#0A0A0B", fg: "#FAFAFA" },

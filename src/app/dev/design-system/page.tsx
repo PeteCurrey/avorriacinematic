@@ -74,7 +74,7 @@ export default function DevDesignSystemPage() {
             </div>
             <div className="p-4 border border-avorria-signal bg-avorria-signal text-avorria-black font-bold">
               <span className="block">Signal Accent</span>
-              <span>#C8F135</span>
+              <span>#4D9FFF</span>
             </div>
           </div>
         </section>

@@ -118,7 +118,7 @@ export function Scene18Finale() {
           {/* Signal rule — draws outward from the left */}
           <div
             ref={signalLineRef}
-            className="w-full h-[1px] bg-avorria-signal origin-left opacity-0 shadow-[0_0_8px_rgba(200,241,53,0.45)]"
+            className="w-full h-[1px] bg-avorria-signal origin-left opacity-0 shadow-[0_0_8px_rgba(77, 159, 255,0.45)]"
             style={{ willChange: "transform, opacity" }}
             aria-hidden="true"
           />

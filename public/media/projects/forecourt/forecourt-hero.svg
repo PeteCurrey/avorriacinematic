@@ -7,7 +7,7 @@
   </defs>
   <rect width="1200" height="750" fill="url(#grid)"/>
   <rect x="80" y="80" width="1040" height="590" fill="#14141C" stroke="#2D2D3D" stroke-width="1.5"/>
-  <text x="120" y="140" fill="#C8F135" font-family="monospace" font-size="14" letter-spacing="3">ARCHIVE // FORECOURT</text>
+  <text x="120" y="140" fill="#4D9FFF" font-family="monospace" font-size="14" letter-spacing="3">ARCHIVE // FORECOURT</text>
   <text x="120" y="180" fill="#FFFFFF" font-family="sans-serif" font-weight="900" font-size="28" letter-spacing="1">AUTOMOTIVE INVENTORY &amp; DEALER CRM</text>
   <line x1="120" y1="210" x2="1080" y2="210" stroke="#2D2D3D" stroke-width="1"/>
   <rect x="120" y="240" width="450" height="380" fill="#0A0A0F" stroke="#2D2D3D"/>

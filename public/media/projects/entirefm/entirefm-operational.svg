@@ -2,7 +2,7 @@
   <rect width="1200" height="675" fill="#08090C" rx="2"/>
   <rect x="24" y="24" width="1152" height="627" fill="#0F1117" stroke="#1B1E28" stroke-width="1"/>
 
-  <text x="60" y="80" font-family="monospace" font-size="12" fill="#C8F135">005 // ENTIREFM</text>
+  <text x="60" y="80" font-family="monospace" font-size="12" fill="#4D9FFF">005 // ENTIREFM</text>
   <text x="60" y="140" font-family="sans-serif" font-size="36" font-weight="900" fill="#F8FAFC">OPERATIONS BACKBONE</text>
   <text x="60" y="180" font-family="monospace" font-size="12" fill="#94A3B8">WORK ORDERS &#183; ASSET HIERARCHY &#183; FIELD DISPATCH</text>
 
@@ -15,15 +15,15 @@
     <text x="120" y="330" font-family="sans-serif" font-size="17" font-weight="700" fill="#F8FAFC">WORK ORDER</text>
     <text x="120" y="358" font-family="monospace" font-size="11" fill="#94A3B8">RAISED &#183; TRIAGED</text>
     <rect x="120" y="370" width="180" height="4" fill="#1E2434"/>
-    <rect x="120" y="370" width="140" height="4" fill="#C8F135"/>
+    <rect x="120" y="370" width="140" height="4" fill="#4D9FFF"/>
   </g>
   <g>
-    <rect x="460" y="272" width="280" height="120" fill="#0F1117" stroke="#C8F135" stroke-width="1.5"/>
-    <text x="480" y="300" font-family="monospace" font-size="11" fill="#C8F135">02 &#183; ROUTING</text>
+    <rect x="460" y="272" width="280" height="120" fill="#0F1117" stroke="#4D9FFF" stroke-width="1.5"/>
+    <text x="480" y="300" font-family="monospace" font-size="11" fill="#4D9FFF">02 &#183; ROUTING</text>
     <text x="480" y="330" font-family="sans-serif" font-size="17" font-weight="700" fill="#F8FAFC">ASSET MATCH</text>
     <text x="480" y="358" font-family="monospace" font-size="11" fill="#94A3B8">SITE &#183; SYSTEM &#183; ENGINEER</text>
     <rect x="480" y="370" width="180" height="4" fill="#1E2434"/>
-    <rect x="480" y="370" width="176" height="4" fill="#C8F135"/>
+    <rect x="480" y="370" width="176" height="4" fill="#4D9FFF"/>
   </g>
   <g>
     <rect x="820" y="272" width="280" height="120" fill="#0F1117" stroke="#1E2434"/>
@@ -31,9 +31,9 @@
     <text x="840" y="330" font-family="sans-serif" font-size="17" font-weight="700" fill="#F8FAFC">FIELD SIGN-OFF</text>
     <text x="840" y="358" font-family="monospace" font-size="11" fill="#94A3B8">EVIDENCE &#183; SLA</text>
     <rect x="840" y="370" width="180" height="4" fill="#1E2434"/>
-    <rect x="840" y="370" width="96" height="4" fill="#C8F135"/>
+    <rect x="840" y="370" width="96" height="4" fill="#4D9FFF"/>
   </g>
-  <g stroke="#C8F135" stroke-width="1.5" opacity="0.55">
+  <g stroke="#4D9FFF" stroke-width="1.5" opacity="0.55">
     <line x1="380" y1="332" x2="460" y2="332"/>
     <line x1="740" y1="332" x2="820" y2="332"/>
   </g>

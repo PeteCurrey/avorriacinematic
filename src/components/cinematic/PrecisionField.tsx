@@ -54,7 +54,8 @@ interface Node {
 }
 
 const INK = "243, 243, 240";
-const SIGNAL = "200, 241, 53";
+/** Electric blue signal, as `r, g, b` for rgba() interpolation. */
+const SIGNAL = "77, 159, 255";
 
 export function PrecisionField({
   intensity = 1,

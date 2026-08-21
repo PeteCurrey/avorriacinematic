@@ -2,7 +2,7 @@
   <rect width="600" height="600" fill="#0B0D12" rx="2"/>
   <circle cx="300" cy="300" r="180" stroke="#1E2433" stroke-width="2"/>
   <circle cx="300" cy="300" r="120" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="4 4"/>
-  <circle cx="300" cy="300" r="8" fill="#C8F135"/>
-  <text x="50" y="60" font-family="monospace" font-size="12" fill="#C8F135">TRAVIS GPS // TELEMETRY &amp; HARDWARE</text>
+  <circle cx="300" cy="300" r="8" fill="#4D9FFF"/>
+  <text x="50" y="60" font-family="monospace" font-size="12" fill="#4D9FFF">TRAVIS GPS // TELEMETRY &amp; HARDWARE</text>
   <text x="50" y="540" font-family="sans-serif" font-size="18" font-weight="700" fill="#F8FAFC">Live Asset Tracking &amp; Hardware Interface</text>
 </svg>

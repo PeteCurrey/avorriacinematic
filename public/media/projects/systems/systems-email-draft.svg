@@ -21,5 +21,5 @@
 
   <!-- Simulated Control Bar -->
   <rect x="24" y="390" width="752" height="65" fill="#131722" stroke="#1E2433" stroke-width="1"/>
-  <text x="44" y="428" font-family="monospace" font-size="10" fill="#C8F135">STATUS: READY FOR HUMAN REVIEW</text>
+  <text x="44" y="428" font-family="monospace" font-size="10" fill="#4D9FFF">STATUS: READY FOR HUMAN REVIEW</text>
 </svg>

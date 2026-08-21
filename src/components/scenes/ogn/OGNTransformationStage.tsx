@@ -43,7 +43,7 @@ export function OGNTransformationStage({ opacity, progress }: OGNTransformationS
 
         {/* 1px Chartreuse Signal Divider */}
         <div
-          className="absolute top-0 bottom-0 w-[2px] bg-avorria-signal shadow-[0_0_12px_rgba(200,241,53,0.8)] z-30 pointer-events-none"
+          className="absolute top-0 bottom-0 w-[2px] bg-avorria-signal shadow-[0_0_12px_rgba(77, 159, 255,0.8)] z-30 pointer-events-none"
           style={{ left: `${dividerPercent}%` }}
         >
           <div className="absolute top-3 -left-3 bg-avorria-black border border-avorria-signal px-1.5 py-0.5 font-mono text-[9px] text-avorria-signal uppercase tracking-wider">

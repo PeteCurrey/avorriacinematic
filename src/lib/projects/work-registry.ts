@@ -30,7 +30,7 @@ export const WORK_PORTFOLIO: WorkProject[] = [
     aspectRatio: "16/10",
     mediaStatus: "FINAL",
     palette: {
-      accent: "#C8F135",
+      accent: "#4D9FFF",
       surface: "#111111"
     },
     shortSummary: "High-performance digital flagship and custom frame architecture for bespoke carbon bicycles."

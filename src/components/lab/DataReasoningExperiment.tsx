@@ -191,7 +191,7 @@ export function DataReasoningExperiment() {
                     key={arch.id}
                     className={`p-6 border transition-all ${
                       isOptimal
-                        ? "border-avorria-signal bg-avorria-surface/90 shadow-[0_0_20px_rgba(200,241,53,0.1)]"
+                        ? "border-avorria-signal bg-avorria-surface/90 shadow-[0_0_20px_rgba(77, 159, 255,0.1)]"
                         : "border-avorria-line bg-avorria-black/40"
                     }`}
                   >

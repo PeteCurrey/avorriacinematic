@@ -2,7 +2,7 @@
   <rect width="1200" height="675" fill="#08090C" rx="2"/>
   <rect x="24" y="24" width="1152" height="627" fill="#0F1117" stroke="#1B1E28" stroke-width="1"/>
 
-  <text x="60" y="80" font-family="monospace" font-size="12" fill="#C8F135">010 // ONE GREAT NORTHERN</text>
+  <text x="60" y="80" font-family="monospace" font-size="12" fill="#4D9FFF">010 // ONE GREAT NORTHERN</text>
   <text x="60" y="140" font-family="sans-serif" font-size="36" font-weight="900" fill="#F8FAFC">INDUSTRIAL HERITAGE</text>
   <text x="60" y="180" font-family="monospace" font-size="12" fill="#94A3B8">FACADE PROPORTION &#183; FLOORPLATE VOLUME &#183; LEASING UX</text>
 
@@ -24,8 +24,8 @@
     <rect x="816" y="430" width="96" height="76"/><rect x="936" y="430" width="96" height="76"/>
   </g>
   <!-- Signal: the surveyed bay -->
-  <rect x="576" y="310" width="96" height="196" fill="none" stroke="#C8F135" stroke-width="1.5"/>
-  <text x="576" y="300" font-family="monospace" font-size="10" fill="#C8F135">BAY 05 &#183; 4.2M</text>
+  <rect x="576" y="310" width="96" height="196" fill="none" stroke="#4D9FFF" stroke-width="1.5"/>
+  <text x="576" y="300" font-family="monospace" font-size="10" fill="#4D9FFF">BAY 05 &#183; 4.2M</text>
 
   <text x="96" y="572" font-family="monospace" font-size="11" fill="#64748B">MULLION SPACING 1200MM</text>
   <text x="480" y="572" font-family="monospace" font-size="11" fill="#64748B">DAYLIGHT RATIO 0.62</text>

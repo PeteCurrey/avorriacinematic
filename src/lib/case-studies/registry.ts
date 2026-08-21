@@ -37,10 +37,10 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
       background: "#07080A",
       foreground: "#F3F3F0",
       muted: "#888884",
-      accent: "#C8F135",
+      accent: "#4D9FFF",
       surface: "#0E1013",
-      mediaBorder: "rgba(200, 241, 53, 0.12)",
-      signalColour: "#C8F135",
+      mediaBorder: "rgba(77, 159, 255, 0.12)",
+      signalColour: "#4D9FFF",
       headerMode: "PROJECT_DARK"
     },
     relationship: "CLIENT",
@@ -1486,7 +1486,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
       projectIndex: "FLAGSHIP 06 OF 06",
       descriptor: "SERIES CONCLUSION // EXPLORE ALL PROJECTS",
       heroMedia: "/media/projects/alkota/product/naked-carbon-hero.jpg",
-      themeAccent: "#C8F135",
+      themeAccent: "#4D9FFF",
       isEndOfSeries: true
     },
     seo: {
@@ -1852,7 +1852,7 @@ export const CASE_STUDIES: Record<string, CaseStudyConfig> = {
       projectIndex: "001 / ALKOTA",
       descriptor: "PERFORMANCE PRODUCT // DIGITAL EXPERIENCE",
       heroMedia: "/media/projects/alkota/product/naked-carbon-hero.jpg",
-      themeAccent: "#C8F135"
+      themeAccent: "#4D9FFF"
     },
     seo: {
       metaTitle: "Amplios — Self-Build Motorhome Engineering Platform | Avorria",
