@@ -3,8 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { DesktopNavigation } from "./DesktopNavigation";
-import { MobileNavigation } from "./MobileNavigation";
+import { SiteMenu } from "./SiteMenu";
 import { useHeader } from "@/providers/HeaderContext";
 
 export function SiteHeader() {
@@ -74,21 +73,28 @@ export function SiteHeader() {
         </Link>
 
         {/* Desktop Navigation */}
+        {/*
+          Minimal chrome. The header carried five numbered nav items, a
+          dropdown, an eyebrow row and a service line — roughly a third of the
+          top of the frame. It is now one commercial action and one menu,
+          which is what the studios this site is measured against do. The full
+          navigation lives one click away in SiteMenu.
+        */}
         <div
-          className={`transition-all duration-500 ${
+          className={`flex items-center gap-3 sm:gap-4 transition-all duration-500 ${
             showNav ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-[-4px] pointer-events-none"
           }`}
         >
-          <DesktopNavigation />
-        </div>
+          <Link
+            href="/start-project"
+            className="hidden sm:inline-flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-widest text-avorria-white hover:text-avorria-signal transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-avorria-signal"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-avorria-signal" aria-hidden="true" />
+            <span>Start a Project</span>
+            <span aria-hidden="true">&rarr;</span>
+          </Link>
 
-        {/* Mobile Navigation Trigger */}
-        <div
-          className={`lg:hidden transition-all duration-500 ${
-            showNav ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-          }`}
-        >
-          <MobileNavigation />
+          <SiteMenu />
         </div>
       </div>
     </header>

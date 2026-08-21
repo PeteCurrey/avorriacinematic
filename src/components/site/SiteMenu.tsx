@@ -23,7 +23,7 @@ const SUB_SERVICES = [
 
 const MENU_ID = "mobile-navigation-menu";
 
-export function MobileNavigation() {
+export function SiteMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [servicesExpanded, setServicesExpanded] = useState(true);
   const pathname = usePathname();
@@ -68,7 +68,7 @@ export function MobileNavigation() {
   };
 
   return (
-    <div className="lg:hidden">
+    <div>
       <button
         ref={triggerRef}
         onClick={() => setIsOpen(!isOpen)}
@@ -109,7 +109,7 @@ export function MobileNavigation() {
           </div>
 
           {/* Navigation Items */}
-          <nav className="my-auto py-6 flex flex-col gap-4" aria-label="Mobile navigation">
+          <nav className="my-auto py-6 flex flex-col gap-4" aria-label="Primary navigation">
             {NAV_ITEMS.map((item, index) => {
               const isServices = item.href === "/services";
 

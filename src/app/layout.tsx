@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Syne, DM_Sans, DM_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import { RootProviders } from "@/providers/RootProviders";
+import { Preloader } from "@/components/site/Preloader";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SkipToContent } from "@/components/site/SkipToContent";
@@ -57,9 +58,29 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchema) }}
         />
+        {/*
+          Repeat loads in the same session must not flash the curtain. The
+          React effect that dismisses it only runs after first paint, so this
+          runs synchronously in <head> instead. It appends a style element
+          rather than touching any React-managed attribute, which is what
+          keeps it clear of hydration mismatches.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(sessionStorage.getItem('avorria_preloader_shown')==='1'){var s=document.createElement('style');s.setAttribute('data-preloader-skip','');s.textContent='[data-avorria-preloader]{display:none!important}';document.head.appendChild(s);}}catch(e){}",
+          }}
+        />
+
+        <noscript>
+          {/* The preloader is dismissed by client JS. Without JS the curtain
+              would trap the page behind an opaque overlay. */}
+          <style>{`[data-avorria-preloader]{display:none !important}`}</style>
+        </noscript>
       </head>
       <body className="bg-avorria-black text-avorria-white min-h-screen flex flex-col antialiased selection:bg-avorria-signal selection:text-avorria-black">
         <RootProviders>
+          <Preloader />
           <SkipToContent />
           <ScrollProgressController />
           <GlobalCursorLayer />
