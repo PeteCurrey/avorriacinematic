@@ -51,6 +51,7 @@ const SELECTOR = ".display-xxl, .display-xl, .display-lg, .display-column, h1, h
             // textContent, so "SOMETHING<br>IN" would measure as one word.
             const text = (el.innerHTML || "")
               .replace(/<br\s*\/?>/gi, " ")
+              .replace(/<wbr\s*\/?>/gi, " ")
               .replace(/<[^>]+>/g, "")
               .replace(/&nbsp;/g, " ")
               .trim();

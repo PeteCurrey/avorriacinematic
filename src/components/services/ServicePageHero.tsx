@@ -39,7 +39,7 @@ export function ServicePageHero({ service }: ServicePageHeroProps) {
               <span>{service.category}</span>
             </div>
 
-            <h1 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-avorria-white leading-[1.05]">
+            <h1 className="font-display font-black text-3xl sm:text-4xl lg:text-5xl xl:text-6xl uppercase tracking-tight text-avorria-white leading-[1.05]">
               {service.title}
             </h1>
 

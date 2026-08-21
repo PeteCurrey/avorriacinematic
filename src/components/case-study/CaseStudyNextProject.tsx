@@ -54,7 +54,7 @@ export function CaseStudyNextProject({ nextProject }: CaseStudyNextProjectProps)
                 <span className="font-mono text-xs text-avorria-signal uppercase tracking-widest block mb-2">
                   {nextProject.descriptor}
                 </span>
-                <h2 className="display-xl font-display font-black uppercase tracking-tight text-avorria-white group-hover:text-avorria-signal transition-colors">
+                <h2 className="display-column text-avorria-white group-hover:text-avorria-signal transition-colors">
                   {nextProject.title}
                 </h2>
               </div>

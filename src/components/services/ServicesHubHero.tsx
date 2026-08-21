@@ -57,7 +57,7 @@ export function ServicesHubHero() {
             column leaves a hole at the top of the composition. */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           <div className="lg:col-span-7 space-y-6">
-            <h1 className="font-display font-black text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight text-avorria-white leading-[1.02]">
+            <h1 className="font-display font-black text-3xl sm:text-5xl lg:text-5xl xl:text-7xl uppercase tracking-tight text-avorria-white leading-[1.02]">
               WHAT WE BUILD. <br />
               <span className="text-avorria-signal">WHAT WE GROW.</span> <br />
               WHAT WE AUTOMATE.

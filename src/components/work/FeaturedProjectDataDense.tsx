@@ -1,4 +1,5 @@
 import React from "react";
+import { BreakableTitle } from "./BreakableTitle";
 import Link from "next/link";
 import Image from "next/image";
 import type { WorkProject } from "@/types/work";
@@ -28,11 +29,11 @@ export function FeaturedProjectDataDense({ project }: FeaturedProjectProps) {
         <Link
           href={`/work/${project.slug}`}
           className="block relative w-full aspect-[16/10] sm:aspect-[21/9] overflow-hidden bg-avorria-surface border border-avorria-line/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-avorria-signal"
-          aria-label={`View ${project.title} case study`}
+          aria-label={`View $<BreakableTitle text={project.title} /> case study`}
         >
           <Image
             src={project.heroMedia}
-            alt={`${project.title} - ${project.descriptor}`}
+            alt={`$<BreakableTitle text={project.title} /> - ${project.descriptor}`}
             fill
             sizes="(max-width: 1024px) 100vw, 1760px"
             className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.015]"
@@ -52,7 +53,7 @@ export function FeaturedProjectDataDense({ project }: FeaturedProjectProps) {
               className="block max-w-full group-hover:text-avorria-signal transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-avorria-signal"
             >
               <h2 className="display-column text-avorria-white group-hover:text-avorria-signal transition-colors">
-                {project.title}
+                <BreakableTitle text={project.title} />
               </h2>
             </Link>
             <p className="font-mono text-xs sm:text-sm text-avorria-muted uppercase tracking-wider mt-2">
