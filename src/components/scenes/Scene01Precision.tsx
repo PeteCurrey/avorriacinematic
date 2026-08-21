@@ -14,21 +14,30 @@ import { getSceneConfig } from "./registry";
 /**
  * SCENE 01 — PRECISION AS POWER
  *
- * THE SINGLE HOMEPAGE HERO.
+ * THE OPENING SEQUENCE.
  *
- * MOTION CONTRACT — two independent timelines:
+ * The visitor lands on black. The only thing on screen is a scroll
+ * invitation. Scrolling draws the signal rule outward from the centre, and
+ * the wordmark emerges from that rule — PRECISION rising out of it, AS POWER
+ * dropping out of it — as though the line cut the type out of the dark.
  *
- *   1. INTRO (autonomous, on mount, ~1.9s)
- *      Plays the moment the page loads so the hero is fully composed at
- *      scroll position 0. The entrance must NEVER be scroll-bound: a
- *      scrubbed entrance renders the landing viewport empty until the
- *      visitor scrolls, which is the worst possible first frame.
+ * A note on the empty first frame: an empty landing viewport is normally the
+ * worst thing a site can do, and earlier in this build it WAS a defect — the
+ * hero was blank with nothing to indicate that scrolling would do anything.
+ * The difference here is deliberate. The scroll cue is present, legible and
+ * animated from the moment the page settles, so the black reads as a held
+ * curtain rather than a failed render. It is the same opening Immersive
+ * Garden, Lusion and Refokus all use.
  *
- *   2. EXIT (scroll-scrubbed, 0.55 -> 1.00)
- *      The composition holds rock-steady for the first 55% of the scene's
- *      scroll distance, then parts vertically and hands off to the
- *      Selected Work reel.
+ * MOTION CONTRACT
+ *   ON MOUNT (autonomous)   ambient field, signal point, scroll cue
+ *   SCROLL 0.02 – 0.12      signal rule draws outward from centre
+ *   SCROLL 0.08 – 0.30      PRECISION and AS POWER emerge from the rule
+ *   SCROLL 0.26 – 0.44      supporting copy and the discipline row resolve
+ *   SCROLL 0.44 – 0.68      readable hold, nothing moves
+ *   SCROLL 0.68 – 1.00      the type parts back through the rule
  */
+
 /**
  * Hero display size.
  *
@@ -41,11 +50,9 @@ import { getSceneConfig } from "./registry";
 const HERO_TYPE_SIZE = "clamp(2.15rem, 8.2vw, 9.5rem)";
 
 /**
- * The three disciplines, stated in the first viewport.
- *
- * A visitor should not have to scroll three chapters to learn what the studio
- * actually does. The headline sells the posture; this row answers the
- * question underneath it, and links straight into the service pages.
+ * The three disciplines. They resolve after the wordmark, so the visitor gets
+ * the posture first and the substance immediately after — without having to
+ * reach chapter four to learn what the studio actually does.
  */
 const HERO_CAPABILITIES = [
   { id: "build", label: "BUILD", line: "Websites, digital flagships & commerce", href: "/services/websites" },
@@ -65,7 +72,7 @@ export function Scene01Precision() {
   const mobileServiceLineRef = useRef<HTMLDivElement | null>(null);
   const scrollCueRef = useRef<HTMLDivElement | null>(null);
   const capabilitiesRef = useRef<HTMLDivElement | null>(null);
-  const compositionRef = useRef<HTMLDivElement | null>(null);
+  const fieldRef = useRef<HTMLDivElement | null>(null);
   const introScopeRef = useRef<HTMLDivElement | null>(null);
 
   const lastHeaderStateRef = useRef<string>("standard");
@@ -75,121 +82,68 @@ export function Scene01Precision() {
   const config = getSceneConfig("scene-01-precision")!;
 
   /**
-   * INTRO — autonomous, runs once on mount.
-   * Every element that starts at opacity-0 in the markup is resolved here,
-   * so the hero is legible without any scroll input.
+   * ON MOUNT — the curtain.
+   *
+   * Only the ambient field, the signal point and the scroll cue resolve.
+   * Everything else waits for scroll, which is what makes the reveal land.
    */
   useGsapContext(
     () => {
-      const targets = [
+      const revealTargets = [
         labelRef.current,
         desktopServiceLineRef.current,
         mobileServiceLineRef.current,
         precisionRef.current,
         powerRef.current,
         bodyRef.current,
-        scrollCueRef.current,
         capabilitiesRef.current,
         signalLineRef.current,
       ].filter(Boolean);
 
-      // Reduced motion: resolve instantly to the settled state, no animation.
+      // Reduced motion: no curtain, no reveal. Resolve to the settled state so
+      // the page is immediately complete and nothing depends on scrolling.
       if (effectiveReducedMotion) {
-        gsap.set(targets, { opacity: 1, y: 0, yPercent: 0, clearProps: "transform" });
-        gsap.set(signalLineRef.current, { scaleX: 1, opacity: 1 });
+        gsap.set(revealTargets, { opacity: 1, y: 0, yPercent: 0, scaleX: 1 });
+        gsap.set(scrollCueRef.current, { opacity: 1 });
+        gsap.set(fieldRef.current, { opacity: 1 });
         return;
       }
 
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      // 0. Signal dot pulses, then collapses into the rule
+      // The ambient field breathes up out of the black first — the room
+      // lights coming up before anything is said.
+      tl.fromTo(fieldRef.current, { opacity: 0 }, { opacity: 1, duration: 1.6 }, 0.15);
+
+      // A single point of life on an otherwise dead screen.
       tl.fromTo(
         signalDotRef.current,
         { opacity: 0, scale: 0 },
-        { opacity: 1, scale: 1, duration: 0.36, ease: "power2.out" },
-        0
-      ).to(
-        signalDotRef.current,
-        { opacity: 0, scale: 0.4, duration: 0.3 },
-        0.42
+        { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" },
+        0.35
       );
 
-      // 1. Precision rule draws outward from centre
-      tl.fromTo(
-        signalLineRef.current,
-        { scaleX: 0, opacity: 0 },
-        { scaleX: 1, opacity: 1, duration: 0.9, ease: "expo.out" },
-        0.34
-      );
-
-      // 2. Wordmark label
-      tl.fromTo(
-        labelRef.current,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.7 },
-        0.42
-      );
-
-      // 3. PRECISION rises, AS POWER descends — meeting at the rule
-      tl.fromTo(
-        precisionRef.current,
-        { yPercent: 110, opacity: 0 },
-        { yPercent: 0, opacity: 1, duration: 1.05, ease: "expo.out" },
-        0.4
-      );
-      tl.fromTo(
-        powerRef.current,
-        { yPercent: -110, opacity: 0 },
-        { yPercent: 0, opacity: 1, duration: 1.05, ease: "expo.out" },
-        0.5
-      );
-
-      // 4. Supporting commercial proposition
-      tl.fromTo(
-        bodyRef.current,
-        { opacity: 0, y: 12 },
-        { opacity: 1, y: 0, duration: 0.75 },
-        0.95
-      );
-
-      // 5. Service lines
-      tl.fromTo(
-        [desktopServiceLineRef.current, mobileServiceLineRef.current].filter(Boolean),
-        { opacity: 0, y: 8 },
-        { opacity: 1, y: 0, duration: 0.7 },
-        1.05
-      );
-
-      // 6. Capability strip — the answer to "what do you actually do"
-      tl.fromTo(
-        capabilitiesRef.current,
-        { opacity: 0, y: 14 },
-        { opacity: 1, y: 0, duration: 0.8 },
-        1.15
-      );
-
-      // 7. Scroll cue — last in, invites the scroll that starts the film
+      // The invitation.
       tl.fromTo(
         scrollCueRef.current,
-        { opacity: 0, y: -6 },
-        { opacity: 1, y: 0, duration: 0.6 },
-        1.45
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.9 },
+        0.7
       );
     },
     introScopeRef,
     [effectiveReducedMotion]
   );
 
-  /**
-   * EXIT — scroll-scrubbed only. No entrance tweens live on this timeline,
-   * so at scroll progress 0 the hero sits exactly where the intro left it.
-   */
+  /** SCROLL — the reveal, the hold, and the handoff. */
   const buildTimeline = (timeline: gsap.core.Timeline) => {
-    timeline.addLabel("hold", 0);
-    timeline.addLabel("exit", 0.55);
-    timeline.addLabel("handoff", 0.88);
+    timeline.addLabel("curtain", 0);
+    timeline.addLabel("rule", 0.02);
+    timeline.addLabel("wordmark", 0.08);
+    timeline.addLabel("substance", 0.26);
+    timeline.addLabel("hold", 0.44);
+    timeline.addLabel("exit", 0.68);
 
-    // Nav is visible from the start
     setNavVisible(true);
     setWordmarkOpacity(1.0);
     setHeaderState("standard");
@@ -203,76 +157,105 @@ export function Scene01Precision() {
       }
     });
 
-    // The scroll cue is the first thing to go — it has done its job.
+    // ── The cue steps aside the instant its job is done ──────────────────
     if (scrollCueRef.current) {
-      timeline.to(scrollCueRef.current, { opacity: 0, y: 8, duration: 0.08 }, 0.04);
+      timeline.to(scrollCueRef.current, { opacity: 0, y: 12, duration: 0.05 }, 0);
     }
 
-    // Supporting copy and metadata dissolve
-    if (bodyRef.current) {
-      timeline.to(bodyRef.current, { opacity: 0, y: -10, duration: 0.16 }, 0.55);
+    // ── 1. The rule draws outward from the centre ────────────────────────
+    if (signalDotRef.current) {
+      timeline.to(signalDotRef.current, { opacity: 0, scale: 0.4, duration: 0.04 }, 0.02);
     }
-    if (labelRef.current) {
-      timeline.to(labelRef.current, { opacity: 0, y: -8, duration: 0.16 }, 0.55);
-    }
-    if (desktopServiceLineRef.current) {
-      timeline.to(desktopServiceLineRef.current, { opacity: 0, duration: 0.16 }, 0.55);
-    }
-    if (mobileServiceLineRef.current) {
-      timeline.to(mobileServiceLineRef.current, { opacity: 0, duration: 0.16 }, 0.55);
-    }
-    if (capabilitiesRef.current) {
-      timeline.to(capabilitiesRef.current, { opacity: 0, y: 12, duration: 0.16 }, 0.5);
+    if (signalLineRef.current) {
+      timeline.fromTo(
+        signalLineRef.current,
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.1, ease: "expo.out" },
+        0.02
+      );
     }
 
-    // The type parts vertically around the rule
+    // ── 2. The wordmark emerges FROM the rule ────────────────────────────
+    // PRECISION sits in a clipped box above the line and rises out of it;
+    // AS POWER sits in a clipped box below and drops out of it. The line is
+    // the aperture the type is cut from.
     if (precisionRef.current) {
-      timeline.to(
+      timeline.fromTo(
         precisionRef.current,
-        { yPercent: -48, opacity: 0, duration: 0.26, ease: "power2.in" },
-        0.6
+        { yPercent: 100, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 0.2, ease: "expo.out" },
+        0.08
       );
     }
     if (powerRef.current) {
-      timeline.to(
+      timeline.fromTo(
         powerRef.current,
-        { yPercent: 48, opacity: 0, duration: 0.26, ease: "power2.in" },
-        0.6
+        { yPercent: -100, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 0.2, ease: "expo.out" },
+        0.1
       );
     }
 
-    // The rule collapses back to a point
+    // ── 3. Substance follows the statement ───────────────────────────────
+    if (labelRef.current) {
+      timeline.fromTo(labelRef.current, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.08 }, 0.26);
+    }
+    if (desktopServiceLineRef.current) {
+      timeline.fromTo(desktopServiceLineRef.current, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.08 }, 0.28);
+    }
+    if (mobileServiceLineRef.current) {
+      timeline.fromTo(mobileServiceLineRef.current, { opacity: 0 }, { opacity: 1, duration: 0.08 }, 0.28);
+    }
+    if (bodyRef.current) {
+      timeline.fromTo(bodyRef.current, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.08 }, 0.3);
+    }
+    if (capabilitiesRef.current) {
+      timeline.fromTo(capabilitiesRef.current, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.1 }, 0.34);
+    }
+
+    // ── 4. Hold: 0.44 → 0.68, nothing moves ──────────────────────────────
+
+    // ── 5. Exit — the type parts back through the rule ───────────────────
+    if (bodyRef.current) {
+      timeline.to(bodyRef.current, { opacity: 0, y: -10, duration: 0.12 }, 0.68);
+    }
+    if (labelRef.current) {
+      timeline.to(labelRef.current, { opacity: 0, y: -8, duration: 0.12 }, 0.68);
+    }
+    if (desktopServiceLineRef.current) {
+      timeline.to(desktopServiceLineRef.current, { opacity: 0, duration: 0.12 }, 0.68);
+    }
+    if (mobileServiceLineRef.current) {
+      timeline.to(mobileServiceLineRef.current, { opacity: 0, duration: 0.12 }, 0.68);
+    }
+    if (capabilitiesRef.current) {
+      timeline.to(capabilitiesRef.current, { opacity: 0, y: 14, duration: 0.12 }, 0.66);
+    }
+    if (precisionRef.current) {
+      timeline.to(precisionRef.current, { yPercent: 100, opacity: 0, duration: 0.2, ease: "power2.in" }, 0.74);
+    }
+    if (powerRef.current) {
+      timeline.to(powerRef.current, { yPercent: -100, opacity: 0, duration: 0.2, ease: "power2.in" }, 0.74);
+    }
     if (signalLineRef.current) {
-      timeline.to(
-        signalLineRef.current,
-        { scaleX: 0, opacity: 0, duration: 0.2, ease: "power2.inOut" },
-        0.68
-      );
+      timeline.to(signalLineRef.current, { scaleX: 0, opacity: 0, duration: 0.14, ease: "power2.inOut" }, 0.86);
     }
-
-    // Slit handoff anchor opens into the next scene
     if (slitHandoffRef.current) {
       timeline.fromTo(
         slitHandoffRef.current,
         { scaleY: 0, opacity: 0 },
-        { scaleY: 1, opacity: 1, duration: 0.12 },
-        0.86
+        { scaleY: 1, opacity: 1, duration: 0.1 },
+        0.9
       );
     }
   };
 
   return (
-    <CinematicSceneViewport
-      config={config}
-      sceneIndex={1}
-      buildTimeline={buildTimeline}
-    >
-      {/* Ambient depth. Sits behind the safe frame, never intercepts pointer
-          events, and pauses itself when off-screen or the tab is hidden. */}
-      <PrecisionField intensity={1} />
+    <CinematicSceneViewport config={config} sceneIndex={1} buildTimeline={buildTimeline}>
+      <div ref={fieldRef} className="absolute inset-0 opacity-0">
+        <PrecisionField intensity={1} />
+      </div>
 
-      {/* Vignette keeps the field from competing with the headline at the
-          optical centre while leaving the edges alive. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
@@ -284,16 +267,18 @@ export function Scene01Precision() {
 
       <SceneSafeFrame>
         <div ref={introScopeRef} className="contents">
-          {/* Semantic H1 */}
+          {/* The full statement stays in the accessibility tree from the first
+              frame, so the reveal is presentation only and a screen reader
+              never depends on scroll. */}
           <h1 className="sr-only">
             Precision as Power. Avorria — Digital Marketing, Web Design, SEO and AI Systems Studio.
           </h1>
 
-          {/* Top: Commercial Label & Service Line */}
           <div className="flex items-start justify-between w-full">
             <div
               ref={labelRef}
               className="font-mono text-xs sm:text-sm uppercase tracking-widest text-avorria-signal opacity-0 font-medium"
+              aria-hidden="true"
             >
               DIGITAL MARKETING / WEB / AI STUDIO
             </div>
@@ -307,73 +292,57 @@ export function Scene01Precision() {
             </div>
           </div>
 
-          {/* Central Brand & Commercial Composition */}
-          <div
-            ref={compositionRef}
-            className="flex flex-col justify-center my-auto py-4 sm:py-6"
-          >
-            {/* PRECISION */}
+          {/* Central composition — the rule is the aperture */}
+          <div className="flex flex-col justify-center my-auto py-4 sm:py-6" aria-hidden="true">
             <div className="overflow-hidden pb-1 sm:pb-2">
               <div
                 ref={precisionRef}
                 className="font-display font-extrabold select-none tracking-tight leading-none text-avorria-white opacity-0"
-                style={{ fontSize: HERO_TYPE_SIZE }}
+                style={{ fontSize: HERO_TYPE_SIZE, willChange: "transform, opacity" }}
               >
                 PRECISION
               </div>
             </div>
 
-            {/* Central Precision Rule */}
             <div className="relative w-full my-2 sm:my-4 flex items-center justify-center">
               <div
                 ref={signalDotRef}
-                className="absolute w-1.5 h-1.5 rounded-full bg-avorria-signal opacity-0 z-10"
+                className="absolute w-1.5 h-1.5 rounded-full bg-avorria-signal opacity-0 z-10 shadow-[0_0_12px_rgba(200,241,53,0.9)]"
                 style={{ willChange: "transform, opacity" }}
-                aria-hidden="true"
               />
               <div
                 ref={signalLineRef}
-                className="w-full h-[1px] bg-avorria-signal origin-center opacity-0"
+                className="w-full h-[1px] bg-avorria-signal origin-center opacity-0 shadow-[0_0_10px_rgba(200,241,53,0.5)]"
                 style={{ willChange: "transform, opacity" }}
-                aria-hidden="true"
               />
               <div
                 ref={slitHandoffRef}
                 className="absolute w-[1px] h-16 sm:h-20 bg-avorria-signal origin-center opacity-0"
                 style={{ willChange: "transform, opacity" }}
-                aria-hidden="true"
               />
             </div>
 
-            {/* AS POWER. */}
             <div className="overflow-hidden pt-1 sm:pt-2">
               <div
                 ref={powerRef}
                 className="font-display font-extrabold select-none tracking-tight leading-none text-avorria-signal opacity-0 whitespace-nowrap"
-                style={{ fontSize: HERO_TYPE_SIZE }}
+                style={{ fontSize: HERO_TYPE_SIZE, willChange: "transform, opacity" }}
               >
                 AS POWER<span className="text-avorria-signal">.</span>
               </div>
             </div>
 
-            {/* Supporting Commercial Proposition */}
-            <div
-              ref={bodyRef}
-              className="mt-6 sm:mt-8 max-w-[680px] opacity-0"
-            >
+            <div ref={bodyRef} className="mt-6 sm:mt-8 max-w-[680px] opacity-0">
               <p className="font-body text-base sm:text-lg text-avorria-white/90 font-light leading-relaxed uppercase tracking-wide">
                 We design and build websites, grow search visibility and engineer AI systems for ambitious businesses.
               </p>
             </div>
           </div>
 
-          {/* Bottom row: the three disciplines, stated in the first viewport */}
+          {/* Bottom: disciplines, and the scroll invitation that holds the
+              black frame before any of the above exists. */}
           <div className="w-full flex flex-col gap-5">
-            <div
-              ref={mobileServiceLineRef}
-              className="sr-only"
-              aria-hidden="true"
-            >
+            <div ref={mobileServiceLineRef} className="sr-only" aria-hidden="true">
               WEB DESIGN / DEVELOPMENT / SEO / AI SYSTEMS
             </div>
 
@@ -405,13 +374,15 @@ export function Scene01Precision() {
 
             <div
               ref={scrollCueRef}
-              className="ml-auto flex items-center gap-3 font-mono text-[10px] sm:text-xs uppercase tracking-widest text-avorria-quiet opacity-0"
+              className="w-full flex flex-col items-center gap-3 opacity-0"
               aria-hidden="true"
             >
-              <span>SCROLL</span>
+              <span className="font-mono text-[11px] sm:text-xs uppercase tracking-[0.42em] font-light text-avorria-signal">
+                Scroll
+              </span>
               <span
-                className="block w-8 h-[1px] bg-avorria-line-strong origin-left"
-                style={{ animation: "avorria-cue 2.4s var(--ease-avorria-in-out) infinite" }}
+                className="block w-[1px] h-10 sm:h-14 bg-gradient-to-b from-avorria-signal to-transparent origin-top"
+                style={{ animation: "avorria-cue-drop 2.6s var(--ease-avorria-in-out) infinite" }}
               />
             </div>
           </div>

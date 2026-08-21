@@ -92,3 +92,16 @@ body.scroll-locked {
 @media (prefers-reduced-motion: reduce) {
   [style*="avorria-cue"] { animation: none !important; transform: scaleX(1) !important; }
 }
+
+/* Hero scroll cue — a light travelling down the rule, drawing the eye
+   toward the scroll that starts the film. */
+@keyframes avorria-cue-drop {
+  0%        { transform: scaleY(0);   transform-origin: top;    opacity: 0; }
+  30%       { transform: scaleY(1);   transform-origin: top;    opacity: 1; }
+  60%       { transform: scaleY(1);   transform-origin: bottom; opacity: 1; }
+  100%      { transform: scaleY(0);   transform-origin: bottom; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [style*="avorria-cue-drop"] { animation: none !important; transform: scaleY(1) !important; opacity: 1 !important; }
+}

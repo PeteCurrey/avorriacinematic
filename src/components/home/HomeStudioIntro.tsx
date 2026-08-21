@@ -62,6 +62,12 @@ const STAGES = [
   },
 ] as const;
 
+const STATEMENT_LINES = [
+  { text: "We design it.", accent: false },
+  { text: "We build it.", accent: false },
+  { text: "We keep it working.", accent: true },
+] as const;
+
 const FACTS = [
   { k: "Model", v: "Independent studio" },
   { k: "Disciplines", v: "Five, in-house" },
@@ -83,6 +89,29 @@ export function HomeStudioIntro() {
     // the chapter takes the viewport.
     if (beat1Ref.current) {
       timeline.set(beat1Ref.current, { autoAlpha: 1, y: 0 }, 0);
+
+      // Each line rises out of its own mask, staggered. The lines are the
+      // beat — they should not arrive as one block.
+      const lines = beat1Ref.current.querySelectorAll("[data-studio-line]");
+      if (lines.length) {
+        timeline.fromTo(
+          lines,
+          { yPercent: 105, opacity: 0 },
+          { yPercent: 0, opacity: 1, duration: 0.11, ease: "expo.out", stagger: 0.05 },
+          0.02
+        );
+      }
+
+      const stages = beat1Ref.current.querySelectorAll("[data-studio-stage]");
+      if (stages.length) {
+        timeline.fromTo(
+          stages,
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.09, ease: "power3.out", stagger: 0.035 },
+          0.2
+        );
+      }
+
       timeline.to(
         beat1Ref.current,
         { autoAlpha: 0, y: -24, duration: 0.08, ease: "power2.in" },
@@ -108,7 +137,7 @@ export function HomeStudioIntro() {
         className="relative w-full border-t border-avorria-line bg-avorria-black py-24"
       >
         <div className="max-w-[1760px] mx-auto px-[var(--safe-x)] flex flex-col gap-20">
-          <StudioBeatOne />
+          <StudioBeatOne startHidden={false} />
           <StudioBeatTwo />
         </div>
       </section>
@@ -158,21 +187,38 @@ export function HomeStudioIntro() {
   );
 }
 
-function StudioBeatOne() {
+function StudioBeatOne({ startHidden = true }: { startHidden?: boolean }) {
   return (
     <div className="w-full flex flex-col gap-8 sm:gap-10">
-      <p
-        className="font-display font-extrabold uppercase tracking-tight leading-[0.94] text-avorria-white"
-        style={{ fontSize: "clamp(1.9rem, 5.4vw, 5rem)" }}
-      >
-        We design it. We build it.
-        <br />
-        <span className="text-avorria-signal">We keep it working.</span>
-      </p>
+      {/* Three lines, three clipped rows. Each rises out of its own mask on
+          scroll, so the statement lands as three beats rather than a block
+          of type appearing at once. */}
+      <div className="flex flex-col">
+        {STATEMENT_LINES.map((line, i) => (
+          <span key={line.text} className="block overflow-hidden">
+            <span
+              data-studio-line
+              className={`block font-display font-extrabold uppercase tracking-tight leading-[1.02] ${
+                line.accent ? "text-avorria-signal" : "text-avorria-white"
+              }`}
+              /* Sized so the longest line, "We keep it working.", holds one line:
+                 it runs ~18.7px of line per px of font size, against a 1325px
+                 safe-frame width at 1440. */
+              style={{ fontSize: "clamp(1.6rem, 4.6vw, 4.6rem)", willChange: "transform, opacity" }}
+            >
+              {line.text}
+            </span>
+          </span>
+        ))}
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-6 border-t border-avorria-line pt-7">
         {STAGES.map((s) => (
-          <div key={s.n} className="flex flex-col gap-2">
+          <div
+            key={s.n}
+            data-studio-stage
+            className={`flex flex-col gap-2 ${startHidden ? "opacity-0" : ""}`}
+          >
             <span className="flex items-center gap-2.5">
               <span className="font-mono text-[10px] text-avorria-quiet">{s.n}</span>
               <span className="font-display font-extrabold uppercase tracking-tight text-lg sm:text-xl text-avorria-white">
